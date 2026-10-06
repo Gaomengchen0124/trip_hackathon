@@ -26,20 +26,20 @@ const sortedIp = computed(() => {
   return [...store.ipPois].sort((a, b) => (w[a.tier] ?? 9) - (w[b.tier] ?? 9))
 })
 
+// 定稿规则：IP 打卡点和城市景点"至少勾一个"即可，不要求两类都选
 const canSubmit = computed(
   () =>
-    store.checkedPois.some((p) => p.type === 'ip') &&
-    store.checkedPois.some((p) => p.type === 'classic') &&
+    store.checkedPois.length > 0 &&
     store.timeRange.startDate &&
     store.timeRange.endDate
 )
 
 async function submit() {
-  const status = await store.submit()
-  if (status === 'ok') {
+  const result = await store.submit()
+  if (result.status === 'ok') {
     router.push('/result/map')
   } else {
-    drawerStatus.value = status // 装不下 / 太宽松 → 弹 S4 抽屉
+    drawerStatus.value = result.status // 装不下 / 太宽松 → 弹 S4 抽屉
   }
 }
 
@@ -48,9 +48,23 @@ function onMarkerHover(poiId) {
   hoverInfo.value = p ? `${p.name} · ${store.ip?.name || ''}` : ''
 }
 
-function onConfirmed() {
-  drawerStatus.value = null
-  router.push('/result/map') // mock：确认后直接出结果；真引擎需按用户勾选重算（TODO）
+/**
+ * S4 抽屉协商完 → 按"最终保留"的点重算一次。
+ * 还是装不下就把抽屉留着（用户得继续砍）；force = 用户选了"允许超载"。
+ */
+async function onConfirmed({ poiIds, force = false }) {
+  if (force) {
+    drawerStatus.value = null
+    router.push('/result/map')
+    return
+  }
+  const result = await store.applyTradeoff(poiIds)
+  if (result.status === 'ok') {
+    drawerStatus.value = null
+    router.push('/result/map')
+  } else {
+    drawerStatus.value = result.status
+  }
 }
 </script>
 
@@ -84,7 +98,7 @@ function onConfirmed() {
         {{ store.submitting ? '规划中…' : '生成行程' }}
       </button>
     </footer>
-    <p v-if="!canSubmit" class="tip">需至少勾选一个打卡点和一个城市景点，并选好起止日期</p>
+    <p v-if="!canSubmit" class="tip">需至少勾选一个点位（书本打卡点或城市景点都行），并选好起止日期</p>
 
     <TradeoffDrawer
       v-if="drawerStatus"

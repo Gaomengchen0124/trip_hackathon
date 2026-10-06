@@ -1,0 +1,583 @@
+{
+  "_说明": "点位库。所有【待填】必须人工核对原著/剧集后填写，禁止编造引文。校验：node data/validate.mjs data/lines/longzu-beijing.json",
+  "_版本": 1,
+  "_priority": 10,
+  "_bounds": {
+    "lng": [
+      115.4,
+      117.5
+    ],
+    "lat": [
+      39.4,
+      41.1
+    ]
+  },
+  "_expected": {
+    "ipStops": [
+      6,
+      8
+    ],
+    "cityStops": [
+      10,
+      20
+    ],
+    "maxTierS": 3
+  },
+  "ip": {
+    "ipId": "longzu",
+    "name": "龙族",
+    "author": "江南",
+    "kind": "novel",
+    "cover": "img/longzu.jpg",
+    "aliases": [
+      "龙族",
+      "路明非",
+      "楚子航"
+    ],
+    "tags": {
+      "城市": [
+        "北京"
+      ],
+      "人物": [
+        "路明非",
+        "楚子航",
+        "恺撒",
+        "诺诺"
+      ],
+      "地名": []
+    }
+  },
+  "line": {
+    "lineId": "longzu-beijing",
+    "ipId": "longzu",
+    "title": "龙族·北京",
+    "city": "北京",
+    "cover": "img/longzu-beijing.jpg",
+    "recommendDays": 2
+  },
+  "clusters": [
+    "东城·故宫",
+    "西城·什刹海",
+    "朝阳·三里屯",
+    "海淀·中关村",
+    "丰台·城南",
+    "怀柔·长城",
+    "通州·环球影城",
+    "密云·古北水镇"
+  ],
+  "ipStops": [
+    {
+      "poiId": "bj-ip-01",
+      "lineId": "longzu-beijing",
+      "type": "ip",
+      "name": "【待填】",
+      "alias": "",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "tier": "A",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "",
+          "full": "",
+          "source": ""
+        },
+        {
+          "kind": "台词",
+          "brief": "",
+          "full": "",
+          "source": ""
+        }
+      ],
+      "realPhoto": "img/bj-ip-01.jpg",
+      "photoCredit": "",
+      "skipNote": "",
+      "tips": ""
+    },
+    {
+      "poiId": "bj-ip-02",
+      "lineId": "longzu-beijing",
+      "type": "ip",
+      "name": "【待填】",
+      "alias": "",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "tier": "A",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "",
+          "full": "",
+          "source": ""
+        },
+        {
+          "kind": "台词",
+          "brief": "",
+          "full": "",
+          "source": ""
+        }
+      ],
+      "realPhoto": "img/bj-ip-02.jpg",
+      "photoCredit": "",
+      "skipNote": "",
+      "tips": ""
+    },
+    {
+      "poiId": "bj-ip-03",
+      "lineId": "longzu-beijing",
+      "type": "ip",
+      "name": "【待填】",
+      "alias": "",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "tier": "A",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "",
+          "full": "",
+          "source": ""
+        },
+        {
+          "kind": "台词",
+          "brief": "",
+          "full": "",
+          "source": ""
+        }
+      ],
+      "realPhoto": "img/bj-ip-03.jpg",
+      "photoCredit": "",
+      "skipNote": "",
+      "tips": ""
+    },
+    {
+      "poiId": "bj-ip-04",
+      "lineId": "longzu-beijing",
+      "type": "ip",
+      "name": "【待填】",
+      "alias": "",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "tier": "A",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "",
+          "full": "",
+          "source": ""
+        },
+        {
+          "kind": "台词",
+          "brief": "",
+          "full": "",
+          "source": ""
+        }
+      ],
+      "realPhoto": "img/bj-ip-04.jpg",
+      "photoCredit": "",
+      "skipNote": "",
+      "tips": ""
+    },
+    {
+      "poiId": "bj-ip-05",
+      "lineId": "longzu-beijing",
+      "type": "ip",
+      "name": "【待填】",
+      "alias": "",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "tier": "A",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "",
+          "full": "",
+          "source": ""
+        },
+        {
+          "kind": "台词",
+          "brief": "",
+          "full": "",
+          "source": ""
+        }
+      ],
+      "realPhoto": "img/bj-ip-05.jpg",
+      "photoCredit": "",
+      "skipNote": "",
+      "tips": ""
+    },
+    {
+      "poiId": "bj-ip-06",
+      "lineId": "longzu-beijing",
+      "type": "ip",
+      "name": "【待填】",
+      "alias": "",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "tier": "A",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "",
+          "full": "",
+          "source": ""
+        },
+        {
+          "kind": "台词",
+          "brief": "",
+          "full": "",
+          "source": ""
+        }
+      ],
+      "realPhoto": "img/bj-ip-06.jpg",
+      "photoCredit": "",
+      "skipNote": "",
+      "tips": ""
+    },
+    {
+      "poiId": "bj-ip-07",
+      "lineId": "longzu-beijing",
+      "type": "ip",
+      "name": "【待填】",
+      "alias": "",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "tier": "A",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "",
+          "full": "",
+          "source": ""
+        },
+        {
+          "kind": "台词",
+          "brief": "",
+          "full": "",
+          "source": ""
+        }
+      ],
+      "realPhoto": "img/bj-ip-07.jpg",
+      "photoCredit": "",
+      "skipNote": "",
+      "tips": ""
+    },
+    {
+      "poiId": "bj-ip-08",
+      "lineId": "longzu-beijing",
+      "type": "ip",
+      "name": "【待填】",
+      "alias": "",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "tier": "A",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "",
+          "full": "",
+          "source": ""
+        },
+        {
+          "kind": "台词",
+          "brief": "",
+          "full": "",
+          "source": ""
+        }
+      ],
+      "realPhoto": "img/bj-ip-08.jpg",
+      "photoCredit": "",
+      "skipNote": "",
+      "tips": ""
+    }
+  ],
+  "cityStops": [
+    {
+      "poiId": "bj-sp-01",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/bj-sp-01.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-02",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/bj-sp-02.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-03",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/bj-sp-03.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-04",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/bj-sp-04.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-05",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/bj-sp-05.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-06",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/bj-sp-06.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-07",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/bj-sp-07.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-08",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/bj-sp-08.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-09",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/bj-sp-09.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-10",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/bj-sp-10.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-11",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/bj-sp-11.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-12",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/bj-sp-12.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-13",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/bj-sp-13.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-14",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/bj-sp-14.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-15",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/bj-sp-15.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    }
+  ]
+}

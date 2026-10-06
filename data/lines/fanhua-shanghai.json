@@ -1,0 +1,591 @@
+{
+  "_说明": "点位库。所有【待填】必须人工核对原著/剧集后填写，禁止编造引文。校验：node data/validate.mjs data/lines/fanhua-shanghai.json",
+  "_版本": 1,
+  "_priority": 1,
+  "_bounds": {
+    "lng": [
+      121,
+      121.9
+    ],
+    "lat": [
+      30.6,
+      31.5
+    ]
+  },
+  "_expected": {
+    "ipStops": [
+      6,
+      8
+    ],
+    "cityStops": [
+      10,
+      20
+    ],
+    "maxTierS": 3
+  },
+  "ip": {
+    "ipId": "fanhua",
+    "name": "繁花",
+    "author": "金宇澄",
+    "kind": "novel",
+    "cover": "img/fanhua.jpg",
+    "aliases": [
+      "繁花",
+      "阿宝",
+      "汪小姐",
+      "黄河路"
+    ],
+    "tags": {
+      "城市": [
+        "上海"
+      ],
+      "人物": [
+        "阿宝",
+        "汪小姐",
+        "玲子",
+        "李李"
+      ],
+      "地名": [
+        "黄河路",
+        "进贤路",
+        "外滩",
+        "南京路",
+        "思南路"
+      ]
+    }
+  },
+  "line": {
+    "lineId": "fanhua-shanghai",
+    "ipId": "fanhua",
+    "title": "繁花·上海",
+    "city": "上海",
+    "cover": "img/fanhua-shanghai.jpg",
+    "recommendDays": 3
+  },
+  "clusters": [
+    "黄浦·外滩",
+    "黄浦·老城厢",
+    "黄浦·打浦桥",
+    "静安",
+    "徐汇·衡复",
+    "虹口·北外滩",
+    "普陀",
+    "浦东",
+    "近郊"
+  ],
+  "ipStops": [
+    {
+      "poiId": "sh-ip-01",
+      "lineId": "fanhua-shanghai",
+      "type": "ip",
+      "name": "【待填】",
+      "alias": "",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "tier": "A",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "",
+          "full": "",
+          "source": ""
+        },
+        {
+          "kind": "台词",
+          "brief": "",
+          "full": "",
+          "source": ""
+        }
+      ],
+      "realPhoto": "img/sh-ip-01.jpg",
+      "photoCredit": "",
+      "skipNote": "",
+      "tips": ""
+    },
+    {
+      "poiId": "sh-ip-02",
+      "lineId": "fanhua-shanghai",
+      "type": "ip",
+      "name": "【待填】",
+      "alias": "",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "tier": "A",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "",
+          "full": "",
+          "source": ""
+        },
+        {
+          "kind": "台词",
+          "brief": "",
+          "full": "",
+          "source": ""
+        }
+      ],
+      "realPhoto": "img/sh-ip-02.jpg",
+      "photoCredit": "",
+      "skipNote": "",
+      "tips": ""
+    },
+    {
+      "poiId": "sh-ip-03",
+      "lineId": "fanhua-shanghai",
+      "type": "ip",
+      "name": "【待填】",
+      "alias": "",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "tier": "A",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "",
+          "full": "",
+          "source": ""
+        },
+        {
+          "kind": "台词",
+          "brief": "",
+          "full": "",
+          "source": ""
+        }
+      ],
+      "realPhoto": "img/sh-ip-03.jpg",
+      "photoCredit": "",
+      "skipNote": "",
+      "tips": ""
+    },
+    {
+      "poiId": "sh-ip-04",
+      "lineId": "fanhua-shanghai",
+      "type": "ip",
+      "name": "【待填】",
+      "alias": "",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "tier": "A",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "",
+          "full": "",
+          "source": ""
+        },
+        {
+          "kind": "台词",
+          "brief": "",
+          "full": "",
+          "source": ""
+        }
+      ],
+      "realPhoto": "img/sh-ip-04.jpg",
+      "photoCredit": "",
+      "skipNote": "",
+      "tips": ""
+    },
+    {
+      "poiId": "sh-ip-05",
+      "lineId": "fanhua-shanghai",
+      "type": "ip",
+      "name": "【待填】",
+      "alias": "",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "tier": "A",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "",
+          "full": "",
+          "source": ""
+        },
+        {
+          "kind": "台词",
+          "brief": "",
+          "full": "",
+          "source": ""
+        }
+      ],
+      "realPhoto": "img/sh-ip-05.jpg",
+      "photoCredit": "",
+      "skipNote": "",
+      "tips": ""
+    },
+    {
+      "poiId": "sh-ip-06",
+      "lineId": "fanhua-shanghai",
+      "type": "ip",
+      "name": "【待填】",
+      "alias": "",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "tier": "A",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "",
+          "full": "",
+          "source": ""
+        },
+        {
+          "kind": "台词",
+          "brief": "",
+          "full": "",
+          "source": ""
+        }
+      ],
+      "realPhoto": "img/sh-ip-06.jpg",
+      "photoCredit": "",
+      "skipNote": "",
+      "tips": ""
+    },
+    {
+      "poiId": "sh-ip-07",
+      "lineId": "fanhua-shanghai",
+      "type": "ip",
+      "name": "【待填】",
+      "alias": "",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "tier": "A",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "",
+          "full": "",
+          "source": ""
+        },
+        {
+          "kind": "台词",
+          "brief": "",
+          "full": "",
+          "source": ""
+        }
+      ],
+      "realPhoto": "img/sh-ip-07.jpg",
+      "photoCredit": "",
+      "skipNote": "",
+      "tips": ""
+    },
+    {
+      "poiId": "sh-ip-08",
+      "lineId": "fanhua-shanghai",
+      "type": "ip",
+      "name": "【待填】",
+      "alias": "",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "tier": "A",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "",
+          "full": "",
+          "source": ""
+        },
+        {
+          "kind": "台词",
+          "brief": "",
+          "full": "",
+          "source": ""
+        }
+      ],
+      "realPhoto": "img/sh-ip-08.jpg",
+      "photoCredit": "",
+      "skipNote": "",
+      "tips": ""
+    }
+  ],
+  "cityStops": [
+    {
+      "poiId": "sh-sp-01",
+      "lineId": "fanhua-shanghai",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/sh-sp-01.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "sh-sp-02",
+      "lineId": "fanhua-shanghai",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/sh-sp-02.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "sh-sp-03",
+      "lineId": "fanhua-shanghai",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/sh-sp-03.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "sh-sp-04",
+      "lineId": "fanhua-shanghai",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/sh-sp-04.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "sh-sp-05",
+      "lineId": "fanhua-shanghai",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/sh-sp-05.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "sh-sp-06",
+      "lineId": "fanhua-shanghai",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/sh-sp-06.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "sh-sp-07",
+      "lineId": "fanhua-shanghai",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/sh-sp-07.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "sh-sp-08",
+      "lineId": "fanhua-shanghai",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/sh-sp-08.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "sh-sp-09",
+      "lineId": "fanhua-shanghai",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/sh-sp-09.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "sh-sp-10",
+      "lineId": "fanhua-shanghai",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/sh-sp-10.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "sh-sp-11",
+      "lineId": "fanhua-shanghai",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/sh-sp-11.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "sh-sp-12",
+      "lineId": "fanhua-shanghai",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/sh-sp-12.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "sh-sp-13",
+      "lineId": "fanhua-shanghai",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/sh-sp-13.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "sh-sp-14",
+      "lineId": "fanhua-shanghai",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/sh-sp-14.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "sh-sp-15",
+      "lineId": "fanhua-shanghai",
+      "type": "classic",
+      "name": "【待填】",
+      "lng": null,
+      "lat": null,
+      "cluster": "【待填】",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "",
+      "realPhoto": "img/sh-sp-15.jpg",
+      "photoCredit": "",
+      "ticket": "",
+      "openHours": ""
+    }
+  ]
+}

@@ -6,7 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "data:gen": "node data/gen-template.mjs",
+    "data:check": "node data/validate.mjs --all",
+    "data:rules": "node data/validate.mjs --rules",
+    "engine:test": "node src/engine/demo.mjs",
+    "engine:home": "node src/engine/demo-home.mjs"
+    ,"smoke": "node scripts/smoke.mjs"
   },
   "dependencies": {
     "pinia": "^2.2.4",

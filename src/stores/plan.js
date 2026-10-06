@@ -20,7 +20,11 @@ export const usePlanStore = defineStore('plan', {
   getters: {
     checkedPois: (s) => s.pois.filter((p) => s.checkedIds.includes(p.poiId)),
     ipPois: (s) => s.pois.filter((p) => p.type === 'ip'),
-    classicPois: (s) => s.pois.filter((p) => p.type === 'classic'),
+    // 城市景点按知名度降序（不依赖 JSON 里的数组顺序，录入时顺序乱了也不会崩）
+    classicPois: (s) =>
+      s.pois
+        .filter((p) => p.type === 'classic')
+        .sort((a, b) => (b.popularity ?? 0) - (a.popularity ?? 0)),
   },
   actions: {
     async loadLine(lineId) {
@@ -43,20 +47,31 @@ export const usePlanStore = defineStore('plan', {
     setHours(h) {
       this.hoursPerDay = h
     },
-    /** 提交规划。返回 status：'ok' 直接出结果；'overload' / 'under70' 需要弹 S4 抽屉 */
-    async submit() {
+    /**
+     * 提交规划。返回整个 PlanResult：
+     *   status = 'ok'                  → 直接进结果页
+     *   status = 'overload' | 'under70' → 弹 S4 抽屉
+     * @param {string[]|null} poiIds 不传就用当前勾选；S4 协商后传"最终保留"的列表
+     */
+    async submit(poiIds = null) {
       this.submitting = true
       try {
+        const ids = poiIds ?? this.checkedIds
         this.result = await api.plan({
           lineId: this.lineId,
-          poiIds: [...this.checkedIds],
+          poiIds: [...ids],
           timeRange: { ...this.timeRange },
           hoursPerDay: this.hoursPerDay,
         })
-        return this.result.status
+        return this.result
       } finally {
         this.submitting = false
       }
+    },
+    /** S4 抽屉确认：按"最终保留"的点重算，并把勾选状态同步回去（"继续修改"能保留选择） */
+    async applyTradeoff(keptIds) {
+      this.checkedIds = [...keptIds]
+      return this.submit(keptIds)
     },
     /** 重新规划：清空选择与结果（返回菜单"不保留"） */
     reset() {

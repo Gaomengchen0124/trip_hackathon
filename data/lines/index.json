@@ -1,0 +1,98 @@
+{
+  "_说明": "首页目录。由 data/gen-template.mjs 生成，不要手改。",
+  "_primary": "fanhua-shanghai",
+  "lines": [
+    {
+      "lineId": "fanhua-shanghai",
+      "ipId": "fanhua",
+      "ipName": "繁花",
+      "title": "繁花·上海",
+      "city": "上海",
+      "cover": "img/fanhua-shanghai.jpg",
+      "file": "data/lines/fanhua-shanghai.json",
+      "priority": 1,
+      "recommendDays": 3,
+      "aliases": [
+        "繁花",
+        "阿宝",
+        "汪小姐",
+        "黄河路"
+      ],
+      "tags": {
+        "城市": [
+          "上海"
+        ],
+        "人物": [
+          "阿宝",
+          "汪小姐",
+          "玲子",
+          "李李"
+        ],
+        "地名": [
+          "黄河路",
+          "进贤路",
+          "外滩",
+          "南京路",
+          "思南路"
+        ]
+      }
+    },
+    {
+      "lineId": "longzu-beijing",
+      "ipId": "longzu",
+      "ipName": "龙族",
+      "title": "龙族·北京",
+      "city": "北京",
+      "cover": "img/longzu-beijing.jpg",
+      "file": "data/lines/longzu-beijing.json",
+      "priority": 10,
+      "recommendDays": 2,
+      "aliases": [
+        "龙族",
+        "路明非",
+        "楚子航"
+      ],
+      "tags": {
+        "城市": [
+          "北京"
+        ],
+        "人物": [
+          "路明非",
+          "楚子航",
+          "恺撒",
+          "诺诺"
+        ],
+        "地名": []
+      }
+    },
+    {
+      "lineId": "longzu-japan",
+      "ipId": "longzu",
+      "ipName": "龙族",
+      "title": "龙族·日本",
+      "city": "东京及近郊",
+      "cover": "img/longzu-japan.jpg",
+      "file": "data/lines/longzu-japan.json",
+      "priority": 11,
+      "recommendDays": 2,
+      "aliases": [
+        "龙族",
+        "路明非",
+        "楚子航"
+      ],
+      "tags": {
+        "城市": [
+          "东京",
+          "日本"
+        ],
+        "人物": [
+          "路明非",
+          "楚子航",
+          "恺撒",
+          "诺诺"
+        ],
+        "地名": []
+      }
+    }
+  ]
+}
