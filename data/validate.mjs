@@ -34,10 +34,10 @@ const RULES = [
   ['C03', 'error', 'cluster 在 clusters 列表中'],
   ['C04', 'error', 'tier 属于 {S, A, B}'],
   ['C05', 'error', 'durationRush < durationNormal'],
-  ['C06', 'error', 'durationNormal 合理（IP 30-180，classic 60-240 分钟）'],
+  ['C06', 'error', 'durationNormal 合理（IP 30-180 分钟；classic 60-480，>300 视为"要玩一整天"）'],
   ['C07', 'warn', 'tier = S 的点位不超过 _expected.maxTierS'],
   ['C08', 'warn', 'durationRush 约为 durationNormal 的 50%（±15%）'],
-  ['C09', 'warn', '同一 cluster 的点位不超过 4 个'],
+  ['C09', 'warn', '同一 cluster 的点位不超过 4 个（超过也能排，引擎会自动拆到多天）'],
   ['C10', 'warn', 'popularity 属于 1-5'],
   ['C11', 'warn', 'realPhoto 指向的图片文件存在（图片放 public/img/）'],
   ['C12', 'error', 'quotes[].kind 只能是「原著」或「台词」（前后端契约）'],
@@ -176,7 +176,8 @@ function validate(file) {
 
   // ---------- C05 / C06 ----------
   for (const { p, kind } of all) {
-    const [lo, hi] = kind === 'ip' ? [30, 180] : [60, 240];
+    // 主题乐园这类要玩一整天的点，上限放到 480
+    const [lo, hi] = kind === 'ip' ? [30, 180] : [60, 480];
     if (typeof p.durationNormal !== 'number') add('error', 'C06', 'durationNormal 不是数字', p.poiId);
     else if (p.durationNormal < lo || p.durationNormal > hi) add('error', 'C06', `durationNormal ${p.durationNormal} 超出 ${lo}-${hi}`, p.poiId);
     if (typeof p.durationRush !== 'number') add('error', 'C05', 'durationRush 不是数字', p.poiId);
@@ -208,7 +209,9 @@ function validate(file) {
     (byCluster[p.cluster] ||= []).push(p.poiId);
   }
   for (const [c, ids] of Object.entries(byCluster)) {
-    if (ids.length > 4) add('warn', 'C09', `片区「${c}」有 ${ids.length} 个点位，超过 4 个（会让某天排满、其他天空着）`);
+    if (ids.length > 4) {
+      add('warn', 'C09', `片区「${c}」有 ${ids.length} 个点位。引擎会自动拆到多天，但若想这片一天走完，建议不超过 4 个`);
+    }
   }
 
   // ---------- C10 ----------

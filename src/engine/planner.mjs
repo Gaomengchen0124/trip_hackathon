@@ -193,8 +193,9 @@ export function bestOrder(points, travel, limit = DEFAULTS.clusterSplitLimit) {
 // 第 4 步：把片区分配到各天
 // 片区是行程的最小单位（片内交通共享）：按 cost 从大到小，
 // 每次丢给「当前最闲的一天」，让每天负担尽量均衡。
+// 返回：每天的点位数组。
 // ===============================================================
-function assignClustersToDays(pois, days, resolve, travel) {
+function assignClustersToDays(pois, dayCount, resolve, travel) {
   const groups = groupByCluster(pois);
   const clusters = [...groups.entries()].map(([name, points]) => ({
     name,
@@ -203,21 +204,117 @@ function assignClustersToDays(pois, days, resolve, travel) {
   }));
 
   clusters.sort((a, b) => b.cost - a.cost);
-  days.forEach((d) => (d.clusters = []));
+  const buckets = Array.from({ length: dayCount }, () => []);
 
   for (const c of clusters) {
-    let target = days[0];
+    let target = 0;
     let minLoad = Infinity;
-    for (const d of days) {
-      const load = d.clusters.reduce((s, x) => s + x.cost, 0);
+    buckets.forEach((pts, i) => {
+      const load = pts.reduce((s, p) => s + resolve(p), 0) + intraTravel(pts, travel);
       if (load < minLoad) {
         minLoad = load;
-        target = d;
+        target = i;
+      }
+    });
+    buckets[target].push(...c.points);
+  }
+  return buckets;
+}
+
+// ===============================================================
+// 第 4.5 步：整片搬完之后，还要能「拆片」
+// 一个片区里塞了 7 个点、超过一天容量时，整片分派会让某天爆掉、其他天空着。
+// 这里按「价值最低的先搬」把点挪到最闲的一天，直到没有超载或搬不动为止。
+// 用最近邻估算代价（不穷举），只做决策；最终顺序仍由 bestOrder 算。
+// ===============================================================
+function fastCost(points, resolve, travel) {
+  return points.reduce((s, p) => s + resolve(p), 0) + intraTravel(points, travel);
+}
+
+function rebalance(buckets, days, resolve, travel, maxMoves = 40) {
+  const pts = buckets.map((p) => [...p]);
+  const cost = pts.map((p) => fastCost(p, resolve, travel));
+  const over = (i) => Math.max(0, cost[i] - days[i].available);
+
+  for (let step = 0; step < maxMoves; step++) {
+    let from = -1;
+    let worst = 0;
+    for (let i = 0; i < pts.length; i++) {
+      if (over(i) > worst) {
+        worst = over(i);
+        from = i;
       }
     }
-    target.clusters.push(c);
+    if (from < 0) break; // 没有超载了
+
+    let to = -1;
+    let bestIdle = 0;
+    for (let i = 0; i < pts.length; i++) {
+      if (i === from) continue;
+      const idle = days[i].available - cost[i];
+      if (idle > bestIdle) {
+        bestIdle = idle;
+        to = i;
+      }
+    }
+    if (to < 0) break; // 别的一天也没空
+
+    // 优先搬走「价值最低 + 停留最短」的点
+    const order = [...pts[from]].sort(
+      (a, b) => importanceOf(a) - importanceOf(b) || resolve(a) - resolve(b)
+    );
+    let moved = false;
+    for (const p of order) {
+      const nextFrom = pts[from].filter((x) => x !== p);
+      const nextTo = [...pts[to], p];
+      const cf = fastCost(nextFrom, resolve, travel);
+      const ct = fastCost(nextTo, resolve, travel);
+      const before = over(from) + Math.max(0, cost[to] - days[to].available);
+      const after =
+        Math.max(0, cf - days[from].available) + Math.max(0, ct - days[to].available);
+      if (after < before) {
+        pts[from] = nextFrom;
+        pts[to] = nextTo;
+        cost[from] = cf;
+        cost[to] = ct;
+        moved = true;
+        break;
+      }
+    }
+    if (!moved) break; // 搬谁都更糟，收手
   }
-  return days;
+
+  // 第二阶段：均衡。拆片之后可能出现 5 个点 / 2 个点这种一头沉，
+  // 在不制造新超载的前提下，把最忙的一天匀一个点给最闲的一天。
+  for (let step = 0; step < 20; step++) {
+    let busy = 0;
+    let free = 0;
+    for (let i = 0; i < pts.length; i++) {
+      if (cost[i] > cost[busy]) busy = i;
+      if (cost[i] < cost[free]) free = i;
+    }
+    if (busy === free || cost[busy] - cost[free] <= 60) break; // 差不到 1 小时就不折腾了
+
+    const order = [...pts[busy]].sort((a, b) => resolve(a) - resolve(b));
+    let moved = false;
+    for (const p of order) {
+      const nextBusy = pts[busy].filter((x) => x !== p);
+      const nextFree = [...pts[free], p];
+      const cb = fastCost(nextBusy, resolve, travel);
+      const cf = fastCost(nextFree, resolve, travel);
+      if (cb > days[busy].available || cf > days[free].available) continue; // 会撑爆就不搬
+      if (cost[busy] - cost[free] - (cb - cf) < 30) continue; // 均衡收益太小
+      pts[busy] = nextBusy;
+      pts[free] = nextFree;
+      cost[busy] = cb;
+      cost[free] = cf;
+      moved = true;
+      break;
+    }
+    if (!moved) break;
+  }
+
+  return pts;
 }
 
 const clock = (minutes) =>
@@ -228,11 +325,13 @@ const clock = (minutes) =>
 // ===============================================================
 function attempt(pois, days, rushSet, travel) {
   const resolve = makeResolve(rushSet);
-  const planned = days.map((d) => ({ ...d, clusters: [], stops: [], used: 0, travel: 0 }));
-  assignClustersToDays(pois, planned, resolve, travel);
+  const planned = days.map((d) => ({ ...d, stops: [], used: 0, travel: 0 }));
+  const buckets = assignClustersToDays(pois, days.length, resolve, travel);
+  const perDay = rebalance(buckets, days, resolve, travel);
 
-  for (const d of planned) {
-    const points = d.clusters.flatMap((c) => c.points);
+  for (let i = 0; i < planned.length; i++) {
+    const d = planned[i];
+    const points = perDay[i];
     if (!points.length) {
       d.idle = d.available;
       continue;

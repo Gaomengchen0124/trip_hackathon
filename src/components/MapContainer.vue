@@ -9,6 +9,7 @@
  *     - selectedIds: string[]        已勾选（亮起），其余灰色
  *     - plan: PlanResult | null      规划结果（有值时按 order 标 D1-1 编号）
  *     - interactive: boolean         是否响应点击（S3 与 S5 都是 true，纯展示可传 false）
+ *     - city: string                地图抬头城市名（传 line.city，如「上海」「东京及近郊」）
  *   emits:
  *     - marker-click(poiId)          点标点（S5 用来弹 S6 卡片）
  *     - marker-hover(poiId)          悬停/触摸（S3 显示「地名 + IP 名」）
@@ -23,10 +24,13 @@ const props = defineProps({
   selectedIds: { type: Array, default: () => [] },
   plan: { type: Object, default: null },
   interactive: { type: Boolean, default: true },
+  city: { type: String, default: '' },
 })
 const emit = defineEmits(['marker-click', 'marker-hover'])
 
-const city = computed(() => props.pois[0]?.cluster?.split('·')[0] || '上海')
+// 城市名优先取线路自带的 line.city：片区名里未必含城市（如「静安」「近郊」），
+// 靠 cluster 拆字符串会把「黄浦·打浦桥」拆成「黄浦」这种区名。
+const city = computed(() => props.city || props.pois[0]?.cluster?.split('·')[0] || '上海')
 
 // 简易投影：按 poi 经纬度范围等比映射到容器内
 const bounds = computed(() => {

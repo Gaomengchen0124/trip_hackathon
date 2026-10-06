@@ -1,8 +1,11 @@
 // 生成点位库空模板。用法：node data/gen-template.mjs
 // 加新的作品线：往 LINES 里加一条，重跑即可。
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { writeFileSync, mkdirSync, existsSync } from 'node:fs';
 
 const TODO = '【待填】';
+// 默认不覆盖已存在的数据文件（内容组填过的东西不能被生成器抹掉）。
+// 确实要重生成某条线：node data/gen-template.mjs --force
+const FORCE = process.argv.includes('--force');
 
 // 片区：固定值，行程引擎按它分组。不要在此之外自创。
 const BEIJING_CLUSTERS = [
@@ -52,7 +55,7 @@ const LINES = [
     tags: {
       城市: ['上海'],
       人物: ['阿宝', '汪小姐', '玲子', '李李'],
-      地名: ['黄河路', '进贤路', '外滩', '南京路', '思南路'],
+      地名: ['黄河路', '进贤路', '南京路', '思南路', '复兴公园', '提篮桥', '曹杨新村', '国泰电影院'],
     },
     recommendDays: 3,
   },
@@ -139,6 +142,12 @@ const written = [];
 for (const cfg of LINES) {
   const lineId = cfg.file;
   const ipInfo = cfg.ip;
+  const out = `data/lines/${cfg.file}.json`;
+  if (existsSync(out) && !FORCE) {
+    console.log(`· ${out} 已存在，跳过（要覆盖就加 --force）`);
+    written.push(cfg);
+    continue;
+  }
   const payload = {
     _说明: '点位库。所有【待填】必须人工核对原著/剧集后填写，禁止编造引文。校验：node data/validate.mjs data/lines/' + cfg.file + '.json',
     _版本: 1,
@@ -167,7 +176,6 @@ for (const cfg of LINES) {
     cityStops: Array.from({ length: 15 }, (_, i) => citySlot(cfg.prefix, lineId, i + 1)),
   };
 
-  const out = `data/lines/${cfg.file}.json`;
   writeFileSync(out, JSON.stringify(payload, null, 2) + '\n');
   written.push(cfg);
   console.log(`✓ ${out}  (${cfg.title}：8 个 IP 点位 + 15 个城市景点，${cfg.clusters.length} 个片区)`);

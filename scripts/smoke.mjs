@@ -39,8 +39,8 @@ try {
   check('搜「汪小姐」命中（人物标签）', mock.search('汪小姐').length === 1)
   check('搜「龙族」命中两条', mock.search('龙族').length === 2)
   check('搜「原神」返回空（页面显示"暂未收录"）', mock.search('原神').length === 0)
-  // 城市景点名还没填（占位是【待填】），所以现在还搜不到；填完自动生效
-  check('未填内容的 POI 名搜不到（预期，填完自动生效）', mock.search('东方明珠').length === 0)
+  check('搜「东方明珠」命中（POI 名）', mock.search('东方明珠').length === 1)
+  check('搜「曹杨新村」命中（IP 点名）', mock.search('曹杨新村').length === 1)
 
   console.log('\n【端点 3 · 路线详情】')
   const detail = mock.getLineDetail('fanhua-shanghai')
@@ -48,7 +48,9 @@ try {
   check('IP 点带 tier', detail.pois.filter((p) => p.type === 'ip').every((p) => p.tier))
   check('城市景点带 popularity', detail.pois.filter((p) => p.type === 'classic').every((p) => p.popularity))
   const pending = detail.pois.filter((p) => p.name.includes('【') || p.cluster.includes('【')).length
-  console.log(`  ℹ️  还有 ${pending}/23 个点位是占位——内容组填完 data/lines/fanhua-shanghai.json 后，下面的规划才有真数据`)
+  check('繁花 23 个点位已全部填写（无占位）', pending === 0, `剩余占位 ${pending}`)
+  check('每个 IP 点都有带出处的原著引文',
+    detail.pois.filter((p) => p.type === 'ip').every((p) => p.quotes?.length && p.quotes.every((q) => q.source && q.full)))
 
   const idOf = (name) => detail.pois.find((p) => p.name.includes(name))?.poiId
   const TR = { startDate: '2026-11-01', startSlot: '上午', endDate: '2026-11-02', endSlot: '晚上' }

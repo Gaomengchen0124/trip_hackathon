@@ -13,6 +13,8 @@
     "engine:test": "node src/engine/demo.mjs",
     "engine:home": "node src/engine/demo-home.mjs"
     ,"smoke": "node scripts/smoke.mjs"
+    ,"demo:plan": "node scripts/demo-plan.mjs"
+    ,"e2e": "node scripts/e2e-ssr.mjs"
   },
   "dependencies": {
     "pinia": "^2.2.4",

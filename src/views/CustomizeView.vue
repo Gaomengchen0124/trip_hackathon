@@ -80,6 +80,7 @@ async function onConfirmed({ poiIds, force = false }) {
       <MapContainer
         :pois="store.pois"
         :selected-ids="store.checkedIds"
+        :city="store.line?.city"
         :interactive="true"
         @marker-hover="onMarkerHover"
       />

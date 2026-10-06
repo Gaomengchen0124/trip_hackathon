@@ -178,6 +178,33 @@ const b = plan({ pois: s2Selected, allPois: POOL, dayHours: 10, startDate: '2026
 check('两次结果完全相同', JSON.stringify(a.days) === JSON.stringify(b.days));
 
 // ===============================================================
+// 场景 8：一个片区塞了 7 个点，超过单日容量 → 必须能「拆片」
+// 真实案例：《繁花》上海有 7 个点都在「黄浦·打浦桥」
+// ===============================================================
+console.log('\n【场景 8】7 个点挤在同一个片区，2 天 → 期望：自动拆到两天，装得下');
+const sameCluster = Array.from({ length: 7 }, (_, i) => ({
+  poiId: `x-ip-0${i + 1}`,
+  name: `同片区点${i + 1}`,
+  type: 'ip',
+  tier: 'A',
+  lng: 121.462 + i * 0.002,
+  lat: 31.212 + i * 0.001,
+  cluster: '黄浦·打浦桥',
+  durationNormal: 90,
+  durationRush: 45,
+}));
+const s8 = plan({
+  pois: sameCluster, allPois: sameCluster, dayHours: 8,
+  startDate: '2026-11-01', startSlot: '上午',
+  endDate: '2026-11-02', endSlot: '晚上',
+});
+check('7 个同片区点被拆到两天后装得下', s8.ok === true, `使用率 ${(s8.usage * 100).toFixed(0)}%`);
+check('两天都排上了点', s8.days.every((d) => d.stops.length > 0),
+  s8.days.map((d) => `${d.date}:${d.stops.length}个`).join(' · '));
+check('没有任何一天超载', s8.days.every((d) => d.used <= d.available));
+check('没触发不必要的压缩', s8.compressed === false);
+
+// ===============================================================
 // 场景 7：日期折算的边界
 // ===============================================================
 console.log('\n【场景 7】日期/时段折算');
