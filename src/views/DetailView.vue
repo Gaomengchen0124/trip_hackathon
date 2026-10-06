@@ -4,13 +4,16 @@
  */
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import DetailContent from '../components/DetailContent.vue'
 import { usePlanStore } from '../stores/plan'
 
 const route = useRoute()
 const router = useRouter()
 const store = usePlanStore()
 
-const poi = computed(() => store.pois.find((p) => p.poiId === route.params.poiId))
+const poi = computed(() =>
+  store.pois.find((p) => p.poiId === route.params.poiId)
+)
 </script>
 
 <template>
@@ -20,40 +23,29 @@ const poi = computed(() => store.pois.find((p) => p.poiId === route.params.poiId
       <h1>{{ poi?.name || '未找到该景点' }}</h1>
     </header>
 
-    <template v-if="poi">
-      <div class="photo">
-        <span>📷 {{ poi.realPhoto }}</span>
-      </div>
-      <p class="intro">{{ poi.intro }}</p>
-
-      <section v-if="poi.quotes?.length" class="quotes">
-        <blockquote v-for="(q, i) in poi.quotes" :key="i" class="quote">
-          <p class="full">{{ q.kind === '台词' ? q.full : `「${q.full}」` }}</p>
-          <footer>—— {{ q.kind }} · {{ q.source }}</footer>
-        </blockquote>
-      </section>
-      <p v-else class="empty">引文待内容组核对原著 / 剧集后填入（宁缺毋假）</p>
-    </template>
+    <DetailContent v-if="poi" :poi="poi" />
 
     <router-link v-else class="btn" to="/">回首页</router-link>
   </div>
 </template>
 
 <style scoped>
-.bar { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
-.back { color: var(--ink-2); font-size: 14px; }
-h1 { font-size: 20px; }
-.photo {
-  aspect-ratio: 16/9; border-radius: var(--card-radius); margin-bottom: 14px;
-  background: var(--brand-light); color: var(--ink-2);
-  display: flex; align-items: center; justify-content: center; font-size: 13px;
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
 }
-.intro { font-size: 15px; margin-bottom: 16px; }
-.quote {
-  background: #fff; border-radius: var(--card-radius); box-shadow: var(--shadow);
-  padding: 16px; margin-bottom: 12px;
+.back {
+  color: var(--ink-2);
+  font-size: 14px;
 }
-.full { font-size: 15px; }
-.quote footer { font-size: 12px; color: var(--ink-2); margin-top: 8px; text-align: right; }
-.empty { font-size: 13px; color: var(--ink-2); }
+.back:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+}
+h1 {
+  font-size: 20px;
+}
 </style>

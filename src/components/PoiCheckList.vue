@@ -1,46 +1,110 @@
 <script setup>
-/**
- * S3 左右两栏勾选列表（基础版）
- * 左栏 IP 点按 tier（S>A>B）排序；右栏城市景点按数组顺序（即知名度）排序。
- */
+import { computed } from 'vue'
+import PoiSelectCard from './PoiSelectCard.vue'
 const props = defineProps({
   title: { type: String, required: true },
   pois: { type: Array, required: true },
   checkedIds: { type: Array, required: true },
+  disabled: Boolean
 })
 const emit = defineEmits(['toggle'])
-
-const TIER_LABEL = { S: '⭐灵魂', A: '重要', B: '可去' }
-
-function tag(p) {
-  return p.type === 'ip' ? TIER_LABEL[p.tier] || '' : '经典'
+const count = computed(
+  () => props.pois.filter((p) => props.checkedIds.includes(p.poiId)).length
+)
+// Preserve parent-supplied order (IP tier / classic popularity).
+function bulk(select) {
+  if (props.disabled) return
+  const ids = props.pois
+    .filter((p) => props.checkedIds.includes(p.poiId) !== select)
+    .map((p) => p.poiId)
+  ids.forEach((id) => emit('toggle', id))
 }
 </script>
-
 <template>
-  <div class="col card-block">
-    <h3>{{ title }}（{{ pois.length }}）</h3>
-    <div class="tools">
-      <button @click="pois.forEach((p) => !checkedIds.includes(p.poiId) && emit('toggle', p.poiId))">全选</button>
-      <button @click="pois.forEach((p) => checkedIds.includes(p.poiId) && emit('toggle', p.poiId))">清空</button>
+  <section class="poi-list" :aria-label="title">
+    <header>
+      <h2>
+        {{ title }} <small>{{ count }} / {{ pois.length }}</small>
+      </h2>
+      <div class="tools">
+        <button
+          type="button"
+          :disabled="disabled || count === pois.length"
+          @click="bulk(true)"
+        >
+          全选</button
+        ><button
+          type="button"
+          :disabled="disabled || !count"
+          @click="bulk(false)"
+        >
+          清空
+        </button>
+      </div>
+    </header>
+    <div class="options">
+      <PoiSelectCard
+        v-for="poi in pois"
+        :key="poi.poiId"
+        :poi="poi"
+        :checked="checkedIds.includes(poi.poiId)"
+        :disabled="disabled"
+        @toggle="emit('toggle', $event)"
+      />
     </div>
-    <label v-for="p in pois" :key="p.poiId" class="row">
-      <input type="checkbox" :checked="checkedIds.includes(p.poiId)" @change="emit('toggle', p.poiId)" />
-      <span class="name">{{ p.name }}</span>
-      <span class="tag">{{ tag(p) }}</span>
-      <span class="dur">{{ p.durationNormal }}min</span>
-    </label>
-  </div>
+    <p v-if="!pois.length" class="empty">暂无候选景点</p>
+  </section>
 </template>
-
 <style scoped>
-.card-block { background: #fff; border-radius: var(--card-radius); box-shadow: var(--shadow); }
-.col { padding: 12px; min-width: 0; }
-h3 { font-size: 15px; margin-bottom: 8px; }
-.tools { display: flex; gap: 12px; font-size: 12px; color: var(--ink-2); margin-bottom: 8px; }
-.row { display: flex; align-items: center; gap: 8px; padding: 8px 4px; border-bottom: 1px solid var(--line); font-size: 14px; cursor: pointer; }
-.row:last-child { border-bottom: none; }
-.name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.tag { font-size: 11px; color: var(--brand); background: var(--brand-light); border-radius: 4px; padding: 1px 6px; white-space: nowrap; }
-.dur { font-size: 12px; color: var(--ink-2); white-space: nowrap; }
+.poi-list {
+  min-width: 0;
+  border-radius: var(--card-radius);
+  padding: 16px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+h2 {
+  font-size: 15px;
+}
+small {
+  font-weight: 400;
+  color: var(--ink-2);
+  font-size: 12px;
+  margin-left: 5px;
+}
+.tools {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--brand);
+}
+.tools button {
+  padding: 4px;
+}
+.tools button:disabled {
+  color: var(--ink-2);
+  opacity: 0.5;
+  cursor: default;
+}
+.tools button:focus-visible {
+  outline: 2px solid var(--brand);
+}
+.options {
+  display: grid;
+  gap: 9px;
+}
+.empty {
+  padding: 24px 0;
+  color: var(--ink-2);
+  text-align: center;
+  font-size: 13px;
+}
 </style>

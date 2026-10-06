@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import RouteCard from '../components/RouteCard.vue'
 import * as api from '../api/adapter'
 
 const route = useRoute()
@@ -28,26 +29,43 @@ function go(lineId) {
     <section v-for="g in columns[key]" :key="g.label" class="group">
       <h2>{{ g.label }}</h2>
       <div class="cards">
-        <button v-for="l in g.lines" :key="l.lineId" class="card" @click="go(l.lineId)">
-          <span class="title">{{ l.title }}</span>
-          <span class="meta">{{ l.city }} · 推荐 {{ l.recommendDays }} 天</span>
-        </button>
+        <RouteCard
+          v-for="l in g.lines"
+          :key="l.lineId"
+          :line="l"
+          :label="g.label"
+          @select="go"
+        />
       </div>
     </section>
   </div>
 </template>
 
 <style scoped>
-.bar { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
-.back { color: var(--ink-2); font-size: 14px; }
-h1 { font-size: 20px; }
-.group { margin-bottom: 24px; }
-.group h2 { font-size: 15px; color: var(--ink-2); margin-bottom: 10px; }
-.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
-.card {
-  background: #fff; border-radius: var(--card-radius); box-shadow: var(--shadow);
-  padding: 16px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start;
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
 }
-.title { font-weight: 600; }
-.meta { font-size: 12px; color: var(--ink-2); }
+.back {
+  color: var(--ink-2);
+  font-size: 14px;
+}
+h1 {
+  font-size: 20px;
+}
+.group {
+  margin-bottom: 24px;
+}
+.group h2 {
+  font-size: 15px;
+  color: var(--ink-2);
+  margin-bottom: 10px;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
 </style>
