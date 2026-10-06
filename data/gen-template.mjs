@@ -40,6 +40,27 @@ const SHANGHAI_CLUSTERS = [
   '近郊',
 ];
 
+// 伦敦：按《哈利波特》文档里的片区名归并（"City" 与 "City of London" 统一）
+const LONDON_CLUSTERS = [
+  "King's Cross",
+  'City of London',
+  "Regent's Park",
+  'South Bank',
+  'Strand',
+  'Southwark',
+  'West End',
+  'Westminster',
+  'Bloomsbury',
+  'Tower',
+  'South Kensington',
+  'Hyde Park',
+  'Tower Bridge',
+  'Leavesden（伦敦周边）',
+];
+
+// 北京（《我与地坛》）：按文档给的行政区做片区
+const BEIJING_LITERARY_CLUSTERS = ['东城', '西城', '朝阳', '海淀'];
+
 const LINES = [
   {
     file: 'fanhua-shanghai',
@@ -86,6 +107,50 @@ const LINES = [
     priority: 11,
     tags: { 城市: ['东京', '日本'], 人物: ['路明非', '楚子航', '恺撒', '诺诺'], 地名: [] },
     recommendDays: 2,
+  },
+  {
+    file: 'harrypotter-london',
+    title: '哈利波特·伦敦',
+    city: '伦敦',
+    clusters: LONDON_CLUSTERS,
+    bounds: { lng: [-0.45, 0.1], lat: [51.4, 51.75] },
+    expectedIp: [8, 8],
+    expectedCity: [10, 20],
+    prefix: 'hp',
+    ip: {
+      ipId: 'harrypotter',
+      name: '哈利波特',
+      author: 'J.K.罗琳',
+      kind: 'novel',
+      aliases: ['哈利波特', '哈利·波特', 'Harry Potter'],
+    },
+    priority: 2,
+    tags: {
+      城市: ['伦敦', '英国'],
+      人物: ['哈利·波特', '赫敏', '罗恩', '邓布利多'],
+      地名: ["King's Cross", 'Leadenhall Market', 'Millennium Bridge', 'Borough Market', 'Piccadilly Circus', 'Westminster'],
+    },
+    recommendDays: 3,
+  },
+  {
+    file: 'woyuditan-beijing',
+    title: '我与地坛·北京',
+    city: '北京',
+    clusters: BEIJING_LITERARY_CLUSTERS,
+    bounds: { lng: [116.2, 116.5], lat: [39.85, 40.05] },
+    expectedIp: [1, 1],
+    expectedCity: [10, 20],
+    prefix: 'wd',
+    ip: {
+      ipId: 'woyuditan',
+      name: '我与地坛',
+      author: '史铁生',
+      kind: 'prose',
+      aliases: ['我与地坛', '史铁生', '地坛'],
+    },
+    priority: 3,
+    tags: { 城市: ['北京'], 人物: ['史铁生'], 地名: ['地坛', '地坛公园'] },
+    recommendDays: 1,
   },
 ];
 

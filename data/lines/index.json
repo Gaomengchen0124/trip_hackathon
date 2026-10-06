@@ -41,6 +41,70 @@
       }
     },
     {
+      "lineId": "harrypotter-london",
+      "ipId": "harrypotter",
+      "ipName": "哈利波特",
+      "title": "哈利波特·伦敦",
+      "city": "伦敦",
+      "cover": "img/harrypotter-london.jpg",
+      "file": "data/lines/harrypotter-london.json",
+      "priority": 2,
+      "recommendDays": 3,
+      "aliases": [
+        "哈利波特",
+        "哈利·波特",
+        "Harry Potter"
+      ],
+      "tags": {
+        "城市": [
+          "伦敦",
+          "英国"
+        ],
+        "人物": [
+          "哈利·波特",
+          "赫敏",
+          "罗恩",
+          "邓布利多"
+        ],
+        "地名": [
+          "King's Cross",
+          "Leadenhall Market",
+          "Millennium Bridge",
+          "Borough Market",
+          "Piccadilly Circus",
+          "Westminster"
+        ]
+      }
+    },
+    {
+      "lineId": "woyuditan-beijing",
+      "ipId": "woyuditan",
+      "ipName": "我与地坛",
+      "title": "我与地坛·北京",
+      "city": "北京",
+      "cover": "img/woyuditan-beijing.jpg",
+      "file": "data/lines/woyuditan-beijing.json",
+      "priority": 3,
+      "recommendDays": 1,
+      "aliases": [
+        "我与地坛",
+        "史铁生",
+        "地坛"
+      ],
+      "tags": {
+        "城市": [
+          "北京"
+        ],
+        "人物": [
+          "史铁生"
+        ],
+        "地名": [
+          "地坛",
+          "地坛公园"
+        ]
+      }
+    },
+    {
       "lineId": "longzu-beijing",
       "ipId": "longzu",
       "ipName": "龙族",

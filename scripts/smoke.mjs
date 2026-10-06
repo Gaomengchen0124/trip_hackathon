@@ -1,6 +1,7 @@
 // 端到端冒烟测试：用 Vite 真加载 src/api/mock/index.js，走一遍页面会走的调用。
 // 用法：npm run smoke
 import { createServer } from 'vite'
+import { readFileSync } from 'node:fs'
 
 const server = await createServer({
   server: { middlewareMode: true, hmr: false },
@@ -19,9 +20,12 @@ try {
   const mock = await server.ssrLoadModule('/src/api/mock/index.js')
 
   console.log('\n【数据装载】')
-  check('读到了 3 条线', mock.lines.length === 3, mock.lines.map((l) => l.title).join('、'))
+  const index = JSON.parse(readFileSync('data/lines/index.json', 'utf8'))
+  check(`首页目录 ${index.lines.length} 条线全部装载`, mock.lines.length === index.lines.length,
+    mock.lines.map((l) => l.title).join('、'))
   check('繁花排第一（主推）', mock.lines[0].lineId === 'fanhua-shanghai')
-  check('点位总数 69（3 × 23）', mock.pois.length === 69, `实际 ${mock.pois.length}`)
+  const totalPois = mock.lines.reduce((n, l) => n + mock.getLineDetail(l.lineId).pois.length, 0)
+  check('点位总数 = 各线之和', mock.pois.length === totalPois, `${mock.pois.length} 个`)
 
   console.log('\n【端点 2 · 首页三栏目】')
   const cols = mock.listColumns()
@@ -41,6 +45,8 @@ try {
   check('搜「原神」返回空（页面显示"暂未收录"）', mock.search('原神').length === 0)
   check('搜「东方明珠」命中（POI 名）', mock.search('东方明珠').length === 1)
   check('搜「曹杨新村」命中（IP 点名）', mock.search('曹杨新村').length === 1)
+  check('搜「哈利波特」命中伦敦线', mock.search('哈利波特')[0]?.lineId === 'harrypotter-london')
+  check('搜「地坛」命中北京文学线', mock.search('地坛')[0]?.lineId === 'woyuditan-beijing')
 
   console.log('\n【端点 3 · 路线详情】')
   const detail = mock.getLineDetail('fanhua-shanghai')
