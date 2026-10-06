@@ -1,0 +1,2922 @@
+diff --git a/src/components/DayTimeline.vue b/src/components/DayTimeline.vue
+new file mode 100644
+index 0000000..c6d8623
+--- /dev/null
++++ b/src/components/DayTimeline.vue
+@@ -0,0 +1,84 @@
++<script setup>
++import { computed } from 'vue'
++import DayTimelineItem from './DayTimelineItem.vue'
++import { formatMinutes } from '../utils/travel-ui'
++const props = defineProps({
++  days: { type: Array, default: () => [] },
++  pois: { type: Array, default: () => [] }
++})
++const emit = defineEmits(['locate'])
++const byId = computed(() => new Map(props.pois.map((p) => [p.poiId, p])))
++function total(day) {
++  return (day.items || []).reduce(
++    (sum, item) => sum + (Number(item.duration) || 0),
++    0
++  )
++}
++</script>
++<template>
++  <div class="timeline">
++    <section v-for="day in days" :key="day.day" class="day">
++      <header>
++        <h2>Day {{ day.day }}</h2>
++        <p>
++          {{ day.items?.length || 0 }} 站 · 游览 {{ formatMinutes(total(day)) }}
++        </p>
++      </header>
++      <ol>
++        <DayTimelineItem
++          v-for="item in day.items || []"
++          :key="item.poiId"
++          :day="day.day"
++          :item="item"
++          :poi="byId.get(item.poiId)"
++          @locate="emit('locate', $event)"
++        />
++      </ol>
++    </section>
++    <p v-if="!days.length" class="empty">
++      暂时没有日程，请返回定制页生成行程。
++    </p>
++  </div>
++</template>
++<style scoped>
++.timeline {
++  display: grid;
++  gap: 16px;
++}
++.day {
++  background: #fff;
++  padding: 22px;
++  border: 1px solid var(--line);
++  border-radius: var(--card-radius);
++  box-shadow: var(--shadow);
++}
++header {
++  display: flex;
++  align-items: center;
++  justify-content: space-between;
++  gap: 8px;
++  flex-wrap: wrap;
++  margin-bottom: 18px;
++}
++h2 {
++  font-family: serif;
++  font-size: 24px;
++  color: var(--brand);
++}
++header p {
++  font-size: 12px;
++  color: var(--ink-2);
++}
++ol {
++  padding: 0;
++}
++.empty {
++  padding: 24px;
++  color: var(--ink-2);
++}
++@media (max-width: 480px) {
++  .day {
++    padding: 16px;
++  }
++}
++</style>
+diff --git a/src/components/DayTimelineItem.vue b/src/components/DayTimelineItem.vue
+new file mode 100644
+index 0000000..00b0540
+--- /dev/null
++++ b/src/components/DayTimelineItem.vue
+@@ -0,0 +1,119 @@
++<script setup>
++import { formatMinutes } from '../utils/travel-ui'
++defineProps({
++  day: { type: Number, required: true },
++  item: { type: Object, required: true },
++  poi: { type: Object, default: null }
++})
++const emit = defineEmits(['locate'])
++</script>
++<template>
++  <li class="stop">
++    <button
++      type="button"
++      :aria-label="`在地图查看${poi?.name || item.poiId}`"
++      @click="emit('locate', item.poiId)"
++    >
++      <span class="number">D{{ day }}-{{ item.order }}</span
++      ><span class="body"
++        ><strong>{{ poi?.name || '景点信息待补充' }}</strong
++        ><small
++          >{{ poi?.cluster || ''
++          }}<span v-if="poi?.type === 'ip'"> · IP 打卡点</span></small
++        ></span
++      ><span class="duration"
++        >{{ formatMinutes(item.duration)
++        }}<small v-if="poi && item.duration < poi.durationNormal"
++          >快速打卡</small
++        ></span
++      ><span aria-hidden="true" class="arrow">↗</span>
++    </button>
++  </li>
++</template>
++<style scoped>
++.stop {
++  list-style: none;
++  border-left: 1px solid var(--line);
++  margin-left: 24px;
++  padding: 0 0 12px 18px;
++  position: relative;
++}
++.stop::before {
++  content: '';
++  position: absolute;
++  left: -4px;
++  top: 25px;
++  width: 7px;
++  height: 7px;
++  border-radius: 50%;
++  background: var(--brand);
++}
++.stop:last-child {
++  padding-bottom: 0;
++}
++button {
++  width: 100%;
++  display: flex;
++  align-items: center;
++  gap: 12px;
++  text-align: left;
++  padding: 16px;
++  border: 1px solid var(--line);
++  border-radius: 12px;
++  background: var(--bg);
++}
++button:hover {
++  background: var(--brand-light);
++}
++button:focus-visible {
++  outline: 2px solid var(--brand);
++  outline-offset: 2px;
++}
++.number {
++  font-size: 11px;
++  color: var(--brand);
++  font-weight: 600;
++  white-space: nowrap;
++}
++.body {
++  flex: 1;
++  min-width: 0;
++}
++strong {
++  font-size: 14px;
++  overflow-wrap: anywhere;
++}
++small {
++  display: block;
++  font-size: 11px;
++  color: var(--ink-2);
++  margin-top: 4px;
++}
++.duration {
++  font-size: 12px;
++  white-space: nowrap;
++}
++.arrow {
++  color: var(--brand);
++}
++@media (max-width: 480px) {
++  .stop {
++    margin-left: 4px;
++    padding-left: 12px;
++  }
++  button {
++    padding: 12px;
++    gap: 8px;
++    flex-wrap: wrap;
++  }
++  .body {
++    flex-basis: 55%;
++  }
++  .duration {
++    margin-left: auto;
++  }
++  .arrow {
++    display: none;
++  }
++}
++</style>
+diff --git a/src/components/DetailContent.vue b/src/components/DetailContent.vue
+new file mode 100644
+index 0000000..a90345b
+--- /dev/null
++++ b/src/components/DetailContent.vue
+@@ -0,0 +1,89 @@
++<script setup>
++import PhotoFrame from './ui/PhotoFrame.vue'
++import QuoteCard from './QuoteCard.vue'
++import { formatMinutes, TIER_LABELS } from '../utils/travel-ui'
++defineProps({ poi: { type: Object, required: true } })
++</script>
++<template>
++  <article class="detail">
++    <PhotoFrame :src="poi.realPhoto" :alt="poi.name" />
++    <div class="content">
++      <p class="eyebrow">
++        {{ poi.type === 'ip' ? '故事中的一站' : '城市经典'
++        }}<span v-if="poi.type === 'ip' && poi.tier">
++          · {{ TIER_LABELS[poi.tier] }}</span
++        >
++      </p>
++      <h2>{{ poi.name }}</h2>
++      <p class="meta">
++        {{ poi.cluster }} · 建议停留 {{ formatMinutes(poi.durationNormal) }}
++      </p>
++      <p class="intro">{{ poi.intro || '景点介绍即将补充' }}</p>
++      <section v-if="poi.type === 'ip'" class="quotes" aria-label="原著与台词">
++        <h3>重读这个瞬间</h3>
++        <QuoteCard
++          v-for="(quote, index) in poi.quotes || []"
++          :key="index"
++          :quote="quote"
++        />
++        <p v-if="!poi.quotes?.length" class="empty">这个地点的故事即将补充</p>
++      </section>
++    </div>
++  </article>
++</template>
++<style scoped>
++.detail {
++  max-width: 820px;
++  margin: 0 auto;
++  background: #fff;
++  border: 1px solid var(--line);
++  border-radius: 16px;
++  overflow: hidden;
++  box-shadow: var(--shadow);
++}
++.content {
++  padding: 28px;
++}
++.eyebrow {
++  font-size: 11px;
++  color: var(--brand);
++  letter-spacing: 2px;
++}
++h2 {
++  font-size: 30px;
++  font-family: serif;
++  margin: 6px 0 8px;
++  overflow-wrap: anywhere;
++}
++.meta {
++  color: var(--ink-2);
++  font-size: 12px;
++}
++.intro {
++  font-size: 15px;
++  line-height: 1.9;
++  margin: 22px 0;
++  overflow-wrap: anywhere;
++}
++.quotes {
++  display: grid;
++  gap: 16px;
++}
++h3 {
++  font-size: 16px;
++  border-top: 1px solid var(--line);
++  padding-top: 20px;
++}
++.empty {
++  color: var(--ink-2);
++  font-size: 13px;
++}
++@media (max-width: 600px) {
++  .content {
++    padding: 20px;
++  }
++  h2 {
++    font-size: 25px;
++  }
++}
++</style>
+diff --git a/src/components/PoiCardOverlay.vue b/src/components/PoiCardOverlay.vue
+index 39344f9..26136da 100644
+--- a/src/components/PoiCardOverlay.vue
++++ b/src/components/PoiCardOverlay.vue
+@@ -1,52 +1,79 @@
+ <script setup>
+-/**
+- * S6 景点卡片浮层 —— 基础占位。
+- * 【交接给组件同学】结构已就位：图片区 + 引文区（原著/台词 brief + 出处）+ 操作区。
+- * 样式自由发挥，但保留 props.poi 字段用法与 emit('view-detail') / emit('close') 两个事件。
+- */
+-defineProps({
+-  poi: { type: Object, required: true },
+-})
++import DialogSheet from './ui/DialogSheet.vue'
++import PhotoFrame from './ui/PhotoFrame.vue'
++import QuoteCard from './QuoteCard.vue'
++import { formatMinutes } from '../utils/travel-ui'
++defineProps({ poi: { type: Object, required: true } })
+ const emit = defineEmits(['view-detail', 'close'])
+ </script>
+-
+ <template>
+-  <div class="overlay-mask" @click="emit('close')">
+-    <div class="card" @click.stop>
+-      <div class="photo">
+-        <!-- 图片素材就绪前显示占位 -->
+-        <span>📷 {{ poi.realPhoto }}</span>
+-      </div>
+-      <div class="quotes">
+-        <p v-if="!poi.quotes?.length" class="empty">引文待内容组核对原著后填入</p>
+-        <template v-for="(q, i) in poi.quotes" :key="i">
+-          <p class="brief">「{{ q.brief }}」</p>
+-          <p class="source">—— {{ q.source }}</p>
+-        </template>
+-      </div>
+-      <div class="footer">
+-        <span>{{ poi.name }} · 建议 {{ poi.durationNormal }} 分钟</span>
+-        <button class="btn" @click="emit('view-detail', poi.poiId)">查看详情</button>
+-      </div>
++  <DialogSheet :title="poi.name" @close="emit('close')">
++    <PhotoFrame class="photo" :src="poi.realPhoto" :alt="poi.name" />
++    <p class="meta">
++      {{ poi.cluster }} · 建议停留 {{ formatMinutes(poi.durationNormal) }}
++    </p>
++    <div v-if="poi.type === 'ip'" class="quotes">
++      <QuoteCard
++        v-for="(quote, index) in poi.quotes || []"
++        :key="index"
++        :quote="quote"
++        brief
++      />
++      <p v-if="!poi.quotes?.length" class="empty">这个地点的故事即将补充</p>
+     </div>
+-  </div>
++    <p v-else class="intro">{{ poi.intro || '景点介绍即将补充' }}</p>
++    <div class="actions">
++      <button type="button" class="btn-ghost" @click="emit('close')">
++        继续看地图</button
++      ><button
++        type="button"
++        class="btn"
++        @click="emit('view-detail', poi.poiId)"
++      >
++        查看详情 ↗
++      </button>
++    </div>
++  </DialogSheet>
+ </template>
+-
+ <style scoped>
+-.overlay-mask {
+-  position: fixed; inset: 0; background: rgba(0, 0, 0, 0.35);
+-  display: flex; align-items: flex-end; justify-content: center; z-index: 50;
+-}
+-.card { width: 100%; max-width: 520px; background: #fff; border-radius: 16px 16px 0 0; padding: 16px; }
+ .photo {
+-  aspect-ratio: 16/9; border-radius: var(--card-radius);
+-  background: var(--brand-light); color: var(--ink-2);
+-  display: flex; align-items: center; justify-content: center; font-size: 13px;
+-}
+-.quotes { padding: 12px 4px; }
+-.brief { font-size: 15px; }
+-.source { font-size: 12px; color: var(--ink-2); margin-bottom: 6px; }
+-.empty { font-size: 13px; color: var(--ink-2); }
+-.footer { display: flex; align-items: center; justify-content: space-between; font-size: 14px; }
++  border-radius: 12px;
++}
++.meta {
++  font-size: 12px;
++  color: var(--ink-2);
++  margin: 12px 0 16px;
++}
++.quotes {
++  display: grid;
++  gap: 10px;
++}
++.intro {
++  font-size: 14px;
++  line-height: 1.8;
++  overflow-wrap: anywhere;
++}
++.empty {
++  font-size: 13px;
++  color: var(--ink-2);
++  padding: 10px 0;
++}
++.actions {
++  display: flex;
++  justify-content: space-between;
++  gap: 10px;
++  margin-top: 20px;
++}
++.actions button {
++  padding: 10px 18px;
++}
++.actions button:focus-visible {
++  outline: 2px solid var(--brand);
++  outline-offset: 3px;
++}
++@media (max-width: 360px) {
++  .actions {
++    flex-direction: column;
++  }
++}
+ </style>
+-
+diff --git a/src/components/PoiCheckList.vue b/src/components/PoiCheckList.vue
+index 7321f3b..bcaf854 100644
+--- a/src/components/PoiCheckList.vue
++++ b/src/components/PoiCheckList.vue
+@@ -1,47 +1,110 @@
+ <script setup>
+-/**
+- * S3 左右两栏勾选列表（基础版）
+- * 左栏 IP 点按 tier（S>A>B）排序；右栏城市景点按数组顺序（即知名度）排序。
+- */
++import { computed } from 'vue'
++import PoiSelectCard from './PoiSelectCard.vue'
+ const props = defineProps({
+   title: { type: String, required: true },
+   pois: { type: Array, required: true },
+   checkedIds: { type: Array, required: true },
++  disabled: Boolean
+ })
+ const emit = defineEmits(['toggle'])
+-
+-const TIER_LABEL = { S: '⭐灵魂', A: '重要', B: '可去' }
+-
+-function tag(p) {
+-  return p.type === 'ip' ? TIER_LABEL[p.tier] || '' : '经典'
++const count = computed(
++  () => props.pois.filter((p) => props.checkedIds.includes(p.poiId)).length
++)
++// Preserve parent-supplied order (IP tier / classic popularity).
++function bulk(select) {
++  if (props.disabled) return
++  const ids = props.pois
++    .filter((p) => props.checkedIds.includes(p.poiId) !== select)
++    .map((p) => p.poiId)
++  ids.forEach((id) => emit('toggle', id))
+ }
+ </script>
+-
+ <template>
+-  <div class="col card-block">
+-    <h3>{{ title }}（{{ pois.length }}）</h3>
+-    <div class="tools">
+-      <button @click="pois.forEach((p) => !checkedIds.includes(p.poiId) && emit('toggle', p.poiId))">全选</button>
+-      <button @click="pois.forEach((p) => checkedIds.includes(p.poiId) && emit('toggle', p.poiId))">清空</button>
++  <section class="poi-list" :aria-label="title">
++    <header>
++      <h2>
++        {{ title }} <small>{{ count }} / {{ pois.length }}</small>
++      </h2>
++      <div class="tools">
++        <button
++          type="button"
++          :disabled="disabled || count === pois.length"
++          @click="bulk(true)"
++        >
++          全选</button
++        ><button
++          type="button"
++          :disabled="disabled || !count"
++          @click="bulk(false)"
++        >
++          清空
++        </button>
++      </div>
++    </header>
++    <div class="options">
++      <PoiSelectCard
++        v-for="poi in pois"
++        :key="poi.poiId"
++        :poi="poi"
++        :checked="checkedIds.includes(poi.poiId)"
++        :disabled="disabled"
++        @toggle="emit('toggle', $event)"
++      />
+     </div>
+-    <label v-for="p in pois" :key="p.poiId" class="row">
+-      <input type="checkbox" :checked="checkedIds.includes(p.poiId)" @change="emit('toggle', p.poiId)" />
+-      <span class="name">{{ p.name }}</span>
+-      <span class="tag">{{ tag(p) }}</span>
+-      <span class="dur">{{ p.durationNormal }}min</span>
+-    </label>
+-  </div>
++    <p v-if="!pois.length" class="empty">暂无候选景点</p>
++  </section>
+ </template>
+-
+ <style scoped>
+-.card-block { background: #fff; border-radius: var(--card-radius); box-shadow: var(--shadow); }
+-.col { padding: 12px; min-width: 0; }
+-h3 { font-size: 15px; margin-bottom: 8px; }
+-.tools { display: flex; gap: 12px; font-size: 12px; color: var(--ink-2); margin-bottom: 8px; }
+-.row { display: flex; align-items: center; gap: 8px; padding: 8px 4px; border-bottom: 1px solid var(--line); font-size: 14px; cursor: pointer; }
+-.row:last-child { border-bottom: none; }
+-.name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+-.tag { font-size: 11px; color: var(--brand); background: var(--brand-light); border-radius: 4px; padding: 1px 6px; white-space: nowrap; }
+-.dur { font-size: 12px; color: var(--ink-2); white-space: nowrap; }
++.poi-list {
++  min-width: 0;
++  border-radius: var(--card-radius);
++  padding: 16px;
++  background: #fff;
++  box-shadow: var(--shadow);
++}
++header {
++  display: flex;
++  gap: 10px;
++  align-items: center;
++  justify-content: space-between;
++  margin-bottom: 14px;
++  flex-wrap: wrap;
++}
++h2 {
++  font-size: 15px;
++}
++small {
++  font-weight: 400;
++  color: var(--ink-2);
++  font-size: 12px;
++  margin-left: 5px;
++}
++.tools {
++  display: flex;
++  gap: 12px;
++  font-size: 12px;
++  color: var(--brand);
++}
++.tools button {
++  padding: 4px;
++}
++.tools button:disabled {
++  color: var(--ink-2);
++  opacity: 0.5;
++  cursor: default;
++}
++.tools button:focus-visible {
++  outline: 2px solid var(--brand);
++}
++.options {
++  display: grid;
++  gap: 9px;
++}
++.empty {
++  padding: 24px 0;
++  color: var(--ink-2);
++  text-align: center;
++  font-size: 13px;
++}
+ </style>
+-
+diff --git a/src/components/PoiSelectCard.vue b/src/components/PoiSelectCard.vue
+new file mode 100644
+index 0000000..9ee1233
+--- /dev/null
++++ b/src/components/PoiSelectCard.vue
+@@ -0,0 +1,90 @@
++<script setup>
++import { TIER_LABELS, formatMinutes } from '../utils/travel-ui'
++defineProps({
++  poi: { type: Object, required: true },
++  checked: Boolean,
++  disabled: Boolean
++})
++const emit = defineEmits(['toggle'])
++</script>
++<template>
++  <label class="poi-option" :class="{ selected: checked, disabled }">
++    <input
++      type="checkbox"
++      :checked="checked"
++      :disabled="disabled"
++      :aria-label="`选择${poi.name}`"
++      @change="emit('toggle', poi.poiId)"
++    />
++    <span class="content"
++      ><span class="headline"
++        ><strong>{{ poi.name }}</strong
++        ><span class="tag">{{
++          poi.type === 'ip' ? TIER_LABELS[poi.tier] || 'IP 打卡点' : '城市经典'
++        }}</span></span
++      ><span class="meta"
++        >{{ poi.cluster }} · {{ formatMinutes(poi.durationNormal) }}</span
++      ></span
++    >
++  </label>
++</template>
++<style scoped>
++.poi-option {
++  display: flex;
++  gap: 12px;
++  align-items: center;
++  min-height: 88px;
++  padding: 14px;
++  border: 1px solid var(--line);
++  border-radius: 12px;
++  background: #fff;
++  cursor: pointer;
++}
++.poi-option.selected {
++  border-color: var(--brand);
++  background: var(--brand-light);
++  box-shadow: inset 3px 0 var(--brand);
++}
++.poi-option:focus-within {
++  outline: 2px solid var(--brand);
++  outline-offset: 2px;
++}
++.poi-option.disabled {
++  opacity: 0.65;
++  cursor: wait;
++}
++input {
++  accent-color: var(--brand);
++  width: 18px;
++  height: 18px;
++  flex-shrink: 0;
++}
++.content {
++  min-width: 0;
++  flex: 1;
++}
++.headline {
++  display: flex;
++  align-items: center;
++  gap: 6px;
++  flex-wrap: wrap;
++}
++strong {
++  font-size: 14px;
++  overflow-wrap: anywhere;
++}
++.tag {
++  font-size: 10px;
++  color: var(--brand);
++  padding: 1px 6px;
++  border-radius: 5px;
++  border: 1px solid #8b1e2d26;
++  white-space: nowrap;
++}
++.meta {
++  display: block;
++  margin-top: 5px;
++  color: var(--ink-2);
++  font-size: 12px;
++}
++</style>
+diff --git a/src/components/QuoteCard.vue b/src/components/QuoteCard.vue
+new file mode 100644
+index 0000000..a8f4002
+--- /dev/null
++++ b/src/components/QuoteCard.vue
+@@ -0,0 +1,55 @@
++<script setup>
++import { computed } from 'vue'
++const props = defineProps({
++  quote: { type: Object, required: true },
++  brief: Boolean
++})
++const text = computed(() =>
++  props.brief ? props.quote.brief : props.quote.full
++)
++</script>
++<template>
++  <blockquote class="quote" :class="{ brief }">
++    <span class="kind">{{ quote.kind }}</span>
++    <p v-if="text" class="text">{{ text }}</p>
++    <p v-else class="empty">{{ quote.kind }}内容待补充</p>
++    <footer>{{ quote.source || '出处待补充' }}</footer>
++  </blockquote>
++</template>
++<style scoped>
++.quote {
++  position: relative;
++  border-left: 3px solid var(--brand);
++  padding: 16px 18px;
++  background: var(--bg);
++  border-radius: 0 10px 10px 0;
++}
++.kind {
++  font-size: 10px;
++  letter-spacing: 2px;
++  color: var(--brand);
++  font-weight: 600;
++}
++.text {
++  font-size: 16px;
++  white-space: pre-wrap;
++  overflow-wrap: anywhere;
++  line-height: 1.95;
++  margin: 8px 0;
++  font-family: 'Songti SC', SimSun, serif;
++}
++.brief .text {
++  font-size: 15px;
++}
++.empty {
++  font-size: 13px;
++  color: var(--ink-2);
++  margin: 8px 0;
++}
++footer {
++  font-size: 11px;
++  color: var(--ink-2);
++  overflow-wrap: anywhere;
++  line-height: 1.6;
++}
++</style>
+diff --git a/src/components/RouteCard.vue b/src/components/RouteCard.vue
+new file mode 100644
+index 0000000..2368a24
+--- /dev/null
++++ b/src/components/RouteCard.vue
+@@ -0,0 +1,82 @@
++<script setup>
++import PhotoFrame from './ui/PhotoFrame.vue'
++defineProps({
++  line: { type: Object, required: true },
++  label: { type: String, default: '' }
++})
++const emit = defineEmits(['select'])
++</script>
++<template>
++  <button
++    type="button"
++    class="route-card"
++    :aria-label="`选择${line.title}`"
++    @click="emit('select', line.lineId)"
++  >
++    <PhotoFrame :src="line.cover" :alt="line.title" ratio="3 / 2" />
++    <span class="body"
++      ><span v-if="label" class="eyebrow">{{ label }}</span
++      ><strong>{{ line.title }}</strong
++      ><span class="meta"
++        >{{ line.city }} · 推荐 {{ line.recommendDays }} 天
++        <span aria-hidden="true">↗</span></span
++      ></span
++    >
++  </button>
++</template>
++<style scoped>
++.route-card {
++  display: flex;
++  flex-direction: column;
++  width: 100%;
++  min-width: 0;
++  text-align: left;
++  background: #fff;
++  border: 1px solid var(--line);
++  border-radius: var(--card-radius);
++  overflow: hidden;
++  box-shadow: var(--shadow);
++  transition:
++    transform 0.18s,
++    box-shadow 0.18s;
++}
++.route-card:hover {
++  transform: translateY(-3px);
++  box-shadow: 0 8px 24px #40272616;
++}
++.route-card:focus-visible {
++  outline: 3px solid var(--brand);
++  outline-offset: 3px;
++}
++.body {
++  display: grid;
++  gap: 7px;
++  padding: 16px;
++  width: 100%;
++}
++.eyebrow {
++  font-size: 11px;
++  letter-spacing: 2px;
++  color: var(--brand);
++}
++strong {
++  font-size: 17px;
++  font-family: serif;
++  overflow-wrap: anywhere;
++}
++.meta {
++  display: flex;
++  justify-content: space-between;
++  gap: 8px;
++  font-size: 12px;
++  color: var(--ink-2);
++}
++@media (prefers-reduced-motion: reduce) {
++  .route-card {
++    transition: none;
++  }
++  .route-card:hover {
++    transform: none;
++  }
++}
++</style>
+diff --git a/src/components/TimeBar.vue b/src/components/TimeBar.vue
+index 88ab04c..22052e7 100644
+--- a/src/components/TimeBar.vue
++++ b/src/components/TimeBar.vue
+@@ -1,61 +1,192 @@
+ <script setup>
+-/**
+- * S3 顶部 · 游玩时间窄条：日期区间 + 开始/结束时段 + 每天 6/8/10 小时
+- */
++import { computed, useId } from 'vue'
++import { SLOTS, HOURS, validateTimeRange } from '../utils/travel-ui'
+ const props = defineProps({
+   timeRange: { type: Object, required: true },
+   hoursPerDay: { type: Number, required: true },
++  disabled: Boolean
+ })
+ const emit = defineEmits(['update:timeRange', 'update:hoursPerDay'])
+-
+-const SLOTS = ['上午', '中午', '晚上']
+-const HOURS = [6, 8, 10]
+-
++const radioName = useId()
++const error = computed(() =>
++  validateTimeRange(props.timeRange, props.hoursPerDay)
++)
++const showError = computed(
++  () => props.timeRange.startDate && props.timeRange.endDate && error.value
++)
+ function patch(field, value) {
+   emit('update:timeRange', { ...props.timeRange, [field]: value })
+ }
+ </script>
+-
+ <template>
+-  <div class="timebar card-block">
+-    <label class="field">
+-      开始
+-      <input type="date" :value="timeRange.startDate" @input="patch('startDate', $event.target.value)" />
+-      <select :value="timeRange.startSlot" @change="patch('startSlot', $event.target.value)">
+-        <option v-for="s in SLOTS" :key="s" :value="s">{{ s }}</option>
+-      </select>
+-    </label>
+-    <span class="tilde">~</span>
+-    <label class="field">
+-      结束
+-      <input type="date" :value="timeRange.endDate" @input="patch('endDate', $event.target.value)" />
+-      <select :value="timeRange.endSlot" @change="patch('endSlot', $event.target.value)">
+-        <option v-for="s in SLOTS" :key="s" :value="s">{{ s }}</option>
+-      </select>
+-    </label>
+-    <span class="divider"></span>
+-    <label class="field">
+-      每天
+-      <span class="hours">
+-        <button
+-          v-for="h in HOURS" :key="h"
+-          class="hour" :class="{ on: hoursPerDay === h }"
+-          @click="emit('update:hoursPerDay', h)"
+-        >{{ h }}h</button>
+-      </span>
+-    </label>
+-  </div>
++  <section class="timebar" aria-label="游玩时间">
++    <fieldset :disabled="disabled" class="fields">
++      <legend>安排游玩时间</legend>
++      <div class="endpoint">
++        <label
++          >开始日期<input
++            type="date"
++            :value="timeRange.startDate"
++            :aria-invalid="Boolean(showError)"
++            @input="patch('startDate', $event.target.value)" /></label
++        ><label
++          >开始时段<select
++            :value="timeRange.startSlot"
++            @change="patch('startSlot', $event.target.value)"
++          >
++            <option v-for="slot in SLOTS" :key="slot">{{ slot }}</option>
++          </select></label
++        >
++      </div>
++      <span class="separator" aria-hidden="true">→</span>
++      <div class="endpoint">
++        <label
++          >结束日期<input
++            type="date"
++            :value="timeRange.endDate"
++            :min="timeRange.startDate || undefined"
++            :aria-invalid="Boolean(showError)"
++            @input="patch('endDate', $event.target.value)" /></label
++        ><label
++          >结束时段<select
++            :value="timeRange.endSlot"
++            @change="patch('endSlot', $event.target.value)"
++          >
++            <option v-for="slot in SLOTS" :key="slot">{{ slot }}</option>
++          </select></label
++        >
++      </div>
++      <fieldset class="hours">
++        <legend>每天游玩</legend>
++        <label
++          v-for="hour in HOURS"
++          :key="hour"
++          :class="{ active: hoursPerDay === hour }"
++          ><input
++            type="radio"
++            :checked="hoursPerDay === hour"
++            :value="hour"
++            :name="radioName"
++            :aria-label="`每天 ${hour} 小时`"
++            @change="emit('update:hoursPerDay', hour)"
++          />{{ hour }}h</label
++        >
++      </fieldset>
++    </fieldset>
++    <p v-if="showError" role="alert" class="error">{{ error }}</p>
++  </section>
+ </template>
+-
+ <style scoped>
+-.card-block { background: #fff; border-radius: var(--card-radius); box-shadow: var(--shadow); }
+-.timebar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 10px 14px; font-size: 14px; }
+-.field { display: flex; align-items: center; gap: 6px; }
+-input, select { border: 1px solid var(--line); border-radius: 6px; padding: 4px 6px; background: #fff; }
+-.tilde { color: var(--ink-2); }
+-.divider { flex: 1; }
+-.hours { display: flex; gap: 6px; }
+-.hour { padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); font-size: 13px; }
+-.hour.on { background: var(--brand); color: #fff; border-color: var(--brand); }
++.timebar {
++  padding: 16px;
++  background: #fff;
++  border-radius: var(--card-radius);
++  box-shadow: var(--shadow);
++}
++fieldset {
++  border: 0;
++  min-width: 0;
++}
++.fields {
++  display: flex;
++  gap: 14px;
++  align-items: center;
++  flex-wrap: wrap;
++}
++.fields > legend {
++  font-size: 13px;
++  font-weight: 600;
++  margin-bottom: 9px;
++}
++.endpoint {
++  display: flex;
++  gap: 8px;
++  min-width: 0;
++}
++label {
++  display: grid;
++  gap: 5px;
++  font-size: 11px;
++  color: var(--ink-2);
++}
++input,
++select {
++  font-size: 13px;
++  min-width: 0;
++  border: 1px solid var(--line);
++  background: var(--bg);
++  color: var(--ink);
++  padding: 8px;
++  border-radius: 7px;
++}
++input:focus-visible,
++select:focus-visible {
++  outline: 2px solid var(--brand);
++}
++.separator {
++  color: var(--ink-2);
++  margin-top: 17px;
++}
++.hours {
++  display: flex;
++  gap: 6px;
++  margin-left: auto;
++}
++.hours legend {
++  font-size: 11px;
++  color: var(--ink-2);
++  margin-bottom: 5px;
++}
++.hours label {
++  position: relative;
++  padding: 8px 12px;
++  border: 1px solid var(--line);
++  border-radius: 8px;
++  font-size: 13px;
++  cursor: pointer;
++}
++.hours input {
++  position: absolute;
++  opacity: 0;
++  width: 1px;
++  height: 1px;
++}
++.hours label:focus-within {
++  outline: 2px solid var(--brand);
++  outline-offset: 2px;
++}
++.hours .active {
++  background: var(--brand);
++  color: white;
++  border-color: var(--brand);
++}
++.fields:disabled {
++  opacity: 0.65;
++}
++.error {
++  font-size: 12px;
++  color: var(--brand);
++  margin-top: 10px;
++}
++@media (max-width: 600px) {
++  .fields {
++    display: grid;
++    grid-template-columns: 1fr;
++    gap: 12px;
++  }
++  .endpoint {
++    display: grid;
++    grid-template-columns: minmax(0, 1fr) 90px;
++  }
++  .separator {
++    display: none;
++  }
++  .hours {
++    margin-left: 0;
++  }
++  .hours label {
++    flex: 1;
++    text-align: center;
++  }
++}
+ </style>
+-
+diff --git a/src/components/TradeoffDrawer.vue b/src/components/TradeoffDrawer.vue
+index 90d8a1a..3aef5fc 100644
+--- a/src/components/TradeoffDrawer.vue
++++ b/src/components/TradeoffDrawer.vue
+@@ -1,67 +1,221 @@
+ <script setup>
+-/**
+- * S4 取舍抽屉（浮在 S3 上）
+- * 两种模式由 status 决定：
+- *   overload → 舍弃清单（用户勾选放弃/保留）+ 允许超载入口
+- *   under70 → 追加建议清单
+- * 真引擎接入前，"确认舍弃"仅关闭抽屉并把 result 视为可出结果（mock 行为，TODO 对齐）。
++/** Existing status prop + confirmed(status) are retained.
++ * confirmed(status, { action: 'apply' | 'keep', poiIds: string[] }) adds selection details.
++ * Parent owns the API request and applies/rolls back the selection.
+  */
+-import { computed } from 'vue'
++import { computed, ref, watch } from 'vue'
+ import { usePlanStore } from '../stores/plan'
+-
++import DialogSheet from './ui/DialogSheet.vue'
++import {
++  applyTradeoff,
++  validateSelection,
++  formatMinutes
++} from '../utils/travel-ui'
+ const props = defineProps({
+-  status: { type: String, required: true }, // 'overload' | 'under70'
++  status: { type: String, required: true },
++  busy: Boolean,
++  error: { type: String, default: '' }
+ })
+ const emit = defineEmits(['close', 'confirmed'])
+-
+ const store = usePlanStore()
+-
++const picked = ref([])
++const removing = computed(() => props.status === 'overload')
+ const title = computed(() =>
+-  props.status === 'overload' ? '时间装不下，咱们得舍几个' : '时间还有富余，建议追加'
++  removing.value ? '留一点从容，调整这一程' : '还有时间，再多读一页城市'
+ )
+-
+-function poiOf(poiId) {
+-  return store.pois.find((p) => p.poiId === poiId)
++const rows = computed(() => {
++  const seen = new Set()
++  return (store.result?.suggestions || []).flatMap((s) => {
++    const poi = store.pois.find((p) => p.poiId === s.poiId)
++    if (
++      !poi ||
++      seen.has(s.poiId) ||
++      store.checkedIds.includes(s.poiId) !== removing.value
++    )
++      return []
++    seen.add(s.poiId)
++    return [{ ...s, poi }]
++  })
++})
++watch(
++  () => [props.status, store.result],
++  () => {
++    picked.value = []
++  }
++)
++const selectionError = computed(() =>
++  validateSelection(
++    store.pois,
++    applyTradeoff(store.checkedIds, picked.value, props.status, store.pois)
++  )
++)
++function confirm(action) {
++  if (
++    props.busy ||
++    (action === 'apply' && (!picked.value.length || selectionError.value))
++  )
++    return
++  emit('confirmed', props.status, { action, poiIds: [...picked.value] })
+ }
+ </script>
+-
+ <template>
+-  <div class="mask" @click="emit('close')">
+-    <div class="sheet" @click.stop>
+-      <h3>{{ title }}</h3>
+-      <p class="hint">
+-        {{ status === 'overload'
+-          ? '勾掉你能放弃的；都不舍得就选「允许超载」。'
+-          : '勾上想追加的，行程会自动重新排。' }}
+-      </p>
+-      <label v-for="s in store.result?.suggestions || []" :key="s.poiId" class="row">
+-        <input type="checkbox" />
+-        <span class="name">{{ poiOf(s.poiId)?.name }}</span>
+-        <span class="reason">{{ s.reason }}</span>
+-      </label>
+-      <div class="actions">
+-        <button class="btn-ghost" @click="emit('close')">回去改</button>
+-        <button v-if="status === 'overload'" class="btn-ghost" @click="emit('confirmed', 'overload')">
+-          都舍不得，允许超载
+-        </button>
+-        <button class="btn" @click="emit('confirmed', status)">确认</button>
+-      </div>
++  <DialogSheet :title="title" :busy="busy" @close="emit('close')">
++    <p class="hint">
++      {{
++        removing
++          ? '勾选愿意舍弃的景点，确认后重新安排。'
++          : '勾选想追加的景点，确认后重新安排。'
++      }}
++    </p>
++    <div class="suggestions">
++      <label
++        v-for="row in rows"
++        :key="row.poiId"
++        class="suggestion"
++        :class="{ picked: picked.includes(row.poiId) }"
++        ><input
++          v-model="picked"
++          type="checkbox"
++          :value="row.poiId"
++          :disabled="busy"
++          :aria-label="`${removing ? '舍弃' : '追加'}${row.poi.name}`"
++        /><span
++          ><strong>{{ row.poi.name }}</strong
++          ><small
++            >{{ row.poi.cluster }} ·
++            {{ formatMinutes(row.poi.durationNormal) }}</small
++          >
++          <p>
++            {{ row.reason || row.poi.skipNote || '可根据自己的偏好调整' }}
++          </p></span
++        ></label
++      >
+     </div>
+-  </div>
++    <p v-if="!rows.length" class="hint">
++      暂时没有可选建议，可以返回修改或保留当前行程。
++    </p>
++    <p v-if="picked.length && selectionError" class="error" role="alert">
++      {{ selectionError }}
++    </p>
++    <p v-if="error" class="error" role="alert">{{ error }}</p>
++    <div class="summary" aria-live="polite">
++      已选 {{ picked.length }} 个{{ removing ? '舍弃' : '追加' }}点位
++    </div>
++    <div class="actions">
++      <button
++        type="button"
++        class="btn-ghost"
++        :disabled="busy"
++        @click="emit('close')"
++      >
++        返回修改</button
++      ><button
++        type="button"
++        class="keep"
++        :disabled="busy"
++        @click="confirm('keep')"
++      >
++        {{ removing ? '保留全部，允许超载' : '保持当前行程' }}</button
++      ><button
++        type="button"
++        class="btn"
++        :disabled="busy || !picked.length || Boolean(selectionError)"
++        @click="confirm('apply')"
++      >
++        {{
++          busy ? '重新规划中…' : removing ? '确认舍弃并重算' : '确认追加并重算'
++        }}
++      </button>
++    </div>
++  </DialogSheet>
+ </template>
+-
+ <style scoped>
+-.mask { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.35); z-index: 40; }
+-.sheet {
+-  position: absolute; left: 0; right: 0; bottom: 0; max-height: 70vh; overflow: auto;
+-  background: #fff; border-radius: 16px 16px 0 0; padding: 20px 16px;
+-  max-width: 640px; margin: 0 auto;
+-}
+-h3 { font-size: 17px; }
+-.hint { font-size: 13px; color: var(--ink-2); margin: 6px 0 12px; }
+-.row { display: flex; align-items: center; gap: 8px; padding: 10px 4px; border-bottom: 1px solid var(--line); font-size: 14px; }
+-.name { font-weight: 500; }
+-.reason { flex: 1; font-size: 12px; color: var(--ink-2); text-align: right; }
+-.actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 16px; }
++.hint {
++  font-size: 13px;
++  color: var(--ink-2);
++  margin-bottom: 16px;
++}
++.suggestions {
++  display: grid;
++  gap: 10px;
++}
++.suggestion {
++  display: flex;
++  gap: 12px;
++  align-items: flex-start;
++  padding: 14px;
++  border: 1px solid var(--line);
++  border-radius: 12px;
++  cursor: pointer;
++}
++.suggestion.picked {
++  background: var(--brand-light);
++  border-color: var(--brand);
++}
++input {
++  width: 18px;
++  height: 18px;
++  accent-color: var(--brand);
++  margin-top: 3px;
++  flex-shrink: 0;
++}
++strong {
++  font-size: 14px;
++}
++small {
++  display: block;
++  color: var(--ink-2);
++  font-size: 11px;
++  margin-top: 4px;
++}
++.suggestion p {
++  font-size: 12px;
++  margin-top: 8px;
++  overflow-wrap: anywhere;
++}
++.error {
++  color: var(--brand);
++  font-size: 13px;
++  margin-top: 12px;
++}
++.summary {
++  font-size: 12px;
++  color: var(--ink-2);
++  margin-top: 14px;
++}
++.actions {
++  display: flex;
++  align-items: center;
++  justify-content: flex-end;
++  gap: 10px;
++  flex-wrap: wrap;
++  margin-top: 18px;
++}
++.actions button {
++  font-size: 13px;
++  padding: 10px 16px;
++}
++.keep {
++  color: var(--brand);
++  text-decoration: underline;
++  text-underline-offset: 4px;
++}
++button:disabled {
++  opacity: 0.6;
++  cursor: wait;
++}
++button:focus-visible,
++.suggestion:focus-within {
++  outline: 2px solid var(--brand);
++  outline-offset: 2px;
++}
++@media (max-width: 480px) {
++  .actions {
++    display: grid;
++    grid-template-columns: 1fr;
++  }
++  .actions .btn {
++    grid-row: 1;
++  }
++}
+ </style>
+-
+diff --git a/src/components/ui/DialogSheet.vue b/src/components/ui/DialogSheet.vue
+new file mode 100644
+index 0000000..fc24298
+--- /dev/null
++++ b/src/components/ui/DialogSheet.vue
+@@ -0,0 +1,120 @@
++<script setup>
++import { onMounted, onBeforeUnmount, ref } from 'vue'
++const props = defineProps({
++  title: { type: String, required: true },
++  busy: Boolean
++})
++const emit = defineEmits(['close'])
++const dialog = ref(null)
++let previousOverflow
++let opener
++onMounted(() => {
++  opener = document.activeElement
++  previousOverflow = document.body.style.overflow
++  document.body.style.overflow = 'hidden'
++  dialog.value.showModal()
++})
++onBeforeUnmount(() => {
++  dialog.value?.close()
++  document.body.style.overflow = previousOverflow
++  if (opener?.isConnected) opener.focus()
++})
++function close() {
++  if (!props.busy) emit('close')
++}
++function backdrop(event) {
++  if (!dialog.value || event.target !== dialog.value) return
++  const box = dialog.value.getBoundingClientRect()
++  if (
++    event.target === dialog.value &&
++    (event.clientX < box.left ||
++      event.clientX > box.right ||
++      event.clientY < box.top ||
++      event.clientY > box.bottom)
++  )
++    close()
++}
++</script>
++<template>
++  <Teleport to="body">
++    <dialog
++      ref="dialog"
++      class="sheet"
++      :aria-label="title"
++      :aria-busy="busy"
++      @cancel.prevent="close"
++      @click="backdrop"
++    >
++      <header>
++        <h2>{{ title }}</h2>
++        <button
++          type="button"
++          class="close"
++          :disabled="busy"
++          aria-label="关闭弹层"
++          @click="close"
++        >
++          ×
++        </button>
++      </header>
++      <slot />
++    </dialog>
++  </Teleport>
++</template>
++<style scoped>
++.sheet {
++  border: 1px solid var(--line);
++  color: var(--ink);
++  background: #fff;
++  border-radius: 22px;
++  width: min(640px, calc(100% - 32px));
++  max-height: calc(100dvh - 40px);
++  margin: auto;
++  padding: 24px;
++  overflow: auto;
++  box-shadow: 0 18px 80px #2b2b2b30;
++}
++.sheet::backdrop {
++  background: #25211dcc;
++  opacity: 0.65;
++}
++header {
++  display: flex;
++  justify-content: space-between;
++  align-items: flex-start;
++  gap: 20px;
++  margin-bottom: 16px;
++}
++h2 {
++  font-size: 20px;
++  font-family: serif;
++  line-height: 1.5;
++}
++.close {
++  font-size: 26px;
++  line-height: 1;
++  width: 36px;
++  height: 36px;
++  border-radius: 50%;
++  background: var(--bg);
++  flex-shrink: 0;
++}
++.close:focus-visible {
++  outline: 2px solid var(--brand);
++  outline-offset: 3px;
++}
++.close:disabled {
++  opacity: 0.4;
++  cursor: wait;
++}
++@media (max-width: 600px) {
++  .sheet {
++    width: 100%;
++    max-height: 88dvh;
++    max-width: none;
++    margin: auto 0 0;
++    border-radius: 22px 22px 0 0;
++    padding: 20px 16px calc(20px + env(safe-area-inset-bottom));
++  }
++}
++</style>
+diff --git a/src/components/ui/PhotoFrame.vue b/src/components/ui/PhotoFrame.vue
+new file mode 100644
+index 0000000..cef6371
+--- /dev/null
++++ b/src/components/ui/PhotoFrame.vue
+@@ -0,0 +1,78 @@
++<script setup>
++import { computed, ref, watch } from 'vue'
++import { assetUrl } from '../../utils/travel-ui'
++const props = defineProps({
++  src: { type: String, default: '' },
++  alt: { type: String, default: '' },
++  ratio: { type: String, default: '16 / 9' }
++})
++const failed = ref(false)
++const url = computed(() => assetUrl(props.src, import.meta.env.BASE_URL))
++watch(url, () => {
++  failed.value = false
++})
++</script>
++<template>
++  <div class="photo-frame" :style="{ aspectRatio: ratio }">
++    <img
++      v-if="url && !failed"
++      :src="url"
++      :alt="alt"
++      loading="lazy"
++      decoding="async"
++      @error="failed = true"
++    />
++    <div v-else class="placeholder" role="img" :aria-label="`${alt}，暂无图片`">
++      <svg viewBox="0 0 80 60" aria-hidden="true">
++        <path
++          d="M8 51V15h23v36m0-25h20v25m0-43h21v43M3 52h74M14 22h10m-10 8h10m-10 8h10m13-5h8m-8 8h8m12-24h9m-9 10h9m-9 10h9"
++        />
++      </svg>
++      <span>{{ alt }}</span
++      ><small>现实照片待补充</small>
++    </div>
++  </div>
++</template>
++<style scoped>
++.photo-frame {
++  position: relative;
++  overflow: hidden;
++  background: linear-gradient(145deg, #f6ecec, #eee6d8);
++  width: 100%;
++  min-width: 0;
++}
++.photo-frame img {
++  width: 100%;
++  height: 100%;
++  object-fit: cover;
++  display: block;
++}
++.placeholder {
++  height: 100%;
++  display: flex;
++  align-items: center;
++  justify-content: center;
++  flex-direction: column;
++  gap: 5px;
++  padding: 12px;
++  color: var(--brand);
++  text-align: center;
++}
++.placeholder svg {
++  width: 64px;
++  height: 48px;
++  fill: none;
++  stroke: currentColor;
++  stroke-width: 1.2;
++  opacity: 0.5;
++}
++.placeholder span {
++  font-family: serif;
++  font-size: 18px;
++  letter-spacing: 2px;
++}
++.placeholder small {
++  font-size: 11px;
++  color: var(--ink-2);
++}
++</style>
+diff --git a/src/types/travel.d.ts b/src/types/travel.d.ts
+new file mode 100644
+index 0000000..50817e6
+--- /dev/null
++++ b/src/types/travel.d.ts
+@@ -0,0 +1,69 @@
++/** Mirrors src/api/contract.md at upstream 32ec57c; no additional backend fields. */
++export interface IP {
++  ipId: string
++  name: string
++  author: string
++  kind: 'novel' | 'film' | 'poetry' | 'history'
++  cover: string
++  aliases: string[]
++}
++export interface Line {
++  lineId: string
++  ipId: string
++  title: string
++  city: string
++  cover: string
++  recommendDays: number
++}
++export interface Quote {
++  kind: '原著' | '台词'
++  brief: string
++  full: string
++  source: string
++}
++interface PoiBase {
++  poiId: string
++  lineId: string
++  name: string
++  lng: number
++  lat: number
++  cluster: string
++  durationNormal: number
++  durationRush: number
++  intro: string
++  realPhoto: string
++  skipNote?: string
++}
++export type POI = PoiBase &
++  (
++    | { type: 'ip'; tier: 'S' | 'A' | 'B'; quotes: Quote[] }
++    | { type: 'classic'; tier?: never; quotes?: Quote[] }
++  )
++export type Slot = '上午' | '中午' | '晚上'
++export interface TimeRange {
++  startDate: string
++  startSlot: Slot
++  endDate: string
++  endSlot: Slot
++}
++export interface PlanItem {
++  poiId: string
++  order: number
++  duration: number
++}
++export interface PlanDay {
++  day: number
++  items: PlanItem[]
++}
++export type PlanStatus = 'ok' | 'overload' | 'under70'
++export interface PlanResult {
++  status: PlanStatus
++  days: PlanDay[]
++  suggestions: { poiId: string; reason: string }[]
++  totalMin: number
++}
++/** UI-only second argument of confirmed(status, selection), not an API payload. */
++export interface TradeoffSelection {
++  action: 'apply' | 'keep'
++  poiIds: string[]
++}
+diff --git a/src/utils/travel-ui.js b/src/utils/travel-ui.js
+new file mode 100644
+index 0000000..1910062
+--- /dev/null
++++ b/src/utils/travel-ui.js
+@@ -0,0 +1,62 @@
++// UI validation only. Scheduling, capacity and recommendation ranking remain in api.plan().
++export const SLOTS = ['上午', '中午', '晚上']
++export const HOURS = [6, 8, 10]
++export const TIER_LABELS = { S: '灵魂点位', A: '重要点位', B: '可选点位' }
++
++function validDate(value) {
++  if (!/^\d{4}-\d{2}-\d{2}$/.test(value || '')) return false
++  const date = new Date(`${value}T00:00:00Z`)
++  return (
++    !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value
++  )
++}
++export function validateTimeRange(range, hours) {
++  if (!validDate(range?.startDate) || !validDate(range?.endDate))
++    return '请选择有效的开始和结束日期'
++  if (!SLOTS.includes(range.startSlot) || !SLOTS.includes(range.endSlot))
++    return '请选择开始和结束时段'
++  if (
++    range.endDate < range.startDate ||
++    (range.endDate === range.startDate &&
++      SLOTS.indexOf(range.endSlot) < SLOTS.indexOf(range.startSlot))
++  )
++    return '结束时间不能早于开始时间'
++  if (!HOURS.includes(hours)) return '每天游玩时长请选择 6、8 或 10 小时'
++  return ''
++}
++export function validateSelection(pois, ids) {
++  const selected = pois.filter((p) => ids.includes(p.poiId))
++  return selected.some((p) => p.type === 'ip') &&
++    selected.some((p) => p.type === 'classic')
++    ? ''
++    : 'IP 打卡点和城市景点至少各选一个'
++}
++export function applyTradeoff(ids, picked, status, pois) {
++  const known = new Set(pois.map((p) => p.poiId))
++  const changes = new Set(picked.filter((id) => known.has(id)))
++  return status === 'overload'
++    ? ids.filter((id) => !changes.has(id))
++    : [...new Set([...ids, ...changes])]
++}
++export function formatMinutes(value) {
++  const min = Number(value)
++  if (!Number.isFinite(min) || min < 0) return '时长待补充'
++  const h = Math.floor(min / 60),
++    m = min % 60
++  return h ? `${h} 小时${m ? ` ${m} 分钟` : ''}` : `${m} 分钟`
++}
++// public/img/foo.jpg is referenced as img/foo.jpg in existing mock data.
++// Resolve against Vite's base, not the current /customize/ or /poi/ route.
++export function assetUrl(value, base = '/') {
++  if (typeof value !== 'string' || !value.trim()) return ''
++  const src = value.trim()
++  if (/^https?:\/\//i.test(src)) return src
++  if (
++    /^[a-z][a-z\d+.-]*:/i.test(src) ||
++    src.startsWith('//') ||
++    src.includes('\\')
++  )
++    return ''
++  if (src.startsWith('/')) return src
++  return `${base.replace(/\/?$/, '/')}${src.replace(/^\.\//, '')}`
++}
+diff --git a/src/views/ColumnListView.vue b/src/views/ColumnListView.vue
+index 54815e6..2787a07 100644
+--- a/src/views/ColumnListView.vue
++++ b/src/views/ColumnListView.vue
+@@ -1,6 +1,7 @@
+ <script setup>
+ import { ref, computed } from 'vue'
+ import { useRoute, useRouter } from 'vue-router'
++import RouteCard from '../components/RouteCard.vue'
+ import * as api from '../api/adapter'
+ 
+ const route = useRoute()
+@@ -28,27 +29,43 @@ function go(lineId) {
+     <section v-for="g in columns[key]" :key="g.label" class="group">
+       <h2>{{ g.label }}</h2>
+       <div class="cards">
+-        <button v-for="l in g.lines" :key="l.lineId" class="card" @click="go(l.lineId)">
+-          <span class="title">{{ l.title }}</span>
+-          <span class="meta">{{ l.city }} · 推荐 {{ l.recommendDays }} 天</span>
+-        </button>
++        <RouteCard
++          v-for="l in g.lines"
++          :key="l.lineId"
++          :line="l"
++          :label="g.label"
++          @select="go"
++        />
+       </div>
+     </section>
+   </div>
+ </template>
+ 
+ <style scoped>
+-.bar { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+-.back { color: var(--ink-2); font-size: 14px; }
+-h1 { font-size: 20px; }
+-.group { margin-bottom: 24px; }
+-.group h2 { font-size: 15px; color: var(--ink-2); margin-bottom: 10px; }
+-.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+-.card {
+-  background: #fff; border-radius: var(--card-radius); box-shadow: var(--shadow);
+-  padding: 16px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start;
++.bar {
++  display: flex;
++  align-items: center;
++  gap: 16px;
++  margin-bottom: 20px;
++}
++.back {
++  color: var(--ink-2);
++  font-size: 14px;
++}
++h1 {
++  font-size: 20px;
++}
++.group {
++  margin-bottom: 24px;
++}
++.group h2 {
++  font-size: 15px;
++  color: var(--ink-2);
++  margin-bottom: 10px;
++}
++.cards {
++  display: grid;
++  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
++  gap: 12px;
+ }
+-.title { font-weight: 600; }
+-.meta { font-size: 12px; color: var(--ink-2); }
+ </style>
+-
+diff --git a/src/views/CustomizeView.vue b/src/views/CustomizeView.vue
+index 7aebc62..bd40655 100644
+--- a/src/views/CustomizeView.vue
++++ b/src/views/CustomizeView.vue
+@@ -1,113 +1,270 @@
+ <script setup>
+-/**
+- * S3 行程定制页：地图 + 时间窄条 + 双栏勾选 + 提交（S4 抽屉挂在提交流程上）
+- */
+-import { ref, computed, watch, onMounted } from 'vue'
++import { ref, computed, watch } from 'vue'
+ import { useRoute, useRouter } from 'vue-router'
+ import { usePlanStore } from '../stores/plan'
+ import MapContainer from '../components/MapContainer.vue'
+ import TimeBar from '../components/TimeBar.vue'
+ import PoiCheckList from '../components/PoiCheckList.vue'
+ import TradeoffDrawer from '../components/TradeoffDrawer.vue'
+-
++import {
++  validateTimeRange,
++  validateSelection,
++  applyTradeoff
++} from '../utils/travel-ui'
+ const route = useRoute()
+ const router = useRouter()
+ const store = usePlanStore()
+-
+-const drawerStatus = ref(null) // 'overload' | 'under70' | null
++const drawerStatus = ref(null)
+ const hoverInfo = ref('')
+-
+-onMounted(() => store.loadLine(route.params.lineId))
+-watch(() => route.params.lineId, (id) => id && store.loadLine(id))
+-
+-// IP 点按 tier 排序；城市景点按数组顺序（知名度）
++const loading = ref(false)
++const planning = ref(false)
++const error = ref('')
++const drawerError = ref('')
++// Returning from results keeps selections; a different line loads fresh data.
++watch(
++  () => route.params.lineId,
++  async (id) => {
++    if (!id || (store.lineId === id && store.line)) return
++    loading.value = true
++    error.value = ''
++    try {
++      await store.loadLine(id)
++    } catch {
++      error.value = '路线加载失败，请返回首页后重试。'
++    } finally {
++      loading.value = false
++    }
++  },
++  { immediate: true }
++)
+ const sortedIp = computed(() => {
+-  const w = { S: 0, A: 1, B: 2 }
+-  return [...store.ipPois].sort((a, b) => (w[a.tier] ?? 9) - (w[b.tier] ?? 9))
++  const weights = { S: 0, A: 1, B: 2 }
++  return [...store.ipPois].sort(
++    (a, b) => (weights[a.tier] ?? 9) - (weights[b.tier] ?? 9)
++  )
+ })
+-
++const validation = computed(
++  () =>
++    validateTimeRange(store.timeRange, store.hoursPerDay) ||
++    validateSelection(store.pois, store.checkedIds)
++)
+ const canSubmit = computed(
+   () =>
+-    store.checkedPois.some((p) => p.type === 'ip') &&
+-    store.checkedPois.some((p) => p.type === 'classic') &&
+-    store.timeRange.startDate &&
+-    store.timeRange.endDate
++    !loading.value &&
++    store.lineId === route.params.lineId &&
++    !validation.value &&
++    !planning.value
+ )
+-
+-async function submit() {
+-  const status = await store.submit()
++async function recalculate() {
++  // Keep the existing one-second planning feedback without changing the engine.
++  const [status] = await Promise.all([
++    store.submit(),
++    new Promise((resolve) => setTimeout(resolve, 1000))
++  ])
++  if (!['ok', 'overload', 'under70'].includes(status))
++    throw new Error('Invalid planning status')
++  return status
++}
++function showResult(status) {
+   if (status === 'ok') {
++    drawerStatus.value = null
+     router.push('/result/map')
+-  } else {
+-    drawerStatus.value = status // 装不下 / 太宽松 → 弹 S4 抽屉
++  } else drawerStatus.value = status
++}
++async function submit() {
++  if (!canSubmit.value) return
++  planning.value = true
++  error.value = ''
++  drawerError.value = ''
++  const previousResult = store.result
++  try {
++    showResult(await recalculate())
++  } catch {
++    store.result = previousResult
++    error.value = '规划失败，已保留当前选择，请重试。'
++  } finally {
++    planning.value = false
+   }
+ }
+-
+-function onMarkerHover(poiId) {
+-  const p = store.pois.find((x) => x.poiId === poiId)
+-  hoverInfo.value = p ? `${p.name} · ${store.ip?.name || ''}` : ''
++function onMarkerHover(id) {
++  const poi = store.pois.find((p) => p.poiId === id)
++  hoverInfo.value = poi
++    ? `${poi.name} · ${poi.type === 'ip' ? store.ip?.name || '' : '城市景点'}`
++    : ''
+ }
+-
+-function onConfirmed() {
+-  drawerStatus.value = null
+-  router.push('/result/map') // mock：确认后直接出结果；真引擎需按用户勾选重算（TODO）
++async function onConfirmed(status, choice) {
++  if (planning.value || status !== drawerStatus.value || !choice) return
++  if (choice.action === 'keep') {
++    drawerStatus.value = null
++    router.push('/result/map')
++    return
++  }
++  if (choice.action !== 'apply') return
++  const allowed = new Set((store.result?.suggestions || []).map((s) => s.poiId))
++  const picked = (choice.poiIds || []).filter((id) => allowed.has(id))
++  if (!picked.length) return
++  const next = applyTradeoff(store.checkedIds, picked, status, store.pois)
++  const invalid = validateSelection(store.pois, next)
++  if (invalid) {
++    drawerError.value = invalid
++    return
++  }
++  const previous = { ids: [...store.checkedIds], result: store.result }
++  planning.value = true
++  drawerError.value = ''
++  store.checkedIds = next
++  try {
++    showResult(await recalculate())
++  } catch {
++    store.checkedIds = previous.ids
++    store.result = previous.result
++    drawerError.value = '重新规划失败，已恢复原选择，请重试。'
++  } finally {
++    planning.value = false
++  }
+ }
+ </script>
+-
+ <template>
+   <div class="page">
+     <header class="bar">
+-      <button class="back" @click="router.push('/')">← 首页</button>
+-      <h1>{{ store.line?.title || '加载中…' }}</h1>
++      <button
++        type="button"
++        class="back"
++        :disabled="planning"
++        @click="router.push('/')"
++      >
++        ← 首页
++      </button>
++      <h1>{{ loading ? '加载中…' : store.line?.title || '行程定制' }}</h1>
+       <span v-if="hoverInfo" class="hover-info">{{ hoverInfo }}</span>
+     </header>
+-
++    <p v-if="error" class="error" role="alert">{{ error }}</p>
+     <div class="map-wrap">
+       <MapContainer
+         :pois="store.pois"
+         :selected-ids="store.checkedIds"
+-        :interactive="true"
++        :interactive="!planning && !loading"
+         @marker-hover="onMarkerHover"
++        @marker-click="onMarkerHover"
+       />
+     </div>
+-
+-    <TimeBar v-model:time-range="store.timeRange" v-model:hours-per-day="store.hoursPerDay" />
+-
++    <TimeBar
++      v-model:time-range="store.timeRange"
++      v-model:hours-per-day="store.hoursPerDay"
++      :disabled="planning || loading"
++    />
+     <div class="cols">
+-      <PoiCheckList title="📖 打卡点" :pois="sortedIp" :checked-ids="store.checkedIds" @toggle="store.togglePoi" />
+-      <PoiCheckList title="🏙 城市著名景点" :pois="store.classicPois" :checked-ids="store.checkedIds" @toggle="store.togglePoi" />
++      <PoiCheckList
++        title="IP 打卡点"
++        :pois="sortedIp"
++        :checked-ids="store.checkedIds"
++        :disabled="planning || loading"
++        @toggle="store.togglePoi"
++      /><PoiCheckList
++        title="城市著名景点"
++        :pois="store.classicPois"
++        :checked-ids="store.checkedIds"
++        :disabled="planning || loading"
++        @toggle="store.togglePoi"
++      />
+     </div>
+-
+     <footer class="submit-bar">
+-      <span class="stat">已选 {{ store.checkedIds.length }} 个点 · 每天 {{ store.hoursPerDay }} 小时</span>
+-      <button class="btn" :disabled="!canSubmit || store.submitting" @click="submit">
+-        {{ store.submitting ? '规划中…' : '生成行程' }}
++      <span class="stat" aria-live="polite"
++        >已选 {{ store.checkedIds.length }} 个点 · 每天
++        {{ store.hoursPerDay }} 小时</span
++      ><button
++        type="button"
++        class="btn"
++        :disabled="!canSubmit"
++        :aria-busy="planning"
++        @click="submit"
++      >
++        {{ planning ? '规划中…' : '生成行程' }}
+       </button>
+     </footer>
+-    <p v-if="!canSubmit" class="tip">需至少勾选一个打卡点和一个城市景点，并选好起止日期</p>
+-
++    <p v-if="validation" class="tip">{{ validation }}</p>
+     <TradeoffDrawer
+       v-if="drawerStatus"
+       :status="drawerStatus"
++      :busy="planning"
++      :error="drawerError"
+       @close="drawerStatus = null"
+       @confirmed="onConfirmed"
+     />
+   </div>
+ </template>
+-
+ <style scoped>
+-.bar { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; flex-wrap: wrap; }
+-.back { color: var(--ink-2); font-size: 14px; }
+-h1 { font-size: 20px; }
+-.hover-info { font-size: 13px; color: var(--brand); background: var(--brand-light); border-radius: 999px; padding: 2px 12px; }
+-.map-wrap { height: 320px; margin-bottom: 12px; }
+-.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+-@media (max-width: 720px) { .cols { grid-template-columns: 1fr; } }
++.bar {
++  display: flex;
++  align-items: center;
++  gap: 14px;
++  margin-bottom: 12px;
++  flex-wrap: wrap;
++}
++.back {
++  color: var(--ink-2);
++  font-size: 14px;
++}
++h1 {
++  font-size: 20px;
++}
++.hover-info {
++  font-size: 13px;
++  color: var(--brand);
++  background: var(--brand-light);
++  border-radius: 999px;
++  padding: 2px 12px;
++}
++.map-wrap {
++  height: 320px;
++  margin-bottom: 12px;
++}
++.cols {
++  display: grid;
++  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
++  gap: 12px;
++  margin-top: 12px;
++}
+ .submit-bar {
+-  position: sticky; bottom: 0; display: flex; align-items: center; justify-content: space-between;
+-  gap: 12px; padding: 12px 0; background: var(--bg); margin-top: 16px;
++  position: sticky;
++  bottom: 0;
++  display: flex;
++  align-items: center;
++  justify-content: space-between;
++  gap: 12px;
++  padding: 12px 0 calc(12px + env(safe-area-inset-bottom));
++  background: var(--bg);
++  margin-top: 16px;
++  border-top: 1px solid var(--line);
++}
++.stat {
++  font-size: 13px;
++  color: var(--ink-2);
++}
++.submit-bar .btn {
++  white-space: nowrap;
++  padding: 10px 20px;
++}
++.tip {
++  font-size: 12px;
++  color: var(--ink-2);
++  text-align: right;
++}
++.error {
++  font-size: 13px;
++  color: var(--brand);
++  background: var(--brand-light);
++  border-radius: 8px;
++  padding: 12px;
++  margin-bottom: 12px;
++}
++@media (max-width: 720px) {
++  .cols {
++    grid-template-columns: 1fr;
++  }
++}
++button:focus-visible {
++  outline: 2px solid var(--brand);
++  outline-offset: 3px;
+ }
+-.stat { font-size: 14px; color: var(--ink-2); }
+-.tip { font-size: 12px; color: var(--ink-2); text-align: right; }
+ </style>
+-
+diff --git a/src/views/DetailView.vue b/src/views/DetailView.vue
+index 422aa23..7181f43 100644
+--- a/src/views/DetailView.vue
++++ b/src/views/DetailView.vue
+@@ -4,13 +4,16 @@
+  */
+ import { computed } from 'vue'
+ import { useRoute, useRouter } from 'vue-router'
++import DetailContent from '../components/DetailContent.vue'
+ import { usePlanStore } from '../stores/plan'
+ 
+ const route = useRoute()
+ const router = useRouter()
+ const store = usePlanStore()
+ 
+-const poi = computed(() => store.pois.find((p) => p.poiId === route.params.poiId))
++const poi = computed(() =>
++  store.pois.find((p) => p.poiId === route.params.poiId)
++)
+ </script>
+ 
+ <template>
+@@ -20,41 +23,29 @@ const poi = computed(() => store.pois.find((p) => p.poiId === route.params.poiId
+       <h1>{{ poi?.name || '未找到该景点' }}</h1>
+     </header>
+ 
+-    <template v-if="poi">
+-      <div class="photo">
+-        <span>📷 {{ poi.realPhoto }}</span>
+-      </div>
+-      <p class="intro">{{ poi.intro }}</p>
+-
+-      <section v-if="poi.quotes?.length" class="quotes">
+-        <blockquote v-for="(q, i) in poi.quotes" :key="i" class="quote">
+-          <p class="full">{{ q.kind === '台词' ? q.full : `「${q.full}」` }}</p>
+-          <footer>—— {{ q.kind }} · {{ q.source }}</footer>
+-        </blockquote>
+-      </section>
+-      <p v-else class="empty">引文待内容组核对原著 / 剧集后填入（宁缺毋假）</p>
+-    </template>
++    <DetailContent v-if="poi" :poi="poi" />
+ 
+     <router-link v-else class="btn" to="/">回首页</router-link>
+   </div>
+ </template>
+ 
+ <style scoped>
+-.bar { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+-.back { color: var(--ink-2); font-size: 14px; }
+-h1 { font-size: 20px; }
+-.photo {
+-  aspect-ratio: 16/9; border-radius: var(--card-radius); margin-bottom: 14px;
+-  background: var(--brand-light); color: var(--ink-2);
+-  display: flex; align-items: center; justify-content: center; font-size: 13px;
++.bar {
++  display: flex;
++  align-items: center;
++  gap: 14px;
++  margin-bottom: 16px;
++  flex-wrap: wrap;
++}
++.back {
++  color: var(--ink-2);
++  font-size: 14px;
+ }
+-.intro { font-size: 15px; margin-bottom: 16px; }
+-.quote {
+-  background: #fff; border-radius: var(--card-radius); box-shadow: var(--shadow);
+-  padding: 16px; margin-bottom: 12px;
++.back:focus-visible {
++  outline: 2px solid var(--brand);
++  outline-offset: 3px;
++}
++h1 {
++  font-size: 20px;
+ }
+-.full { font-size: 15px; }
+-.quote footer { font-size: 12px; color: var(--ink-2); margin-top: 8px; text-align: right; }
+-.empty { font-size: 13px; color: var(--ink-2); }
+ </style>
+-
+diff --git a/src/views/HomeView.vue b/src/views/HomeView.vue
+index 3b0159e..d43970c 100644
+--- a/src/views/HomeView.vue
++++ b/src/views/HomeView.vue
+@@ -1,6 +1,7 @@
+ <script setup>
+ import { ref, watch } from 'vue'
+ import { useRouter } from 'vue-router'
++import RouteCard from '../components/RouteCard.vue'
+ import * as api from '../api/adapter'
+ 
+ const router = useRouter()
+@@ -11,7 +12,7 @@ const columns = ref({ city: [], figure: [], place: [] })
+ const COL_META = {
+   city: { title: '按城市', key: 'city' },
+   figure: { title: '按人物', key: 'figure' },
+-  place: { title: '按地名', key: 'place' },
++  place: { title: '按地名', key: 'place' }
+ }
+ 
+ api.listColumns().then((c) => (columns.value = c))
+@@ -42,9 +43,19 @@ function go(lineId) {
+           placeholder="搜书名 / 人物 / 地名 / 城市，如：繁花、阿宝、黄河路"
+         />
+         <div v-if="keyword.trim()" class="dropdown">
+-          <p v-if="!suggestions.length" class="none">抱歉，暂时未收录该圣地巡礼内容</p>
+-          <button v-for="l in suggestions" :key="l.lineId" class="item" @click="go(l.lineId)">
+-            {{ l.title }} <span class="meta">{{ l.city }} · 推荐 {{ l.recommendDays }} 天</span>
++          <p v-if="!suggestions.length" class="none">
++            抱歉，暂时未收录该圣地巡礼内容
++          </p>
++          <button
++            v-for="l in suggestions"
++            :key="l.lineId"
++            class="item"
++            @click="go(l.lineId)"
++          >
++            {{ l.title }}
++            <span class="meta"
++              >{{ l.city }} · 推荐 {{ l.recommendDays }} 天</span
++            >
+           </button>
+         </div>
+       </div>
+@@ -53,46 +64,107 @@ function go(lineId) {
+     <section v-for="(meta, colKey) in COL_META" :key="colKey" class="wall">
+       <h2>{{ meta.title }}</h2>
+       <div class="cards">
+-        <button v-for="g in columns[colKey].slice(0, 3)" :key="g.label" class="card" @click="go(g.lines[0].lineId)">
+-          <span class="cover">📖</span>
+-          <span class="title">{{ g.lines[0].title }}</span>
+-          <span class="label">{{ g.label }}</span>
+-        </button>
+-        <router-link class="card more" :to="`/column/${meta.key}`">···</router-link>
++        <RouteCard
++          v-for="g in columns[colKey]
++            .filter((g) => g.lines?.length)
++            .slice(0, 3)"
++          :key="g.label"
++          :line="g.lines[0]"
++          :label="g.label"
++          @select="go"
++        />
++        <router-link class="card more" :to="`/column/${meta.key}`"
++          >···</router-link
++        >
+       </div>
+     </section>
+   </div>
+ </template>
+ 
+ <style scoped>
+-.hero { text-align: center; padding: 48px 0 24px; }
+-h1 { font-size: 30px; letter-spacing: 4px; }
+-.slogan { color: var(--ink-2); margin: 8px 0 24px; }
+-.searchbox { position: relative; max-width: 480px; margin: 0 auto; }
++.hero {
++  text-align: center;
++  padding: 48px 0 24px;
++}
++h1 {
++  font-size: 30px;
++  letter-spacing: 4px;
++}
++.slogan {
++  color: var(--ink-2);
++  margin: 8px 0 24px;
++}
++.searchbox {
++  position: relative;
++  max-width: 480px;
++  margin: 0 auto;
++}
+ .searchbox input {
+-  width: 100%; padding: 14px 20px; border-radius: 999px;
+-  border: 1px solid var(--line); box-shadow: var(--shadow); outline: none;
++  width: 100%;
++  padding: 14px 20px;
++  border-radius: 999px;
++  border: 1px solid var(--line);
++  box-shadow: var(--shadow);
++  outline: none;
+ }
+ .dropdown {
+-  position: absolute; left: 0; right: 0; top: calc(100% + 8px);
+-  background: #fff; border-radius: var(--card-radius); box-shadow: var(--shadow);
+-  overflow: hidden; text-align: left; z-index: 30;
+-}
+-.item { display: block; width: 100%; padding: 12px 20px; text-align: left; }
+-.item:hover { background: var(--brand-light); }
+-.meta { font-size: 12px; color: var(--ink-2); margin-left: 8px; }
+-.none { padding: 14px 20px; color: var(--ink-2); font-size: 14px; }
+-.wall { margin-top: 32px; }
+-.wall h2 { font-size: 17px; margin-bottom: 12px; }
+-.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
++  position: absolute;
++  left: 0;
++  right: 0;
++  top: calc(100% + 8px);
++  background: #fff;
++  border-radius: var(--card-radius);
++  box-shadow: var(--shadow);
++  overflow: hidden;
++  text-align: left;
++  z-index: 30;
++}
++.item {
++  display: block;
++  width: 100%;
++  padding: 12px 20px;
++  text-align: left;
++}
++.item:hover {
++  background: var(--brand-light);
++}
++.meta {
++  font-size: 12px;
++  color: var(--ink-2);
++  margin-left: 8px;
++}
++.none {
++  padding: 14px 20px;
++  color: var(--ink-2);
++  font-size: 14px;
++}
++.wall {
++  margin-top: 32px;
++}
++.wall h2 {
++  font-size: 17px;
++  margin-bottom: 12px;
++}
++.cards {
++  display: grid;
++  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
++  gap: 12px;
++}
+ .card {
+-  background: #fff; border-radius: var(--card-radius); box-shadow: var(--shadow);
+-  padding: 16px; display: flex; flex-direction: column; gap: 8px; align-items: flex-start;
++  background: #fff;
++  border-radius: var(--card-radius);
++  box-shadow: var(--shadow);
++  padding: 16px;
++  display: flex;
++  flex-direction: column;
++  gap: 8px;
++  align-items: flex-start;
+   min-height: 120px;
+ }
+-.cover { font-size: 28px; }
+-.title { font-weight: 600; }
+-.label { font-size: 12px; color: var(--ink-2); }
+-.more { align-items: center; justify-content: center; font-size: 24px; color: var(--ink-2); }
++.more {
++  align-items: center;
++  justify-content: center;
++  font-size: 24px;
++  color: var(--ink-2);
++}
+ </style>
+-
+diff --git a/src/views/ResultView.vue b/src/views/ResultView.vue
+index 8b899b7..6278bde 100644
+--- a/src/views/ResultView.vue
++++ b/src/views/ResultView.vue
+@@ -7,6 +7,7 @@ import { ref, computed } from 'vue'
+ import { useRoute, useRouter } from 'vue-router'
+ import { usePlanStore } from '../stores/plan'
+ import MapContainer from '../components/MapContainer.vue'
++import DayTimeline from '../components/DayTimeline.vue'
+ import PoiCardOverlay from '../components/PoiCardOverlay.vue'
+ 
+ const route = useRoute()
+@@ -16,7 +17,7 @@ const store = usePlanStore()
+ const TABS = [
+   { key: 'map', label: '地图' },
+   { key: 'day', label: '日程' },
+-  { key: 'export', label: '导出·携程' },
++  { key: 'export', label: '导出·携程' }
+ ]
+ 
+ const activePoi = ref(null)
+@@ -25,12 +26,22 @@ const tab = computed(() => route.params.tab)
+ const statusBadge = computed(() => {
+   const map = {
+     ok: '',
+-    overload: '⚠️ 超载行程：时间不够，已按你的取舍保留',
+-    under70: '✨ 宽松行程：还有时间可以再加',
++    overload: `⚠️ 超载行程：当前排程需 ${store.result?.days.length || '待确认'} 天，请检查可用时间`,
++    under70: '✨ 宽松行程：还有时间可以再加'
+   }
+   return map[store.result?.status] || ''
+ })
+ 
++async function locatePoi(poiId) {
++  await router.push('/result/map')
++  activePoi.value = poiOf(poiId)
++}
++
++function restartPlan() {
++  store.reset()
++  router.push(`/customize/${store.lineId}`)
++}
++
+ function poiOf(poiId) {
+   return store.pois.find((p) => p.poiId === poiId)
+ }
+@@ -39,7 +50,11 @@ const itineraryText = computed(() => {
+   const lines = [`${store.line?.title || ''} 行程单`, '']
+   store.result?.days.forEach((d) => {
+     lines.push(`Day ${d.day}`)
+-    d.items.forEach((it) => lines.push(`  ${String(it.order).padStart(2, '0')}. ${poiOf(it.poiId)?.name || it.poiId}（${it.duration} 分钟）`))
++    d.items.forEach((it) =>
++      lines.push(
++        `  ${String(it.order).padStart(2, '0')}. ${poiOf(it.poiId)?.name || it.poiId}（${it.duration} 分钟）`
++      )
++    )
+     lines.push('')
+   })
+   return lines.join('\n')
+@@ -55,19 +70,32 @@ function exportImage() {
+   <div class="page">
+     <header class="bar">
+       <button class="back" @click="router.back()">← 返回</button>
+-      <h1>{{ store.line?.title }} · {{ store.result?.days.length }} 天 · {{ store.checkedIds.length }} 个点</h1>
++      <h1>
++        {{ store.line?.title }} · {{ store.result?.days.length }} 天 ·
++        {{ store.checkedIds.length }} 个点
++      </h1>
+       <span v-if="statusBadge" class="badge">{{ statusBadge }}</span>
+     </header>
+ 
+     <nav class="tabs">
+       <router-link
+-        v-for="t in TABS" :key="t.key"
++        v-for="t in TABS"
++        :key="t.key"
+         :to="`/result/${t.key}`"
+-        class="tab" :class="{ on: tab === t.key }"
+-      >{{ t.label }}</router-link>
++        class="tab"
++        :class="{ on: tab === t.key }"
++        >{{ t.label }}</router-link
++      >
+       <span class="spacer"></span>
+-      <router-link class="mini" :to="`/customize/${store.lineId}`">继续修改</router-link>
+-      <button class="mini danger" @click="store.reset(); router.push(`/customize/${store.lineId}`)">重新规划</button>
++      <router-link class="mini" :to="`/customize/${store.lineId}`"
++        >继续修改</router-link
++      >
++      <button
++        class="mini danger"
++        @click="restartPlan"
++      >
++        重新规划
++      </button>
+     </nav>
+ 
+     <!-- S5-a 地图 -->
+@@ -90,62 +118,106 @@ function exportImage() {
+     </template>
+ 
+     <!-- S5-b 日程 -->
+-    <ol v-else-if="tab === 'day'" class="timeline">
+-      <li v-for="d in store.result?.days" :key="d.day" class="day">
+-        <h3>Day {{ d.day }}</h3>
+-        <button
+-          v-for="it in d.items" :key="it.poiId"
+-          class="stop"
+-          @click="router.push(`/poi/${it.poiId}`)"
+-        >
+-          <span class="no">D{{ d.day }}-{{ it.order }}</span>
+-          <span class="name">{{ poiOf(it.poiId)?.name }}</span>
+-          <span class="dur">{{ it.duration }}min</span>
+-        </button>
+-      </li>
+-    </ol>
++    <DayTimeline
++      v-else-if="tab === 'day'"
++      :days="store.result?.days || []"
++      :pois="store.pois"
++      @locate="locatePoi"
++    />
+ 
+     <!-- S5-c 导出·携程 -->
+     <section v-else class="export card-block">
+       <pre class="itinerary">{{ itineraryText }}</pre>
+       <div class="actions">
+-        <button class="btn-ghost" @click="exportImage">导出文字行程单图片</button>
++        <button class="btn-ghost" @click="exportImage">
++          导出文字行程单图片
++        </button>
+         <!-- TODO：深链参数待验证（见执行方案风险表），先跳官网首页 -->
+-        <a class="btn" href="https://www.ctrip.com" target="_blank" rel="noopener">行程定了，去携程订酒店和票 →</a>
++        <a
++          class="btn"
++          href="https://www.ctrip.com"
++          target="_blank"
++          rel="noopener"
++          >行程定了，去携程订酒店和票 →</a
++        >
+       </div>
+     </section>
+   </div>
+ </template>
+ 
+ <style scoped>
+-.bar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+-.back { color: var(--ink-2); font-size: 14px; }
+-h1 { font-size: 18px; }
+-.badge { font-size: 12px; color: var(--brand); background: var(--brand-light); border-radius: 999px; padding: 2px 12px; }
+-.tabs { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+-.tab { padding: 8px 18px; border-radius: 999px; background: #fff; font-size: 14px; box-shadow: var(--shadow); }
+-.tab.on { background: var(--brand); color: #fff; }
+-.spacer { flex: 1; }
+-.mini { font-size: 13px; color: var(--ink-2); }
+-.mini.danger { color: var(--brand); }
+-.map-wrap { height: 420px; }
+-.timeline { list-style: none; }
+-.day { background: #fff; border-radius: var(--card-radius); box-shadow: var(--shadow); padding: 16px; margin-bottom: 12px; }
+-.day h3 { font-size: 16px; margin-bottom: 8px; }
+-.stop {
+-  display: flex; gap: 10px; width: 100%; align-items: center;
+-  padding: 10px 4px; border-bottom: 1px solid var(--line); font-size: 14px; text-align: left;
+-}
+-.stop:last-child { border-bottom: none; }
+-.no { font-size: 11px; color: var(--brand); background: var(--brand-light); border-radius: 4px; padding: 1px 6px; }
+-.name { flex: 1; }
+-.dur { font-size: 12px; color: var(--ink-2); }
+-.card-block { background: #fff; border-radius: var(--card-radius); box-shadow: var(--shadow); }
+-.export { padding: 16px; }
++.bar {
++  display: flex;
++  align-items: center;
++  gap: 12px;
++  flex-wrap: wrap;
++  margin-bottom: 12px;
++}
++.back {
++  color: var(--ink-2);
++  font-size: 14px;
++}
++h1 {
++  font-size: 18px;
++}
++.badge {
++  font-size: 12px;
++  color: var(--brand);
++  background: var(--brand-light);
++  border-radius: 999px;
++  padding: 2px 12px;
++}
++.tabs {
++  display: flex;
++  align-items: center;
++  gap: 8px;
++  margin-bottom: 14px;
++  flex-wrap: wrap;
++}
++.tab {
++  padding: 8px 18px;
++  border-radius: 999px;
++  background: #fff;
++  font-size: 14px;
++  box-shadow: var(--shadow);
++}
++.tab.on {
++  background: var(--brand);
++  color: #fff;
++}
++.spacer {
++  flex: 1;
++}
++.mini {
++  font-size: 13px;
++  color: var(--ink-2);
++}
++.mini.danger {
++  color: var(--brand);
++}
++.map-wrap {
++  height: 420px;
++}
++.card-block {
++  background: #fff;
++  border-radius: var(--card-radius);
++  box-shadow: var(--shadow);
++}
++.export {
++  padding: 16px;
++}
+ .itinerary {
+-  background: var(--bg); border-radius: var(--card-radius); padding: 16px;
+-  font-family: monospace; font-size: 13px; white-space: pre-wrap; margin-bottom: 14px;
++  background: var(--bg);
++  border-radius: var(--card-radius);
++  padding: 16px;
++  font-family: monospace;
++  font-size: 13px;
++  white-space: pre-wrap;
++  margin-bottom: 14px;
++}
++.actions {
++  display: flex;
++  gap: 10px;
++  flex-wrap: wrap;
+ }
+-.actions { display: flex; gap: 10px; flex-wrap: wrap; }
+ </style>
+-
+diff --git a/tests/component-flow.cjs b/tests/component-flow.cjs
+new file mode 100644
+index 0000000..7d935b1
+--- /dev/null
++++ b/tests/component-flow.cjs
+@@ -0,0 +1,222 @@
++/* Run after npm ci; install Playwright only in a test checkout. See handoff README. */
++const assert = require('node:assert/strict')
++const fs = require('node:fs/promises')
++const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright')
++async function main() {
++  process.env.VITE_USE_MOCK = 'true'
++  const { createServer } = await import('vite')
++  const server = await createServer({
++    server: { host: '127.0.0.1', port: 4173, strictPort: true }
++  })
++  await server.listen()
++  const browser = await chromium.launch({
++    headless: true,
++    ...(process.env.CHROMIUM_EXECUTABLE_PATH
++      ? { executablePath: process.env.CHROMIUM_EXECUTABLE_PATH }
++      : {}),
++    args: ['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu']
++  })
++  const page = await browser.newPage({ viewport: { width: 1280, height: 900 } })
++  const errors = []
++  page.on('pageerror', (e) => errors.push(e.message))
++  page.on('console', (m) => {
++    if (m.type() === 'warning' && /Vue warn/.test(m.text()))
++      errors.push(m.text())
++  })
++  async function viewStore() {
++    return page.evaluate(async () => {
++      const { usePlanStore } = await import('/src/stores/plan.js')
++      const s = usePlanStore()
++      return {
++        ids: [...s.checkedIds],
++        status: s.result?.status,
++        days: s.result?.days.length
++      }
++    })
++  }
++  async function clickGenerate() {
++    await page.getByRole('button', { name: '生成行程', exact: true }).click()
++    await page.getByRole('dialog').waitFor()
++  }
++  try {
++    await page.goto('http://127.0.0.1:4173')
++    await page.getByRole('button', { name: '选择繁花·上海' }).first().click()
++    await page
++      .getByRole('checkbox', { name: '选择黄河路', exact: true })
++      .waitFor()
++    assert.equal((await viewStore()).ids.length, 0)
++    await page.getByLabel('开始日期').fill('2026-10-10')
++    await page.getByLabel('结束日期').fill('2026-10-09')
++    assert.equal(
++      await page
++        .getByRole('button', { name: '生成行程', exact: true })
++        .isDisabled(),
++      true
++    )
++    await page.getByLabel('结束日期').fill('2026-10-11')
++    await page
++      .getByRole('checkbox', { name: '选择黄河路', exact: true })
++      .check()
++    assert.equal(
++      await page
++        .getByRole('button', { name: '生成行程', exact: true })
++        .isDisabled(),
++      true
++    )
++    await page.getByRole('checkbox', { name: '选择外滩', exact: true }).check()
++    await clickGenerate()
++    assert.equal(
++      await page.getByRole('button', { name: '确认追加并重算' }).isDisabled(),
++      true
++    )
++    await page
++      .getByRole('checkbox', { name: '追加南京路步行街', exact: true })
++      .check()
++    await page.getByRole('button', { name: '确认追加并重算' }).click()
++    await page.getByRole('button', { name: '保持当前行程' }).waitFor()
++    await page.waitForFunction(
++      () =>
++        !document.querySelector('dialog')?.getAttribute('aria-busy') ||
++        document.querySelector('dialog')?.getAttribute('aria-busy') === 'false'
++    )
++    assert.deepEqual((await viewStore()).ids, ['sh-01', 'sh-c1', 'sh-02'])
++    await page.getByRole('button', { name: '保持当前行程' }).click()
++    await page.waitForURL('**/result/map')
++    await page.getByRole('link', { name: '日程', exact: true }).click()
++    await page
++      .getByRole('button', { name: '在地图查看黄河路', exact: true })
++      .click()
++    await page.waitForURL('**/result/map')
++    await page.getByRole('dialog', { name: '黄河路', exact: true }).waitFor()
++    await page.keyboard.press('Escape')
++    await page.getByRole('dialog').waitFor({ state: 'detached' })
++    // Detail rendering uses full text, preserves line breaks and never inserts HTML.
++    await page.evaluate(async () => {
++      const { usePlanStore } = await import('/src/stores/plan.js')
++      usePlanStore().pois.find((p) => p.poiId === 'sh-01').quotes = [
++        {
++          kind: '原著',
++          brief: '测试短文本',
++          full: '测试长文本第一行\n测试长文本第二行 <b>普通文本</b>',
++          source: '自动化测试数据'
++        },
++        {
++          kind: '台词',
++          brief: '测试台词',
++          full: '测试台词全文',
++          source: '自动化测试数据'
++        }
++      ]
++    })
++    await page.getByRole('link', { name: '日程', exact: true }).click()
++    await page
++      .getByRole('button', { name: '在地图查看黄河路', exact: true })
++      .click()
++    await page.getByText('测试短文本', { exact: true }).waitFor()
++    await page.getByRole('button', { name: '查看详情', exact: false }).click()
++    await page.waitForURL('**/poi/sh-01')
++    await page.getByText('测试台词全文', { exact: true }).waitFor()
++    assert.equal(await page.locator('.quote b').count(), 0)
++    assert.ok(
++      (await page.locator('.quote .text').first().innerText()).includes('\n')
++    )
++    await page.getByRole('button', { name: '返回', exact: false }).click()
++    await page.waitForURL('**/result/map')
++    await page.getByRole('link', { name: '继续修改', exact: true }).click()
++    assert.equal((await viewStore()).ids.length, 3)
++    assert.equal(
++      await page
++        .getByRole('checkbox', { name: '选择黄河路', exact: true })
++        .isChecked(),
++      true
++    )
++    await page.getByRole('button', { name: '全选', exact: true }).nth(0).click()
++    await page.getByRole('button', { name: '全选', exact: true }).nth(1).click()
++    await page.getByLabel('每天 6 小时', { exact: true }).check()
++    await clickGenerate()
++    await page
++      .getByRole('checkbox', { name: '舍弃黄河路', exact: true })
++      .check()
++    // Simulate a rejected planner request; the UI must restore ids/result.
++    const before = await viewStore()
++    await page.evaluate(async () => {
++      const { usePlanStore } = await import('/src/stores/plan.js')
++      const s = usePlanStore()
++      window.restoreSubmit = s.submit
++      s.submit = async () => {
++        throw Error('Simulated offline')
++      }
++    })
++    await page.getByRole('button', { name: '确认舍弃并重算' }).click()
++    await page.getByText('重新规划失败，已恢复原选择，请重试。').waitFor()
++    assert.deepEqual((await viewStore()).ids, before.ids)
++    await page.evaluate(async () => {
++      const { usePlanStore } = await import('/src/stores/plan.js')
++      usePlanStore().submit = window.restoreSubmit
++    })
++    // The failed operation restores the previous result; choose again if the draft reset.
++    await page
++      .getByRole('checkbox', { name: '舍弃黄河路', exact: true })
++      .check()
++    await page.getByRole('button', { name: '确认舍弃并重算' }).click()
++    await page.waitForFunction(
++      () =>
++        document.querySelector('dialog')?.getAttribute('aria-busy') === 'false'
++    )
++    assert.equal((await viewStore()).ids.includes('sh-01'), false)
++    await page.getByRole('button', { name: '保留全部，允许超载' }).click()
++    await page.waitForURL('**/result/map')
++    assert.equal((await viewStore()).status, 'overload')
++    await page.getByText(/超载行程：当前排程需/).waitFor()
++    await page.getByRole('button', { name: '重新规划', exact: true }).click()
++    await page.waitForURL('**/customize/**')
++    assert.equal((await viewStore()).ids.length, 0)
++    // Mobile, no horizontal overflow; images must resolve at /img, not /customize/img.
++    await page.setViewportSize({ width: 390, height: 844 })
++    await page
++      .getByRole('checkbox', { name: '选择黄河路', exact: true })
++      .check()
++    await page.getByRole('checkbox', { name: '选择外滩', exact: true }).check()
++    await clickGenerate()
++    assert.equal(
++      await page.evaluate(
++        () => document.documentElement.scrollWidth > innerWidth
++      ),
++      false
++    )
++    assert.equal(
++      await page.evaluate(
++        () =>
++          document.querySelector('dialog').scrollWidth >
++          document.querySelector('dialog').clientWidth
++      ),
++      false
++    )
++    await fs.mkdir('test-output', { recursive: true })
++    await page.screenshot({ path: 'test-output/mobile-drawer.png' })
++    await page.keyboard.press('Escape')
++    await page.getByRole('dialog').waitFor({ state: 'detached' })
++    await page.screenshot({
++      path: 'test-output/mobile-customize.png',
++      fullPage: true
++    })
++    await page.setViewportSize({ width: 1280, height: 900 })
++    await page.getByRole('button', { name: '首页', exact: false }).click()
++    await page.screenshot({
++      path: 'test-output/desktop-home.png',
++      fullPage: true
++    })
++    assert.equal(await page.locator('vite-error-overlay').count(), 0)
++    assert.deepEqual(errors, [])
++    console.log(
++      'PASS: actual Chromium flow — dates, selection, add/remove and replan, rollback, allow overload, dialog Escape, keep/reset selection, timeline to map, mobile overflow, no Vue errors.'
++    )
++  } finally {
++    await browser.close()
++    await server.close()
++  }
++}
++main().catch((e) => {
++  console.error(e)
++  process.exitCode = 1
++})
+diff --git a/tests/travel-ui.test.mjs b/tests/travel-ui.test.mjs
+new file mode 100644
+index 0000000..adcb0e9
+--- /dev/null
++++ b/tests/travel-ui.test.mjs
+@@ -0,0 +1,64 @@
++import test from 'node:test'
++import assert from 'node:assert/strict'
++import {
++  validateTimeRange,
++  validateSelection,
++  applyTradeoff,
++  assetUrl
++} from '../src/utils/travel-ui.js'
++const range = {
++  startDate: '2026-10-10',
++  startSlot: '上午',
++  endDate: '2026-10-10',
++  endSlot: '晚上'
++}
++const pois = [
++  { poiId: 'ip', type: 'ip' },
++  { poiId: 'classic', type: 'classic' },
++  { poiId: 'extra', type: 'ip' }
++]
++test('rejects empty, nonexistent and reversed dates, reversed slots and unsupported hours', () => {
++  assert.equal(validateTimeRange(range, 8), '')
++  for (const patch of [
++    { startDate: '' },
++    { startDate: '2026-02-30' },
++    { endDate: '2026-10-09' },
++    { startSlot: '晚上', endSlot: '上午' },
++    { endSlot: '午夜' }
++  ])
++    assert.ok(validateTimeRange({ ...range, ...patch }, 8))
++  assert.ok(validateTimeRange(range, 7))
++})
++test('both POI categories are required after a tradeoff', () => {
++  assert.equal(validateSelection(pois, ['ip', 'classic']), '')
++  assert.ok(validateSelection(pois, ['ip']))
++  assert.ok(
++    validateSelection(
++      pois,
++      applyTradeoff(['ip', 'classic'], ['ip'], 'overload', pois)
++    )
++  )
++})
++test('tradeoff respects known ids and does not mutate selections', () => {
++  const ids = ['ip', 'classic']
++  assert.deepEqual(
++    applyTradeoff(ids, ['extra', 'extra', 'unknown'], 'under70', pois),
++    ['ip', 'classic', 'extra']
++  )
++  assert.deepEqual(applyTradeoff(ids, ['classic'], 'overload', pois), ['ip'])
++  assert.deepEqual(ids, ['ip', 'classic'])
++})
++test('assets resolve against Vite base and reject executable URLs', () => {
++  assert.equal(assetUrl('img/photo.jpg', '/trip/'), '/trip/img/photo.jpg')
++  assert.equal(
++    assetUrl('https://example.com/photo.jpg'),
++    'https://example.com/photo.jpg'
++  )
++  for (const src of [
++    'javascript:alert(1)',
++    'data:text/html,hello',
++    '//example.com/a',
++    ''
++  ])
++    assert.equal(assetUrl(src), '')
++})
