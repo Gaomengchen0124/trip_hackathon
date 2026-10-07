@@ -53,3 +53,6 @@
 | daomu-hangzhou | dm-sp-11.jpg | File:Gongchen Bridge 08 2013-07.JPG | 猫猫的日记本 | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:Gongchen_Bridge_08_2013-07.JPG) |  |
 | daomu-hangzhou | dm-sp-12.jpg | File:Archaeological Ruins of Liangzhu City (53697123771).jpg | xiquinhosilva | CC BY 2.0 | [链接](https://commons.wikimedia.org/wiki/File:Archaeological_Ruins_of_Liangzhu_City_(53697123771).jpg) |  |
 | daomu-hangzhou | dm-sp-14.jpg | File:杭州.胡雪岩故居 - panoramio (2).jpg | zhiyin586@163.com | CC BY 3.0 | [链接](https://commons.wikimedia.org/wiki/File:%E6%9D%AD%E5%B7%9E.%E8%83%A1%E9%9B%AA%E5%B2%A9%E6%95%85%E5%B1%85_-_panoramio_(2).jpg) |  |
+| santi-beijing | st-sp-01.jpg | 故宫全景（用户提供） | 【待用户补充来源】 | 【待确认】 | — | 用户提供 |
+| santi-beijing | st-sp-02.jpg | 天安门城楼（用户提供） | 【待用户补充来源】 | 【待确认】 | — | 用户提供 |
+| woyuditan-beijing | wd-sp-02.jpg | 故宫全景（用户提供） | 【待用户补充来源】 | 【待确认】 | — | 复用三体·北京同景点图 |
