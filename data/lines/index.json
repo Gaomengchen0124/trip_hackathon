@@ -41,6 +41,192 @@
       }
     },
     {
+      "lineId": "harrypotter-london",
+      "ipId": "harrypotter",
+      "ipName": "哈利波特",
+      "title": "哈利波特·伦敦",
+      "city": "伦敦",
+      "cover": "img/harrypotter-london.jpg",
+      "file": "data/lines/harrypotter-london.json",
+      "priority": 2,
+      "recommendDays": 3,
+      "aliases": [
+        "哈利波特",
+        "哈利·波特",
+        "Harry Potter"
+      ],
+      "tags": {
+        "城市": [
+          "伦敦",
+          "英国"
+        ],
+        "人物": [
+          "哈利·波特",
+          "赫敏",
+          "罗恩",
+          "邓布利多"
+        ],
+        "地名": [
+          "国王十字",
+          "利德贺市场",
+          "千禧桥",
+          "博罗市场",
+          "皮卡迪利广场",
+          "威斯敏斯特"
+        ]
+      }
+    },
+    {
+      "lineId": "woyuditan-beijing",
+      "ipId": "woyuditan",
+      "ipName": "我与地坛",
+      "title": "我与地坛·北京",
+      "city": "北京",
+      "cover": "img/woyuditan-beijing.jpg",
+      "file": "data/lines/woyuditan-beijing.json",
+      "priority": 3,
+      "recommendDays": 1,
+      "aliases": [
+        "我与地坛",
+        "史铁生",
+        "地坛"
+      ],
+      "tags": {
+        "城市": [
+          "北京"
+        ],
+        "人物": [
+          "史铁生"
+        ],
+        "地名": [
+          "地坛",
+          "地坛公园"
+        ]
+      }
+    },
+    {
+      "lineId": "daomu-hangzhou",
+      "ipId": "daomu",
+      "ipName": "盗墓笔记",
+      "title": "盗墓笔记·杭州",
+      "city": "杭州",
+      "cover": "img/daomu-hangzhou.jpg",
+      "file": "data/lines/daomu-hangzhou.json",
+      "priority": 4,
+      "recommendDays": 2,
+      "aliases": [
+        "盗墓笔记",
+        "吴邪",
+        "闷油瓶",
+        "张起灵",
+        "吴山居",
+        "小哥"
+      ],
+      "tags": {
+        "城市": [
+          "杭州"
+        ],
+        "人物": [
+          "吴邪",
+          "张起灵",
+          "闷油瓶",
+          "阿宁",
+          "王胖子"
+        ],
+        "地名": [
+          "西泠印社",
+          "楼外楼",
+          "宝石山",
+          "孤山路",
+          "北山路",
+          "西湖"
+        ]
+      }
+    },
+    {
+      "lineId": "santi-beijing",
+      "ipId": "santi",
+      "ipName": "三体",
+      "title": "三体·北京",
+      "city": "北京",
+      "cover": "img/santi-beijing.jpg",
+      "file": "data/lines/santi-beijing.json",
+      "priority": 5,
+      "recommendDays": 3,
+      "aliases": [
+        "三体",
+        "汪淼",
+        "叶文洁",
+        "史强",
+        "大史",
+        "罗辑",
+        "程心",
+        "云天明",
+        "红岸基地"
+      ],
+      "tags": {
+        "城市": [
+          "北京"
+        ],
+        "人物": [
+          "汪淼",
+          "叶文洁",
+          "史强",
+          "程心",
+          "云天明"
+        ],
+        "地名": [
+          "密云水库",
+          "王府井天主教堂",
+          "北京天文馆",
+          "清华大学",
+          "密云观测站"
+        ]
+      }
+    },
+    {
+      "lineId": "qianfu-tianjin",
+      "ipId": "qianfu",
+      "ipName": "潜伏",
+      "title": "潜伏·天津",
+      "city": "天津",
+      "cover": "img/qianfu-tianjin.jpg",
+      "file": "data/lines/qianfu-tianjin.json",
+      "priority": 6,
+      "recommendDays": 2,
+      "aliases": [
+        "潜伏",
+        "余则成",
+        "翠平",
+        "吴敬中",
+        "吴站长",
+        "左蓝",
+        "李涯",
+        "天津站",
+        "保密局天津站"
+      ],
+      "tags": {
+        "城市": [
+          "天津"
+        ],
+        "人物": [
+          "余则成",
+          "翠平",
+          "吴敬中",
+          "左蓝",
+          "李涯"
+        ],
+        "地名": [
+          "天津站",
+          "五大道",
+          "意式风情区",
+          "海河",
+          "静园",
+          "盘山"
+        ]
+      }
+    },
+    {
       "lineId": "longzu-beijing",
       "ipId": "longzu",
       "ipName": "龙族",
@@ -52,8 +238,13 @@
       "recommendDays": 2,
       "aliases": [
         "龙族",
+        "龙族Ⅱ",
+        "悼亡者之瞳",
         "路明非",
-        "楚子航"
+        "楚子航",
+        "恺撒",
+        "诺诺",
+        "夏弥"
       ],
       "tags": {
         "城市": [
@@ -63,9 +254,19 @@
           "路明非",
           "楚子航",
           "恺撒",
-          "诺诺"
+          "诺诺",
+          "夏弥",
+          "芬格尔"
         ],
-        "地名": []
+        "地名": [
+          "颐和园",
+          "十七孔桥",
+          "中关村",
+          "王府井",
+          "琉璃厂",
+          "后海",
+          "西单"
+        ]
       }
     },
     {
@@ -77,11 +278,17 @@
       "cover": "img/longzu-japan.jpg",
       "file": "data/lines/longzu-japan.json",
       "priority": 11,
-      "recommendDays": 2,
+      "recommendDays": 3,
       "aliases": [
         "龙族",
+        "龙族Ⅲ",
+        "黑月之潮",
         "路明非",
-        "楚子航"
+        "楚子航",
+        "恺撒",
+        "源稚生",
+        "绘梨衣",
+        "酒德麻衣"
       ],
       "tags": {
         "城市": [
@@ -92,9 +299,20 @@
           "路明非",
           "楚子航",
           "恺撒",
-          "诺诺"
+          "源稚生",
+          "绘梨衣",
+          "酒德麻衣"
         ],
-        "地名": []
+        "地名": [
+          "东京塔",
+          "明治神宫",
+          "歌舞伎町",
+          "浅草寺",
+          "秋叶原",
+          "热海",
+          "银座",
+          "台场"
+        ]
       }
     }
   ]

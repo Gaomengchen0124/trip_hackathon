@@ -1,7 +1,7 @@
 <script setup>
 /**
  * S5 行程结果页：Tab 容器（地图 / 日程 / 导出·携程）
- * S6 景点卡片浮层挂在地图 Tab 上；时间轴点某站 → 切回地图 Tab 并开卡片。
+ * S6 景点卡片浮层挂在地图 Tab 上。
  */
 import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -24,19 +24,13 @@ const activePoi = ref(null)
 const tab = computed(() => route.params.tab)
 
 const statusBadge = computed(() => {
-  const r = store.result
-  if (!r) return ''
   const map = {
     ok: '',
-    overload: r.impossible
-      ? '⚠️ 这趟走不完：即使全部压缩也排不下，建议减少点位或增加天数'
-      : '⚠️ 超载行程：时间不够，已按你的取舍保留',
+    overload: `⚠️ 超载行程：当前排程需 ${store.result?.days.length || '待确认'} 天，请检查可用时间`,
     under70: '✨ 宽松行程：还有时间可以再加'
   }
-  return map[r.status] || ''
+  return map[store.result?.status] || ''
 })
-
-const pct = computed(() => Math.round((store.result?.usage ?? 0) * 100))
 
 async function locatePoi(poiId) {
   await router.push('/result/map')
@@ -53,18 +47,16 @@ function poiOf(poiId) {
 }
 
 const itineraryText = computed(() => {
-  const r = store.result
   const lines = [`${store.line?.title || ''} 行程单`, '']
-  r?.days.forEach((d) => {
-    lines.push(`Day ${d.day}  （${d.date}）`)
-    d.items.forEach((it) => {
-      const name = poiOf(it.poiId)?.name || it.poiId
-      const tag = it.mode === 'rush' ? '（打卡）' : ''
-      lines.push(`  ${it.arrive} → ${it.leave}  ${name}${tag}`)
-    })
+  store.result?.days.forEach((d) => {
+    lines.push(`Day ${d.day}`)
+    d.items.forEach((it) =>
+      lines.push(
+        `  ${String(it.order).padStart(2, '0')}. ${poiOf(it.poiId)?.name || it.poiId}（${it.duration} 分钟）`
+      )
+    )
     lines.push('')
   })
-  if (r?.message) lines.push(r.message)
   return lines.join('\n')
 })
 
@@ -81,7 +73,6 @@ function exportImage() {
       <h1>
         {{ store.line?.title }} · {{ store.result?.days.length }} 天 ·
         {{ store.checkedIds.length }} 个点
-        <span class="usage">用掉 {{ pct }}%</span>
       </h1>
       <span v-if="statusBadge" class="badge">{{ statusBadge }}</span>
     </header>
@@ -99,7 +90,12 @@ function exportImage() {
       <router-link class="mini" :to="`/customize/${store.lineId}`"
         >继续修改</router-link
       >
-      <button class="mini danger" @click="restartPlan">重新规划</button>
+      <button
+        class="mini danger"
+        @click="restartPlan"
+      >
+        重新规划
+      </button>
     </nav>
 
     <!-- S5-a 地图 -->
@@ -109,9 +105,6 @@ function exportImage() {
           :pois="store.checkedPois"
           :selected-ids="store.checkedIds"
           :plan="store.result"
-          :city="store.line?.city"
-          :ip-name="store.ip?.name || ''"
-          :active-poi-id="activePoi?.poiId || ''"
           :interactive="true"
           @marker-click="(id) => (activePoi = poiOf(id))"
         />
@@ -173,12 +166,6 @@ h1 {
   background: var(--brand-light);
   border-radius: 999px;
   padding: 2px 12px;
-}
-.usage {
-  font-size: 12px;
-  color: var(--ink-2);
-  font-weight: 400;
-  margin-left: 6px;
 }
 .tabs {
   display: flex;

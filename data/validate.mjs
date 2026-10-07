@@ -28,13 +28,13 @@ const RULES = [
   ['S09', 'error', '没有残留占位符【…】'],
   ['S10', 'warn', 'IP 点位数量在 _expected.ipStops 区间内'],
   ['S11', 'warn', '城市景点数量在 _expected.cityStops 区间内'],
-  ['S12', 'warn', 'IP 点位不少于 6 个（太少撑不起主题）'],
+  ['S12', 'warn', 'IP 点位不少于 6 个（太少撑不起主题）；本线 _expected.ipStops 更小时以它为准'],
   ['C01', 'error', 'lng / lat 不为 null'],
   ['C02', 'error', '坐标落在 _bounds 范围内'],
   ['C03', 'error', 'cluster 在 clusters 列表中'],
   ['C04', 'error', 'tier 属于 {S, A, B}'],
   ['C05', 'error', 'durationRush < durationNormal'],
-  ['C06', 'error', 'durationNormal 合理（IP 30-180 分钟；classic 60-480，>300 视为"要玩一整天"）'],
+  ['C06', 'error', 'durationNormal 合理（IP 30-180 分钟；classic 30-480，>300 视为"要玩一整天"）'],
   ['C07', 'warn', 'tier = S 的点位不超过 _expected.maxTierS'],
   ['C08', 'warn', 'durationRush 约为 durationNormal 的 50%（±15%）'],
   ['C09', 'warn', '同一 cluster 的点位不超过 4 个（超过也能排，引擎会自动拆到多天）'],
@@ -149,7 +149,10 @@ function validate(file) {
     const [lo, hi] = expect.ipStops;
     if (nIp < lo || nIp > hi) add('warn', 'S10', `IP 点位 ${nIp} 个，期望 ${lo}-${hi} 个`);
   }
-  if (nIp < 6) add('warn', 'S12', `IP 点位只有 ${nIp} 个，撑不起主题`);
+  // 默认认为一条线至少 6 个 IP 点才撑得起主题；
+  // 但《我与地坛》这类作品本身就只有 1 个真实地点，_expected 说了算。
+  const minIp = Math.min(6, expect.ipStops?.[0] ?? 6);
+  if (nIp < minIp) add('warn', 'S12', `IP 点位只有 ${nIp} 个，撑不起主题（本线期望至少 ${minIp} 个）`);
   if (expect.cityStops) {
     const [lo, hi] = expect.cityStops;
     if (nCity < lo || nCity > hi) add('warn', 'S11', `城市景点 ${nCity} 个，期望 ${lo}-${hi} 个`);
@@ -177,7 +180,7 @@ function validate(file) {
   // ---------- C05 / C06 ----------
   for (const { p, kind } of all) {
     // 主题乐园这类要玩一整天的点，上限放到 480
-    const [lo, hi] = kind === 'ip' ? [30, 180] : [60, 480];
+    const [lo, hi] = kind === 'ip' ? [30, 180] : [30, 480];
     if (typeof p.durationNormal !== 'number') add('error', 'C06', 'durationNormal 不是数字', p.poiId);
     else if (p.durationNormal < lo || p.durationNormal > hi) add('error', 'C06', `durationNormal ${p.durationNormal} 超出 ${lo}-${hi}`, p.poiId);
     if (typeof p.durationRush !== 'number') add('error', 'C05', 'durationRush 不是数字', p.poiId);

@@ -8,7 +8,7 @@
 import { httpGet, httpPost } from './client'
 import * as mock from './mock/index.js'
 
-const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true'
+const USE_MOCK = import.meta.env.VITE_USE_MOCK !== 'false'
 
 export async function search(keyword) {
   if (USE_MOCK) return mock.search(keyword)

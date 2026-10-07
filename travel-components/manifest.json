@@ -1,0 +1,90 @@
+{
+  "repository": "https://github.com/Gaomengchen0124/trip_hackathon",
+  "baseCommit": "32ec57c684cdd465a1fe2cb7cd05fd5151d734e4",
+  "files": [
+    {
+      "path": "src/components/DayTimeline.vue",
+      "sha256": "75a019fdf91471a5e21dfafcb48e7ba83c82fe9af8d68d5163ea8546f172f73f"
+    },
+    {
+      "path": "src/components/DayTimelineItem.vue",
+      "sha256": "f5724041d0bfb59332b22bd16bef7da16793c8a9298f8ad452b95ea257c8652c"
+    },
+    {
+      "path": "src/components/DetailContent.vue",
+      "sha256": "82e53aa5db2f7145b3daf682a0eba28ef18a8e2ae71320f7515efa77a4f41df9"
+    },
+    {
+      "path": "src/components/PoiCardOverlay.vue",
+      "sha256": "c7f379ba49bd52bdb8556149e427a9f09c6522e4b9d5fefc6f76cf8cd467b7a8"
+    },
+    {
+      "path": "src/components/PoiCheckList.vue",
+      "sha256": "65aa6fe78b7c5e2f4ee54915c844de6352b54987238d4c16bdbf496db0a4608a"
+    },
+    {
+      "path": "src/components/PoiSelectCard.vue",
+      "sha256": "c4793eeedf8c46be9c799946faef39d3a936072360b23a2f9b72d77ec3be0b32"
+    },
+    {
+      "path": "src/components/QuoteCard.vue",
+      "sha256": "652414576a02e0144acaba156d70ccf7d91487aff82052baf7ac34aab29046d7"
+    },
+    {
+      "path": "src/components/RouteCard.vue",
+      "sha256": "09cc1e07ff8b277e021ec7e9a788067d470b88b0a3aa61bc7afb6fe1ebd7481a"
+    },
+    {
+      "path": "src/components/TimeBar.vue",
+      "sha256": "3415d1014c898d9fa1d83b93a7435779fd2ebdb7fd389dc988ba315e4b6bd39d"
+    },
+    {
+      "path": "src/components/TradeoffDrawer.vue",
+      "sha256": "4b1339cc72c1a100d1146b6b89b306d536d33452425e889aea409167795bef8a"
+    },
+    {
+      "path": "src/components/ui/DialogSheet.vue",
+      "sha256": "13f65b055b3e51bdd9ac56571d09e8fb68ea41027906e2025eb000407564735d"
+    },
+    {
+      "path": "src/components/ui/PhotoFrame.vue",
+      "sha256": "1c5708a758c1bd7d9f19f889a002042625286459317b9676bc3365c324dc9f5e"
+    },
+    {
+      "path": "src/types/travel.d.ts",
+      "sha256": "a09bfb602c5adf88333128f2cadf2920b5b9058ab926e62a1bdc9d625b4e7350"
+    },
+    {
+      "path": "src/utils/travel-ui.js",
+      "sha256": "48d779281df0b0f859e5591a63252063fbf1e09cf11063a7103afb35bf61061e"
+    },
+    {
+      "path": "src/views/ColumnListView.vue",
+      "sha256": "8508c0abfee8497424692d75d3b6ecce466688d8ac8406c1ea927d5d1313bacd"
+    },
+    {
+      "path": "src/views/CustomizeView.vue",
+      "sha256": "417994d0fddcf006433f22dcbd915e8b35db946b7610951734927e96d3d9ffa4"
+    },
+    {
+      "path": "src/views/DetailView.vue",
+      "sha256": "841293af162b52c91ab70e65d4ddf1fc6974ff148389830ef824063b1c9e5619"
+    },
+    {
+      "path": "src/views/HomeView.vue",
+      "sha256": "03657b04eef3a9a3fd6bc701386f48a85f74bf5537e597698b6995e857264b7c"
+    },
+    {
+      "path": "src/views/ResultView.vue",
+      "sha256": "e5cff5d24c1b8416fbdba7978f3067341c8ed33b39bce0314d6ab0962602edf2"
+    },
+    {
+      "path": "tests/component-flow.cjs",
+      "sha256": "3ee7331cd5cf45443d25b0393529c04f97ec5b89184a49b8640e5ab20e632150"
+    },
+    {
+      "path": "tests/travel-ui.test.mjs",
+      "sha256": "000eaa27eca8d7eeaa897cccd6384402bf7e0ba836ad9bf630ed731af4ae6517"
+    }
+  ]
+}

@@ -1,11 +1,4 @@
 <script setup>
-/**
- * S3 行程定制页：地图 + 时间窄条 + 双栏勾选 + 提交（S4 抽屉挂在提交流程上）
- *
- * 组件来自 travel-components 交付包；契约按当前引擎（contract.md）：
- *   submit()/applyTradeoff() → PlanResult{ status: ok | overload | under70 }
- *   ok / under70 都能进结果页，只有 overload 必须先在抽屉里砍够（或允许超载）。
- */
 import { ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { usePlanStore } from '../stores/plan'
@@ -13,20 +6,21 @@ import MapContainer from '../components/MapContainer.vue'
 import TimeBar from '../components/TimeBar.vue'
 import PoiCheckList from '../components/PoiCheckList.vue'
 import TradeoffDrawer from '../components/TradeoffDrawer.vue'
-import { validateTimeRange, validateSelection } from '../utils/travel-ui'
-
+import {
+  validateTimeRange,
+  validateSelection,
+  applyTradeoff
+} from '../utils/travel-ui'
 const route = useRoute()
 const router = useRouter()
 const store = usePlanStore()
-
-const drawerStatus = ref(null) // 'overload' | 'under70' | null
+const drawerStatus = ref(null)
 const hoverInfo = ref('')
 const loading = ref(false)
 const planning = ref(false)
 const error = ref('')
 const drawerError = ref('')
-
-// 结果页返回时保留勾选；换一条线才重新加载。
+// Returning from results keeps selections; a different line loads fresh data.
 watch(
   () => route.params.lineId,
   async (id) => {
@@ -43,21 +37,17 @@ watch(
   },
   { immediate: true }
 )
-
-// 圣地巡礼点按 tier 排序；其他知名景点按数组顺序（知名度）
 const sortedIp = computed(() => {
   const weights = { S: 0, A: 1, B: 2 }
   return [...store.ipPois].sort(
     (a, b) => (weights[a.tier] ?? 9) - (weights[b.tier] ?? 9)
   )
 })
-
 const validation = computed(
   () =>
     validateTimeRange(store.timeRange, store.hoursPerDay) ||
     validateSelection(store.pois, store.checkedIds)
 )
-
 const canSubmit = computed(
   () =>
     !loading.value &&
@@ -65,31 +55,22 @@ const canSubmit = computed(
     !validation.value &&
     !planning.value
 )
-
-const STATUSES = ['ok', 'overload', 'under70']
-
-/** 跑一次引擎；带一个最短 800ms 的"规划中…"反馈。 */
-async function recalculate(run) {
-  const [result] = await Promise.all([
-    run(),
-    new Promise((resolve) => setTimeout(resolve, 800))
+async function recalculate() {
+  // Keep the existing one-second planning feedback without changing the engine.
+  const [status] = await Promise.all([
+    store.submit(),
+    new Promise((resolve) => setTimeout(resolve, 1000))
   ])
-  if (!result || !STATUSES.includes(result.status))
+  if (!['ok', 'overload', 'under70'].includes(status))
     throw new Error('Invalid planning status')
-  return result
+  return status
 }
-
-function goResult() {
-  drawerStatus.value = null
-  router.push('/result/map')
-}
-
-/** 首次提交：ok 直接进结果页；overload / under70 都先弹抽屉给建议。 */
 function showResult(status) {
-  if (status === 'ok') goResult()
-  else drawerStatus.value = status
+  if (status === 'ok') {
+    drawerStatus.value = null
+    router.push('/result/map')
+  } else drawerStatus.value = status
 }
-
 async function submit() {
   if (!canSubmit.value) return
   planning.value = true
@@ -97,7 +78,7 @@ async function submit() {
   drawerError.value = ''
   const previousResult = store.result
   try {
-    showResult((await recalculate(() => store.submit())).status)
+    showResult(await recalculate())
   } catch {
     store.result = previousResult
     error.value = '规划失败，已保留当前选择，请重试。'
@@ -105,26 +86,24 @@ async function submit() {
     planning.value = false
   }
 }
-
-function onMarkerHover(poiId) {
-  const p = store.pois.find((x) => x.poiId === poiId)
-  hoverInfo.value = p
-    ? `${p.name} · ${p.type === 'ip' ? store.ip?.name || '' : '其他知名景点'}`
+function onMarkerHover(id) {
+  const poi = store.pois.find((p) => p.poiId === id)
+  hoverInfo.value = poi
+    ? `${poi.name} · ${poi.type === 'ip' ? store.ip?.name || '' : '城市景点'}`
     : ''
 }
-
-/**
- * S4 抽屉协商完 → 按"最终保留"的点重算一次。
- * force = 不重算，直接带着当前结果出结果页（overload 的"允许超载"）。
- */
-async function onConfirmed({ poiIds, force = false } = {}) {
-  if (planning.value) return
-  if (force) {
+async function onConfirmed(status, choice) {
+  if (planning.value || status !== drawerStatus.value || !choice) return
+  if (choice.action === 'keep') {
     drawerStatus.value = null
     router.push('/result/map')
     return
   }
-  const next = [...new Set(poiIds || [])]
+  if (choice.action !== 'apply') return
+  const allowed = new Set((store.result?.suggestions || []).map((s) => s.poiId))
+  const picked = (choice.poiIds || []).filter((id) => allowed.has(id))
+  if (!picked.length) return
+  const next = applyTradeoff(store.checkedIds, picked, status, store.pois)
   const invalid = validateSelection(store.pois, next)
   if (invalid) {
     drawerError.value = invalid
@@ -133,11 +112,9 @@ async function onConfirmed({ poiIds, force = false } = {}) {
   const previous = { ids: [...store.checkedIds], result: store.result }
   planning.value = true
   drawerError.value = ''
+  store.checkedIds = next
   try {
-    const result = await recalculate(() => store.applyTradeoff(next))
-    // 抽屉里协商完：装得下或富余都放行；只有还是超载才把抽屉留着继续砍。
-    if (result.status === 'ok' || result.status === 'under70') goResult()
-    else drawerStatus.value = result.status
+    showResult(await recalculate())
   } catch {
     store.checkedIds = previous.ids
     store.result = previous.result
@@ -147,7 +124,6 @@ async function onConfirmed({ poiIds, force = false } = {}) {
   }
 }
 </script>
-
 <template>
   <div class="page">
     <header class="bar">
@@ -162,49 +138,41 @@ async function onConfirmed({ poiIds, force = false } = {}) {
       <h1>{{ loading ? '加载中…' : store.line?.title || '行程定制' }}</h1>
       <span v-if="hoverInfo" class="hover-info">{{ hoverInfo }}</span>
     </header>
-
     <p v-if="error" class="error" role="alert">{{ error }}</p>
-
     <div class="map-wrap">
       <MapContainer
         :pois="store.pois"
         :selected-ids="store.checkedIds"
-        :city="store.line?.city"
-        :ip-name="store.ip?.name || ''"
         :interactive="!planning && !loading"
         @marker-hover="onMarkerHover"
         @marker-click="onMarkerHover"
       />
     </div>
-
     <TimeBar
       v-model:time-range="store.timeRange"
       v-model:hours-per-day="store.hoursPerDay"
       :disabled="planning || loading"
     />
-
     <div class="cols">
       <PoiCheckList
-        title="📖 圣地巡礼"
+        title="IP 打卡点"
         :pois="sortedIp"
         :checked-ids="store.checkedIds"
         :disabled="planning || loading"
         @toggle="store.togglePoi"
-      />
-      <PoiCheckList
-        title="🏙 其他知名景点"
+      /><PoiCheckList
+        title="城市著名景点"
         :pois="store.classicPois"
         :checked-ids="store.checkedIds"
         :disabled="planning || loading"
         @toggle="store.togglePoi"
       />
     </div>
-
     <footer class="submit-bar">
-      <span class="stat" aria-live="polite">
-        已选 {{ store.checkedIds.length }} 个点 · 每天 {{ store.hoursPerDay }} 小时
-      </span>
-      <button
+      <span class="stat" aria-live="polite"
+        >已选 {{ store.checkedIds.length }} 个点 · 每天
+        {{ store.hoursPerDay }} 小时</span
+      ><button
         type="button"
         class="btn"
         :disabled="!canSubmit"
@@ -215,7 +183,6 @@ async function onConfirmed({ poiIds, force = false } = {}) {
       </button>
     </footer>
     <p v-if="validation" class="tip">{{ validation }}</p>
-
     <TradeoffDrawer
       v-if="drawerStatus"
       :status="drawerStatus"
@@ -226,7 +193,6 @@ async function onConfirmed({ poiIds, force = false } = {}) {
     />
   </div>
 </template>
-
 <style scoped>
 .bar {
   display: flex;
