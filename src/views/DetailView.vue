@@ -2,7 +2,7 @@
 /**
  * S7 景点详情页：大图 + ≤50 字介绍 + 约 100 字原文/台词（brief/full 分离）
  */
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { usePlanStore } from '../stores/plan'
 
@@ -11,6 +11,10 @@ const router = useRouter()
 const store = usePlanStore()
 
 const poi = computed(() => store.pois.find((p) => p.poiId === route.params.poiId))
+
+// 图片缺失时回落到占位样式
+const imgFailed = ref(false)
+watch(() => route.params.poiId, () => (imgFailed.value = false))
 </script>
 
 <template>
@@ -22,7 +26,14 @@ const poi = computed(() => store.pois.find((p) => p.poiId === route.params.poiId
 
     <template v-if="poi">
       <div class="photo">
-        <span>📷 {{ poi.realPhoto }}</span>
+        <img
+          v-if="!imgFailed"
+          class="photo-img"
+          :src="'/' + poi.realPhoto"
+          :alt="poi.name"
+          @error="imgFailed = true"
+        />
+        <span v-else>📷 {{ poi.realPhoto }}</span>
       </div>
       <p class="intro">{{ poi.intro }}</p>
 
@@ -47,7 +58,9 @@ h1 { font-size: 20px; }
   aspect-ratio: 16/9; border-radius: var(--card-radius); margin-bottom: 14px;
   background: var(--brand-light); color: var(--ink-2);
   display: flex; align-items: center; justify-content: center; font-size: 13px;
+  overflow: hidden;
 }
+.photo-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .intro { font-size: 15px; margin-bottom: 16px; }
 .quote {
   background: #fff; border-radius: var(--card-radius); box-shadow: var(--shadow);
