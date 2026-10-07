@@ -1,7 +1,8 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import RouteCard from '../components/RouteCard.vue'
+import IpWall from '../components/IpWall.vue'
 import * as api from '../api/adapter'
 
 const router = useRouter()
@@ -16,6 +17,15 @@ const COL_META = {
 }
 
 api.listColumns().then((c) => (columns.value = c))
+
+// IP 墙:三个栏目 flatMap 后按 ipId 去重(龙族保留首个 = 主线路)
+const wallLines = computed(() => {
+  const seen = new Set()
+  return Object.values(columns.value)
+    .flat()
+    .flatMap((g) => g.lines ?? [])
+    .filter((l) => l?.ipId && !seen.has(l.ipId) && seen.add(l.ipId))
+})
 
 // 输入即联想（简单防抖）
 let timer = null
@@ -61,18 +71,20 @@ function go(lineId) {
       </div>
     </section>
 
+    <IpWall :lines="wallLines" />
+
     <section v-for="(meta, colKey) in COL_META" :key="colKey" class="wall">
       <h2>{{ meta.title }}</h2>
       <div class="cards">
-        <RouteCard
+        <div
           v-for="g in columns[colKey]
             .filter((g) => g.lines?.length)
             .slice(0, 3)"
           :key="g.label"
-          :line="g.lines[0]"
-          :label="g.label"
-          @select="go"
-        />
+          class="card-wrap"
+        >
+          <RouteCard :line="g.lines[0]" :label="g.label" @select="go" />
+        </div>
         <router-link class="card more" :to="`/column/${meta.key}`"
           >···</router-link
         >
@@ -139,16 +151,22 @@ h1 {
   font-size: 14px;
 }
 .wall {
-  margin-top: 32px;
+  margin-top: 24px;
 }
 .wall h2 {
   font-size: 17px;
   margin-bottom: 12px;
 }
+/* 栏目收缩为一行可横滑的小卡片 */
 .cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  display: flex;
   gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+.card-wrap {
+  flex: none;
+  width: 190px;
 }
 .card {
   background: #fff;
@@ -162,6 +180,8 @@ h1 {
   min-height: 120px;
 }
 .more {
+  flex: none;
+  width: 64px;
   align-items: center;
   justify-content: center;
   font-size: 24px;
