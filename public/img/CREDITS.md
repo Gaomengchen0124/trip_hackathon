@@ -47,3 +47,5 @@
 | woyuditan-beijing | wd-sp-12.jpg | File:北京协和医学院 Peking Union Medical College (9573959701).jpg | Nikolaj Potanin from Russia | CC BY-SA 2.0 | [链接](https://commons.wikimedia.org/wiki/File:%E5%8C%97%E4%BA%AC%E5%8D%8F%E5%92%8C%E5%8C%BB%E5%AD%A6%E9%99%A2_Peking_Union_Medical_College_(9573959701).jpg) | 复用三体·北京同景点图 |
 | woyuditan-beijing | wd-sp-14.jpg | File:Yuanmingyuan Haiyantang 20130126.JPG | 颐园新居 | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:Yuanmingyuan_Haiyantang_20130126.JPG) | 复用三体·北京同景点图 |
 | woyuditan-beijing | wd-sp-15.jpg | File:Summer Palace in Beijing2022 Spring.jpg | Charlie fong | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Summer_Palace_in_Beijing2022_Spring.jpg) | 复用三体·北京同景点图 |
+
+| santi-beijing | st-ip-01.jpg | 密云射电观测基地（用户提供） | 【待用户补充来源】 | 【待确认】 | — | 用户提供的本地文件，需补来源与授权说明 |
