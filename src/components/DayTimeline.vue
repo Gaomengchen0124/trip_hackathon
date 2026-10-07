@@ -69,8 +69,12 @@ header p {
   font-size: 12px;
   color: var(--ink-2);
 }
+/* 每站一张实拍封面图，像画廊一样铺开；点卡片仍然会定位到地图。 */
 ol {
   padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
 }
 .empty {
   padding: 24px;
@@ -79,6 +83,10 @@ ol {
 @media (max-width: 480px) {
   .day {
     padding: 16px;
+  }
+  ol {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
   }
 }
 </style>

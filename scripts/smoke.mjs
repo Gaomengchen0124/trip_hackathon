@@ -27,15 +27,20 @@ try {
   const totalPois = mock.lines.reduce((n, l) => n + mock.getLineDetail(l.lineId).pois.length, 0)
   check('点位总数 = 各线之和', mock.pois.length === totalPois, `${mock.pois.length} 个`)
 
-  console.log('\n【端点 2 · 首页三栏目】')
+  console.log('\n【端点 2 · 首页栏目（按城市）】')
   const cols = mock.listColumns()
-  check('三栏都有内容', cols.city.length && cols.figure.length && cols.place.length,
-    `城市 ${cols.city.length} / 人物 ${cols.figure.length} / 地名 ${cols.place.length}`)
-  const dup = ['city', 'figure', 'place'].some((k) => {
-    const ids = cols[k].flatMap((g) => g.lines.map((l) => l.lineId))
-    return new Set(ids).size !== ids.length
-  })
-  check('同一栏里没有重复卡片', !dup)
+  check('只保留城市栏', Object.keys(cols).join() === 'city', Object.keys(cols).join(' / '))
+  check('城市栏有内容', cols.city.length > 0, `${cols.city.length} 个城市`)
+  const groupOf = (lineId) =>
+    cols.city.find((g) => g.lines.some((l) => l.lineId === lineId))?.label
+  check('北京三条线归到同一组', ['woyuditan-beijing', 'santi-beijing', 'longzu-beijing']
+    .every((id) => groupOf(id) === '北京'),
+    ['woyuditan-beijing', 'santi-beijing', 'longzu-beijing'].map(groupOf).join(' / '))
+  check('同一城市只出现一组',
+    new Set(cols.city.map((g) => g.label)).size === cols.city.length)
+  const ids = cols.city.flatMap((g) => g.lines.map((l) => l.lineId))
+  check('每条线只出现一次', new Set(ids).size === ids.length,
+    `${ids.length} 张卡 / ${new Set(ids).size} 条线`)
 
   console.log('\n【端点 1 · 搜索】')
   check('搜「繁花」命中主线', mock.search('繁花')[0]?.lineId === 'fanhua-shanghai')

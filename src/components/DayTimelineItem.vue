@@ -1,11 +1,14 @@
 <script setup>
-import { formatMinutes } from '../utils/travel-ui'
-defineProps({
+import { computed } from 'vue'
+import PhotoFrame from './ui/PhotoFrame.vue'
+import { formatMinutes, poiCover } from '../utils/travel-ui'
+const props = defineProps({
   day: { type: Number, required: true },
   item: { type: Object, required: true },
   poi: { type: Object, default: null }
 })
 const emit = defineEmits(['locate'])
+const cover = computed(() => poiCover(props.poi))
 </script>
 <template>
   <li class="stop">
@@ -14,52 +17,41 @@ const emit = defineEmits(['locate'])
       :aria-label="`在地图查看${poi?.name || item.poiId}`"
       @click="emit('locate', item.poiId)"
     >
-      <span class="number">D{{ day }}-{{ item.order }}</span
-      ><span class="body"
-        ><strong>{{ poi?.name || '景点信息待补充' }}</strong
-        ><small
+      <span class="cover">
+        <PhotoFrame :src="cover" :alt="poi?.name || ''" ratio="16 / 10" />
+        <span class="number">D{{ day }}-{{ item.order }}</span>
+      </span>
+      <span class="body">
+        <strong>{{ poi?.name || '景点信息待补充' }}</strong>
+        <small
           >{{ poi?.cluster || ''
           }}<span v-if="poi?.type === 'ip'"> · 圣地巡礼</span></small
-        ></span
-      ><span class="duration"
-        >{{ formatMinutes(item.duration)
-        }}<small v-if="poi && item.duration < poi.durationNormal"
-          >快速打卡</small
-        ></span
-      ><span aria-hidden="true" class="arrow">↗</span>
+        >
+        <span class="duration"
+          >{{ formatMinutes(item.duration)
+          }}<em v-if="poi && item.duration < poi.durationNormal">快速打卡</em></span
+        >
+      </span>
     </button>
   </li>
 </template>
 <style scoped>
 .stop {
   list-style: none;
-  border-left: 1px solid var(--line);
-  margin-left: 24px;
-  padding: 0 0 12px 18px;
-  position: relative;
-}
-.stop::before {
-  content: '';
-  position: absolute;
-  left: -4px;
-  top: 25px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--brand);
-}
-.stop:last-child {
-  padding-bottom: 0;
+  display: flex;
+  min-width: 0;
+  /* 一天只有两三站时不要让封面图被拉得过大 */
+  max-width: 420px;
 }
 button {
   width: 100%;
   display: flex;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
   text-align: left;
-  padding: 16px;
+  padding: 0;
   border: 1px solid var(--line);
   border-radius: 12px;
+  overflow: hidden;
   background: var(--bg);
 }
 button:hover {
@@ -69,17 +61,27 @@ button:focus-visible {
   outline: 2px solid var(--brand);
   outline-offset: 2px;
 }
+.cover {
+  position: relative;
+  display: block;
+}
 .number {
-  font-size: 11px;
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
   color: var(--brand);
+  font-size: 11px;
   font-weight: 600;
-  white-space: nowrap;
 }
 .body {
-  flex: 1;
-  min-width: 0;
+  display: block;
+  padding: 10px 12px 12px;
 }
 strong {
+  display: block;
   font-size: 14px;
   overflow-wrap: anywhere;
 }
@@ -90,30 +92,15 @@ small {
   margin-top: 4px;
 }
 .duration {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
   font-size: 12px;
-  white-space: nowrap;
+  margin-top: 8px;
 }
-.arrow {
-  color: var(--brand);
-}
-@media (max-width: 480px) {
-  .stop {
-    margin-left: 4px;
-    padding-left: 12px;
-  }
-  button {
-    padding: 12px;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .body {
-    flex-basis: 55%;
-  }
-  .duration {
-    margin-left: auto;
-  }
-  .arrow {
-    display: none;
-  }
+.duration em {
+  font-style: normal;
+  font-size: 11px;
+  color: var(--ink-2);
 }
 </style>

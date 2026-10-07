@@ -41,6 +41,7 @@ const RULES = [
   ['C10', 'warn', 'popularity 属于 1-5'],
   ['C11', 'warn', 'realPhoto 指向的图片文件存在（图片放 public/img/）'],
   ['C12', 'error', 'quotes[].kind 只能是「原著」或「台词」（前后端契约）'],
+  ['C13', 'warn', 'photos[] 每张图都存在，且 photos[0] 与 realPhoto 一致（首图）'],
 ];
 
 if (process.argv.includes('--rules')) {
@@ -226,9 +227,14 @@ function validate(file) {
 
   // ---------- C11 ----------
   // 数据里写 img/x.jpg，文件实际在 public/img/x.jpg
+  // photos[] 是可选的多图字段；老数据只有 realPhoto 时按单图处理
+  const photosOf = (p) =>
+    Array.isArray(p.photos) && p.photos.length ? p.photos : [p.realPhoto];
   const imgExists = (f) =>
     [f, `public/${f}`, `public/img/${f.split('/').pop()}`].some((c) => c && existsSync(c));
-  const missingImgs = all.map(({ p }) => p.realPhoto).filter((f) => f && !imgExists(f));
+  const missingImgs = [
+    ...new Set(all.flatMap(({ p }) => photosOf(p)).filter((f) => f && !imgExists(f))),
+  ];
   if (missingImgs.length) {
     const head = missingImgs.slice(0, 3).join('、');
     add(
@@ -246,6 +252,17 @@ function validate(file) {
         add('error', 'C12', `quotes[${i}].kind = "${q.kind}"，只能是 原著 / 台词`, p.poiId);
       }
     });
+  }
+
+  // ---------- C13 ----------
+  for (const { p } of all) {
+    const list = photosOf(p)
+    if (list[0] !== p.realPhoto) {
+      add('warn', 'C13', `photos[0] 与 realPhoto 不一致（首图）：${list[0]} ≠ ${p.realPhoto}`, p.poiId)
+    }
+    if (new Set(list).size !== list.length) {
+      add('warn', 'C13', 'photos 里有重复图片', p.poiId)
+    }
   }
 
   return report(file, data);

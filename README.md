@@ -22,8 +22,8 @@ npm run build    # 产物在 dist/
 
 | 路径 | 页面 | 备注 |
 | --- | --- | --- |
-| `/` | S1 首页 | 搜索联想 + 三栏目卡片墙 |
-| `/column/:key` | S2 栏目列表 | key = city / figure / place |
+| `/` | S1 首页 | 搜索联想 + 按城市分组的卡片墙 |
+| `/column/:key` | S2 栏目列表 | key = city（其他值回落到 city）|
 | `/customize/:lineId` | S3 定制页 | S4 取舍抽屉是内部状态，非路由 |
 | `/result/:tab` | S5 结果页 | tab = map / day / export；`/result` 重定向到 map |
 | `/poi/:poiId` | S7 详情页 | S6 卡片浮层是结果页内部状态，非路由 |

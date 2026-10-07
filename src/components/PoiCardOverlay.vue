@@ -1,14 +1,16 @@
 <script setup>
 import DialogSheet from './ui/DialogSheet.vue'
+import { computed } from 'vue'
 import PhotoFrame from './ui/PhotoFrame.vue'
 import QuoteCard from './QuoteCard.vue'
-import { formatMinutes } from '../utils/travel-ui'
-defineProps({ poi: { type: Object, required: true } })
+import { formatMinutes, poiCover } from '../utils/travel-ui'
+const props = defineProps({ poi: { type: Object, required: true } })
+const cover = computed(() => poiCover(props.poi))
 const emit = defineEmits(['view-detail', 'close'])
 </script>
 <template>
   <DialogSheet :title="poi.name" @close="emit('close')">
-    <PhotoFrame class="photo" :src="poi.realPhoto" :alt="poi.name" />
+    <PhotoFrame class="photo" :src="cover" :alt="poi.name" />
     <p class="meta">
       {{ poi.cluster }} · 建议停留 {{ formatMinutes(poi.durationNormal) }}
     </p>

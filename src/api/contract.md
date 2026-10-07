@@ -71,15 +71,16 @@ search(keyword: string) → Line[]
 
 ---
 
-## 端点 2：首页三栏目卡片墙
+## 端点 2：首页栏目卡片墙（只按城市）
 
 ```
-listColumns() → { city: Column[], figure: Column[], place: Column[] }
+listColumns() → { city: Column[] }
 // Column = { label: string, lines: Line[] }
 ```
 
-**一条线在每个栏目里最多出现一次**，命中的多个标签合成 `label`（如「阿宝 / 汪小姐 / 玲子 / 李李」），
-不要拆成多个 Column，否则首页会出现好几张一模一样的卡片。
+**按 `line.city` 分组，同一城市的线路放在同一个 Column 里**（`label` 就是城市名，如「北京」），
+`lines` 里是该城市的全部线路。原来的「按人物 / 按地名」两栏已下线；
+人物、地名标签仍然保留在 `tags` 里，供端点 1 的搜索使用。
 
 真实后端建议：`GET /columns`
 

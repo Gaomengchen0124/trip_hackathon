@@ -7,13 +7,9 @@ import * as api from '../api/adapter'
 const router = useRouter()
 const keyword = ref('')
 const suggestions = ref([])
-const columns = ref({ city: [], figure: [], place: [] })
+const columns = ref({ city: [] })
 
-const COL_META = {
-  city: { title: '按城市', key: 'city' },
-  figure: { title: '按人物', key: 'figure' },
-  place: { title: '按地名', key: 'place' }
-}
+const COL_META = { city: { title: '按城市', key: 'city' } }
 
 api.listColumns().then((c) => (columns.value = c))
 
