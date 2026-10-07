@@ -170,6 +170,7 @@ async function onConfirmed({ poiIds, force = false } = {}) {
         :pois="store.pois"
         :selected-ids="store.checkedIds"
         :city="store.line?.city"
+        :ip-name="store.ip?.name || ''"
         :interactive="!planning && !loading"
         @marker-hover="onMarkerHover"
         @marker-click="onMarkerHover"

@@ -110,6 +110,8 @@ function exportImage() {
           :selected-ids="store.checkedIds"
           :plan="store.result"
           :city="store.line?.city"
+          :ip-name="store.ip?.name || ''"
+          :active-poi-id="activePoi?.poiId || ''"
           :interactive="true"
           @marker-click="(id) => (activePoi = poiOf(id))"
         />

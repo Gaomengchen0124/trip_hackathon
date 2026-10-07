@@ -113,3 +113,19 @@ src/engine/
 
 远郊点位（迪士尼、朱家角）单独成片区，砍掉它们省一整个往返，所以会被优先建议放弃——
 这是 S4 取舍抽屉最好看的一幕。
+
+---
+
+## 地图（2026-10-07）
+
+地图已改为随 npm 安装的 Leaflet 1.9.4，默认使用 OpenStreetMap 在线底图，无需 Mapbox Token。
+可复制 `.env.example` 为 `.env` 配置 Mapbox 公共 `pk.` Token，地图改用 Mapbox Static Tiles；
+这里不是 Mapbox GL JS 渲染器。
+
+支持勾选变色、`D1-1` 行程编号、日程点站跳转定位、景点卡片、缩放拖动、重叠点下拉选择。
+网络失败时切换到内置的人民广场周边道路数据（`src/data/shanghai-streets.json`），点位仍可点击；
+范围以外没有本地道路，不能当作完整离线导航。数据来源与 ODbL 授权见 `src/data/README.md`。
+
+OSM 公共瓦片只用于低流量演示，遵循 https://operations.osmfoundation.org/policies/tiles/ ；
+正式使用按实际流量与服务条款选择底图供应商，保留地图版权标注。
+POI 坐标约定 WGS84；若后端给的是高德/腾讯 GCJ-02 坐标，需先在数据适配层转换。
