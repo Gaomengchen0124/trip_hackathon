@@ -1,9 +1,18 @@
 <script setup>
 // B：真实地理底图；保留原有 props / emits 契约。
 import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
-import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import streets from '../data/shanghai-streets.json'
+// leaflet 在模块加载期就会读 window，Node 侧渲染（SSR / scripts/e2e-ssr.mjs）会直接崩。
+// 所以改成进页面后再动态 import：浏览器里行为不变，服务端根本不会加载它。
+let L = null
+async function loadLeaflet() {
+  if (!L) {
+    const mod = await import('leaflet')
+    L = mod.default || mod
+  }
+  return L
+}
 const props = defineProps({
   pois: { type: Array, default: () => [] }, selectedIds: { type: Array, default: () => [] },
   plan: { type: Object, default: null }, interactive: { type: Boolean, default: true },
@@ -90,7 +99,8 @@ function connect() {
   timer = setTimeout(offline, 20000)
   layer.addTo(map)
 }
-onMounted(() => {
+onMounted(async () => {
+  await loadLeaflet()
   map = L.map(host.value, { zoomAnimation: false, fadeAnimation: false, markerZoomAnimation: false, zoomSnap: 0.25, scrollWheelZoom: false, zoomControl: false, dragging: true, touchZoom: true, doubleClickZoom: true, keyboard: true, boxZoom: true }).setView([31.227, 121.473], 13)
   map.attributionControl.addAttribution('© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>')
   map.createPane('localStreets').style.zIndex = 150
@@ -106,7 +116,7 @@ watch(() => props.pois, () => { render(); fit() }, { deep: true })
 watch([() => props.selectedIds, () => props.plan, () => props.activePoiId, () => props.interactive], render, { deep: true })
 watch(() => props.activePoiId, id => { if (id) focus(id) })
 watch(() => props.interactive, applyInteractive)
-onBeforeUnmount(() => { clearTimeout(timer); observer?.disconnect(); tiles?.off(); tiles?.getContainer()?.querySelectorAll('img').forEach(img => L.DomEvent.off(img)); map?.stop(); map?.remove(); map = null; markers.clear() })
+onBeforeUnmount(() => { clearTimeout(timer); observer?.disconnect(); tiles?.off(); tiles?.getContainer()?.querySelectorAll('img').forEach(img => L?.DomEvent.off(img)); map?.stop(); map?.remove(); map = null; markers.clear() })
 </script>
 
 <template>

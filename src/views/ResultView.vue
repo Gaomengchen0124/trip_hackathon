@@ -1,27 +1,22 @@
 <script setup>
 /**
- * S5 行程结果页：Tab 容器（地图 / 日程 / 导出·携程）
- * S6 景点卡片浮层挂在地图 Tab 上；时间轴点某站 → 切回地图 Tab 并开卡片。
+ * S5 行程结果页：单页布局。
+ * 地图在上，逐日行程紧接在下方，直接下拉即可查看；底部附「导出·携程」区块。
+ * 不再用 Tab 在地图 / 日程 / 导出之间切换页面。
+ * S6 景点卡片浮层挂在地图上；时间轴点某站 → 地图滚回视野并开该点卡片。
  */
 import { ref, computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { usePlanStore } from '../stores/plan'
 import MapContainer from '../components/MapContainer.vue'
 import DayTimeline from '../components/DayTimeline.vue'
 import PoiCardOverlay from '../components/PoiCardOverlay.vue'
 
-const route = useRoute()
 const router = useRouter()
 const store = usePlanStore()
 
-const TABS = [
-  { key: 'map', label: '地图' },
-  { key: 'day', label: '日程' },
-  { key: 'export', label: '导出·携程' }
-]
-
 const activePoi = ref(null)
-const tab = computed(() => route.params.tab)
+const mapBox = ref(null)
 
 const statusBadge = computed(() => {
   const r = store.result
@@ -38,9 +33,10 @@ const statusBadge = computed(() => {
 
 const pct = computed(() => Math.round((store.result?.usage ?? 0) * 100))
 
-async function locatePoi(poiId) {
-  await router.push('/result/map')
+/** 时间轴点某站：弹出该点卡片，并把地图滚回视野。 */
+function locatePoi(poiId) {
   activePoi.value = poiOf(poiId)
+  mapBox.value?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
 function restartPlan() {
@@ -84,56 +80,46 @@ function exportImage() {
         <span class="usage">用掉 {{ pct }}%</span>
       </h1>
       <span v-if="statusBadge" class="badge">{{ statusBadge }}</span>
-    </header>
-
-    <nav class="tabs">
-      <router-link
-        v-for="t in TABS"
-        :key="t.key"
-        :to="`/result/${t.key}`"
-        class="tab"
-        :class="{ on: tab === t.key }"
-        >{{ t.label }}</router-link
-      >
       <span class="spacer"></span>
       <router-link class="mini" :to="`/customize/${store.lineId}`"
         >继续修改</router-link
       >
       <button class="mini danger" @click="restartPlan">重新规划</button>
-    </nav>
+    </header>
 
     <!-- S5-a 地图 -->
-    <template v-if="tab === 'map'">
-      <div class="map-wrap">
-        <MapContainer
-          :pois="store.checkedPois"
-          :selected-ids="store.checkedIds"
-          :plan="store.result"
-          :city="store.line?.city"
-          :ip-name="store.ip?.name || ''"
-          :active-poi-id="activePoi?.poiId || ''"
-          :interactive="true"
-          @marker-click="(id) => (activePoi = poiOf(id))"
-        />
-      </div>
-      <PoiCardOverlay
-        v-if="activePoi"
-        :poi="activePoi"
-        @close="activePoi = null"
-        @view-detail="(id) => router.push(`/poi/${id}`)"
+    <section ref="mapBox" class="map-wrap" aria-label="行程地图">
+      <MapContainer
+        :pois="store.checkedPois"
+        :selected-ids="store.checkedIds"
+        :plan="store.result"
+        :city="store.line?.city"
+        :ip-name="store.ip?.name || ''"
+        :active-poi-id="activePoi?.poiId || ''"
+        :interactive="true"
+        @marker-click="(id) => (activePoi = poiOf(id))"
       />
-    </template>
+    </section>
 
-    <!-- S5-b 日程 -->
-    <DayTimeline
-      v-else-if="tab === 'day'"
-      :days="store.result?.days || []"
-      :pois="store.pois"
-      @locate="locatePoi"
-    />
+    <!-- S5-b 逐日行程：紧接地图下方，下拉即达 -->
+    <section class="itinerary-block" aria-label="逐日行程">
+      <header class="section-head">
+        <h2>逐日行程</h2>
+        <p>点其中任一站，地图会定位并弹出该点卡片</p>
+      </header>
+      <DayTimeline
+        :days="store.result?.days || []"
+        :pois="store.pois"
+        @locate="locatePoi"
+      />
+    </section>
 
     <!-- S5-c 导出·携程 -->
-    <section v-else class="export card-block">
+    <section class="export card-block" aria-label="导出·携程">
+      <header class="section-head">
+        <h2>导出 · 携程</h2>
+        <p>行程单文字版如下，可直接复制或打印</p>
+      </header>
       <pre class="itinerary">{{ itineraryText }}</pre>
       <div class="actions">
         <button class="btn-ghost" @click="exportImage">
@@ -149,6 +135,13 @@ function exportImage() {
         >
       </div>
     </section>
+
+    <PoiCardOverlay
+      v-if="activePoi"
+      :poi="activePoi"
+      @close="activePoi = null"
+      @view-detail="(id) => router.push(`/poi/${id}`)"
+    />
   </div>
 </template>
 
@@ -158,7 +151,7 @@ function exportImage() {
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 .back {
   color: var(--ink-2);
@@ -180,24 +173,6 @@ h1 {
   font-weight: 400;
   margin-left: 6px;
 }
-.tabs {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 14px;
-  flex-wrap: wrap;
-}
-.tab {
-  padding: 8px 18px;
-  border-radius: 999px;
-  background: #fff;
-  font-size: 14px;
-  box-shadow: var(--shadow);
-}
-.tab.on {
-  background: var(--brand);
-  color: #fff;
-}
 .spacer {
   flex: 1;
 }
@@ -209,7 +184,27 @@ h1 {
   color: var(--brand);
 }
 .map-wrap {
-  height: 420px;
+  height: 440px;
+  margin-bottom: 26px;
+}
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.section-head h2 {
+  font-family: serif;
+  font-size: 20px;
+  color: var(--brand);
+}
+.section-head p {
+  font-size: 12px;
+  color: var(--ink-2);
+}
+.itinerary-block {
+  margin-bottom: 26px;
 }
 .card-block {
   background: #fff;
@@ -217,7 +212,7 @@ h1 {
   box-shadow: var(--shadow);
 }
 .export {
-  padding: 16px;
+  padding: 20px;
 }
 .itinerary {
   background: var(--bg);
