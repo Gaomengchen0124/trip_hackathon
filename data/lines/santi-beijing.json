@@ -1,0 +1,470 @@
+{
+  "_说明": "点位库。所有【待填】必须人工核对原著/剧集后填写，禁止编造引文。校验：node data/validate.mjs data/lines/santi-beijing.json",
+  "_版本": 1,
+  "_priority": 5,
+  "_bounds": {
+    "lng": [
+      115.4,
+      117.5
+    ],
+    "lat": [
+      39.4,
+      41.1
+    ]
+  },
+  "_expected": {
+    "ipStops": [
+      4,
+      6
+    ],
+    "cityStops": [
+      10,
+      20
+    ],
+    "maxTierS": 3
+  },
+  "ip": {
+    "ipId": "santi",
+    "name": "三体",
+    "author": "刘慈欣",
+    "kind": "novel",
+    "cover": "img/santi.jpg",
+    "aliases": [
+      "三体",
+      "汪淼",
+      "叶文洁",
+      "史强",
+      "大史",
+      "罗辑",
+      "程心",
+      "云天明",
+      "红岸基地"
+    ],
+    "tags": {
+      "城市": [
+        "北京"
+      ],
+      "人物": [
+        "汪淼",
+        "叶文洁",
+        "史强",
+        "程心",
+        "云天明"
+      ],
+      "地名": [
+        "密云水库",
+        "王府井天主教堂",
+        "北京天文馆",
+        "清华大学",
+        "密云观测站"
+      ]
+    }
+  },
+  "line": {
+    "lineId": "santi-beijing",
+    "ipId": "santi",
+    "title": "三体·北京",
+    "city": "北京",
+    "cover": "img/santi-beijing.jpg",
+    "recommendDays": 3
+  },
+  "clusters": [
+    "海淀·中关村",
+    "海淀·清北",
+    "东城",
+    "西城",
+    "朝阳",
+    "丰台",
+    "密云",
+    "近郊"
+  ],
+  "ipStops": [
+    {
+      "poiId": "st-ip-01",
+      "lineId": "santi-beijing",
+      "type": "ip",
+      "name": "国家天文台密云观测站",
+      "alias": "书中称「射电天文观测基地」",
+      "lng": 116.9779248,
+      "lat": 40.5588719,
+      "cluster": "密云",
+      "tier": "S",
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "书中「宇宙闪烁」的发生地，汪淼在这里看见整片天空向他闪烁。",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "二十八面直径为九米的抛物面天线在暮色中一字排开",
+          "full": "汪淼驱车沿京密路到密云县，再转至黑龙潭，又走了一段盘山路，便到达中科院国家天文观测中心的射电天文观测基地。他看到二十八面直径为九米的抛物面天线在暮色中一字排开，像一排壮观的钢铁植物，2006年建成的两台高大的五十米口径射电望远镜天线矗立在这排九米天线的尽头。",
+          "source": "第一部·第9章"
+        }
+      ],
+      "realPhoto": "img/st-ip-01.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "skipNote": "全程最远的孤点，时间不够第一个砍它。",
+      "tips": "市区开车约 2 小时，必须单独留半天。"
+    },
+    {
+      "poiId": "st-ip-02",
+      "lineId": "santi-beijing",
+      "type": "ip",
+      "name": "王府井天主教堂",
+      "alias": "东堂 / 圣若瑟堂",
+      "lng": 116.4059366,
+      "lat": 39.9159425,
+      "cluster": "东城",
+      "tier": "A",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "汪淼看见倒计时后无意识走到这里，在教堂前一直坐到天亮。",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "教堂的罗马式尖顶像三根黑色的巨指",
+          "full": "他正坐在王府井天主教堂前。在黎明惨白的天空下，教堂的罗马式尖顶像三根黑色的巨指，似乎在为他指出冥冥太空中的什么东西。汪淼起身要走，一阵从教堂传出的圣乐留住了他。",
+          "source": "第一部·第9章"
+        }
+      ],
+      "realPhoto": "img/st-ip-02.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "skipNote": "停留时间短，可并入王府井购物时段。",
+      "tips": "就在王府井大街上，购物行程顺路。"
+    },
+    {
+      "poiId": "st-ip-03",
+      "lineId": "santi-beijing",
+      "type": "ip",
+      "name": "北京天文馆",
+      "alias": "书中「首都天文馆 / 新天文馆」",
+      "lng": 116.330344,
+      "lat": 39.9360594,
+      "cluster": "西城",
+      "tier": "A",
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "汪淼深夜来取 3K 眼镜，在这里第一次看见宇宙闪烁。",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "越透明的东西越神秘，宇宙本身就是透明的。",
+          "full": "汪淼一小时后到达市内，他在新天文馆前下了车。城市午夜的灯光透过这栋巨大玻璃建筑的透明幕墙，将内部的结构隐隐约约显现出来。……越透明的东西越神秘，宇宙本身就是透明的。",
+          "source": "第一部·第9章"
+        }
+      ],
+      "realPhoto": "img/st-ip-03.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "skipNote": "与密云基地讲同一场戏，时间紧留一个就够。",
+      "tips": "和动物园、西直门一带可以连着排一天。"
+    },
+    {
+      "poiId": "st-ip-04",
+      "lineId": "santi-beijing",
+      "type": "ip",
+      "name": "清华大学",
+      "alias": "",
+      "lng": 116.320963,
+      "lat": 40.0022905,
+      "cluster": "海淀·清北",
+      "tier": "B",
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "叶文洁任教一生的地方，叶哲泰的批斗会也发生在这里。",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "清华大学物理系天体物理专业教授",
+          "full": "清华大学物理系天体物理专业教授",
+          "source": "第一部·第25章"
+        }
+      ],
+      "realPhoto": "img/st-ip-04.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "skipNote": "校园不好「打卡」，限制多，可优先放弃。",
+      "tips": "校园需预约入校，节假日提前查规则。"
+    },
+    {
+      "poiId": "st-ip-05",
+      "lineId": "santi-beijing",
+      "type": "ip",
+      "name": "密云水库",
+      "alias": "",
+      "lng": 116.8885833,
+      "lat": 40.5132909,
+      "cluster": "密云",
+      "tier": "B",
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "《死神永生》里云天明与程心坐在水边谈心的那面水。",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "他一个人坐在那里看着密云水库宽阔的水面",
+          "full": "当时他一个人坐在那里看着密云水库宽阔的水面，程心过来坐下问他平时都喜欢些什么，然后他们攀谈起来，并不停地向水中扔小石子……程心叠了一只小纸船放进水中，在微风的吹送下，那只雪白的纸船向远方慢慢驶去，最后变成一个小白点。",
+          "source": "《三体Ⅲ·死神永生》第一部"
+        }
+      ],
+      "realPhoto": "img/st-ip-05.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "skipNote": "远郊点，和观测站捆成一组，取舍时整组砍。",
+      "tips": "和密云观测站排同一天，中间留出车程。"
+    }
+  ],
+  "cityStops": [
+    {
+      "poiId": "st-sp-01",
+      "lineId": "santi-beijing",
+      "type": "classic",
+      "name": "故宫博物院",
+      "lng": 116.3972,
+      "lat": 39.9164,
+      "cluster": "东城",
+      "popularity": 5,
+      "durationNormal": 240,
+      "durationRush": 120,
+      "intro": "明清两代皇宫，中轴线上规模最大的宫殿建筑群。",
+      "realPhoto": "img/st-sp-01.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "¥60",
+      "openHours": "08:30-17:00，周一闭馆"
+    },
+    {
+      "poiId": "st-sp-02",
+      "lineId": "santi-beijing",
+      "type": "classic",
+      "name": "天安门广场",
+      "lng": 116.3972,
+      "lat": 39.9087,
+      "cluster": "东城",
+      "popularity": 5,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "北京的城市中心广场，看升旗与城楼的地方。",
+      "realPhoto": "img/st-sp-02.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "免费（需预约）",
+      "openHours": "全天"
+    },
+    {
+      "poiId": "st-sp-03",
+      "lineId": "santi-beijing",
+      "type": "classic",
+      "name": "颐和园",
+      "lng": 116.2754,
+      "lat": 39.9995,
+      "cluster": "海淀·清北",
+      "popularity": 5,
+      "durationNormal": 240,
+      "durationRush": 120,
+      "intro": "清代皇家园林，昆明湖与万寿山相映。",
+      "realPhoto": "img/st-sp-03.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "¥30",
+      "openHours": "06:30-18:00"
+    },
+    {
+      "poiId": "st-sp-04",
+      "lineId": "santi-beijing",
+      "type": "classic",
+      "name": "圆明园遗址公园",
+      "lng": 116.3098,
+      "lat": 40.0076,
+      "cluster": "海淀·清北",
+      "popularity": 4,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "清代皇家园林遗址，西洋楼残柱是它的标志。",
+      "realPhoto": "img/st-sp-04.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "¥25",
+      "openHours": "07:00-19:00"
+    },
+    {
+      "poiId": "st-sp-05",
+      "lineId": "santi-beijing",
+      "type": "classic",
+      "name": "天坛公园",
+      "lng": 116.4066,
+      "lat": 39.8823,
+      "cluster": "东城",
+      "popularity": 5,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "明清皇帝祭天的场所，祈年殿是它的标志。",
+      "realPhoto": "img/st-sp-05.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "¥34",
+      "openHours": "06:00-17:30"
+    },
+    {
+      "poiId": "st-sp-06",
+      "lineId": "santi-beijing",
+      "type": "classic",
+      "name": "八达岭长城",
+      "lng": 116.0165,
+      "lat": 40.3586,
+      "cluster": "近郊",
+      "popularity": 5,
+      "durationNormal": 300,
+      "durationRush": 150,
+      "intro": "明长城保存最好的一段，北京最经典的登城点。",
+      "realPhoto": "img/st-sp-06.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "¥40",
+      "openHours": "07:30-16:00"
+    },
+    {
+      "poiId": "st-sp-07",
+      "lineId": "santi-beijing",
+      "type": "classic",
+      "name": "鸟巢 · 水立方",
+      "lng": 116.3969,
+      "lat": 39.9928,
+      "cluster": "朝阳",
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "2008 年奥运会主场馆，夜景灯光值得一看。",
+      "realPhoto": "img/st-sp-07.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "外观免费",
+      "openHours": "全天"
+    },
+    {
+      "poiId": "st-sp-08",
+      "lineId": "santi-beijing",
+      "type": "classic",
+      "name": "南锣鼓巷",
+      "lng": 116.4034,
+      "lat": 39.9371,
+      "cluster": "东城",
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "元代格局保留至今的胡同街区，小店密集。",
+      "realPhoto": "img/st-sp-08.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "免费",
+      "openHours": "全天"
+    },
+    {
+      "poiId": "st-sp-09",
+      "lineId": "santi-beijing",
+      "type": "classic",
+      "name": "什刹海",
+      "lng": 116.3947,
+      "lat": 39.9428,
+      "cluster": "西城",
+      "popularity": 4,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "由前海、后海组成的湖区，环湖是胡同与酒吧。",
+      "realPhoto": "img/st-sp-09.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "免费",
+      "openHours": "全天"
+    },
+    {
+      "poiId": "st-sp-10",
+      "lineId": "santi-beijing",
+      "type": "classic",
+      "name": "雍和宫",
+      "lng": 116.4174,
+      "lat": 39.9473,
+      "cluster": "东城",
+      "popularity": 4,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "清代皇家寺院，北京规模最大的藏传佛教寺院。",
+      "realPhoto": "img/st-sp-10.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "¥25",
+      "openHours": "09:00-16:30"
+    },
+    {
+      "poiId": "st-sp-11",
+      "lineId": "santi-beijing",
+      "type": "classic",
+      "name": "北海公园",
+      "lng": 116.3899,
+      "lat": 39.933,
+      "cluster": "西城",
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "皇家园林，白塔与琼华岛是北京的老地标。",
+      "realPhoto": "img/st-sp-11.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "¥10",
+      "openHours": "06:30-20:00"
+    },
+    {
+      "poiId": "st-sp-12",
+      "lineId": "santi-beijing",
+      "type": "classic",
+      "name": "景山公园",
+      "lng": 116.3963,
+      "lat": 39.925,
+      "cluster": "西城",
+      "popularity": 3,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "故宫北侧的皇家园林，万春亭俯瞰紫禁城全景。",
+      "realPhoto": "img/st-sp-12.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "¥2",
+      "openHours": "06:30-20:00"
+    },
+    {
+      "poiId": "st-sp-13",
+      "lineId": "santi-beijing",
+      "type": "classic",
+      "name": "798 艺术区",
+      "lng": 116.4953,
+      "lat": 39.9846,
+      "cluster": "朝阳",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "旧厂房改造的当代艺术区，画廊与咖啡馆密集。",
+      "realPhoto": "img/st-sp-13.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "免费",
+      "openHours": "全天"
+    },
+    {
+      "poiId": "st-sp-14",
+      "lineId": "santi-beijing",
+      "type": "classic",
+      "name": "香山公园",
+      "lng": 116.1888,
+      "lat": 39.9963,
+      "cluster": "海淀·清北",
+      "popularity": 3,
+      "durationNormal": 180,
+      "durationRush": 90,
+      "intro": "西山赏红叶的胜地，登顶可远眺北京城。",
+      "realPhoto": "img/st-sp-14.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "¥10",
+      "openHours": "06:00-18:30"
+    },
+    {
+      "poiId": "st-sp-15",
+      "lineId": "santi-beijing",
+      "type": "classic",
+      "name": "中国国家博物馆",
+      "lng": 116.418,
+      "lat": 39.9042,
+      "cluster": "东城",
+      "popularity": 5,
+      "durationNormal": 180,
+      "durationRush": 90,
+      "intro": "天安门广场东侧的国家级博物馆，藏品逾百万件。",
+      "realPhoto": "img/st-sp-15.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "免费（需预约）",
+      "openHours": "09:00-17:00，周一闭馆"
+    }
+  ]
+}
