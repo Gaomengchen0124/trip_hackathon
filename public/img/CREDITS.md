@@ -58,3 +58,8 @@
 | woyuditan-beijing | wd-sp-02.jpg | 故宫全景（用户提供） | 【待用户补充来源】 | 【待确认】 | — | 复用三体·北京同景点图 |
 | santi-beijing | st-sp-06.jpg | 八达岭长城航拍（用户提供） | 【待用户补充来源】 | 【待确认】 | — | 用户提供 |
 | santi-beijing | st-sp-14.jpg | 香山红叶（用户提供） | 【待用户补充来源】 | 【待确认】 | — | 用户提供 |
+| woyuditan-beijing | wd-sp-08.jpg | File:China Beijing Drum Tower.png | Yang Han | CC0 | [链接](https://commons.wikimedia.org/wiki/File:China_Beijing_Drum_Tower.png) |  |
+| woyuditan-beijing | wd-sp-09.jpg | File:Beijing Lu Xun Museum 2.jpg | EditQ | CC0 | [链接](https://commons.wikimedia.org/wiki/File:Beijing_Lu_Xun_Museum_2.jpg) |  |
+| woyuditan-beijing | wd-sp-10.jpg | File:National Museum of Modern Chinese Literature, Block C (20230215152724).jpg | N509FZ | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:National_Museum_of_Modern_Chinese_Literature,_Block_C_(20230215152724).jpg) |  |
+| woyuditan-beijing | wd-sp-11.jpg | File:PekingUniversityPic6.jpg | galaygobi | CC BY 2.0 | [链接](https://commons.wikimedia.org/wiki/File:PekingUniversityPic6.jpg) |  |
+| woyuditan-beijing | wd-sp-13.jpg | File:National Library of China - South House (1987).JPG | 虞海 | CC BY-SA 2.0 tw | [链接](https://commons.wikimedia.org/wiki/File:National_Library_of_China_-_South_House_(1987).JPG) |  |
