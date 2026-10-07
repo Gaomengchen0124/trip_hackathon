@@ -9,7 +9,7 @@ defineProps({ poi: { type: Object, required: true } })
     <PhotoFrame :src="poi.realPhoto" :alt="poi.name" />
     <div class="content">
       <p class="eyebrow">
-        {{ poi.type === 'ip' ? '故事中的一站' : '城市经典'
+        {{ poi.type === 'ip' ? '圣地巡礼' : '其他知名景点'
         }}<span v-if="poi.type === 'ip' && poi.tier">
           · {{ TIER_LABELS[poi.tier] }}</span
         >

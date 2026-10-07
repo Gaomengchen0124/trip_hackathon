@@ -20,7 +20,7 @@ const emit = defineEmits(['toggle'])
       ><span class="headline"
         ><strong>{{ poi.name }}</strong
         ><span class="tag">{{
-          poi.type === 'ip' ? TIER_LABELS[poi.tier] || 'IP 打卡点' : '城市经典'
+          poi.type === 'ip' ? TIER_LABELS[poi.tier] || '圣地巡礼' : '其他知名景点'
         }}</span></span
       ><span class="meta"
         >{{ poi.cluster }} · {{ formatMinutes(poi.durationNormal) }}</span

@@ -20,6 +20,17 @@ const labels = computed(() => {
 })
 let map, pins, tiles, observer, timer
 const markers = new Map()
+const HANDLERS = ['dragging', 'touchZoom', 'doubleClickZoom', 'keyboard', 'boxZoom']
+// interactive 是异步变的（S3 进页面时还在 loading），建图之后必须能补打开
+function applyInteractive() {
+  if (!map) return
+  for (const name of HANDLERS) {
+    const handler = map[name]
+    if (!handler) continue
+    if (props.interactive) handler.enable()
+    else handler.disable()
+  }
+}
 const token = import.meta.env.VITE_MAPBOX_TOKEN || import.meta.env.VITE_MAPBOX_ACCESS_TOKEN || ''
 const provider = token.startsWith('pk.') ? 'Mapbox' : 'OpenStreetMap'
 const status = computed(() => state.value === 'online' ? `${provider} · 在线地图` : state.value === 'loading' ? '正在连接在线地图…' : '本地道路 · 仅人民广场周边')
@@ -27,6 +38,11 @@ function fit() {
   if (!map) return
   if (valid.value.length) map.fitBounds(valid.value.map(p => [p.lat, p.lng]), { padding: [45, 55], maxZoom: 15, animate: false })
   else map.setView([31.227, 121.473], 13)
+}
+function zoomBy(delta) {
+  if (!map || !props.interactive) return
+  if (delta > 0) map.zoomIn(1)
+  else map.zoomOut(1)
 }
 function focus(id, notify = false) {
   const marker = markers.get(id)
@@ -48,7 +64,7 @@ function render() {
     button.setAttribute('aria-label', `${p.name}${labels.value[p.poiId] ? ' '+labels.value[p.poiId] : ''}${selected ? '，已选' : '，未选'}`)
     button.disabled = !props.interactive
     const tooltip = document.createElement('span')
-    tooltip.textContent = `${p.name} · ${p.type === 'ip' ? props.ipName || 'IP 打卡点' : '城市景点'}`
+    tooltip.textContent = `${p.name} · ${p.type === 'ip' ? props.ipName || '圣地巡礼' : '其他知名景点'}`
     const marker = L.marker([p.lat, p.lng], { icon: L.divIcon({ html: button, className: 'travel-icon', iconSize: [40, 32], iconAnchor: [20, 16] }), keyboard: false, interactive: props.interactive, zIndexOffset: p.poiId === props.activePoiId ? 1000 : selected ? 100 : 0 }).addTo(pins)
     marker.bindTooltip(tooltip, { direction: 'top', offset: [0, -14] })
     button.addEventListener('click', () => focus(p.poiId, true))
@@ -75,7 +91,7 @@ function connect() {
   layer.addTo(map)
 }
 onMounted(() => {
-  map = L.map(host.value, { zoomAnimation: false, fadeAnimation: false, markerZoomAnimation: false, zoomSnap: 0.25, scrollWheelZoom: false, zoomControl: props.interactive, dragging: props.interactive, touchZoom: props.interactive, doubleClickZoom: props.interactive, keyboard: props.interactive, boxZoom: props.interactive }).setView([31.227, 121.473], 13)
+  map = L.map(host.value, { zoomAnimation: false, fadeAnimation: false, markerZoomAnimation: false, zoomSnap: 0.25, scrollWheelZoom: false, zoomControl: false, dragging: true, touchZoom: true, doubleClickZoom: true, keyboard: true, boxZoom: true }).setView([31.227, 121.473], 13)
   map.attributionControl.addAttribution('© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>')
   map.createPane('localStreets').style.zIndex = 150
   L.geoJSON(streets, { pane: 'localStreets', style: f => ({ color: f.properties.waterway ? '#8cc4d3' : '#c7ac86', weight: f.properties.waterway ? 12 : 3, opacity: 0.85 }), onEachFeature: (f, layer) => { if (f.properties.name) { const el = document.createElement('span'); el.textContent = f.properties.name; layer.bindTooltip(el) } } }).addTo(map)
@@ -84,16 +100,22 @@ onMounted(() => {
   if (props.activePoiId) focus(props.activePoiId)
   observer = new ResizeObserver(() => map?.invalidateSize())
   observer.observe(host.value)
+  applyInteractive()
 })
 watch(() => props.pois, () => { render(); fit() }, { deep: true })
 watch([() => props.selectedIds, () => props.plan, () => props.activePoiId, () => props.interactive], render, { deep: true })
 watch(() => props.activePoiId, id => { if (id) focus(id) })
+watch(() => props.interactive, applyInteractive)
 onBeforeUnmount(() => { clearTimeout(timer); observer?.disconnect(); tiles?.off(); tiles?.getContainer()?.querySelectorAll('img').forEach(img => L.DomEvent.off(img)); map?.stop(); map?.remove(); map = null; markers.clear() })
 </script>
 
 <template>
   <section class="map-box" :aria-label="`${city}景点地图`">
     <div ref="host" class="map-canvas"></div>
+    <div v-if="interactive" class="map-zoom" role="group" aria-label="地图缩放">
+      <button type="button" title="放大" aria-label="放大地图" @click="zoomBy(1)">＋</button>
+      <button type="button" title="缩小" aria-label="缩小地图" @click="zoomBy(-1)">－</button>
+    </div>
     <div class="map-toolbar">
       <span class="map-status" role="status">{{ status }}</span>
       <button v-if="state === 'offline' && interactive" @click="connect">重试联网</button>
@@ -106,7 +128,7 @@ onBeforeUnmount(() => { clearTimeout(timer); observer?.disconnect(); tiles?.off(
         <option v-for="p in valid" :key="p.poiId" :value="p.poiId">{{ labels[p.poiId] || '' }} {{ p.name }}</option>
       </select>
     </label>
-    <div class="map-legend"><i class="gold"></i>IP 打卡 <i class="red"></i>城市景点 <i></i>未选</div>
+    <div class="map-legend"><i class="gold"></i>圣地巡礼 <i class="red"></i>其他知名景点 <i></i>未选</div>
     <div v-if="!valid.length" class="map-empty">暂无有效坐标</div>
   </section>
 </template>
@@ -117,6 +139,11 @@ onBeforeUnmount(() => { clearTimeout(timer); observer?.disconnect(); tiles?.off(
 .map-toolbar { position: absolute; top: 10px; left: 52px; right: 10px; z-index: 800; display: flex; flex-wrap: wrap; gap: 5px; align-items: center; pointer-events: none; }
 .map-toolbar > * { background: #fff; border-radius: 6px; padding: 5px 9px; font-size: 11px; box-shadow: 0 2px 8px #0002; pointer-events: auto; }
 .map-toolbar button { color: #8d4036; cursor: pointer; }
+.map-zoom { position: absolute; top: 10px; left: 10px; z-index: 810; display: flex; flex-direction: column; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px #0003; }
+.map-zoom button { width: 36px; height: 36px; border: 0; border-bottom: 1px solid #e6e0d4; background: #fff; color: #8d4036; font-size: 17px; line-height: 1; cursor: pointer; }
+.map-zoom button:last-child { border-bottom: 0; }
+.map-zoom button:hover { background: #f7f2e9; }
+.map-zoom button:focus-visible { outline: 2px solid var(--brand); outline-offset: -3px; }
 .map-picker { position: absolute; left: 10px; bottom: 38px; z-index: 800; display: flex; align-items: center; gap: 6px; padding: 6px 9px; background: #fffffff2; border-radius: 6px; font-size: 11px; max-width: calc(100% - 20px); }
 .map-picker select { min-width: 0; max-width: 230px; padding: 4px; border: 1px solid #ddd; border-radius: 4px; background: white; }
 .map-legend { position: absolute; left: 10px; bottom: 12px; z-index: 800; background: #fffffff2; padding: 3px 6px; border-radius: 5px; font-size: 10px; display: flex; align-items: center; gap: 5px; }

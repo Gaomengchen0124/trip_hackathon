@@ -44,7 +44,7 @@ watch(
   { immediate: true }
 )
 
-// IP 点按 tier 排序；城市景点按数组顺序（知名度）
+// 圣地巡礼点按 tier 排序；其他知名景点按数组顺序（知名度）
 const sortedIp = computed(() => {
   const weights = { S: 0, A: 1, B: 2 }
   return [...store.ipPois].sort(
@@ -109,7 +109,7 @@ async function submit() {
 function onMarkerHover(poiId) {
   const p = store.pois.find((x) => x.poiId === poiId)
   hoverInfo.value = p
-    ? `${p.name} · ${p.type === 'ip' ? store.ip?.name || '' : '城市景点'}`
+    ? `${p.name} · ${p.type === 'ip' ? store.ip?.name || '' : '其他知名景点'}`
     : ''
 }
 
@@ -185,14 +185,14 @@ async function onConfirmed({ poiIds, force = false } = {}) {
 
     <div class="cols">
       <PoiCheckList
-        title="📖 打卡点"
+        title="📖 圣地巡礼"
         :pois="sortedIp"
         :checked-ids="store.checkedIds"
         :disabled="planning || loading"
         @toggle="store.togglePoi"
       />
       <PoiCheckList
-        title="🏙 城市著名景点"
+        title="🏙 其他知名景点"
         :pois="store.classicPois"
         :checked-ids="store.checkedIds"
         :disabled="planning || loading"

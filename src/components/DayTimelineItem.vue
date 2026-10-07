@@ -19,7 +19,7 @@ const emit = defineEmits(['locate'])
         ><strong>{{ poi?.name || '景点信息待补充' }}</strong
         ><small
           >{{ poi?.cluster || ''
-          }}<span v-if="poi?.type === 'ip'"> · IP 打卡点</span></small
+          }}<span v-if="poi?.type === 'ip'"> · 圣地巡礼</span></small
         ></span
       ><span class="duration"
         >{{ formatMinutes(item.duration)
