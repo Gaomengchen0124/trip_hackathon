@@ -1,0 +1,349 @@
+{
+  "_说明": "点位库。所有【待填】必须人工核对原著/剧集后填写，禁止编造引文。校验：node data/validate.mjs data/lines/woyuditan-beijing.json",
+  "_版本": 1,
+  "_priority": 3,
+  "_bounds": {
+    "lng": [
+      116.2,
+      116.5
+    ],
+    "lat": [
+      39.85,
+      40.05
+    ]
+  },
+  "_expected": {
+    "ipStops": [
+      1,
+      1
+    ],
+    "cityStops": [
+      10,
+      20
+    ],
+    "maxTierS": 3
+  },
+  "ip": {
+    "ipId": "woyuditan",
+    "name": "我与地坛",
+    "author": "史铁生",
+    "kind": "prose",
+    "cover": "img/woyuditan.jpg",
+    "aliases": [
+      "我与地坛",
+      "史铁生",
+      "地坛"
+    ],
+    "tags": {
+      "城市": [
+        "北京"
+      ],
+      "人物": [
+        "史铁生"
+      ],
+      "地名": [
+        "地坛",
+        "地坛公园"
+      ]
+    }
+  },
+  "line": {
+    "lineId": "woyuditan-beijing",
+    "ipId": "woyuditan",
+    "title": "我与地坛·北京",
+    "city": "北京",
+    "cover": "img/woyuditan-beijing.jpg",
+    "recommendDays": 1
+  },
+  "clusters": [
+    "东城",
+    "西城",
+    "朝阳",
+    "海淀"
+  ],
+  "ipStops": [
+    {
+      "poiId": "wd-ip-01",
+      "lineId": "woyuditan-beijing",
+      "type": "ip",
+      "name": "地坛公园",
+      "alias": "地坛、古园",
+      "lng": 116.4173,
+      "lat": 39.9477,
+      "cluster": "东城",
+      "tier": "S",
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "史铁生生命与写作最核心的北京地点，也是《我与地坛》的精神原点。",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "地坛离我家很近。",
+          "full": "作者写到地坛离家很近，祖母年轻时带着父亲来到北京后，一家人几十年间几次搬家，却始终在地坛周围；双腿残废后，他摇着轮椅一次次进入这座古园，在这里思考生死、命运与活着的意义。",
+          "source": "《我与地坛》"
+        }
+      ],
+      "realPhoto": "img/wd-ip-01.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "skipNote": "只做城市打卡时可压缩为园门与核心遗址区域。",
+      "tips": "清晨或傍晚进入，重点看古殿、残墙、祭坛和老柏树。"
+    }
+  ],
+  "cityStops": [
+    {
+      "poiId": "wd-sp-01",
+      "lineId": "woyuditan-beijing",
+      "type": "classic",
+      "name": "天坛公园",
+      "lng": 116.4107,
+      "lat": 39.8822,
+      "cluster": "东城",
+      "popularity": 5,
+      "durationNormal": 150,
+      "durationRush": 75,
+      "intro": "北京代表性皇家祭祀建筑群，可作为“古园/祭坛”文化补充。",
+      "realPhoto": "img/wd-sp-01.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "约¥15起",
+      "openHours": ""
+    },
+    {
+      "poiId": "wd-sp-02",
+      "lineId": "woyuditan-beijing",
+      "type": "classic",
+      "name": "故宫博物院",
+      "lng": 116.397,
+      "lat": 39.918,
+      "cluster": "东城",
+      "popularity": 5,
+      "durationNormal": 180,
+      "durationRush": 90,
+      "intro": "北京最具代表性的历史文化景区。",
+      "realPhoto": "img/wd-sp-02.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "约¥60",
+      "openHours": ""
+    },
+    {
+      "poiId": "wd-sp-03",
+      "lineId": "woyuditan-beijing",
+      "type": "classic",
+      "name": "景山公园",
+      "lng": 116.3968,
+      "lat": 39.932,
+      "cluster": "东城",
+      "popularity": 5,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "可俯瞰故宫，是北京历史城市空间的高点。",
+      "realPhoto": "img/wd-sp-03.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "约¥2",
+      "openHours": ""
+    },
+    {
+      "poiId": "wd-sp-04",
+      "lineId": "woyuditan-beijing",
+      "type": "classic",
+      "name": "北海公园",
+      "lng": 116.3961,
+      "lat": 39.925,
+      "cluster": "西城",
+      "popularity": 5,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "北京传统皇家园林与水景代表。",
+      "realPhoto": "img/wd-sp-04.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "约¥10",
+      "openHours": ""
+    },
+    {
+      "poiId": "wd-sp-05",
+      "lineId": "woyuditan-beijing",
+      "type": "classic",
+      "name": "雍和宫",
+      "lng": 116.4173,
+      "lat": 39.9478,
+      "cluster": "东城",
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "与地坛距离较近，适合安排同日游览。",
+      "realPhoto": "img/wd-sp-05.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "约¥25",
+      "openHours": ""
+    },
+    {
+      "poiId": "wd-sp-06",
+      "lineId": "woyuditan-beijing",
+      "type": "classic",
+      "name": "南锣鼓巷",
+      "lng": 116.4039,
+      "lat": 39.9367,
+      "cluster": "东城",
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "北京胡同文化代表街区。",
+      "realPhoto": "img/wd-sp-06.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "免费",
+      "openHours": ""
+    },
+    {
+      "poiId": "wd-sp-07",
+      "lineId": "woyuditan-beijing",
+      "type": "classic",
+      "name": "什刹海",
+      "lng": 116.3826,
+      "lat": 39.9405,
+      "cluster": "西城",
+      "popularity": 5,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "胡同、水面与老北京生活结合的区域。",
+      "realPhoto": "img/wd-sp-07.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "免费",
+      "openHours": ""
+    },
+    {
+      "poiId": "wd-sp-08",
+      "lineId": "woyuditan-beijing",
+      "type": "classic",
+      "name": "鼓楼·钟楼",
+      "lng": 116.3927,
+      "lat": 39.947,
+      "cluster": "东城",
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "北京中轴线重要历史建筑群。",
+      "realPhoto": "img/wd-sp-08.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "约¥30",
+      "openHours": ""
+    },
+    {
+      "poiId": "wd-sp-09",
+      "lineId": "woyuditan-beijing",
+      "type": "classic",
+      "name": "北京鲁迅博物馆",
+      "lng": 116.3548,
+      "lat": 39.933,
+      "cluster": "西城",
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "现代文学主题博物馆，适合文学线路补充。",
+      "realPhoto": "img/wd-sp-09.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "免费/预约",
+      "openHours": ""
+    },
+    {
+      "poiId": "wd-sp-10",
+      "lineId": "woyuditan-beijing",
+      "type": "classic",
+      "name": "中国现代文学馆",
+      "lng": 116.4268,
+      "lat": 39.985,
+      "cluster": "朝阳",
+      "popularity": 4,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "中国现代文学重要收藏、研究与展示机构。",
+      "realPhoto": "img/wd-sp-10.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "预约",
+      "openHours": ""
+    },
+    {
+      "poiId": "wd-sp-11",
+      "lineId": "woyuditan-beijing",
+      "type": "classic",
+      "name": "北京大学",
+      "lng": 116.3109,
+      "lat": 39.9929,
+      "cluster": "海淀",
+      "popularity": 5,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "北京重要文化教育地标。",
+      "realPhoto": "img/wd-sp-11.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "预约",
+      "openHours": ""
+    },
+    {
+      "poiId": "wd-sp-12",
+      "lineId": "woyuditan-beijing",
+      "type": "classic",
+      "name": "清华大学",
+      "lng": 116.3269,
+      "lat": 40.0037,
+      "cluster": "海淀",
+      "popularity": 5,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "史铁生北京人生背景的城市文化补充。",
+      "realPhoto": "img/wd-sp-12.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "预约",
+      "openHours": ""
+    },
+    {
+      "poiId": "wd-sp-13",
+      "lineId": "woyuditan-beijing",
+      "type": "classic",
+      "name": "中国国家图书馆",
+      "lng": 116.3256,
+      "lat": 39.9437,
+      "cluster": "海淀",
+      "popularity": 4,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "北京重要阅读与文化地标。",
+      "realPhoto": "img/wd-sp-13.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "免费/预约",
+      "openHours": ""
+    },
+    {
+      "poiId": "wd-sp-14",
+      "lineId": "woyuditan-beijing",
+      "type": "classic",
+      "name": "圆明园遗址公园",
+      "lng": 116.3047,
+      "lat": 40.0087,
+      "cluster": "海淀",
+      "popularity": 5,
+      "durationNormal": 150,
+      "durationRush": 75,
+      "intro": "北京重要遗址公园。",
+      "realPhoto": "img/wd-sp-14.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "约¥10",
+      "openHours": ""
+    },
+    {
+      "poiId": "wd-sp-15",
+      "lineId": "woyuditan-beijing",
+      "type": "classic",
+      "name": "颐和园",
+      "lng": 116.2755,
+      "lat": 39.9999,
+      "cluster": "海淀",
+      "popularity": 5,
+      "durationNormal": 180,
+      "durationRush": 90,
+      "intro": "北京代表性皇家园林。",
+      "realPhoto": "img/wd-sp-15.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "约¥30",
+      "openHours": ""
+    }
+  ]
+}

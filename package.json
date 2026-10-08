@@ -6,15 +6,25 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "data:gen": "node data/gen-template.mjs",
+    "data:check": "node data/validate.mjs --all",
+    "data:rules": "node data/validate.mjs --rules",
+    "engine:test": "node src/engine/demo.mjs",
+    "engine:home": "node src/engine/demo-home.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "demo:plan": "node scripts/demo-plan.mjs",
+    "e2e": "node scripts/e2e-ssr.mjs"
   },
   "dependencies": {
+    "leaflet": "^1.9.4",
     "pinia": "^2.2.4",
     "vue": "^3.5.12",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.4",
+    "puppeteer-core": "^25.12.0",
     "vite": "^5.4.10"
   }
 }

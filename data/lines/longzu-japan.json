@@ -1,0 +1,552 @@
+{
+  "_说明": "点位库。所有【待填】必须人工核对原著/剧集后填写，禁止编造引文。校验：node data/validate.mjs data/lines/longzu-japan.json",
+  "_版本": 1,
+  "_priority": 11,
+  "_bounds": {
+    "lng": [
+      138.5,
+      140.9
+    ],
+    "lat": [
+      34.9,
+      36.3
+    ]
+  },
+  "_expected": {
+    "ipStops": [
+      6,
+      8
+    ],
+    "cityStops": [
+      10,
+      20
+    ],
+    "maxTierS": 3
+  },
+  "ip": {
+    "ipId": "longzu",
+    "name": "龙族",
+    "author": "江南",
+    "kind": "novel",
+    "cover": "img/longzu.jpg",
+    "aliases": [
+      "龙族",
+      "龙族Ⅲ",
+      "黑月之潮",
+      "路明非",
+      "楚子航",
+      "恺撒",
+      "源稚生",
+      "绘梨衣",
+      "酒德麻衣"
+    ],
+    "tags": {
+      "城市": [
+        "东京",
+        "日本"
+      ],
+      "人物": [
+        "路明非",
+        "楚子航",
+        "恺撒",
+        "源稚生",
+        "绘梨衣",
+        "酒德麻衣"
+      ],
+      "地名": [
+        "东京塔",
+        "明治神宫",
+        "歌舞伎町",
+        "浅草寺",
+        "秋叶原",
+        "热海",
+        "银座",
+        "台场"
+      ]
+    }
+  },
+  "line": {
+    "lineId": "longzu-japan",
+    "ipId": "longzu",
+    "title": "龙族·日本",
+    "city": "东京及近郊",
+    "cover": "img/longzu-japan.jpg",
+    "recommendDays": 3
+  },
+  "clusters": [
+    "新宿",
+    "涩谷",
+    "台东·浅草",
+    "千代田·银座",
+    "港区·台场",
+    "近郊·富士箱根",
+    "近郊·横滨"
+  ],
+  "ipStops": [
+    {
+      "poiId": "jp-ip-01",
+      "lineId": "longzu-japan",
+      "type": "ip",
+      "name": "东京塔",
+      "alias": "书中「特别瞭望台」",
+      "lng": 139.745536,
+      "lat": 35.6584491,
+      "cluster": "港区·台场",
+      "tier": "S",
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "王将带源稚女上特别瞭望台，说出那句烧掉这座城的话。",
+      "tips": "150 米与 250 米两个瞭望台分开买票。",
+      "skipNote": "全线最重的一场戏，不建议放弃。",
+      "realPhoto": "img/jp-ip-01.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "东京塔曾是东京的制高点",
+          "full": "我很确定，王将那种人，最喜欢站在高处，像皇帝一样低头看整个世界，而东京塔曾是东京的制高点。他带我去过特别瞭望台，他对我说，稚女你看这座城市，就像一个卧病在床的老人，霓虹灯的光已经无法遮掩它的丑陋。这座城应该被一把火烧掉，我们好在废墟上建造更辉煌的国家。",
+          "source": "龙族Ⅲ（下）·第十二章"
+        }
+      ]
+    },
+    {
+      "poiId": "jp-ip-02",
+      "lineId": "longzu-japan",
+      "type": "ip",
+      "name": "明治神宫",
+      "alias": "书中「皇室级别的日本婚礼」",
+      "lng": 139.6996266,
+      "lat": 35.6748417,
+      "cluster": "涩谷",
+      "tier": "S",
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "神婚事务所打算包下整座明治神宫，给新人办一场世纪婚礼。",
+      "tips": "原宿站下车，从南参道进。",
+      "skipNote": "东京三大神宫之一，顺路也要看。",
+      "realPhoto": "img/jp-ip-02.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "在明治神宫举办皇室级别的日本婚礼",
+          "full": "诸位好，我是神婚事务所的羽田，本事务所代理各种顶级婚礼。根据剧本，我们会为新人在明治神宫举办皇室级别的日本婚礼。”“包下整座明治神宫，宫内厅那边没问题吧？”酒德麻衣问。“本事务所和宫内厅的关系一直融洽。我保证那是一场世纪婚礼，全世界的新人都会羡慕他们！",
+          "source": "龙族Ⅲ（下）·第二章"
+        }
+      ]
+    },
+    {
+      "poiId": "jp-ip-03",
+      "lineId": "longzu-japan",
+      "type": "ip",
+      "name": "新宿 · 歌舞伎町",
+      "alias": "",
+      "lng": 139.7027105,
+      "lat": 35.6945429,
+      "cluster": "新宿",
+      "tier": "A",
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "日本分部的王牌第一次出任务，就扎进了混乱的歌舞伎町。",
+      "tips": "夜里去最热闹，注意安全和随身物品。",
+      "skipNote": "街区性质的点，可换成新宿御苑。",
+      "realPhoto": "img/jp-ip-03.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "歌舞伎町聚集了几百人，随时可能擦枪走火",
+          "full": "少主，今晚新宿区的状况很棘手，”樱的声音有些犹豫，“沼鸦会和火堂组冲突，歌舞伎町聚集了几百人，随时可能擦枪走火，战略部的老人分为两批分别拜访火堂组和沼鸦会，正试图平息局面，这时候不建议您和贵宾接近歌舞伎町。",
+          "source": "龙族Ⅲ（上）·第十章"
+        }
+      ]
+    },
+    {
+      "poiId": "jp-ip-04",
+      "lineId": "longzu-japan",
+      "type": "ip",
+      "name": "浅草寺 · 雷门",
+      "alias": "",
+      "lng": 139.7955265,
+      "lat": 35.7134032,
+      "cluster": "台东·浅草",
+      "tier": "A",
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "路明非带着绘梨衣穿过雷门，那是她翘家后少有的安静时刻。",
+      "tips": "雷门—仲见世—本堂一条直线走完。",
+      "skipNote": "和仲见世商店街可以合并成一次。",
+      "realPhoto": "img/jp-ip-04.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "说浅草寺是世界上最灵验的寺庙",
+          "full": "路明非随口骗骗她说迪斯尼是世界上最大的游乐场她就欢欣鼓舞，说浅草寺是世界上最灵验的寺庙她就觉得很神圣，经过浅草寺的“雷门”时有种天主教徒觐见教皇的惶恐。",
+          "source": "龙族Ⅲ（下）·第八章"
+        }
+      ]
+    },
+    {
+      "poiId": "jp-ip-05",
+      "lineId": "longzu-japan",
+      "type": "ip",
+      "name": "秋叶原电器街",
+      "alias": "",
+      "lng": 139.7726288,
+      "lat": 35.699173,
+      "cluster": "千代田·银座",
+      "tier": "A",
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "恺撒想去看看游戏首发，楚子航在这里买了台照相机。",
+      "tips": "电器街口出站，主街向北逛。",
+      "skipNote": "购物时间长，时间紧可只走过主街。",
+      "realPhoto": "img/jp-ip-05.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "江湖上故老相传秋叶原乃宅男圣地",
+          "full": "路明非醒了，睡眼蒙眬地往外看：“东京诶！我们到了！不知道哪里是秋叶原。”“电器街么？”恺撒说，“我也想去那里看看，游戏首发式什么。”“御宅族之街”秋叶原，恺撒也听说过。街上有上千家电器店，最潮的游戏和电子产品都在那里发布，还有特色女仆咖啡店。",
+          "source": "龙族Ⅲ（上）·第六章"
+        }
+      ]
+    },
+    {
+      "poiId": "jp-ip-06",
+      "lineId": "longzu-japan",
+      "type": "ip",
+      "name": "热海",
+      "alias": "书中「黑石官邸」",
+      "lng": 139.0717866,
+      "lat": 35.096471,
+      "cluster": "近郊·富士箱根",
+      "tier": "A",
+      "durationNormal": 180,
+      "durationRush": 90,
+      "intro": "相模湾边上的温泉乡，黑石官邸里那顿夜宴就是在这儿摆的。",
+      "tips": "东京站坐新干线约 40 分钟，建议住一晚。",
+      "skipNote": "离东京远，只有两天就优先砍它。",
+      "realPhoto": "img/jp-ip-06.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "热海是座滨海小城的名字",
+          "full": "热海是座滨海小城的名字，坐落在伊豆半岛的尽头，是著名的温泉乡。江户幕府的建立者德川家康喜欢在大战之后莅临热海沐浴，热海因此出名。黑色高墙是热海当地一座豪华宅邸的外墙，宅邸名为“黑石官邸”，建于江户幕府中期。",
+          "source": "龙族Ⅲ（中）·第一章"
+        }
+      ]
+    },
+    {
+      "poiId": "jp-ip-07",
+      "lineId": "longzu-japan",
+      "type": "ip",
+      "name": "银座",
+      "alias": "",
+      "lng": 139.7647202,
+      "lat": 35.6720135,
+      "cluster": "千代田·银座",
+      "tier": "B",
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "恺撒在飞机上指着银座说，这里的地价曾能买下整个美国。",
+      "tips": "周末下午中央通会封路变成步行街。",
+      "skipNote": "纯购物点，随时可去掉。",
+      "realPhoto": "img/jp-ip-07.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "那边最亮的地方就是银座",
+          "full": "那边最亮的地方就是银座，据说日本地产价格最高的时候，一个银座的土地价值便可以买下整个美国。”恺撒扭头看向窗外。",
+          "source": "龙族Ⅲ（上）·第六章"
+        }
+      ]
+    },
+    {
+      "poiId": "jp-ip-08",
+      "lineId": "longzu-japan",
+      "type": "ip",
+      "name": "台场",
+      "alias": "书中「调色板城乐园」",
+      "lng": 139.7793576,
+      "lat": 35.6190032,
+      "cluster": "港区·台场",
+      "tier": "B",
+      "durationNormal": 150,
+      "durationRush": 75,
+      "intro": "绘梨衣把景点宣传页扔掉，唯独留下了台场的调色板城乐园。",
+      "tips": "百合海鸥号到台场站，夜景最好。",
+      "skipNote": "游乐场耗时长，赶时间就砍。",
+      "realPhoto": "img/jp-ip-08.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "她已经要求明天去台场的调色板城乐园",
+          "full": "每个旅游景点都有各种各样的宣传页啊，她把东京所有景点的宣传页都拿了，然后把什么浅草寺、皇居、明治神宫这类有品位的景点全都扔掉了，留下的就是各种商业街、各种游乐场……还有歌舞伎町的色情宣传页。总之她就是喜欢那种五光十色的地方，不喜欢有气质有格调的地方。",
+          "source": "龙族Ⅲ（下）·第四章"
+        }
+      ]
+    }
+  ],
+  "cityStops": [
+    {
+      "poiId": "jp-sp-01",
+      "lineId": "longzu-japan",
+      "type": "classic",
+      "name": "东京晴空塔",
+      "lng": 139.8107141,
+      "lat": 35.7100543,
+      "cluster": "台东·浅草",
+      "popularity": 5,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "634 米的电波塔，350 米与 450 米两层观景台。",
+      "realPhoto": "img/jp-sp-01.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "jp-sp-02",
+      "lineId": "longzu-japan",
+      "type": "classic",
+      "name": "上野公园",
+      "lng": 139.7738278,
+      "lat": 35.7152915,
+      "cluster": "台东·浅草",
+      "popularity": 4,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "东京老牌公园，博物馆群与樱花大道都在这儿。",
+      "realPhoto": "img/jp-sp-02.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "jp-sp-03",
+      "lineId": "longzu-japan",
+      "type": "classic",
+      "name": "仲见世商店街",
+      "lng": 139.7964856,
+      "lat": 35.7122821,
+      "cluster": "台东·浅草",
+      "popularity": 4,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "雷门到浅草寺本堂的参道，小吃与伴手礼集中。",
+      "realPhoto": "img/jp-sp-03.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "jp-sp-04",
+      "lineId": "longzu-japan",
+      "type": "classic",
+      "name": "涩谷十字路口",
+      "lng": 139.7004982,
+      "lat": 35.6594951,
+      "cluster": "涩谷",
+      "popularity": 4,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "世界最繁忙的十字路口，看人潮的经典机位。",
+      "realPhoto": "img/jp-sp-04.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "jp-sp-05",
+      "lineId": "longzu-japan",
+      "type": "classic",
+      "name": "惠比寿花园广场",
+      "lng": 139.7135595,
+      "lat": 35.6420419,
+      "cluster": "涩谷",
+      "popularity": 3,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "旧啤酒厂改造的商业区，冬天的灯饰很出名。",
+      "realPhoto": "img/jp-sp-05.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "jp-sp-06",
+      "lineId": "longzu-japan",
+      "type": "classic",
+      "name": "新宿御苑",
+      "lng": 139.7095466,
+      "lat": 35.6850716,
+      "cluster": "新宿",
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "新宿中心的大型庭院，春樱与秋枫都出名。",
+      "realPhoto": "img/jp-sp-06.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "jp-sp-07",
+      "lineId": "longzu-japan",
+      "type": "classic",
+      "name": "新宿黄金街",
+      "lng": 139.7047001,
+      "lat": 35.6939905,
+      "cluster": "新宿",
+      "popularity": 3,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "两百多家小酒馆挤成的窄巷，夜里最有味道。",
+      "realPhoto": "img/jp-sp-07.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "jp-sp-08",
+      "lineId": "longzu-japan",
+      "type": "classic",
+      "name": "皇居东御苑",
+      "lng": 139.7573959,
+      "lat": 35.6867006,
+      "cluster": "千代田·银座",
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "皇居对公众开放的部分，江户城遗迹尚存。",
+      "realPhoto": "img/jp-sp-08.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "jp-sp-09",
+      "lineId": "longzu-japan",
+      "type": "classic",
+      "name": "筑地场外市场",
+      "lng": 139.7704732,
+      "lat": 35.6653884,
+      "cluster": "千代田·银座",
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "老筑地市场外的商店街，海鲜饭与玉子烧集中。",
+      "realPhoto": "img/jp-sp-09.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "jp-sp-10",
+      "lineId": "longzu-japan",
+      "type": "classic",
+      "name": "东京站丸之内站舍",
+      "lng": 139.7659765,
+      "lat": 35.6811505,
+      "cluster": "千代田·银座",
+      "popularity": 4,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "红砖车站建筑，地下街与丸之内商圈都从这里起。",
+      "realPhoto": "img/jp-sp-10.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "jp-sp-11",
+      "lineId": "longzu-japan",
+      "type": "classic",
+      "name": "增上寺",
+      "lng": 139.7502047,
+      "lat": 35.6572377,
+      "cluster": "港区·台场",
+      "popularity": 3,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "东京塔旁的净土宗古刹，德川家的灵庙所在地。",
+      "realPhoto": "img/jp-sp-11.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "jp-sp-12",
+      "lineId": "longzu-japan",
+      "type": "classic",
+      "name": "台场海滨公园",
+      "lng": 139.7773535,
+      "lat": 35.631084,
+      "cluster": "港区·台场",
+      "popularity": 4,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "人工海滨公园，能同时拍到彩虹大桥与自由女神像。",
+      "realPhoto": "img/jp-sp-12.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "jp-sp-13",
+      "lineId": "longzu-japan",
+      "type": "classic",
+      "name": "富士山 · 河口湖",
+      "lng": 138.7448243,
+      "lat": 35.5130603,
+      "cluster": "近郊·富士箱根",
+      "popularity": 5,
+      "durationNormal": 300,
+      "durationRush": 150,
+      "intro": "富士五湖之一，湖畔是看富士山倒影的名所。",
+      "realPhoto": "img/jp-sp-13.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "jp-sp-14",
+      "lineId": "longzu-japan",
+      "type": "classic",
+      "name": "箱根 · 芦之湖",
+      "lng": 139.0019966,
+      "lat": 35.214483,
+      "cluster": "近郊·富士箱根",
+      "popularity": 4,
+      "durationNormal": 240,
+      "durationRush": 120,
+      "intro": "箱根火山湖，海盗船与箱根神社都在水边。",
+      "realPhoto": "img/jp-sp-14.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "jp-sp-15",
+      "lineId": "longzu-japan",
+      "type": "classic",
+      "name": "横滨 · 港未来 21",
+      "lng": 139.6323669,
+      "lat": 35.4594441,
+      "cluster": "近郊·横滨",
+      "popularity": 4,
+      "durationNormal": 180,
+      "durationRush": 90,
+      "intro": "横滨湾边的现代港区，夜景与中华街相邻。",
+      "realPhoto": "img/jp-sp-15.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    }
+  ]
+}

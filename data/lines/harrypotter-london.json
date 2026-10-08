@@ -1,0 +1,614 @@
+{
+  "_说明": "点位库。所有【待填】必须人工核对原著/剧集后填写，禁止编造引文。校验：node data/validate.mjs data/lines/harrypotter-london.json",
+  "_版本": 1,
+  "_priority": 2,
+  "_bounds": {
+    "lng": [
+      -0.45,
+      0.1
+    ],
+    "lat": [
+      51.4,
+      51.75
+    ]
+  },
+  "_expected": {
+    "ipStops": [
+      8,
+      8
+    ],
+    "cityStops": [
+      10,
+      20
+    ],
+    "maxTierS": 3
+  },
+  "ip": {
+    "ipId": "harrypotter",
+    "name": "哈利波特",
+    "author": "J.K.罗琳",
+    "kind": "novel",
+    "cover": "img/harrypotter.jpg",
+    "aliases": [
+      "哈利波特",
+      "哈利·波特",
+      "Harry Potter"
+    ],
+    "tags": {
+      "城市": [
+        "伦敦",
+        "英国"
+      ],
+      "人物": [
+        "哈利·波特",
+        "赫敏",
+        "罗恩",
+        "邓布利多"
+      ],
+      "地名": [
+        "国王十字",
+        "利德贺市场",
+        "千禧桥",
+        "博罗市场",
+        "皮卡迪利广场",
+        "威斯敏斯特"
+      ]
+    }
+  },
+  "line": {
+    "lineId": "harrypotter-london",
+    "ipId": "harrypotter",
+    "title": "哈利波特·伦敦",
+    "city": "伦敦",
+    "cover": "img/harrypotter-london.jpg",
+    "recommendDays": 3
+  },
+  "clusters": [
+    "国王十字",
+    "伦敦金融城",
+    "摄政公园",
+    "南岸",
+    "河岸街",
+    "南华克",
+    "西区",
+    "威斯敏斯特",
+    "布鲁姆斯伯里",
+    "伦敦塔",
+    "南肯辛顿",
+    "海德公园",
+    "塔桥",
+    "利维斯登（伦敦周边）"
+  ],
+  "ipStops": [
+    {
+      "poiId": "hp-ip-01",
+      "lineId": "harrypotter-london",
+      "type": "ip",
+      "name": "国王十字车站",
+      "alias": "King's Cross Station / Platform 9¾",
+      "lng": -0.1233,
+      "lat": 51.532,
+      "cluster": "国王十字",
+      "tier": "S",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "哈利前往霍格沃茨的经典入口，9¾站台是系列最标志性的伦敦打卡点。",
+      "quotes": [],
+      "basis": "Visit London 明确将 Platform 9¾ 列为伦敦最经典的 Harry Potter 打卡体验；Warner Bros. 官方也说明系列中大部分9¾场景在 King's Cross 拍摄。",
+      "realPhoto": "img/hp-ip-01.jpg",
+      "photos": [
+        "img/hp-ip-01.jpg",
+        "img/hp-ip-01-2.jpg",
+        "img/hp-ip-01-3.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "skipNote": "全线核心点，不建议删除。",
+      "tips": "先拍9¾站台行李车，再逛官方 Harry Potter Shop。"
+    },
+    {
+      "poiId": "hp-ip-02",
+      "lineId": "harrypotter-london",
+      "type": "ip",
+      "name": "利德贺市场",
+      "alias": "Diagon Alley / Leaky Cauldron 外景相关地点",
+      "lng": -0.0836,
+      "lat": 51.5128,
+      "cluster": "伦敦金融城",
+      "tier": "S",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "《魔法石》中对角巷及破釜酒吧入口的重要伦敦取景地。",
+      "quotes": [],
+      "basis": "Visit London 明确指出 Leadenhall Market 出现在多部电影中，并用于对角巷与破釜酒吧入口。",
+      "realPhoto": "img/hp-ip-02.jpg",
+      "photos": [
+        "img/hp-ip-02.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "skipNote": "距离 King's Cross 较远，但哈迷辨识度极高。",
+      "tips": "重点寻找 Bull's Head Passage 的蓝色门面。"
+    },
+    {
+      "poiId": "hp-ip-03",
+      "lineId": "harrypotter-london",
+      "type": "ip",
+      "name": "伦敦动物园",
+      "alias": "London Zoo / Reptile House",
+      "lng": -0.1536,
+      "lat": 51.5353,
+      "cluster": "摄政公园",
+      "tier": "A",
+      "durationNormal": 150,
+      "durationRush": 60,
+      "intro": "《魔法石》中哈利发现蛇语能力的经典拍摄地点。",
+      "quotes": [],
+      "basis": "ZSL London Zoo 官方确认《Harry Potter and the Philosopher's Stone》的 Reptile House 于2001年拍摄相关场景。",
+      "realPhoto": "img/hp-ip-03-2.jpg",
+      "photos": [
+        "img/hp-ip-03-2.jpg",
+        "img/hp-ip-03-3.jpg",
+        "img/hp-ip-03.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "skipNote": "位置偏北且需购票，纯电影地标路线可删除。",
+      "tips": "重点看 Reptile House。"
+    },
+    {
+      "poiId": "hp-ip-04",
+      "lineId": "harrypotter-london",
+      "type": "ip",
+      "name": "千禧桥",
+      "alias": "Millennium Bridge",
+      "lng": -0.0985,
+      "lat": 51.5095,
+      "cluster": "南岸",
+      "tier": "A",
+      "durationNormal": 30,
+      "durationRush": 15,
+      "intro": "《混血王子》中食死徒袭击伦敦、桥梁被摧毁的标志性电影场景。",
+      "quotes": [],
+      "basis": "伦敦市政府公开资料明确介绍《Half-Blood Prince》中的 Millennium Bridge 场景。",
+      "realPhoto": "img/hp-ip-04.jpg",
+      "photos": [
+        "img/hp-ip-04.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "skipNote": "停留短，可与圣保罗大教堂合并。",
+      "tips": "傍晚拍桥与圣保罗大教堂同框。"
+    },
+    {
+      "poiId": "hp-ip-05",
+      "lineId": "harrypotter-london",
+      "type": "ip",
+      "name": "澳大利亚大厦",
+      "alias": "Gringotts Wizarding Bank 相关取景",
+      "lng": -0.1176,
+      "lat": 51.5134,
+      "cluster": "河岸街",
+      "tier": "A",
+      "durationNormal": 30,
+      "durationRush": 15,
+      "intro": "电影中古灵阁巫师银行的重要伦敦取景建筑。",
+      "quotes": [],
+      "basis": "Visit London 的 Harry Potter 专题指出 Australia House 内部被用于古灵阁巫师银行电影场景。",
+      "realPhoto": "img/hp-ip-05-2.jpg",
+      "photos": [
+        "img/hp-ip-05-2.jpg",
+        "img/hp-ip-05.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "skipNote": "主要是建筑取景，不能按普通景点进入。",
+      "tips": "外交机构，遵守安保规定，不把内部当普通景点参观。"
+    },
+    {
+      "poiId": "hp-ip-06",
+      "lineId": "harrypotter-london",
+      "type": "ip",
+      "name": "博罗市场",
+      "alias": "Leaky Cauldron 相关外景",
+      "lng": -0.091,
+      "lat": 51.5055,
+      "cluster": "南华克",
+      "tier": "A",
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "《阿兹卡班的囚徒》中破釜酒吧入口相关场景的伦敦拍摄地。",
+      "quotes": [],
+      "basis": "Harry Potter Studio 的伦敦取景资料将 Borough Market 列为该片破釜酒吧入口取景地。",
+      "realPhoto": "img/hp-ip-06.jpg",
+      "photos": [
+        "img/hp-ip-06.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "skipNote": "若只看建筑电影感，Leadenhall Market 优先级更高。",
+      "tips": "可直接把午餐和巡礼合并。"
+    },
+    {
+      "poiId": "hp-ip-07",
+      "lineId": "harrypotter-london",
+      "type": "ip",
+      "name": "皮卡迪利广场",
+      "alias": "Piccadilly Circus",
+      "lng": -0.134,
+      "lat": 51.5101,
+      "cluster": "西区",
+      "tier": "A",
+      "durationNormal": 45,
+      "durationRush": 20,
+      "intro": "《死亡圣器（上）》中三人逃离婚礼后出现在伦敦街头的经典场景。",
+      "quotes": [],
+      "basis": "Visit London 将 Piccadilly Circus 列为 Harry Potter 电影相关地点。",
+      "realPhoto": "img/hp-ip-07-2.jpg",
+      "photos": [
+        "img/hp-ip-07-2.jpg",
+        "img/hp-ip-07-3.jpg",
+        "img/hp-ip-07.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "skipNote": "本身也是伦敦热门景点，哈利波特关联适合顺路体验。",
+      "tips": "夜间霓虹效果好。"
+    },
+    {
+      "poiId": "hp-ip-08",
+      "lineId": "harrypotter-london",
+      "type": "ip",
+      "name": "威斯敏斯特地铁站",
+      "alias": "Westminster Underground Station",
+      "lng": -0.1247,
+      "lat": 51.501,
+      "cluster": "威斯敏斯特",
+      "tier": "B",
+      "durationNormal": 30,
+      "durationRush": 15,
+      "intro": "《凤凰社》中哈利与亚瑟·韦斯莱乘地铁前往魔法部相关场景。",
+      "quotes": [],
+      "basis": "Visit London 明确列出 Westminster Underground Station，并说明其出现在《凤凰社》中。",
+      "realPhoto": "img/hp-ip-08.jpg",
+      "photos": [
+        "img/hp-ip-08.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "skipNote": "停留价值短，附近景点很多。",
+      "tips": "顺路拍 Big Ben 和国会大厦，不影响通勤。"
+    }
+  ],
+  "cityStops": [
+    {
+      "poiId": "hp-sp-01",
+      "lineId": "harrypotter-london",
+      "type": "classic",
+      "name": "大英博物馆",
+      "alias": "",
+      "lng": -0.1269,
+      "lat": 51.5194,
+      "cluster": "布鲁姆斯伯里",
+      "popularity": 5,
+      "durationNormal": 150,
+      "durationRush": 75,
+      "intro": "世界级博物馆，适合伦敦城市线路补充。",
+      "realPhoto": "img/hp-sp-01.jpg",
+      "photos": [
+        "img/hp-sp-01.jpg",
+        "img/hp-sp-01-2.jpg",
+        "img/hp-sp-01-3.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "ticket": "免费/特展另计",
+      "openHours": ""
+    },
+    {
+      "poiId": "hp-sp-02",
+      "lineId": "harrypotter-london",
+      "type": "classic",
+      "name": "伦敦塔",
+      "alias": "",
+      "lng": -0.0759,
+      "lat": 51.5081,
+      "cluster": "伦敦塔",
+      "popularity": 5,
+      "durationNormal": 150,
+      "durationRush": 75,
+      "intro": "伦敦代表性历史地标。",
+      "realPhoto": "img/hp-sp-02.jpg",
+      "photos": [
+        "img/hp-sp-02.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "ticket": "付费",
+      "openHours": ""
+    },
+    {
+      "poiId": "hp-sp-03",
+      "lineId": "harrypotter-london",
+      "type": "classic",
+      "name": "圣保罗大教堂",
+      "alias": "",
+      "lng": -0.0985,
+      "lat": 51.5138,
+      "cluster": "伦敦金融城",
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "可与 Millennium Bridge 连线。",
+      "realPhoto": "img/hp-sp-03-2.jpg",
+      "photos": [
+        "img/hp-sp-03-2.jpg",
+        "img/hp-sp-03-3.jpg",
+        "img/hp-sp-03.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "ticket": "付费",
+      "openHours": ""
+    },
+    {
+      "poiId": "hp-sp-04",
+      "lineId": "harrypotter-london",
+      "type": "classic",
+      "name": "威斯敏斯特教堂",
+      "alias": "",
+      "lng": -0.1276,
+      "lat": 51.4993,
+      "cluster": "威斯敏斯特",
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "伦敦历史文化核心地标。",
+      "realPhoto": "img/hp-sp-04-2.jpg",
+      "photos": [
+        "img/hp-sp-04-2.jpg",
+        "img/hp-sp-04-3.jpg",
+        "img/hp-sp-04.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "ticket": "付费",
+      "openHours": ""
+    },
+    {
+      "poiId": "hp-sp-05",
+      "lineId": "harrypotter-london",
+      "type": "classic",
+      "name": "大本钟·国会大厦",
+      "alias": "",
+      "lng": -0.1246,
+      "lat": 51.5007,
+      "cluster": "威斯敏斯特",
+      "popularity": 5,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "与 Westminster 哈利波特点位最方便组合。",
+      "realPhoto": "img/hp-sp-05-2.jpg",
+      "photos": [
+        "img/hp-sp-05-2.jpg",
+        "img/hp-sp-05.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "ticket": "外观免费",
+      "openHours": ""
+    },
+    {
+      "poiId": "hp-sp-06",
+      "lineId": "harrypotter-london",
+      "type": "classic",
+      "name": "特拉法加广场",
+      "alias": "",
+      "lng": -0.128,
+      "lat": 51.508,
+      "cluster": "威斯敏斯特",
+      "popularity": 5,
+      "durationNormal": 45,
+      "durationRush": 23,
+      "intro": "可与 Piccadilly Circus 连线。",
+      "realPhoto": "img/hp-sp-06-2.jpg",
+      "photos": [
+        "img/hp-sp-06-2.jpg",
+        "img/hp-sp-06.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "ticket": "免费",
+      "openHours": ""
+    },
+    {
+      "poiId": "hp-sp-07",
+      "lineId": "harrypotter-london",
+      "type": "classic",
+      "name": "伦敦眼",
+      "alias": "",
+      "lng": -0.1195,
+      "lat": 51.5033,
+      "cluster": "南岸",
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "泰晤士河经典观景点。",
+      "realPhoto": "img/hp-sp-07-3.jpg",
+      "photos": [
+        "img/hp-sp-07-3.jpg",
+        "img/hp-sp-07-2.jpg",
+        "img/hp-sp-07.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "ticket": "付费",
+      "openHours": ""
+    },
+    {
+      "poiId": "hp-sp-08",
+      "lineId": "harrypotter-london",
+      "type": "classic",
+      "name": "白金汉宫",
+      "alias": "",
+      "lng": -0.1419,
+      "lat": 51.5014,
+      "cluster": "威斯敏斯特",
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "英国王室代表性城市地标。",
+      "realPhoto": "img/hp-sp-08-2.jpg",
+      "photos": [
+        "img/hp-sp-08-2.jpg",
+        "img/hp-sp-08-3.jpg",
+        "img/hp-sp-08.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "ticket": "外观免费",
+      "openHours": ""
+    },
+    {
+      "poiId": "hp-sp-09",
+      "lineId": "harrypotter-london",
+      "type": "classic",
+      "name": "自然历史博物馆",
+      "alias": "",
+      "lng": -0.1764,
+      "lat": 51.4967,
+      "cluster": "南肯辛顿",
+      "popularity": 5,
+      "durationNormal": 150,
+      "durationRush": 75,
+      "intro": "适合家庭与学生游客。",
+      "realPhoto": "img/hp-sp-09-2.jpg",
+      "photos": [
+        "img/hp-sp-09-2.jpg",
+        "img/hp-sp-09-3.jpg",
+        "img/hp-sp-09.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "ticket": "免费/特展另计",
+      "openHours": ""
+    },
+    {
+      "poiId": "hp-sp-10",
+      "lineId": "harrypotter-london",
+      "type": "classic",
+      "name": "V&A博物馆",
+      "alias": "",
+      "lng": -0.1722,
+      "lat": 51.4966,
+      "cluster": "南肯辛顿",
+      "popularity": 5,
+      "durationNormal": 150,
+      "durationRush": 75,
+      "intro": "艺术设计类博物馆。",
+      "realPhoto": "img/hp-sp-10-2.jpg",
+      "photos": [
+        "img/hp-sp-10-2.jpg",
+        "img/hp-sp-10.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "ticket": "免费/特展另计",
+      "openHours": ""
+    },
+    {
+      "poiId": "hp-sp-11",
+      "lineId": "harrypotter-london",
+      "type": "classic",
+      "name": "海德公园",
+      "alias": "",
+      "lng": -0.1657,
+      "lat": 51.5073,
+      "cluster": "海德公园",
+      "popularity": 5,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "中心伦敦大型公园。",
+      "realPhoto": "img/hp-sp-11-2.jpg",
+      "photos": [
+        "img/hp-sp-11-2.jpg",
+        "img/hp-sp-11-3.jpg",
+        "img/hp-sp-11.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "ticket": "免费",
+      "openHours": ""
+    },
+    {
+      "poiId": "hp-sp-12",
+      "lineId": "harrypotter-london",
+      "type": "classic",
+      "name": "摄政公园",
+      "alias": "",
+      "lng": -0.1599,
+      "lat": 51.5313,
+      "cluster": "摄政公园",
+      "popularity": 5,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "可与伦敦动物园连线。",
+      "realPhoto": "img/hp-sp-12-2.jpg",
+      "photos": [
+        "img/hp-sp-12-2.jpg",
+        "img/hp-sp-12.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "ticket": "免费",
+      "openHours": ""
+    },
+    {
+      "poiId": "hp-sp-13",
+      "lineId": "harrypotter-london",
+      "type": "classic",
+      "name": "伦敦塔桥",
+      "alias": "",
+      "lng": -0.0754,
+      "lat": 51.5055,
+      "cluster": "塔桥",
+      "popularity": 5,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "伦敦代表性桥梁。",
+      "realPhoto": "img/hp-sp-13-2.jpg",
+      "photos": [
+        "img/hp-sp-13-2.jpg",
+        "img/hp-sp-13-3.jpg",
+        "img/hp-sp-13.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "ticket": "外观免费/内部付费",
+      "openHours": ""
+    },
+    {
+      "poiId": "hp-sp-14",
+      "lineId": "harrypotter-london",
+      "type": "classic",
+      "name": "莱斯特广场",
+      "alias": "",
+      "lng": -0.13,
+      "lat": 51.51,
+      "cluster": "西区",
+      "popularity": 4,
+      "durationNormal": 45,
+      "durationRush": 23,
+      "intro": "电影文化氛围浓厚。",
+      "realPhoto": "img/hp-sp-14.jpg",
+      "photos": [
+        "img/hp-sp-14.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "ticket": "免费",
+      "openHours": ""
+    },
+    {
+      "poiId": "hp-sp-15",
+      "lineId": "harrypotter-london",
+      "type": "classic",
+      "name": "华纳兄弟哈利波特工作室",
+      "alias": "Warner Bros. Studio Tour London",
+      "lng": -0.4181,
+      "lat": 51.6906,
+      "cluster": "利维斯登（伦敦周边）",
+      "popularity": 5,
+      "durationNormal": 360,
+      "durationRush": 180,
+      "intro": "原始电影布景、道具、服装与幕后体验；不在伦敦市内。",
+      "realPhoto": "img/hp-sp-15-2.jpg",
+      "photos": [
+        "img/hp-sp-15-2.jpg",
+        "img/hp-sp-15-3.jpg",
+        "img/hp-sp-15.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "ticket": "付费预约",
+      "openHours": ""
+    }
+  ]
+}

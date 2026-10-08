@@ -1,0 +1,530 @@
+{
+  "_说明": "点位库。所有【待填】必须人工核对原著/剧集后填写，禁止编造引文。校验：node data/validate.mjs data/lines/longzu-beijing.json",
+  "_版本": 1,
+  "_priority": 10,
+  "_bounds": {
+    "lng": [
+      115.4,
+      117.5
+    ],
+    "lat": [
+      39.4,
+      41.1
+    ]
+  },
+  "_expected": {
+    "ipStops": [
+      6,
+      8
+    ],
+    "cityStops": [
+      10,
+      20
+    ],
+    "maxTierS": 3
+  },
+  "ip": {
+    "ipId": "longzu",
+    "name": "龙族",
+    "author": "江南",
+    "kind": "novel",
+    "cover": "img/longzu.jpg",
+    "aliases": [
+      "龙族",
+      "龙族Ⅱ",
+      "悼亡者之瞳",
+      "路明非",
+      "楚子航",
+      "恺撒",
+      "诺诺",
+      "夏弥"
+    ],
+    "tags": {
+      "城市": [
+        "北京"
+      ],
+      "人物": [
+        "路明非",
+        "楚子航",
+        "恺撒",
+        "诺诺",
+        "夏弥",
+        "芬格尔"
+      ],
+      "地名": [
+        "颐和园",
+        "十七孔桥",
+        "中关村",
+        "王府井",
+        "琉璃厂",
+        "后海",
+        "西单"
+      ]
+    }
+  },
+  "line": {
+    "lineId": "longzu-beijing",
+    "ipId": "longzu",
+    "title": "龙族·北京",
+    "city": "北京",
+    "cover": "img/longzu-beijing.jpg",
+    "recommendDays": 2
+  },
+  "clusters": [
+    "东城·故宫",
+    "西城·什刹海",
+    "朝阳·三里屯",
+    "海淀·中关村",
+    "丰台·城南",
+    "怀柔·长城",
+    "通州·环球影城",
+    "密云·古北水镇"
+  ],
+  "ipStops": [
+    {
+      "poiId": "bj-ip-01",
+      "lineId": "longzu-beijing",
+      "type": "ip",
+      "name": "颐和园",
+      "alias": "书中「长廊」「十七孔桥」「昆明湖」「佛香阁」",
+      "lng": 116.2757976,
+      "lat": 39.996719,
+      "cluster": "海淀·中关村",
+      "tier": "S",
+      "durationNormal": 180,
+      "durationRush": 90,
+      "intro": "诺诺一个人坐在长廊里喝啤酒，隔着昆明湖看对面的万寿山；夜里她又从十七孔桥下水，游向湖心——全书最像\"龙\"的一笔。",
+      "tips": "从东宫门进最顺：长廊—佛香阁—昆明湖；傍晚在十七孔桥东南侧看金光穿洞。",
+      "skipNote": "全线唯一 S 级场景，不建议放弃。",
+      "realPhoto": "img/bj-ip-01.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "诺诺坐在长廊里，靠着一根柱子",
+          "full": "诺诺坐在长廊里，靠着一根柱子，眺望着浩瀚的昆明湖，喝着自己带进来的啤酒。湖对面就是万寿山，山顶是宏伟的佛香阁和排云殿。她没有告诉恺撒自己去了哪里，并不是因为她不开心。多数时候，她并不知道自己开心或者不开心，她有时候这样，有时候那样，只是因为忽然想到，就去做了。",
+          "source": "龙族Ⅱ·第十六幕"
+        },
+        {
+          "kind": "原著",
+          "brief": "十七孔桥在前方的夜色里就像是一具龙的脊骨",
+          "full": "十七孔桥在前方的夜色里就像是一具龙的脊骨横卧在水面上，诺诺忽然站了起来，脱掉身上的长衣长裤。她在夜风中舒展身体，冷风吹得她的皮肤表面起了一层小疙瘩。她鱼跃入水，向着十七孔桥游去。",
+          "source": "龙族Ⅱ·第十六幕"
+        }
+      ]
+    },
+    {
+      "poiId": "bj-ip-03",
+      "lineId": "longzu-beijing",
+      "type": "ip",
+      "name": "中关村",
+      "alias": "",
+      "lng": 116.3103787,
+      "lat": 39.9826574,
+      "cluster": "海淀·中关村",
+      "tier": "A",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "赵孟华坐地铁到中关村再回北大，龙王的震动在这条线上炸开。",
+      "tips": "地铁中关村站，可顺路逛北大清华。",
+      "skipNote": "纯城市路段，打卡性质，可放弃。",
+      "realPhoto": "img/bj-ip-03.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "门上的路线显示，下一站就是中关村",
+          "full": "赵孟华看了一眼门上的路线显示，下一站就是中关村。他的目的地就是中关村，他昨天晚上跟一个哥们喝多了，睡在人家宿舍，这是赶回北大。",
+          "source": "龙族Ⅱ·第十二幕"
+        }
+      ]
+    },
+    {
+      "poiId": "bj-ip-04",
+      "lineId": "longzu-beijing",
+      "type": "ip",
+      "name": "王府井 · 东方广场",
+      "alias": "书中「东方广场」「君悦酒店」",
+      "lng": 116.4106885,
+      "lat": 39.9085583,
+      "cluster": "东城·故宫",
+      "tier": "A",
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "楚子航深夜潜入东方广场地下一层，一路追到王府井地铁站。",
+      "tips": "地下商场与地铁站连着，从王府井站下最方便。",
+      "skipNote": "商场本身好逛，但戏份只在深夜，可压缩。",
+      "realPhoto": "img/bj-ip-04.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "楚子航无声地潜行在东方广场地下一层商场里",
+          "full": "深夜零点四十五分，楚子航无声地潜行在东方广场地下一层商场里。这栋巨大的地标式建筑毗邻长安街，云集着豪奢品牌和一家君悦酒店，地下直通地铁王府井站。",
+          "source": "龙族Ⅱ·第十八幕"
+        }
+      ]
+    },
+    {
+      "poiId": "bj-ip-05",
+      "lineId": "longzu-beijing",
+      "type": "ip",
+      "name": "琉璃厂",
+      "alias": "",
+      "lng": 116.3782141,
+      "lat": 39.8933656,
+      "cluster": "西城·什刹海",
+      "tier": "B",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "恺撒在这条老街喝茶、逛铺子，书里写它是赶考举子住过的地方。",
+      "tips": "一条街走完，顺路可以连大栅栏。",
+      "skipNote": "短街，时间紧可以先去掉。",
+      "realPhoto": "img/bj-ip-05.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "早晨的阳光照在琉璃厂大街的石板路上",
+          "full": "早晨的阳光照在琉璃厂大街的石板路上，一辆人力三轮跑得欢，两侧都是复古的青砖小楼，每一户门前都挂着“宝翠堂”、“崇文府”这类黑底金字招牌。",
+          "source": "龙族Ⅱ·第十六幕"
+        }
+      ]
+    },
+    {
+      "poiId": "bj-ip-06",
+      "lineId": "longzu-beijing",
+      "type": "ip",
+      "name": "后海",
+      "alias": "",
+      "lng": 116.3765554,
+      "lat": 39.9407632,
+      "cluster": "西城·什刹海",
+      "tier": "B",
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "决战当口，书里一笔写尽了这座城里的人还在后海喝酒。",
+      "tips": "傍晚沿湖走一圈，酒吧街在后海北沿。",
+      "skipNote": "与什刹海同一片区，可合并。",
+      "realPhoto": "img/bj-ip-06.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "文艺青年们睡醒之后开始准备去后海的酒吧",
+          "full": "这是一个国际化的大城市，上千万人在这个城市里进出，北海公园里还有老头老太在健身，文艺青年们睡醒之后开始准备去后海的酒吧晃晃，CBD里出没着职场精英，为他们的百万年薪小跑着工作，车流堵塞了二三四五环……",
+          "source": "龙族Ⅱ·第二十幕"
+        }
+      ]
+    },
+    {
+      "poiId": "bj-ip-07",
+      "lineId": "longzu-beijing",
+      "type": "ip",
+      "name": "故宫",
+      "alias": "",
+      "lng": 116.3972,
+      "lat": 39.9164,
+      "cluster": "东城·故宫",
+      "tier": "B",
+      "durationNormal": 180,
+      "durationRush": 90,
+      "intro": "书里那群\"旅行团\"把紫禁城当成找龙的第一站。",
+      "tips": "务必提前预约，周一闭馆。",
+      "skipNote": "本身是必看景点，但书中只是背景板。",
+      "realPhoto": "img/bj-ip-07.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "他们昨天已经游览了故宫",
+          "full": "那个唐森和他的朋友们正这么做，他们昨天已经游览了故宫，今天的目标是去颐和园。”楚子航淡淡地说，“他们之所以变成了彻头彻尾的旅行团，是因为他们发现这座城市里满是龙的痕迹。",
+          "source": "龙族Ⅱ·第十五幕"
+        }
+      ]
+    },
+    {
+      "poiId": "bj-ip-08",
+      "lineId": "longzu-beijing",
+      "type": "ip",
+      "name": "西单",
+      "alias": "书中「西单北大街」「西单婚庆大厦」",
+      "lng": 116.3682035,
+      "lat": 39.9057386,
+      "cluster": "西城·什刹海",
+      "tier": "B",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "恺撒开着敞篷车在西单北大街上乱钻，后来干脆买下了婚庆大厦。",
+      "tips": "西单商圈地铁直达，适合当机动点。",
+      "skipNote": "购物属性为主的点位，可放弃。",
+      "realPhoto": "img/bj-ip-08.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "quotes": [
+        {
+          "kind": "原著",
+          "brief": "在车流如织的西单北大街上钻来钻去",
+          "full": "恺撒开着敞篷小车在车流如织的西单北大街上钻来钻去，就像是在野牛肚子下面奔跑的野兔。来来往往的大车都被他出其不意地截断，但没人冲他按喇叭。",
+          "source": "龙族Ⅱ·第十九幕"
+        }
+      ]
+    }
+  ],
+  "cityStops": [
+    {
+      "poiId": "bj-sp-01",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "天安门广场",
+      "lng": 116.3972,
+      "lat": 39.9087,
+      "cluster": "东城·故宫",
+      "popularity": 5,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "北京的城市中心广场，看升旗与城楼的地方。",
+      "realPhoto": "img/bj-sp-01.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-02",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "中国国家博物馆",
+      "lng": 116.418,
+      "lat": 39.9042,
+      "cluster": "东城·故宫",
+      "popularity": 5,
+      "durationNormal": 180,
+      "durationRush": 90,
+      "intro": "天安门广场东侧的国家级博物馆，藏品逾百万件。",
+      "realPhoto": "img/bj-sp-02.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-03",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "天坛公园",
+      "lng": 116.4066,
+      "lat": 39.8823,
+      "cluster": "东城·故宫",
+      "popularity": 5,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "明清皇帝祭天的场所，祈年殿是它的标志。",
+      "realPhoto": "img/bj-sp-03.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-04",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "雍和宫",
+      "lng": 116.4174,
+      "lat": 39.9473,
+      "cluster": "东城·故宫",
+      "popularity": 4,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "清代皇家寺院，北京规模最大的藏传佛教寺院。",
+      "realPhoto": "img/bj-sp-04.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-05",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "南锣鼓巷",
+      "lng": 116.4034,
+      "lat": 39.9371,
+      "cluster": "东城·故宫",
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "元代格局保留至今的胡同街区，小店密集。",
+      "realPhoto": "img/bj-sp-05.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-06",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "什刹海",
+      "lng": 116.3947,
+      "lat": 39.9428,
+      "cluster": "西城·什刹海",
+      "popularity": 4,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "由前海、后海组成的湖区，环湖是胡同与酒吧。",
+      "realPhoto": "img/bj-sp-06.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-07",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "北海公园",
+      "lng": 116.3899,
+      "lat": 39.933,
+      "cluster": "西城·什刹海",
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "皇家园林，白塔与琼华岛是北京的老地标。",
+      "realPhoto": "img/bj-sp-07.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-08",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "景山公园",
+      "lng": 116.3963,
+      "lat": 39.925,
+      "cluster": "西城·什刹海",
+      "popularity": 3,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "故宫北侧的皇家园林，万春亭俯瞰紫禁城全景。",
+      "realPhoto": "img/bj-sp-08.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-09",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "圆明园遗址公园",
+      "lng": 116.3098,
+      "lat": 40.0076,
+      "cluster": "海淀·中关村",
+      "popularity": 4,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "清代皇家园林遗址，西洋楼残柱是它的标志。",
+      "realPhoto": "img/bj-sp-09.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-10",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "香山公园",
+      "lng": 116.1888,
+      "lat": 39.9963,
+      "cluster": "海淀·中关村",
+      "popularity": 3,
+      "durationNormal": 180,
+      "durationRush": 90,
+      "intro": "西山赏红叶的胜地，登顶可远眺北京城。",
+      "realPhoto": "img/bj-sp-10.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-11",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "清华大学",
+      "lng": 116.320963,
+      "lat": 40.0022905,
+      "cluster": "海淀·中关村",
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "百年学府，二校门与清华园是经典取景点。",
+      "realPhoto": "img/bj-sp-11.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-12",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "798 艺术区",
+      "lng": 116.4953,
+      "lat": 39.9846,
+      "cluster": "朝阳·三里屯",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "旧厂房改造的当代艺术区，画廊与咖啡馆密集。",
+      "realPhoto": "img/bj-sp-12.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-13",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "鸟巢 · 水立方",
+      "lng": 116.3969,
+      "lat": 39.9928,
+      "cluster": "朝阳·三里屯",
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "2008 年奥运会主场馆，夜景灯光值得一看。",
+      "realPhoto": "img/bj-sp-13.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-14",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "慕田峪长城",
+      "lng": 116.5605754,
+      "lat": 40.4345154,
+      "cluster": "怀柔·长城",
+      "popularity": 5,
+      "durationNormal": 300,
+      "durationRush": 150,
+      "intro": "怀柔段的明长城，敌楼密集、游人相对少。",
+      "realPhoto": "img/bj-sp-14.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "bj-sp-15",
+      "lineId": "longzu-beijing",
+      "type": "classic",
+      "name": "北京环球影城",
+      "lng": 116.6777865,
+      "lat": 39.8548383,
+      "cluster": "通州·环球影城",
+      "popularity": 4,
+      "durationNormal": 420,
+      "durationRush": 210,
+      "intro": "通州的大型主题乐园，一整天才能玩完。",
+      "realPhoto": "img/bj-sp-15.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    }
+  ]
+}

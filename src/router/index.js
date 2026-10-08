@@ -13,8 +13,12 @@ const router = createRouter({
   ],
 })
 
-// 防刷新/直达丢状态：没有规划结果时不允许进结果页
+// 栏目页只保留了「按城市」，旧的 figure / place 直达链接回落到城市栏
 router.beforeEach((to) => {
+  if (to.name === 'column' && to.params.key !== 'city') {
+    return { name: 'column', params: { key: 'city' } }
+  }
+  // 防刷新/直达丢状态：没有规划结果时不允许进结果页
   if (to.name === 'result') {
     const store = usePlanStore()
     if (!store.result) return { name: 'home' }

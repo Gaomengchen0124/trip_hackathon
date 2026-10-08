@@ -1,51 +1,81 @@
 <script setup>
-/**
- * S6 景点卡片浮层 —— 基础占位。
- * 【交接给组件同学】结构已就位：图片区 + 引文区（原著/台词 brief + 出处）+ 操作区。
- * 样式自由发挥，但保留 props.poi 字段用法与 emit('view-detail') / emit('close') 两个事件。
- */
-defineProps({
-  poi: { type: Object, required: true },
-})
+import DialogSheet from './ui/DialogSheet.vue'
+import { computed } from 'vue'
+import PhotoFrame from './ui/PhotoFrame.vue'
+import QuoteCard from './QuoteCard.vue'
+import { formatMinutes, poiCover } from '../utils/travel-ui'
+const props = defineProps({ poi: { type: Object, required: true } })
+const cover = computed(() => poiCover(props.poi))
 const emit = defineEmits(['view-detail', 'close'])
 </script>
-
 <template>
-  <div class="overlay-mask" @click="emit('close')">
-    <div class="card" @click.stop>
-      <div class="photo">
-        <!-- 图片素材就绪前显示占位 -->
-        <span>📷 {{ poi.realPhoto }}</span>
-      </div>
-      <div class="quotes">
-        <p v-if="!poi.quotes?.length" class="empty">引文待内容组核对原著后填入</p>
-        <template v-for="(q, i) in poi.quotes" :key="i">
-          <p class="brief">「{{ q.brief }}」</p>
-          <p class="source">—— {{ q.source }}</p>
-        </template>
-      </div>
-      <div class="footer">
-        <span>{{ poi.name }} · 建议 {{ poi.durationNormal }} 分钟</span>
-        <button class="btn" @click="emit('view-detail', poi.poiId)">查看详情</button>
-      </div>
+  <DialogSheet :title="poi.name" @close="emit('close')">
+    <PhotoFrame class="photo" :src="cover" :alt="poi.name" />
+    <p class="meta">
+      {{ poi.cluster }} · 建议停留 {{ formatMinutes(poi.durationNormal) }}
+    </p>
+    <div v-if="poi.type === 'ip'" class="quotes">
+      <QuoteCard
+        v-for="(quote, index) in poi.quotes || []"
+        :key="index"
+        :quote="quote"
+        brief
+      />
+      <p v-if="!poi.quotes?.length" class="empty">这个地点的故事即将补充</p>
     </div>
-  </div>
+    <p v-else class="intro">{{ poi.intro || '景点介绍即将补充' }}</p>
+    <div class="actions">
+      <button type="button" class="btn-ghost" @click="emit('close')">
+        继续看地图</button
+      ><button
+        type="button"
+        class="btn"
+        @click="emit('view-detail', poi.poiId)"
+      >
+        查看详情 ↗
+      </button>
+    </div>
+  </DialogSheet>
 </template>
-
 <style scoped>
-.overlay-mask {
-  position: fixed; inset: 0; background: rgba(0, 0, 0, 0.35);
-  display: flex; align-items: flex-end; justify-content: center; z-index: 50;
-}
-.card { width: 100%; max-width: 520px; background: #fff; border-radius: 16px 16px 0 0; padding: 16px; }
 .photo {
-  aspect-ratio: 16/9; border-radius: var(--card-radius);
-  background: var(--brand-light); color: var(--ink-2);
-  display: flex; align-items: center; justify-content: center; font-size: 13px;
+  border-radius: 12px;
 }
-.quotes { padding: 12px 4px; }
-.brief { font-size: 15px; }
-.source { font-size: 12px; color: var(--ink-2); margin-bottom: 6px; }
-.empty { font-size: 13px; color: var(--ink-2); }
-.footer { display: flex; align-items: center; justify-content: space-between; font-size: 14px; }
+.meta {
+  font-size: 12px;
+  color: var(--ink-2);
+  margin: 12px 0 16px;
+}
+.quotes {
+  display: grid;
+  gap: 10px;
+}
+.intro {
+  font-size: 14px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.empty {
+  font-size: 13px;
+  color: var(--ink-2);
+  padding: 10px 0;
+}
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+.actions button {
+  padding: 10px 18px;
+}
+.actions button:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+}
+@media (max-width: 360px) {
+  .actions {
+    flex-direction: column;
+  }
+}
 </style>
