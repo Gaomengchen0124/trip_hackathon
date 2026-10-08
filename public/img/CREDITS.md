@@ -63,3 +63,4 @@
 | woyuditan-beijing | wd-sp-10.jpg | File:National Museum of Modern Chinese Literature, Block C (20230215152724).jpg | N509FZ | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:National_Museum_of_Modern_Chinese_Literature,_Block_C_(20230215152724).jpg) |  |
 | woyuditan-beijing | wd-sp-11.jpg | File:PekingUniversityPic6.jpg | galaygobi | CC BY 2.0 | [链接](https://commons.wikimedia.org/wiki/File:PekingUniversityPic6.jpg) |  |
 | woyuditan-beijing | wd-sp-13.jpg | File:National Library of China - South House (1987).JPG | 虞海 | CC BY-SA 2.0 tw | [链接](https://commons.wikimedia.org/wiki/File:National_Library_of_China_-_South_House_(1987).JPG) |  |
+| santi-beijing | st-ip-04.jpg | 清华园二校门（用户提供） | 【待用户补充来源】 | 【待确认】 | — | 用户提供，替换原 Commons 图 |
