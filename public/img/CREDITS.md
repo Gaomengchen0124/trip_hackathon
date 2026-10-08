@@ -64,3 +64,6 @@
 | woyuditan-beijing | wd-sp-11.jpg | File:PekingUniversityPic6.jpg | galaygobi | CC BY 2.0 | [链接](https://commons.wikimedia.org/wiki/File:PekingUniversityPic6.jpg) |  |
 | woyuditan-beijing | wd-sp-13.jpg | File:National Library of China - South House (1987).JPG | 虞海 | CC BY-SA 2.0 tw | [链接](https://commons.wikimedia.org/wiki/File:National_Library_of_China_-_South_House_(1987).JPG) |  |
 | santi-beijing | st-ip-04.jpg | 清华园二校门（用户提供） | 【待用户补充来源】 | 【待确认】 | — | 用户提供，替换原 Commons 图 |
+| fanhua-shanghai | sh-ip-04.jpg | 曹杨一村门楼（用户提供） | 小红书用户 书号595186852 | 待授权（演示用） | — | 用户提供，带水印 |
+| fanhua-shanghai | sh-ip-07.jpg | 进贤路四吉饭店（用户提供） | 小红书用户 书号222171576 | 待授权（演示用） | — | 用户提供，带水印 |
+| santi-beijing | st-sp-13.jpg | 798艺术区（用户提供） | 小红书用户 书号1064264904 | 待授权（演示用） | — | 用户提供，带水印 |
