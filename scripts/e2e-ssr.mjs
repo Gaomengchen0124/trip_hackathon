@@ -50,7 +50,7 @@ async function render(path, { seed } = {}) {
 // ---- 1. 首页 ----
 {
   const { html } = await render('/')
-  check('首页渲染', html.includes('跟着书本去旅行'))
+  check('首页渲染', html.includes('我的圣地巡礼'))
   check('首页搜索框在', html.includes('搜书名'))
 }
 
@@ -132,7 +132,7 @@ async function render(path, { seed } = {}) {
 // ---- 6. 栏目页 ----
 {
   const { html } = await render('/column/city')
-  check('栏目页渲染（按城市）', html.includes('按城市'))
+  check('栏目页渲染（圣地巡礼）', html.includes('圣地巡礼'))
 }
 
 console.log(results.join('\n'))

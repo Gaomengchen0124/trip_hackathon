@@ -8,7 +8,7 @@ const route = useRoute()
 const router = useRouter()
 const columns = ref({ city: [] })
 
-const NAMES = { city: '按城市' }
+const NAMES = { city: '圣地巡礼' }
 const key = computed(() => route.params.key)
 const title = computed(() => NAMES[key.value] || '栏目')
 

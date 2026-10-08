@@ -10,7 +10,7 @@ const keyword = ref('')
 const suggestions = ref([])
 const columns = ref({ city: [] })
 
-const COL_META = { city: { title: '按城市', key: 'city' } }
+const COL_META = { city: { title: '选择你的圣地巡礼之行', key: 'city' } }
 
 api.listColumns().then((c) => (columns.value = c))
 
@@ -40,8 +40,8 @@ function go(lineId) {
 <template>
   <div class="page">
     <section class="hero">
-      <h1>跟着书本去旅行</h1>
-      <p class="slogan">把"我热爱的故事"变成"一次可执行的旅行"</p>
+      <h1>我的圣地巡礼</h1>
+      <p class="slogan">循着文字与光影的足迹，赴一场现实的朝圣。</p>
 
       <div class="searchbox">
         <input
