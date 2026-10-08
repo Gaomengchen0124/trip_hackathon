@@ -6,9 +6,9 @@ import * as api from '../api/adapter'
 
 const route = useRoute()
 const router = useRouter()
-const columns = ref({ city: [], figure: [], place: [] })
+const columns = ref({ city: [] })
 
-const NAMES = { city: '按城市', figure: '按人物', place: '按地名' }
+const NAMES = { city: '按城市' }
 const key = computed(() => route.params.key)
 const title = computed(() => NAMES[key.value] || '栏目')
 

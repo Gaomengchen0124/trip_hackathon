@@ -96,6 +96,11 @@
       "quotes": [],
       "basis": "Visit London 明确将 Platform 9¾ 列为伦敦最经典的 Harry Potter 打卡体验；Warner Bros. 官方也说明系列中大部分9¾场景在 King's Cross 拍摄。",
       "realPhoto": "img/hp-ip-01.jpg",
+      "photos": [
+        "img/hp-ip-01.jpg",
+        "img/hp-ip-01-2.jpg",
+        "img/hp-ip-01-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "skipNote": "全线核心点，不建议删除。",
       "tips": "先拍9¾站台行李车，再逛官方 Harry Potter Shop。"
@@ -116,6 +121,9 @@
       "quotes": [],
       "basis": "Visit London 明确指出 Leadenhall Market 出现在多部电影中，并用于对角巷与破釜酒吧入口。",
       "realPhoto": "img/hp-ip-02.jpg",
+      "photos": [
+        "img/hp-ip-02.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "skipNote": "距离 King's Cross 较远，但哈迷辨识度极高。",
       "tips": "重点寻找 Bull's Head Passage 的蓝色门面。"
@@ -135,7 +143,12 @@
       "intro": "《魔法石》中哈利发现蛇语能力的经典拍摄地点。",
       "quotes": [],
       "basis": "ZSL London Zoo 官方确认《Harry Potter and the Philosopher's Stone》的 Reptile House 于2001年拍摄相关场景。",
-      "realPhoto": "img/hp-ip-03.jpg",
+      "realPhoto": "img/hp-ip-03-2.jpg",
+      "photos": [
+        "img/hp-ip-03-2.jpg",
+        "img/hp-ip-03-3.jpg",
+        "img/hp-ip-03.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "skipNote": "位置偏北且需购票，纯电影地标路线可删除。",
       "tips": "重点看 Reptile House。"
@@ -156,6 +169,9 @@
       "quotes": [],
       "basis": "伦敦市政府公开资料明确介绍《Half-Blood Prince》中的 Millennium Bridge 场景。",
       "realPhoto": "img/hp-ip-04.jpg",
+      "photos": [
+        "img/hp-ip-04.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "skipNote": "停留短，可与圣保罗大教堂合并。",
       "tips": "傍晚拍桥与圣保罗大教堂同框。"
@@ -175,7 +191,11 @@
       "intro": "电影中古灵阁巫师银行的重要伦敦取景建筑。",
       "quotes": [],
       "basis": "Visit London 的 Harry Potter 专题指出 Australia House 内部被用于古灵阁巫师银行电影场景。",
-      "realPhoto": "img/hp-ip-05.jpg",
+      "realPhoto": "img/hp-ip-05-2.jpg",
+      "photos": [
+        "img/hp-ip-05-2.jpg",
+        "img/hp-ip-05.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "skipNote": "主要是建筑取景，不能按普通景点进入。",
       "tips": "外交机构，遵守安保规定，不把内部当普通景点参观。"
@@ -196,6 +216,9 @@
       "quotes": [],
       "basis": "Harry Potter Studio 的伦敦取景资料将 Borough Market 列为该片破釜酒吧入口取景地。",
       "realPhoto": "img/hp-ip-06.jpg",
+      "photos": [
+        "img/hp-ip-06.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "skipNote": "若只看建筑电影感，Leadenhall Market 优先级更高。",
       "tips": "可直接把午餐和巡礼合并。"
@@ -215,7 +238,12 @@
       "intro": "《死亡圣器（上）》中三人逃离婚礼后出现在伦敦街头的经典场景。",
       "quotes": [],
       "basis": "Visit London 将 Piccadilly Circus 列为 Harry Potter 电影相关地点。",
-      "realPhoto": "img/hp-ip-07.jpg",
+      "realPhoto": "img/hp-ip-07-2.jpg",
+      "photos": [
+        "img/hp-ip-07-2.jpg",
+        "img/hp-ip-07-3.jpg",
+        "img/hp-ip-07.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "skipNote": "本身也是伦敦热门景点，哈利波特关联适合顺路体验。",
       "tips": "夜间霓虹效果好。"
@@ -236,6 +264,9 @@
       "quotes": [],
       "basis": "Visit London 明确列出 Westminster Underground Station，并说明其出现在《凤凰社》中。",
       "realPhoto": "img/hp-ip-08.jpg",
+      "photos": [
+        "img/hp-ip-08.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "skipNote": "停留价值短，附近景点很多。",
       "tips": "顺路拍 Big Ben 和国会大厦，不影响通勤。"
@@ -256,6 +287,11 @@
       "durationRush": 75,
       "intro": "世界级博物馆，适合伦敦城市线路补充。",
       "realPhoto": "img/hp-sp-01.jpg",
+      "photos": [
+        "img/hp-sp-01.jpg",
+        "img/hp-sp-01-2.jpg",
+        "img/hp-sp-01-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "ticket": "免费/特展另计",
       "openHours": ""
@@ -274,6 +310,9 @@
       "durationRush": 75,
       "intro": "伦敦代表性历史地标。",
       "realPhoto": "img/hp-sp-02.jpg",
+      "photos": [
+        "img/hp-sp-02.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "ticket": "付费",
       "openHours": ""
@@ -291,7 +330,12 @@
       "durationNormal": 90,
       "durationRush": 45,
       "intro": "可与 Millennium Bridge 连线。",
-      "realPhoto": "img/hp-sp-03.jpg",
+      "realPhoto": "img/hp-sp-03-2.jpg",
+      "photos": [
+        "img/hp-sp-03-2.jpg",
+        "img/hp-sp-03-3.jpg",
+        "img/hp-sp-03.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "ticket": "付费",
       "openHours": ""
@@ -309,7 +353,12 @@
       "durationNormal": 90,
       "durationRush": 45,
       "intro": "伦敦历史文化核心地标。",
-      "realPhoto": "img/hp-sp-04.jpg",
+      "realPhoto": "img/hp-sp-04-2.jpg",
+      "photos": [
+        "img/hp-sp-04-2.jpg",
+        "img/hp-sp-04-3.jpg",
+        "img/hp-sp-04.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "ticket": "付费",
       "openHours": ""
@@ -327,7 +376,11 @@
       "durationNormal": 60,
       "durationRush": 30,
       "intro": "与 Westminster 哈利波特点位最方便组合。",
-      "realPhoto": "img/hp-sp-05.jpg",
+      "realPhoto": "img/hp-sp-05-2.jpg",
+      "photos": [
+        "img/hp-sp-05-2.jpg",
+        "img/hp-sp-05.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "ticket": "外观免费",
       "openHours": ""
@@ -345,7 +398,11 @@
       "durationNormal": 45,
       "durationRush": 23,
       "intro": "可与 Piccadilly Circus 连线。",
-      "realPhoto": "img/hp-sp-06.jpg",
+      "realPhoto": "img/hp-sp-06-2.jpg",
+      "photos": [
+        "img/hp-sp-06-2.jpg",
+        "img/hp-sp-06.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "ticket": "免费",
       "openHours": ""
@@ -363,7 +420,12 @@
       "durationNormal": 90,
       "durationRush": 45,
       "intro": "泰晤士河经典观景点。",
-      "realPhoto": "img/hp-sp-07.jpg",
+      "realPhoto": "img/hp-sp-07-3.jpg",
+      "photos": [
+        "img/hp-sp-07-3.jpg",
+        "img/hp-sp-07-2.jpg",
+        "img/hp-sp-07.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "ticket": "付费",
       "openHours": ""
@@ -381,7 +443,12 @@
       "durationNormal": 90,
       "durationRush": 45,
       "intro": "英国王室代表性城市地标。",
-      "realPhoto": "img/hp-sp-08.jpg",
+      "realPhoto": "img/hp-sp-08-2.jpg",
+      "photos": [
+        "img/hp-sp-08-2.jpg",
+        "img/hp-sp-08-3.jpg",
+        "img/hp-sp-08.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "ticket": "外观免费",
       "openHours": ""
@@ -399,7 +466,12 @@
       "durationNormal": 150,
       "durationRush": 75,
       "intro": "适合家庭与学生游客。",
-      "realPhoto": "img/hp-sp-09.jpg",
+      "realPhoto": "img/hp-sp-09-2.jpg",
+      "photos": [
+        "img/hp-sp-09-2.jpg",
+        "img/hp-sp-09-3.jpg",
+        "img/hp-sp-09.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "ticket": "免费/特展另计",
       "openHours": ""
@@ -417,7 +489,11 @@
       "durationNormal": 150,
       "durationRush": 75,
       "intro": "艺术设计类博物馆。",
-      "realPhoto": "img/hp-sp-10.jpg",
+      "realPhoto": "img/hp-sp-10-2.jpg",
+      "photos": [
+        "img/hp-sp-10-2.jpg",
+        "img/hp-sp-10.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "ticket": "免费/特展另计",
       "openHours": ""
@@ -435,7 +511,12 @@
       "durationNormal": 120,
       "durationRush": 60,
       "intro": "中心伦敦大型公园。",
-      "realPhoto": "img/hp-sp-11.jpg",
+      "realPhoto": "img/hp-sp-11-2.jpg",
+      "photos": [
+        "img/hp-sp-11-2.jpg",
+        "img/hp-sp-11-3.jpg",
+        "img/hp-sp-11.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "ticket": "免费",
       "openHours": ""
@@ -453,7 +534,11 @@
       "durationNormal": 120,
       "durationRush": 60,
       "intro": "可与伦敦动物园连线。",
-      "realPhoto": "img/hp-sp-12.jpg",
+      "realPhoto": "img/hp-sp-12-2.jpg",
+      "photos": [
+        "img/hp-sp-12-2.jpg",
+        "img/hp-sp-12.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "ticket": "免费",
       "openHours": ""
@@ -471,7 +556,12 @@
       "durationNormal": 60,
       "durationRush": 30,
       "intro": "伦敦代表性桥梁。",
-      "realPhoto": "img/hp-sp-13.jpg",
+      "realPhoto": "img/hp-sp-13-2.jpg",
+      "photos": [
+        "img/hp-sp-13-2.jpg",
+        "img/hp-sp-13-3.jpg",
+        "img/hp-sp-13.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "ticket": "外观免费/内部付费",
       "openHours": ""
@@ -490,6 +580,9 @@
       "durationRush": 23,
       "intro": "电影文化氛围浓厚。",
       "realPhoto": "img/hp-sp-14.jpg",
+      "photos": [
+        "img/hp-sp-14.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "ticket": "免费",
       "openHours": ""
@@ -507,7 +600,12 @@
       "durationNormal": 360,
       "durationRush": 180,
       "intro": "原始电影布景、道具、服装与幕后体验；不在伦敦市内。",
-      "realPhoto": "img/hp-sp-15.jpg",
+      "realPhoto": "img/hp-sp-15-2.jpg",
+      "photos": [
+        "img/hp-sp-15-2.jpg",
+        "img/hp-sp-15-3.jpg",
+        "img/hp-sp-15.jpg"
+      ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "ticket": "付费预约",
       "openHours": ""

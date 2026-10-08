@@ -1,12 +1,41 @@
 <script setup>
+import { computed, ref, watch } from 'vue'
 import PhotoFrame from './ui/PhotoFrame.vue'
 import QuoteCard from './QuoteCard.vue'
-import { formatMinutes, TIER_LABELS } from '../utils/travel-ui'
-defineProps({ poi: { type: Object, required: true } })
+import { formatMinutes, TIER_LABELS, poiPhotos } from '../utils/travel-ui'
+const props = defineProps({ poi: { type: Object, required: true } })
+
+// 一个点位可能有多张实拍图：默认大图看第一张（封面），点缩略图切其它张。
+const photos = computed(() => poiPhotos(props.poi))
+const active = ref(0)
+const current = computed(() => photos.value[active.value] || '')
+
+watch(
+  () => props.poi?.poiId,
+  () => {
+    active.value = 0
+  }
+)
 </script>
 <template>
   <article class="detail">
-    <PhotoFrame :src="poi.realPhoto" :alt="poi.name" />
+    <div class="gallery">
+      <PhotoFrame :src="current" :alt="poi.name" />
+      <div v-if="photos.length > 1" class="thumbs" role="group" aria-label="现场实拍图">
+        <button
+          v-for="(photo, index) in photos"
+          :key="photo"
+          type="button"
+          :class="{ on: index === active }"
+          :aria-label="`查看第 ${index + 1} 张：${poi.name}`"
+          :aria-current="index === active ? 'true' : undefined"
+          @click="active = index"
+        >
+          <PhotoFrame :src="photo" :alt="`${poi.name} 第 ${index + 1} 张`" ratio="4 / 3" />
+        </button>
+        <p class="count">{{ active + 1 }} / {{ photos.length }}</p>
+      </div>
+    </div>
     <div class="content">
       <p class="eyebrow">
         {{ poi.type === 'ip' ? '圣地巡礼' : '其他知名景点'
@@ -40,6 +69,36 @@ defineProps({ poi: { type: Object, required: true } })
   border-radius: 16px;
   overflow: hidden;
   box-shadow: var(--shadow);
+}
+.thumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  overflow-x: auto;
+}
+.thumbs button {
+  flex: 0 0 82px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  overflow: hidden;
+  background: none;
+  line-height: 0;
+}
+.thumbs button.on {
+  border-color: var(--brand);
+}
+.thumbs button:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+.thumbs .count {
+  margin-left: auto;
+  padding-right: 4px;
+  font-size: 12px;
+  color: var(--ink-2);
+  white-space: nowrap;
 }
 .content {
   padding: 28px;

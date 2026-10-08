@@ -2,11 +2,7 @@
 // 输入是 data/lines/index.json + 各条线的 data/lines/*.json，输出是首页要的东西。
 // 不读文件、不访问网络：读文件那步由调用方（demo / 前端 fetch）负责。
 
-export const SECTIONS = [
-  { key: '城市', label: '城市' },
-  { key: '人物', label: '人物' },
-  { key: '地名', label: '地名' },
-];
+export const SECTIONS = [{ key: '城市', label: '城市' }];
 
 // 搜不到时首页显示的原话，不要改
 export const EMPTY_SEARCH_HINT = '抱歉，暂时未收录该圣地巡礼内容';
@@ -66,8 +62,7 @@ export function toCard(line, sectionKey, doc) {
 }
 
 // ---------------------------------------------------------------
-// 首页 S1：城市 / 人物 / 地名 三栏，每栏前 N 张 + 省略号
-// 同一张卡片可以出现在多栏下面，因为只是分组方式不同
+// 首页 S1：只按城市一栏，前 N 组 + 省略号；同一城市的线路在同一组里
 // ---------------------------------------------------------------
 export function buildHomepage(index, docsById = {}, { perSection = 3 } = {}) {
   const lines = [...(index.lines ?? [])].sort((a, b) => a.priority - b.priority);

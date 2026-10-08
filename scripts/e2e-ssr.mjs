@@ -66,7 +66,7 @@ async function render(path, { seed } = {}) {
     `${store.ipPois.length}/${store.classicPois.length}`)
   check('IP 点按 S>A>B 排序', store.ipPois[0]?.tier === 'S')
   check('城市景点按知名度降序', store.classicPois[0]?.popularity === 5)
-  check('定制页渲染出双栏', html.includes('打卡点') && html.includes('城市著名景点'))
+  check('定制页渲染出双栏', html.includes('圣地巡礼') && html.includes('其他知名景点'))
   check('时间条渲染', html.includes('开始') && html.includes('结束'))
   check('勾选列表带原文引文点（S 级在前）', html.includes('国泰电影院'))
 }

@@ -58,3 +58,14 @@ export function assetUrl(value, base = '/') {
   if (src.startsWith('/')) return src
   return `${base.replace(/\/?$/, '/')}${src.replace(/^\.\//, '')}`
 }
+
+// 一个点位可能有多张实拍图：photos[0] 即封面，老数据只有 realPhoto 时退回单图。
+export function poiPhotos(poi) {
+  const list = Array.isArray(poi?.photos) ? poi.photos.filter(Boolean) : []
+  if (list.length) return list
+  return poi?.realPhoto ? [poi.realPhoto] : []
+}
+
+export function poiCover(poi) {
+  return poiPhotos(poi)[0] || ''
+}

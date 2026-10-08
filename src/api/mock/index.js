@@ -64,21 +64,17 @@ export function search(keyword) {
 }
 
 // ------------------------------------------------------------
-// 3. 端点 2：首页三栏目卡片墙
-//    每栏一条线只出现一次（命中的人物/地名合成副标题），不出重复卡片
+// 3. 端点 2：首页栏目卡片墙（只按城市）
+//    同一城市的线路归到一组，一组里可以有多条线；每条线只出现一次
 // ------------------------------------------------------------
-const COLUMN_TAG = { city: '城市', figure: '人物', place: '地名' }
-
 export function listColumns() {
-  const out = { city: [], figure: [], place: [] }
-  for (const [key, tag] of Object.entries(COLUMN_TAG)) {
-    for (const l of orderedLines()) {
-      const matched = l.tags?.[tag] ?? []
-      if (!matched.length) continue
-      out[key].push({ label: matched.join(' / '), lines: [toLine(l.lineId)] })
-    }
+  const groups = new Map()
+  for (const l of orderedLines()) {
+    const city = l.city || '其他'
+    if (!groups.has(city)) groups.set(city, { label: city, lines: [] })
+    groups.get(city).lines.push(toLine(l.lineId))
   }
-  return out
+  return { city: [...groups.values()] }
 }
 
 // ------------------------------------------------------------
