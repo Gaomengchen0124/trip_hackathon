@@ -305,7 +305,11 @@
       "realPhoto": "img/dm-sp-07.jpg",
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "¥80",
-      "openHours": "07:30-18:30"
+      "openHours": "07:30-18:30",
+      "photos": [
+        "img/dm-sp-07.jpg",
+        "img/dm-sp-07-2.jpg"
+      ]
     },
     {
       "poiId": "dm-sp-08",

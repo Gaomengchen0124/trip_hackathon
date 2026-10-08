@@ -190,3 +190,15 @@
 | harrypotter-london | hp-sp-14-2.jpg | 同上（Leicester Square 同组） | DiscoA340 | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Leicester_Square_(August_2023)_07.jpg) |  |
 | harrypotter-london | hp-sp-14-3.jpg | 同上（Leicester Square 同组） | DiscoA340 | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Leicester_Square_(August_2023)_08.jpg) |  |
 | harrypotter-london | hp-sp-15.jpg（华纳兄弟首图，该点目前仅此 1 张） | File:Entrance to the Making of Harry Potter studio tour.jpg | Photograph by Mike Peel (www.mikepeel.net) | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Entrance_to_the_Making_of_Harry_Potter_studio_tour.jpg) |  |
+| santi-beijing | st-ip-04.jpg | 清华园二校门（用户提供） | 【待用户补充来源】 | 【待确认】 | — | 用户提供，替换原 Commons 图 |
+| fanhua-shanghai | sh-ip-04.jpg | 曹杨一村门楼（用户提供） | 小红书用户 书号595186852 | 待授权（演示用） | — | 用户提供，带水印 |
+| fanhua-shanghai | sh-ip-07.jpg | 进贤路四吉饭店（用户提供） | 小红书用户 书号222171576 | 待授权（演示用） | — | 用户提供，带水印 |
+| santi-beijing | st-sp-13.jpg | 798艺术区（用户提供） | 小红书用户 书号1064264904 | 待授权（演示用） | — | 用户提供，带水印 |
+| fanhua-shanghai | sh-ip-08.jpg | 南京路新世界城夜景（用户提供，原图标注HUANGHE ROAD） | 【待用户补充来源】 | 【待确认】 | — | 用户提供 |
+| daomu-hangzhou | dm-sp-05.jpg | 三潭印月石塔（用户提供） | 小红书用户 书号4290017343 | 待授权（演示用） | — | 用户提供，带水印 |
+| daomu-hangzhou | dm-sp-13.jpg | 太子湾公园湖景草坪（用户提供，原误标西溪） | 【待用户补充来源】 | 【待确认】 | — | 用户提供 |
+| daomu-hangzhou | dm-sp-08.jpg | 九溪烟树（用户提供） | 小红书用户 书号593424568 | 待授权（演示用） | — | 用户提供，带水印 |
+| daomu-hangzhou | dm-sp-09.jpg | 龙井村门楼（用户提供） | 【待用户补充来源】 | 【待确认】 | — | 用户提供 |
+| daomu-hangzhou | dm-sp-10.jpg | 六和塔（用户提供） | 【待用户补充来源】 | 【待确认】 | — | 用户提供 |
+| daomu-hangzhou | dm-ip-03.jpg | 宝石山摩崖石刻（用户提供） | 小红书用户 书号761015720 | 待授权（演示用） | — | 用户提供，带水印 |
+| daomu-hangzhou | dm-sp-07.jpg + dm-sp-07-2.jpg | 西溪湿地摇橹船/西溪白墙（用户提供） | 【待用户补充来源】 | 【待确认】 | — | 用户提供，多图 |

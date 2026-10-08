@@ -17,6 +17,7 @@ body {
   color: var(--ink);
   background: var(--bg);
   line-height: 1.6;
+  overflow-x: hidden; /* 首页 IP 墙整宽出血,防止出现横向滚动条 */
 }
 
 #app { min-height: 100vh; display: flex; flex-direction: column; }
