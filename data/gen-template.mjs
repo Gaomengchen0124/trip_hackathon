@@ -96,6 +96,41 @@ const TIANJIN_CLUSTERS = [
   '西青·杨柳青',
 ];
 
+// 大理（《去有风的地方》）：模板《填写模板·去有风的地方-大理.md》固定的 6 个片区
+const DALI_CLUSTERS = [
+  '大理·凤阳邑',
+  '大理·喜洲',
+  '大理·古城',
+  '大理·苍山三塔',
+  '大理·洱海西岸',
+  '大理·海东双廊',
+];
+
+// 厦门（《开端》）：模板《填写模板·开端-厦门.md》固定的 9 个片区
+const XIAMEN_CLUSTERS = [
+  '厦门·岛内步道',
+  '厦门·东荣社区',
+  '厦门·华美空间',
+  '厦门·环东海域',
+  '厦门·海沧大道',
+  '厦门·鼓浪屿',
+  '厦门·中山路沙坡尾',
+  '厦门·环岛路',
+  '厦门·集美',
+];
+
+// 上海（《爱情神话》）：模板《填写模板·爱情神话-上海.md》固定的 8 个片区
+const SHANGHAI_AQSH_CLUSTERS = [
+  '徐汇·衡复',
+  '静安',
+  '近郊',
+  '黄浦·外滩',
+  '黄浦·老城厢',
+  '黄浦·打浦桥',
+  '虹口·北外滩',
+  '浦东',
+];
+
 const LINES = [
   {
     file: 'fanhua-shanghai',
@@ -264,8 +299,8 @@ const LINES = [
     clusters: TIANJIN_CLUSTERS,
     // 模板给的坐标范围（116.7~117.5 / 38.5~39.3）装不下盘山（40.06）和滨海海洋博物馆（117.79），放宽到全市
     bounds: { lng: [116.7, 118.0], lat: [38.5, 40.3] },
-    // 剧本核对结论：全剧唯一可落地的现实锚点只有天津站，其余是棚内置景名 → 方案 A，只填 1 张卡
-    expectedIp: [1, 3],
+    // 方案 B（取景地线）：天津站 + 张园/静园/利顺德/张学良故居/曾延毅旧居/吴泰勋旧居（取景依据由人 A 核实提供）
+    expectedIp: [6, 8],
     expectedCity: [10, 20],
     prefix: 'qf',
     ip: {
@@ -273,13 +308,86 @@ const LINES = [
       name: '潜伏',
       author: '龙一（原著）／姜伟（编剧）',
       kind: 'tv',
-      aliases: ['潜伏', '余则成', '翠平', '吴敬中', '吴站长', '左蓝', '李涯', '天津站', '保密局天津站'],
+      aliases: ['潜伏', '余则成', '翠平', '吴敬中', '吴站长', '左蓝', '李涯', '天津站', '保密局天津站', '张园', '静园', '利顺德', '利顺德大饭店'],
     },
     priority: 6,
     tags: {
       城市: ['天津'],
       人物: ['余则成', '翠平', '吴敬中', '左蓝', '李涯'],
-      地名: ['天津站', '五大道', '意式风情区', '海河', '静园', '盘山'],
+      地名: ['天津站', '张园', '静园', '利顺德大饭店', '五大道', '意式风情区', '海河', '赤峰道', '盘山'],
+    },
+    recommendDays: 2,
+  },
+  {
+    file: 'quyoufengdedifang-dali',
+    title: '去有风的地方·大理',
+    city: '大理',
+    clusters: DALI_CLUSTERS,
+    bounds: { lng: [99.9, 100.4], lat: [25.5, 26.0] },
+    // 首版只收录凤阳邑、喜洲、大理古城 3 个已报道取景点，其余候选待有证据再补
+    expectedIp: [3, 8],
+    expectedCity: [10, 20],
+    prefix: 'yf-dl',
+    ip: {
+      ipId: 'quyoufengdedifang',
+      name: '去有风的地方',
+      author: '原创电视剧（无原著）',
+      kind: 'tv',
+      aliases: ['去有风的地方', '有风的地方', '许红豆', '谢之遥', '有风小院', '凤阳邑'],
+    },
+    priority: 7,
+    tags: {
+      城市: ['大理'],
+      人物: ['许红豆', '谢之遥'],
+      地名: ['凤阳邑', '喜洲古镇', '大理古城'],
+    },
+    recommendDays: 2,
+  },
+  {
+    file: 'kaiduan-xiamen',
+    title: '开端·厦门',
+    city: '厦门',
+    clusters: XIAMEN_CLUSTERS,
+    bounds: { lng: [117.9, 118.4], lat: [24.4, 24.8] },
+    expectedIp: [6, 8],
+    expectedCity: [10, 20],
+    prefix: 'kd-xm',
+    ip: {
+      ipId: 'kaiduan',
+      name: '开端',
+      author: '祈祷君（原著）／电视剧《开端》',
+      kind: 'tv',
+      aliases: ['开端', '祈祷君', '李诗情', '肖鹤云', '嘉林', '公交车'],
+    },
+    priority: 8,
+    tags: {
+      城市: ['厦门'],
+      人物: ['李诗情', '肖鹤云'],
+      地名: ['和熙楼', '海山东荣广场', '联发华美空间', '美峰天桥'],
+    },
+    recommendDays: 2,
+  },
+  {
+    file: 'aiqingshenhua-shanghai',
+    title: '爱情神话·上海',
+    city: '上海',
+    clusters: SHANGHAI_AQSH_CLUSTERS,
+    bounds: { lng: [121.0, 121.9], lat: [30.6, 31.5] },
+    expectedIp: [6, 8],
+    expectedCity: [10, 20],
+    prefix: 'aqsh-sh',
+    ip: {
+      ipId: 'aiqingshenhua',
+      name: '爱情神话',
+      author: '邵艺辉（编剧／导演）',
+      kind: 'film',
+      aliases: ['爱情神话', '老白', '李小姐', '格洛瑞亚', '蓓蓓', '五原路'],
+    },
+    priority: 9,
+    tags: {
+      城市: ['上海'],
+      人物: ['老白', '李小姐', '格洛瑞亚', '蓓蓓'],
+      地名: ['五原路', '延庆路', '马利美术馆'],
     },
     recommendDays: 2,
   },

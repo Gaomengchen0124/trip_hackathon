@@ -14,8 +14,8 @@
   },
   "_expected": {
     "ipStops": [
-      1,
-      3
+      6,
+      8
     ],
     "cityStops": [
       10,
@@ -38,7 +38,11 @@
       "左蓝",
       "李涯",
       "天津站",
-      "保密局天津站"
+      "保密局天津站",
+      "张园",
+      "静园",
+      "利顺德",
+      "利顺德大饭店"
     ],
     "tags": {
       "城市": [
@@ -53,10 +57,13 @@
       ],
       "地名": [
         "天津站",
+        "张园",
+        "静园",
+        "利顺德大饭店",
         "五大道",
         "意式风情区",
         "海河",
-        "静园",
+        "赤峰道",
         "盘山"
       ]
     }
@@ -80,18 +87,25 @@
   ],
   "ipStops": [
     {
-      "poiId": "qf-ip-01",
       "lineId": "qianfu-tianjin",
       "type": "ip",
-      "name": "天津站",
       "alias": "剧里叫「天津站」（保密局天津站）；站内电台代号「码头」",
-      "lng": 117.2036841,
-      "lat": 39.1357517,
+      "realPhoto": "img/qf-ip-01.jpg",
+      "photos": [
+        "img/qf-ip-01.jpg",
+        "img/qf-ip-01-2.jpg",
+        "img/qf-ip-01-3.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "poiId": "qf-ip-01",
+      "name": "天津站",
       "cluster": "河东",
       "tier": "S",
+      "lng": 117.2036841,
+      "lat": 39.1357517,
       "durationNormal": 45,
       "durationRush": 15,
-      "intro": "剧中余则成任职的「保密局天津站」与这座火车站同名，站内电台代号又叫「码头」——机构名、代号、真实车站三重叠在一处，是全剧最好用的入口。",
+      "intro": "剧中「保密局天津站」与这座火车站同名，站内电台代号又叫「码头」——机构名、代号、真实车站三重叠在一处。",
       "quotes": [
         {
           "kind": "台词",
@@ -100,10 +114,164 @@
           "source": "电视剧《潜伏》第 2 集"
         }
       ],
-      "realPhoto": "img/qf-ip-01.jpg",
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "skipNote": "市区点，放弃省不了多少时间——建议留。",
       "tips": "拍站房外景即可，无需进站。"
+    },
+    {
+      "lineId": "qianfu-tianjin",
+      "type": "ip",
+      "alias": "剧里的「天津站」站部；溥仪旧居",
+      "realPhoto": "img/qf-ip-02.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "poiId": "qf-ip-02",
+      "name": "张园 · 保密局天津站站部",
+      "cluster": "和平·五大道",
+      "tier": "S",
+      "lng": 117.1854596,
+      "lat": 39.1238778,
+      "durationNormal": 45,
+      "durationRush": 25,
+      "intro": "剧中「保密局天津站」站部的取景地，现实里也是溥仪住过的旧园，就静卧在鞍山道旁。",
+      "quotes": [
+        {
+          "kind": "台词",
+          "brief": "天津虽然不比上海，但也是花花世界。",
+          "full": "天津虽然不比上海，但也是花花世界。",
+          "source": "电视剧《潜伏》第 3 集"
+        }
+      ],
+      "skipNote": "和静园挨着，两处一起走才划算，单独砍掉一个意义不大。",
+      "tips": "和平区鞍山道59号，与静园（鞍山道70号）步行 5 分钟，建议顺路一起走。"
+    },
+    {
+      "lineId": "qianfu-tianjin",
+      "type": "ip",
+      "alias": "剧中站长接风宴地点",
+      "realPhoto": "img/qf-ip-03.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "poiId": "qf-ip-03",
+      "name": "利顺德大饭店",
+      "cluster": "和平·五大道",
+      "tier": "A",
+      "lng": 117.2032,
+      "lat": 39.1269,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "剧中站长设接风宴的地方；现实中是 1863 年开业的老饭店，馆内的利顺德博物馆能看到这段近代史。",
+      "quotes": [
+        {
+          "kind": "台词",
+          "brief": "我代表天津站，为你们接风。",
+          "full": "我代表天津站，为你们接风，并向各位坚强而善良的抗战夫人们表示敬意。",
+          "source": "电视剧《潜伏》第 3 集"
+        }
+      ],
+      "skipNote": "建筑本身值得看，时间紧时可以只在大堂和内设博物馆转一圈。",
+      "tips": "和平区台儿庄路33号；馆内博物馆需另购票，建议留 1 小时。"
+    },
+    {
+      "lineId": "qianfu-tianjin",
+      "type": "ip",
+      "alias": "剧中余则成打晋升报告用的机器",
+      "realPhoto": "img/qf-ip-04.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "poiId": "qf-ip-04",
+      "name": "静园",
+      "cluster": "和平·五大道",
+      "tier": "A",
+      "lng": 117.1829335,
+      "lat": 39.1222041,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "剧中余则成用来打晋升报告的那台机器就在这座小院里；这里也是溥仪离开天津前的居所。",
+      "quotes": [
+        {
+          "kind": "台词",
+          "brief": "我没有什么信仰，如果说有，我现在信仰良心。",
+          "full": "我没有什么信仰，如果说有，我现在信仰良心，赶走日本人后，我就信仰生活，信仰你。",
+          "source": "电视剧《潜伏》第 2 集"
+        }
+      ],
+      "skipNote": "离张园近，想省时间可以把两处并成一段。",
+      "tips": "和平区鞍山道70号，离张园很近，建议顺路参观。"
+    },
+    {
+      "lineId": "qianfu-tianjin",
+      "type": "ip",
+      "alias": "剧中成衣铺与诊所的取景地",
+      "realPhoto": "img/qf-ip-05.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "poiId": "qf-ip-05",
+      "name": "张学良故居",
+      "cluster": "和平·五大道",
+      "tier": "B",
+      "lng": 117.1968,
+      "lat": 39.1238,
+      "durationNormal": 45,
+      "durationRush": 25,
+      "intro": "剧中成衣铺与诊所的取景地之一，赤峰道上这座三层洋楼如今是张学良故居纪念馆。",
+      "quotes": [
+        {
+          "kind": "台词",
+          "brief": "谁也不能战胜我的信仰。",
+          "full": "别做梦了，谁也不能战胜我的信仰。我可以死，但我决不会出卖我的战士。",
+          "source": "电视剧《潜伏》第 7 集 秋掌柜"
+        }
+      ],
+      "skipNote": "和瓷房子同在赤峰道，顺路看外景即可，赶时间可以砍。",
+      "tips": "和平区赤峰道78号；剧中诊所的另一处取景在新华路31号。"
+    },
+    {
+      "lineId": "qianfu-tianjin",
+      "type": "ip",
+      "alias": "剧中吴敬中家",
+      "realPhoto": "img/qf-ip-06.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "poiId": "qf-ip-06",
+      "name": "曾延毅旧居",
+      "cluster": "和平·五大道",
+      "tier": "B",
+      "lng": 117.1955,
+      "lat": 39.115,
+      "durationNormal": 30,
+      "durationRush": 15,
+      "intro": "剧中吴敬中家的取景地，五大道上一处安静的近代名人旧居，外景打卡即可。",
+      "quotes": [
+        {
+          "kind": "台词",
+          "brief": "处罚是可怜的手段，我用不惯。",
+          "full": "处罚是可怜的手段，我用不惯。",
+          "source": "电视剧《潜伏》第 5 集 吴站长"
+        }
+      ],
+      "skipNote": "外景点，不占多少时间；实在赶就砍。",
+      "tips": "和平区重庆道一带，外景打卡即可。"
+    },
+    {
+      "lineId": "qianfu-tianjin",
+      "type": "ip",
+      "alias": "剧中戴笠下榻处",
+      "realPhoto": "img/qf-ip-07.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "poiId": "qf-ip-07",
+      "name": "吴泰勋旧居",
+      "cluster": "和平·五大道",
+      "tier": "B",
+      "lng": 117.193,
+      "lat": 39.1125,
+      "durationNormal": 30,
+      "durationRush": 15,
+      "intro": "剧中戴笠下榻处的取景地，藏在五大道的近代旧居群里，是剧中上级机关与本线的联结点。",
+      "quotes": [
+        {
+          "kind": "台词",
+          "brief": "绝密，码头指示佛龛，尽速查一叫左蓝的女人身份。",
+          "full": "绝密，码头指示佛龛，尽速查一叫左蓝的女人身份。",
+          "source": "电视剧《潜伏》第 4 集 站长电文"
+        }
+      ],
+      "skipNote": "外景点，时间紧可砍。",
+      "tips": "和平区常德道一带，外景打卡即可。"
     }
   ],
   "cityStops": [
@@ -171,6 +339,11 @@
       "durationRush": 45,
       "intro": "天津老城厢的民俗主轴，天后宫是天津城市信仰的起点，适合看市井与手作。",
       "realPhoto": "img/qf-sp-04.jpg",
+      "photos": [
+        "img/qf-sp-04.jpg",
+        "img/qf-sp-04-2.jpg",
+        "img/qf-sp-04-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "免费",
       "openHours": "09:00-17:00"
@@ -242,40 +415,6 @@
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "免费",
       "openHours": "全天"
-    },
-    {
-      "poiId": "qf-sp-09",
-      "lineId": "qianfu-tianjin",
-      "type": "classic",
-      "name": "静园",
-      "lng": 117.1829335,
-      "lat": 39.1222041,
-      "cluster": "和平·五大道",
-      "popularity": 3,
-      "durationNormal": 60,
-      "durationRush": 30,
-      "intro": "末代皇帝溥仪在天津的居所，一座安静的西式庭院，近代史绕不开的一站。",
-      "realPhoto": "img/qf-sp-09.jpg",
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
-      "ticket": "约¥20",
-      "openHours": "09:00-17:30"
-    },
-    {
-      "poiId": "qf-sp-10",
-      "lineId": "qianfu-tianjin",
-      "type": "classic",
-      "name": "张园",
-      "lng": 117.1854596,
-      "lat": 39.1238778,
-      "cluster": "和平·五大道",
-      "popularity": 3,
-      "durationNormal": 45,
-      "durationRush": 23,
-      "intro": "由清末旧园改建的西式宅院，溥仪离津前也曾在此居住，如今是演出与展览场地。",
-      "realPhoto": "img/qf-sp-10.jpg",
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
-      "ticket": "约¥25",
-      "openHours": "09:00-17:00"
     },
     {
       "poiId": "qf-sp-11",

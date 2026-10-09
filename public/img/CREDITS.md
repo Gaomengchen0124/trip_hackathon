@@ -63,3 +63,189 @@
 | woyuditan-beijing | wd-sp-10.jpg | File:National Museum of Modern Chinese Literature, Block C (20230215152724).jpg | N509FZ | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:National_Museum_of_Modern_Chinese_Literature,_Block_C_(20230215152724).jpg) |  |
 | woyuditan-beijing | wd-sp-11.jpg | File:PekingUniversityPic6.jpg | galaygobi | CC BY 2.0 | [链接](https://commons.wikimedia.org/wiki/File:PekingUniversityPic6.jpg) |  |
 | woyuditan-beijing | wd-sp-13.jpg | File:National Library of China - South House (1987).JPG | 虞海 | CC BY-SA 2.0 tw | [链接](https://commons.wikimedia.org/wiki/File:National_Library_of_China_-_South_House_(1987).JPG) |  |
+
+## 多图补充（2026-10-08）：点位第 2 张起（详情页缩略图可切换）
+
+最长边 1280px 压缩后落盘；首图仍为各点位已选定的那张。
+
+| 线路 | 文件 | 标题 | 作者 | 授权 | 来源 | 备注 |
+| --- | --- | --- | --- | --- | --- | --- |
+| fanhua-shanghai | sh-ip-01-2.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 国泰电影院 · 第 2 张起 |
+| fanhua-shanghai | sh-ip-01-3.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 国泰电影院 · 第 2 张起 |
+| fanhua-shanghai | sh-ip-02-2.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 思南路 · 第 2 张起 |
+| fanhua-shanghai | sh-ip-02-3.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 思南路 · 第 2 张起 |
+| fanhua-shanghai | sh-ip-03-2.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 复兴公园 · 第 2 张起 |
+| fanhua-shanghai | sh-ip-03-3.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 复兴公园 · 第 2 张起 |
+| fanhua-shanghai | sh-ip-05-2.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 提篮桥 · 第 2 张起 |
+| fanhua-shanghai | sh-ip-05-3.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 提篮桥 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-01-2.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 东方明珠 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-01-3.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 东方明珠 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-02-2.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 上海中心·上海之巅 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-02-3.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 上海中心·上海之巅 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-03-2.jpg | File:Yuyuan Gardens - concrete bird design.JPG | Me (w:User:pfctdayelise) | CC BY-SA 2.5 | [链接](https://commons.wikimedia.org/wiki/File:Yuyuan_Gardens_-_concrete_bird_design.JPG) | 豫园·城隍庙 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-03-3.jpg | File:Yu Garden Shanghai November 2017 003.jpg | King of Hearts | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Yu_Garden_Shanghai_November_2017_003.jpg) | 豫园·城隍庙 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-04-2.jpg | File:East Nanjing Road Shanghai.JPG | Livelikerw | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:East_Nanjing_Road_Shanghai.JPG) | 南京路步行街 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-04-3.jpg | File:上海 - panoramio (3).jpg | Roman SUZUKI | CC BY 3.0 | [链接](https://commons.wikimedia.org/wiki/File:%E4%B8%8A%E6%B5%B7_-_panoramio_(3).jpg) | 南京路步行街 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-05-2.jpg | File:上海博物馆 俄罗斯“巡回画派展”(2).jpg | 白色瑰宝 | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:%E4%B8%8A%E6%B5%B7%E5%8D%9A%E7%89%A9%E9%A6%86_%E4%BF%84%E7%BD%97%E6%96%AF%E2%80%9C%E5%B7%A1%E5%9B%9E%E7%94%BB%E6%B4%BE%E5%B1%95%E2%80%9D(2).jpg) | 上海博物馆 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-05-3.jpg | File:上海博物馆东馆 161034.jpg | Hpppp0527 | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:%E4%B8%8A%E6%B5%B7%E5%8D%9A%E7%89%A9%E9%A6%86%E4%B8%9C%E9%A6%86_161034.jpg) | 上海博物馆 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-06-2.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 静安寺 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-06-3.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 静安寺 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-07-2.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 武康大楼·武康路 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-07-3.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 武康大楼·武康路 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-08-2.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 田子坊 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-08-3.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 田子坊 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-09-2.jpg | File:上海新天地 - panoramio.jpg | Foxy Who \(^∀^)/ | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:%E4%B8%8A%E6%B5%B7%E6%96%B0%E5%A4%A9%E5%9C%B0_-_panoramio.jpg) | 新天地 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-10-2.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 上海迪士尼乐园 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-10-3.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 上海迪士尼乐园 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-11-2.jpg | File:Zhujiajiao canal 4.JPG | BrokenSphere | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:Zhujiajiao_canal_4.JPG) | 朱家角古镇 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-11-3.jpg | File:Zhujiajiao at night.jpg | Woong Deewaa | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Zhujiajiao_at_night.jpg) | 朱家角古镇 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-12-2.jpg | File:2024-Apr Shanghai 1933 Old Millfun (Old Slaughterhouse) 1933老场坊 - img 03.jpg | Chainwit. | CC BY 4.0 | [链接](https://commons.wikimedia.org/wiki/File:2024-Apr_Shanghai_1933_Old_Millfun_(Old_Slaughterhouse)_1933%E8%80%81%E5%9C%BA%E5%9D%8A_-_img_03.jpg) | 1933老场坊 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-12-3.jpg | File:2024-Apr Shanghai 1933 Old Millfun (Old Slaughterhouse) 1933老场坊 - img 06.jpg | Chainwit. | CC BY 4.0 | [链接](https://commons.wikimedia.org/wiki/File:2024-Apr_Shanghai_1933_Old_Millfun_(Old_Slaughterhouse)_1933%E8%80%81%E5%9C%BA%E5%9D%8A_-_img_06.jpg) | 1933老场坊 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-13-2.jpg | File:上海多伦路文化名人街郭沫若足印.JPG | Gisling | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:%E4%B8%8A%E6%B5%B7%E5%A4%9A%E4%BC%A6%E8%B7%AF%E6%96%87%E5%8C%96%E5%90%8D%E4%BA%BA%E8%A1%97%E9%83%AD%E6%B2%AB%E8%8B%A5%E8%B6%B3%E5%8D%B0.JPG) | 多伦路文化名人街 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-13-3.jpg | File:上海多伦路文化名人街茅盾足印.JPG | Gisling | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:%E4%B8%8A%E6%B5%B7%E5%A4%9A%E4%BC%A6%E8%B7%AF%E6%96%87%E5%8C%96%E5%90%8D%E4%BA%BA%E8%A1%97%E8%8C%85%E7%9B%BE%E8%B6%B3%E5%8D%B0.JPG) | 多伦路文化名人街 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-15-2.jpg | File:Shanghai recycling transport tricycle.jpg | Ermell | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Shanghai_recycling_transport_tricycle.jpg) | 西岸滨江·龙美术馆 · 第 2 张起 |
+| fanhua-shanghai | sh-sp-15-3.jpg | File:Shanghai Jin Mao tower.jpg | Ermell | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Shanghai_Jin_Mao_tower.jpg) | 西岸滨江·龙美术馆 · 第 2 张起 |
+| santi-beijing | st-ip-02-2.jpg | File:王府井天主教堂 (2).jpg | EditQ | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:%E7%8E%8B%E5%BA%9C%E4%BA%95%E5%A4%A9%E4%B8%BB%E6%95%99%E5%A0%82_(2).jpg) | 王府井天主教堂 · 第 2 张起 |
+| santi-beijing | st-ip-03-2.jpg | File:Beijing Planetarium new.jpg | Shizhao | CC BY-SA 2.5 | [链接](https://commons.wikimedia.org/wiki/File:Beijing_Planetarium_new.jpg) | 北京天文馆 · 第 2 张起 |
+| santi-beijing | st-ip-03-3.jpg | File:Visitors' entrance of Beijing Planetarium (20221011161419).jpg | N509FZ | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Visitors%27_entrance_of_Beijing_Planetarium_(20221011161419).jpg) | 北京天文馆 · 第 2 张起 |
+| santi-beijing | st-ip-04-2.jpg | File:PUMC 1.jpg | The original uploader was Dirrival at Chinese Wikipedia. | CC BY-SA 2.5 | [链接](https://commons.wikimedia.org/wiki/File:PUMC_1.jpg) | 清华大学 · 第 2 张起 |
+| santi-beijing | st-ip-04-3.jpg | File:Peking Union Medical College Hospital Dongdan Campus.jpg | EditQ | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Peking_Union_Medical_College_Hospital_Dongdan_Campus.jpg) | 清华大学 · 第 2 张起 |
+| santi-beijing | st-ip-05-2.jpg | File:Miyun, Beijing, China - panoramio (16).jpg | liyuhanrenll | CC BY 3.0 | [链接](https://commons.wikimedia.org/wiki/File:Miyun,_Beijing,_China_-_panoramio_(16).jpg) | 密云水库 · 第 2 张起 |
+| santi-beijing | st-sp-02-2.jpg | File:Flower basket at Tiananmen Square (20241001120425).jpg | HoweyYuan | CC0 | [链接](https://commons.wikimedia.org/wiki/File:Flower_basket_at_Tiananmen_Square_(20241001120425).jpg) | 天安门广场 · 第 2 张起 |
+| santi-beijing | st-sp-02-3.jpg | File:Tiananmen Square - National Day 2006.jpg | PENG, Yanan (Neo-Jay) | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:Tiananmen_Square_-_National_Day_2006.jpg) | 天安门广场 · 第 2 张起 |
+| santi-beijing | st-sp-02-4.jpg | File:National mourning for 2008 Sichuan earthquake victims - Tiananmen Square, Beijing, 2008-05-19.jpg | Neo-Jay | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:National_mourning_for_2008_Sichuan_earthquake_victims_-_Tiananmen_Square,_Beijing,_2008-05-19.jpg) | 天安门广场 · 第 2 张起 |
+| santi-beijing | st-sp-03-2.jpg | File:West Gate of Summer Palace Station (20170708).jpg | FRDian | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:West_Gate_of_Summer_Palace_Station_(20170708).jpg) | 颐和园 · 第 2 张起 |
+| santi-beijing | st-sp-03-3.jpg | File:Chinese glazed roof tile in the Summer Palace.jpg | HoweyYuan | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Chinese_glazed_roof_tile_in_the_Summer_Palace.jpg) | 颐和园 · 第 2 张起 |
+| santi-beijing | st-sp-04-2.jpg | File:Shizilin in Old Summer Palace 2022.jpg | Charlie fong | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Shizilin_in_Old_Summer_Palace_2022.jpg) | 圆明园遗址公园 · 第 2 张起 |
+| santi-beijing | st-sp-05-2.jpg | File:Temple of Heaven, Beijing, China - 010 edit.jpg | Maros M r a z (Maros) | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:Temple_of_Heaven,_Beijing,_China_-_010_edit.jpg) | 天坛公园 · 第 2 张起 |
+| santi-beijing | st-sp-05-3.jpg | File:中国北京天坛公园3.JPG | Weiqing | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:%E4%B8%AD%E5%9B%BD%E5%8C%97%E4%BA%AC%E5%A4%A9%E5%9D%9B%E5%85%AC%E5%9B%AD3.JPG) | 天坛公园 · 第 2 张起 |
+| santi-beijing | st-sp-06-2.jpg | File:2014-1-北京-八达岭长城 (48).jpg | Willlee710 | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:2014-1-%E5%8C%97%E4%BA%AC-%E5%85%AB%E8%BE%BE%E5%B2%AD%E9%95%BF%E5%9F%8E_(48).jpg) | 八达岭长城 · 第 2 张起 |
+| santi-beijing | st-sp-07-2.jpg | File:Olympic stadium of Beijing.JPG | Usuallysmile | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Olympic_stadium_of_Beijing.JPG) | 鸟巢 · 水立方 · 第 2 张起 |
+| santi-beijing | st-sp-07-3.jpg | File:“首善北京”彩车 20191005 161945.jpg | 維基小霸王 | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:%E2%80%9C%E9%A6%96%E5%96%84%E5%8C%97%E4%BA%AC%E2%80%9D%E5%BD%A9%E8%BD%A6_20191005_161945.jpg) | 鸟巢 · 水立方 · 第 2 张起 |
+| santi-beijing | st-sp-08-2.jpg | File:南锣鼓巷站8号线“北京记忆”装饰.JPG | Hat600 | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:%E5%8D%97%E9%94%A3%E9%BC%93%E5%B7%B7%E7%AB%998%E5%8F%B7%E7%BA%BF%E2%80%9C%E5%8C%97%E4%BA%AC%E8%AE%B0%E5%BF%86%E2%80%9D%E8%A3%85%E9%A5%B0.JPG) | 南锣鼓巷 · 第 2 张起 |
+| santi-beijing | st-sp-08-3.jpg | File:Nanluogu Xiang (6230757826).jpg | Francisco Anzola | CC BY 2.0 | [链接](https://commons.wikimedia.org/wiki/File:Nanluogu_Xiang_(6230757826).jpg) | 南锣鼓巷 · 第 2 张起 |
+| santi-beijing | st-sp-09-2.jpg | File:北京 什刹海.jpg | Worldtravelwiki | CC0 | [链接](https://commons.wikimedia.org/wiki/File:%E5%8C%97%E4%BA%AC_%E4%BB%80%E5%88%B9%E6%B5%B7.jpg) | 什刹海 · 第 2 张起 |
+| santi-beijing | st-sp-09-3.jpg | File:8号线什刹海站站台.JPG | Hat600 | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:8%E5%8F%B7%E7%BA%BF%E4%BB%80%E5%88%B9%E6%B5%B7%E7%AB%99%E7%AB%99%E5%8F%B0.JPG) | 什刹海 · 第 2 张起 |
+| santi-beijing | st-sp-10-2.jpg | File:Yonghe Temple board.jpg | PENG, Yanan (Neo-Jay | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:Yonghe_Temple_board.jpg) | 雍和宫 · 第 2 张起 |
+| santi-beijing | st-sp-10-3.jpg | File:雍和宫2.jpg | 蒋亦炯 | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:%E9%9B%8D%E5%92%8C%E5%AE%AB2.jpg) | 雍和宫 · 第 2 张起 |
+| santi-beijing | st-sp-11-2.jpg | File:Peking Beihai Park Vase-20110104-RM-113150.jpg | Ermell | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Peking_Beihai_Park_Vase-20110104-RM-113150.jpg) | 北海公园 · 第 2 张起 |
+| santi-beijing | st-sp-11-3.jpg | File:Peking Beihai Park Bühne-20110104-RM-113434.jpg | Ermell | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Peking_Beihai_Park_B%C3%BChne-20110104-RM-113434.jpg) | 北海公园 · 第 2 张起 |
+| santi-beijing | st-sp-12-2.jpg | File:北京景山公园 02.jpg | DragonSamYU | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:%E5%8C%97%E4%BA%AC%E6%99%AF%E5%B1%B1%E5%85%AC%E5%9B%AD_02.jpg) | 景山公园 · 第 2 张起 |
+| santi-beijing | st-sp-12-3.jpg | File:Jingshan from the southwest (20211107141052).jpg | N509FZ | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Jingshan_from_the_southwest_(20211107141052).jpg) | 景山公园 · 第 2 张起 |
+| santi-beijing | st-sp-14-2.jpg | File:Fragrant Hills-pagoda1.JPG |  | CC BY-SA 1.0 | [链接](https://commons.wikimedia.org/wiki/File:Fragrant_Hills-pagoda1.JPG) | 香山公园 · 第 2 张起 |
+| santi-beijing | st-sp-14-3.jpg | File:Fragrant Hill Hotel (20170825140009).jpg | N509FZ | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Fragrant_Hill_Hotel_(20170825140009).jpg) | 香山公园 · 第 2 张起 |
+| santi-beijing | st-sp-14-4.jpg | File:香山 Fragrant Hills Ароматная гора (9451295212).jpg | Nikolaj Potanin from Russia | CC BY-SA 2.0 | [链接](https://commons.wikimedia.org/wiki/File:%E9%A6%99%E5%B1%B1_Fragrant_Hills_%D0%90%D1%80%D0%BE%D0%BC%D0%B0%D1%82%D0%BD%D0%B0%D1%8F_%D0%B3%D0%BE%D1%80%D0%B0_(9451295212).jpg) | 香山公园 · 第 2 张起 |
+| santi-beijing | st-sp-15-2.jpg | File:Bmnh 1.jpg | Shizhao | CC BY-SA 2.5 | [链接](https://commons.wikimedia.org/wiki/File:Bmnh_1.jpg) | 中国国家博物馆 · 第 2 张起 |
+| santi-beijing | st-sp-15-3.jpg | File:Bmnh 2013.jpg | 維基小霸王 | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:Bmnh_2013.jpg) | 中国国家博物馆 · 第 2 张起 |
+| woyuditan-beijing | wd-ip-01-2.jpg | File:South Gate, Temple of Earth.jpg | Potatohai | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:South_Gate,_Temple_of_Earth.jpg) | 地坛公园 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-01-2.jpg | File:Temple of Heaven, Beijing, China - 010 edit.jpg | Maros M r a z (Maros) | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:Temple_of_Heaven,_Beijing,_China_-_010_edit.jpg) | 天坛公园 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-01-3.jpg | File:中国北京天坛公园3.JPG | Weiqing | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:%E4%B8%AD%E5%9B%BD%E5%8C%97%E4%BA%AC%E5%A4%A9%E5%9D%9B%E5%85%AC%E5%9B%AD3.JPG) | 天坛公园 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-03-2.jpg | File:北京景山公园 02.jpg | DragonSamYU | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:%E5%8C%97%E4%BA%AC%E6%99%AF%E5%B1%B1%E5%85%AC%E5%9B%AD_02.jpg) | 景山公园 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-03-3.jpg | File:Jingshan from the southwest (20211107141052).jpg | N509FZ | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Jingshan_from_the_southwest_(20211107141052).jpg) | 景山公园 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-04-2.jpg | File:Peking Beihai Park Vase-20110104-RM-113150.jpg | Ermell | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Peking_Beihai_Park_Vase-20110104-RM-113150.jpg) | 北海公园 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-04-3.jpg | File:Peking Beihai Park Bühne-20110104-RM-113434.jpg | Ermell | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Peking_Beihai_Park_B%C3%BChne-20110104-RM-113434.jpg) | 北海公园 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-05-2.jpg | File:Yonghe Temple board.jpg | PENG, Yanan (Neo-Jay | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:Yonghe_Temple_board.jpg) | 雍和宫 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-05-3.jpg | File:雍和宫2.jpg | 蒋亦炯 | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:%E9%9B%8D%E5%92%8C%E5%AE%AB2.jpg) | 雍和宫 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-06-2.jpg | File:南锣鼓巷站8号线“北京记忆”装饰.JPG | Hat600 | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:%E5%8D%97%E9%94%A3%E9%BC%93%E5%B7%B7%E7%AB%998%E5%8F%B7%E7%BA%BF%E2%80%9C%E5%8C%97%E4%BA%AC%E8%AE%B0%E5%BF%86%E2%80%9D%E8%A3%85%E9%A5%B0.JPG) | 南锣鼓巷 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-06-3.jpg | File:Nanluogu Xiang (6230757826).jpg | Francisco Anzola | CC BY 2.0 | [链接](https://commons.wikimedia.org/wiki/File:Nanluogu_Xiang_(6230757826).jpg) | 南锣鼓巷 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-07-2.jpg | File:北京 什刹海.jpg | Worldtravelwiki | CC0 | [链接](https://commons.wikimedia.org/wiki/File:%E5%8C%97%E4%BA%AC_%E4%BB%80%E5%88%B9%E6%B5%B7.jpg) | 什刹海 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-07-3.jpg | File:8号线什刹海站站台.JPG | Hat600 | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:8%E5%8F%B7%E7%BA%BF%E4%BB%80%E5%88%B9%E6%B5%B7%E7%AB%99%E7%AB%99%E5%8F%B0.JPG) | 什刹海 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-08-2.jpg | File:China Beijing The Side of Drum Tower.jpg | Yang Han | CC0 | [链接](https://commons.wikimedia.org/wiki/File:China_Beijing_The_Side_of_Drum_Tower.jpg) | 鼓楼·钟楼 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-08-3.jpg | File:Zhonglou (" tour de la Cloche "), façade sud - A698.jpg | Passet Stéphane | CC0 | [链接](https://commons.wikimedia.org/wiki/File:Zhonglou_(%22_tour_de_la_Cloche_%22),_fa%C3%A7ade_sud_-_A698.jpg) | 鼓楼·钟楼 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-09-2.jpg | File:Beijing Lu Xun Museum 1.jpg | EditQ | CC0 | [链接](https://commons.wikimedia.org/wiki/File:Beijing_Lu_Xun_Museum_1.jpg) | 北京鲁迅博物馆 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-09-3.jpg | File:Beijing Lu Xun Museum - guest house.jpg | 維基小霸王 | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Beijing_Lu_Xun_Museum_-_guest_house.jpg) | 北京鲁迅博物馆 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-10-2.jpg | File:National Museum of Modern Chinese Literature, Block A (20230215151804).jpg | N509FZ | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:National_Museum_of_Modern_Chinese_Literature,_Block_A_(20230215151804).jpg) | 中国现代文学馆 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-10-3.jpg | File:National Museum of Modern Chinese Literature, east gate (20230215152708).jpg | N509FZ | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:National_Museum_of_Modern_Chinese_Literature,_east_gate_(20230215152708).jpg) | 中国现代文学馆 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-11-2.jpg | File:BeiDa 北京大学 (2914514323).jpg | Caitriana Nicholson from 北京 ~ Beijing, 中国 ~ China | CC BY-SA 2.0 | [链接](https://commons.wikimedia.org/wiki/File:BeiDa_%E5%8C%97%E4%BA%AC%E5%A4%A7%E5%AD%A6_(2914514323).jpg) | 北京大学 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-13-2.jpg | File:National Library Beijing China.jpg | Shanghai.Dennis | CC BY-SA 2.0 | [链接](https://commons.wikimedia.org/wiki/File:National_Library_Beijing_China.jpg) | 中国国家图书馆 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-13-3.jpg | File:National Library of China South Area Renovation.JPG | Chmarkine | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:National_Library_of_China_South_Area_Renovation.JPG) | 中国国家图书馆 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-14-2.jpg | File:Shizilin in Old Summer Palace 2022.jpg | Charlie fong | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Shizilin_in_Old_Summer_Palace_2022.jpg) | 圆明园遗址公园 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-15-2.jpg | File:West Gate of Summer Palace Station (20170708).jpg | FRDian | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:West_Gate_of_Summer_Palace_Station_(20170708).jpg) | 颐和园 · 第 2 张起 |
+| woyuditan-beijing | wd-sp-15-3.jpg | File:Chinese glazed roof tile in the Summer Palace.jpg | HoweyYuan | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Chinese_glazed_roof_tile_in_the_Summer_Palace.jpg) | 颐和园 · 第 2 张起 |
+| daomu-hangzhou | dm-ip-01-2.jpg | File:杭州西湖边 西泠印社.jpg | 画室与照相馆 | CC BY-SA 3.0 | [链接](https://commons.wikimedia.org/wiki/File:%E6%9D%AD%E5%B7%9E%E8%A5%BF%E6%B9%96%E8%BE%B9_%E8%A5%BF%E6%B3%A0%E5%8D%B0%E7%A4%BE.jpg) | 西泠印社 · 第 2 张起 |
+| daomu-hangzhou | dm-ip-01-3.jpg | File:杭州 西湖 西泠印社 - panoramio (3).jpg | zhiyin586@163.com | CC BY 3.0 | [链接](https://commons.wikimedia.org/wiki/File:%E6%9D%AD%E5%B7%9E_%E8%A5%BF%E6%B9%96_%E8%A5%BF%E6%B3%A0%E5%8D%B0%E7%A4%BE_-_panoramio_(3).jpg) | 西泠印社 · 第 2 张起 |
+| daomu-hangzhou | dm-ip-02-2.jpg | File:杭州楼外楼食品厂 - panoramio.jpg | 江上清风1961 | CC BY 3.0 | [链接](https://commons.wikimedia.org/wiki/File:%E6%9D%AD%E5%B7%9E%E6%A5%BC%E5%A4%96%E6%A5%BC%E9%A3%9F%E5%93%81%E5%8E%82_-_panoramio.jpg) | 楼外楼 · 第 2 张起 |
+| daomu-hangzhou | dm-ip-02-3.jpg | File:杭州. 西湖游船（ 远景：楼外楼 .保叔塔.） - panoramio.jpg | zhiyin586@163.com | CC BY 3.0 | [链接](https://commons.wikimedia.org/wiki/File:%E6%9D%AD%E5%B7%9E._%E8%A5%BF%E6%B9%96%E6%B8%B8%E8%88%B9%EF%BC%88_%E8%BF%9C%E6%99%AF%EF%BC%9A%E6%A5%BC%E5%A4%96%E6%A5%BC_.%E4%BF%9D%E5%8F%94%E5%A1%94.%EF%BC%89_-_panoramio.jpg) | 楼外楼 · 第 2 张起 |
+| daomu-hangzhou | dm-sp-01-2.jpg | File:杭州. 西湖. 苏堤春晓 - panoramio (1).jpg | zhiyin586@163.com | CC BY 3.0 | [链接](https://commons.wikimedia.org/wiki/File:%E6%9D%AD%E5%B7%9E._%E8%A5%BF%E6%B9%96._%E8%8B%8F%E5%A0%A4%E6%98%A5%E6%99%93_-_panoramio_(1).jpg) | 西湖 · 苏堤春晓 · 第 2 张起 |
+| daomu-hangzhou | dm-sp-01-3.jpg | File:北山路上看苏堤, 2016-03-09.jpg | 江上清风1961 | CC BY 3.0 | [链接](https://commons.wikimedia.org/wiki/File:%E5%8C%97%E5%B1%B1%E8%B7%AF%E4%B8%8A%E7%9C%8B%E8%8B%8F%E5%A0%A4,_2016-03-09.jpg) | 西湖 · 苏堤春晓 · 第 2 张起 |
+| daomu-hangzhou | dm-sp-02-2.jpg | File:白堤断桥, 2006-05-13.jpg | 江上清风1961 | CC BY 3.0 | [链接](https://commons.wikimedia.org/wiki/File:%E7%99%BD%E5%A0%A4%E6%96%AD%E6%A1%A5,_2006-05-13.jpg) | 断桥残雪（白堤） · 第 2 张起 |
+| daomu-hangzhou | dm-sp-03-2.jpg | File:Leifeng Pagoda 雷峰塔 - panoramio.jpg | lienyuan lee | CC BY 3.0 | [链接](https://commons.wikimedia.org/wiki/File:Leifeng_Pagoda_%E9%9B%B7%E5%B3%B0%E5%A1%94_-_panoramio.jpg) | 雷峰塔 · 第 2 张起 |
+| daomu-hangzhou | dm-sp-03-3.jpg | File:Leifeng Pagoda 1.jpg | 钉钉 | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Leifeng_Pagoda_1.jpg) | 雷峰塔 · 第 2 张起 |
+| daomu-hangzhou | dm-sp-04-2.jpg | File:浙江省杭州市灵隐寺石窟卢舍那佛会浮雕.jpg | Wshzhcn | CC BY 4.0 | [链接](https://commons.wikimedia.org/wiki/File:%E6%B5%99%E6%B1%9F%E7%9C%81%E6%9D%AD%E5%B7%9E%E5%B8%82%E7%81%B5%E9%9A%90%E5%AF%BA%E7%9F%B3%E7%AA%9F%E5%8D%A2%E8%88%8D%E9%82%A3%E4%BD%9B%E4%BC%9A%E6%B5%AE%E9%9B%95.jpg) | 灵隐寺 · 飞来峰 · 第 2 张起 |
+| daomu-hangzhou | dm-sp-04-3.jpg | File:浙江省杭州市灵隐寺石窟.jpg | Wshzhcn | CC BY 4.0 | [链接](https://commons.wikimedia.org/wiki/File:%E6%B5%99%E6%B1%9F%E7%9C%81%E6%9D%AD%E5%B7%9E%E5%B8%82%E7%81%B5%E9%9A%90%E5%AF%BA%E7%9F%B3%E7%AA%9F.jpg) | 灵隐寺 · 飞来峰 · 第 2 张起 |
+| daomu-hangzhou | dm-sp-15-2.jpg | File:西湖 浙江省博物馆孤山馆区之雷峰塔刻字石砖 04.jpg | Liuxingy | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:%E8%A5%BF%E6%B9%96_%E6%B5%99%E6%B1%9F%E7%9C%81%E5%8D%9A%E7%89%A9%E9%A6%86%E5%AD%A4%E5%B1%B1%E9%A6%86%E5%8C%BA%E4%B9%8B%E9%9B%B7%E5%B3%B0%E5%A1%94%E5%88%BB%E5%AD%97%E7%9F%B3%E7%A0%96_04.jpg) | 浙江省博物馆（孤山馆区） · 第 2 张起 |
+| daomu-hangzhou | dm-sp-15-3.jpg | File:西湖 浙江省博物馆孤山馆区之雷峰塔刻字石砖 06.jpg | Liuxingy | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:%E8%A5%BF%E6%B9%96_%E6%B5%99%E6%B1%9F%E7%9C%81%E5%8D%9A%E7%89%A9%E9%A6%86%E5%AD%A4%E5%B1%B1%E9%A6%86%E5%8C%BA%E4%B9%8B%E9%9B%B7%E5%B3%B0%E5%A1%94%E5%88%BB%E5%AD%97%E7%9F%B3%E7%A0%96_06.jpg) | 浙江省博物馆（孤山馆区） · 第 2 张起 |
+| qianfu-tianjin | qf-ip-01-2.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 天津站 · 第 2 张起 |
+| qianfu-tianjin | qf-ip-01-3.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 天津站 · 第 2 张起 |
+| qianfu-tianjin | qf-sp-04-2.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 古文化街 · 天后宫 · 第 2 张起 |
+| qianfu-tianjin | qf-sp-04-3.jpg | （用户本地文件/待补来源） | 【待补充】 | 【待确认】 | — | 古文化街 · 天后宫 · 第 2 张起 |
+
+## 哈利波特·伦敦：莱斯特广场 / 华纳兄弟工作室 配图对调校正（2026-10-08）
+
+原先这两个点位的图片配反了（`hp-sp-14` 拿到了华纳兄弟的图、`hp-sp-15` 拿到了莱斯特广场的图），已对调回正确归属。
+
+| 线路 | 文件 | 标题 | 作者 | 授权 | 来源 | 备注 |
+| --- | --- | --- | --- | --- | --- | --- |
+| harrypotter-london | hp-sp-14.jpg（莱斯特广场首图） | File:Leicester Square (August 2023) 03 / 07 / 08.jpg 同组三张之一 | DiscoA340 | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Leicester_Square_(August_2023)_03.jpg) | 该组 3 张现对应 hp-sp-14.jpg / -2 / -3 |
+| harrypotter-london | hp-sp-14-2.jpg | 同上（Leicester Square 同组） | DiscoA340 | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Leicester_Square_(August_2023)_07.jpg) |  |
+| harrypotter-london | hp-sp-14-3.jpg | 同上（Leicester Square 同组） | DiscoA340 | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Leicester_Square_(August_2023)_08.jpg) |  |
+| harrypotter-london | hp-sp-15.jpg（华纳兄弟首图，该点目前仅此 1 张） | File:Entrance to the Making of Harry Potter studio tour.jpg | Photograph by Mike Peel (www.mikepeel.net) | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Entrance_to_the_Making_of_Harry_Potter_studio_tour.jpg) |  |
+| santi-beijing | st-ip-04.jpg | 清华园二校门（用户提供） | 【待用户补充来源】 | 【待确认】 | — | 用户提供，替换原 Commons 图 |
+| fanhua-shanghai | sh-ip-04.jpg | 曹杨一村门楼（用户提供） | 小红书用户 书号595186852 | 待授权（演示用） | — | 用户提供，带水印 |
+| fanhua-shanghai | sh-ip-07.jpg | 进贤路四吉饭店（用户提供） | 小红书用户 书号222171576 | 待授权（演示用） | — | 用户提供，带水印 |
+| santi-beijing | st-sp-13.jpg | 798艺术区（用户提供） | 小红书用户 书号1064264904 | 待授权（演示用） | — | 用户提供，带水印 |
+| fanhua-shanghai | sh-ip-08.jpg | 南京路新世界城夜景（用户提供，原图标注HUANGHE ROAD） | 【待用户补充来源】 | 【待确认】 | — | 用户提供 |
+| daomu-hangzhou | dm-sp-05.jpg | 三潭印月石塔（用户提供） | 小红书用户 书号4290017343 | 待授权（演示用） | — | 用户提供，带水印 |
+| daomu-hangzhou | dm-sp-13.jpg | 太子湾公园湖景草坪（用户提供，原误标西溪） | 【待用户补充来源】 | 【待确认】 | — | 用户提供 |
+| daomu-hangzhou | dm-sp-08.jpg | 九溪烟树（用户提供） | 小红书用户 书号593424568 | 待授权（演示用） | — | 用户提供，带水印 |
+| daomu-hangzhou | dm-sp-09.jpg | 龙井村门楼（用户提供） | 【待用户补充来源】 | 【待确认】 | — | 用户提供 |
+| daomu-hangzhou | dm-sp-10.jpg | 六和塔（用户提供） | 【待用户补充来源】 | 【待确认】 | — | 用户提供 |
+| daomu-hangzhou | dm-ip-03.jpg | 宝石山摩崖石刻（用户提供） | 小红书用户 书号761015720 | 待授权（演示用） | — | 用户提供，带水印 |
+| daomu-hangzhou | dm-sp-07.jpg + dm-sp-07-2.jpg | 西溪湿地摇橹船/西溪白墙（用户提供） | 【待用户补充来源】 | 【待确认】 | — | 用户提供，多图 |
+
+## 厦门（开端）/ 大理（去有风的地方）打卡点实拍（2026-10-08）
+
+素材来自「厦门大理景点图片_32张」；统一压到最长边 1280px。授权差异见「许可」列，上线前按各来源许可处理。
+
+| 线路 | 文件 | 景点 / 画面 | 作者或署名 | 许可 | 来源 |
+| --- | --- | --- | --- | --- | --- |
+| kaiduan-xiamen | kd-xm-ip-01.jpg | 和熙楼 · 螺旋步道外观 | wishingbone | Flickr：All Rights Reserved | [链接](https://www.flickr.com/photos/wishingbone/52731537721/) |
+| kaiduan-xiamen | kd-xm-ip-01-2.jpg | 和熙楼 · 街景与螺旋楼体 | wishingbone | Flickr：All Rights Reserved | [链接](https://www.flickr.com/photos/wishingbone/52731537866/) |
+| kaiduan-xiamen | kd-xm-ip-01-3.jpg | 和熙楼 · 楼内螺旋结构 | wishingbone | Flickr：All Rights Reserved | [链接](https://www.flickr.com/photos/wishingbone/52731537626/) |
+| kaiduan-xiamen | kd-xm-ip-05.jpg | 波特曼七星湾酒店 · 酒店与滨海花园航拍 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://www.portmansevenstars.com/picture.html) |
+| kaiduan-xiamen | kd-xm-ip-05-2.jpg | 波特曼七星湾酒店 · 室外泳池与楼体 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://hotels.ctrip.com/hotels/60185397.html) |
+| kaiduan-xiamen | kd-xm-ip-05-3.jpg | 波特曼七星湾酒店 · 室内泳池 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://hotels.ctrip.com/hotels/60185397.html) |
+| kaiduan-xiamen | kd-xm-ip-05-4.jpg | 波特曼七星湾酒店 · 宴会餐厅 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://hotels.ctrip.com/hotels/60185397.html) |
+| kaiduan-xiamen | kd-xm-ip-05-5.jpg | 波特曼七星湾酒店 · 餐饮空间 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://hotels.ctrip.com/hotels/60185397.html) |
+| kaiduan-xiamen | kd-xm-ip-02.jpg | 海山东荣广场站 · 公交站与沿街建筑 | 小红书 Devill芃（新浪转载署名） | 来源页未提供明确开放许可 | [链接](https://fj.sina.com.cn/news/2022-06-13/detail-imizirau8113034.shtml) |
+| kaiduan-xiamen | kd-xm-ip-02-2.jpg | 海山东荣广场站 · 站台正面 | 小红书 Devill芃（新浪转载署名） | 来源页未提供明确开放许可 | [链接](https://fj.sina.com.cn/news/2022-06-13/detail-imizirau8113034.shtml) |
+| kaiduan-xiamen | kd-xm-ip-04.jpg | 美峰天桥 · 方框步道灯光夜景 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://www.sohu.com/a/602856099_121117479) |
+| kaiduan-xiamen | kd-xm-ip-04-2.jpg | 美峰天桥 · 跨路天桥外观 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://www.sohu.com/a/522176512_121117464) |
+| kaiduan-xiamen | kd-xm-ip-03.jpg | 联发华美空间 · 厂房街景 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://you.ctrip.com/sight/xiamen21/2042280.html) |
+| kaiduan-xiamen | kd-xm-ip-03-2.jpg | 联发华美空间 · 咖啡店外景 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://you.ctrip.com/sight/xiamen21/2042280.html) |
+| kaiduan-xiamen | kd-xm-ip-03-3.jpg | 联发华美空间 · 中庭建筑 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://you.ctrip.com/sight/xiamen21/2042280.html) |
+| kaiduan-xiamen | kd-xm-ip-03-4.jpg | 联发华美空间 · 园区入口夜景 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://you.ctrip.com/sight/xiamen21/2042280.html) |
+| kaiduan-xiamen | kd-xm-ip-03-5.jpg | 联发华美空间 · 蝴蝶阶梯 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://you.ctrip.com/sight/xiamen21/2042280.html) |
+| kaiduan-xiamen | kd-xm-ip-03-6.jpg | 联发华美空间 · 园区长廊夜景 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://you.ctrip.com/sight/xiamen21/2042280.html) |
+| quyoufengdedifang-dali | yf-dl-ip-01.jpg | 凤阳邑村 · 花巷街景 | q_95/strip" | 具体作者见来源页面 | [链接](https://www.yndaily.com/html/2025/yunxinwen_0806/137022.html) |
+| quyoufengdedifang-dali | yf-dl-ip-01-2.jpg | 凤阳邑村 · 绿植庭院 | q_95/strip" | 具体作者见来源页面 | [链接](https://www.yndaily.com/html/2025/yunxinwen_0806/137022.html) |
+| quyoufengdedifang-dali | yf-dl-ip-01-3.jpg | 凤阳邑村 · 扎染体验店 | q_95/strip" | 具体作者见来源页面 | [链接](https://www.yndaily.com/html/2025/yunxinwen_0806/137022.html) |
+| quyoufengdedifang-dali | yf-dl-ip-01-4.jpg | 凤阳邑村 · 村中庭院 | q_95/strip" | 具体作者见来源页面 | [链接](https://www.yndaily.com/html/2025/yunxinwen_0806/137022.html) |
+| quyoufengdedifang-dali | yf-dl-ip-01-5.jpg | 凤阳邑村 · 有风小院门口 | q_95/strip" | 具体作者见来源页面 | [链接](https://www.yndaily.com/html/2025/yunxinwen_0806/137022.html) |
+| quyoufengdedifang-dali | yf-dl-ip-01-6.jpg | 凤阳邑村 · 石板路集市 | q_95/strip" | 具体作者见来源页面 | [链接](https://www.yndaily.com/html/2025/yunxinwen_0806/137022.html) |
+| quyoufengdedifang-dali | yf-dl-ip-02.jpg | 喜洲古镇 · 古镇与洱海航拍 | 新华网 赵普凡 | 来源页未提供明确开放许可 | [链接](https://yn.yunnan.cn/system/2020/12/30/031208262.shtml) |
+| quyoufengdedifang-dali | yf-dl-ip-02-2.jpg | 喜洲古镇 · 转角楼 | 新华网 丁凝 | 来源页未提供明确开放许可 | [链接](https://yn.yunnan.cn/system/2020/12/30/031208262.shtml) |
+| quyoufengdedifang-dali | yf-dl-ip-02-3.jpg | 喜洲古镇 · 扎染街景 | 新华网 丁凝 | 来源页未提供明确开放许可 | [链接](https://yn.yunnan.cn/system/2020/12/30/031208262.shtml) |
+| quyoufengdedifang-dali | yf-dl-ip-02-4.jpg | 喜洲古镇 · 白族院落俯瞰 | 新华网 赵普凡 | 来源页未提供明确开放许可 | [链接](https://yn.yunnan.cn/system/2020/12/30/031208262.shtml) |
+| quyoufengdedifang-dali | yf-dl-ip-02-5.jpg | 喜洲古镇 · 白墙巷道 | 新华网 丁凝 | 来源页未提供明确开放许可 | [链接](https://yn.yunnan.cn/system/2020/12/30/031208262.shtml) |
+| quyoufengdedifang-dali | yf-dl-ip-02-6.jpg | 喜洲古镇 · 题名坊 | 新华网 赵普凡 | 来源页未提供明确开放许可 | [链接](https://yn.yunnan.cn/system/2020/12/30/031208262.shtml) |
+| quyoufengdedifang-dali | yf-dl-ip-03.jpg | 大理古城 · 古城街巷航拍 | 瑞丽江的河水 | CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/ | [链接](https://commons.wikimedia.org/wiki/File:%E5%A4%A7%E7%90%86%E5%8F%A4%E5%9F%8E_-_%E8%88%AA%E6%8B%8D_-_2024-10-13_05.jpg) |
+| quyoufengdedifang-dali | yf-dl-ip-03-2.jpg | 大理古城 · 古城屋顶与苍山 | ShuQizhe | CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/ | [链接](https://commons.wikimedia.org/wiki/File:Dali_Ancient_Town_20260220-2.jpg) |
+
+## 线路封面（2026-10-08）：去有风的地方·大理 / 开端·厦门 / 爱情神话·上海
+
+| 线路 | 文件 | 画面 | 作者或署名 | 许可 | 来源 | 备注 |
+| --- | --- | --- | --- | --- | --- | --- |
+| quyoufengdedifang-dali | quyoufengdedifang-dali.jpg（同时用作 IP 封面 quyoufengdedifang.jpg） | 凤阳邑村 · 有风小院门口 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://www.yndaily.com/html/2025/yunxinwen_0806/137022.html) | 用户提供，压到 1280px |
+| kaiduan-xiamen | kaiduan-xiamen.jpg（同时用作 IP 封面 kaiduan.jpg） | 鼓浪屿与厦门 city 天际线 | 【用户提供，来源待补】 | 【待确认】 | — | 用户提供 |
+| aiqingshenhua-shanghai | aiqingshenhua-shanghai.jpg（同时用作 IP 封面 aiqingshenhua.jpg） | 《爱情神话》屋顶剧照 | 【用户提供，来源待补】 | 【待确认】 | — | 用户提供；影视剧照，上线前需确认版权 | 

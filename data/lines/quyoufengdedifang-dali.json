@@ -1,0 +1,415 @@
+{
+  "_说明": "《去有风的地方》·大理点位库（草稿）。内容取自 2026-10-07《填写模板·去有风的地方-大理》。台词与原著引文未核实，quotes 暂为空；入口坐标与实际图片待核。校验：node data/validate.mjs data/lines/quyoufengdedifang-dali.json",
+  "_版本": 1,
+  "_priority": 7,
+  "_bounds": {
+    "lng": [
+      99.9,
+      100.4
+    ],
+    "lat": [
+      25.5,
+      26
+    ]
+  },
+  "_expected": {
+    "ipStops": [
+      3,
+      8
+    ],
+    "cityStops": [
+      10,
+      20
+    ],
+    "maxTierS": 3
+  },
+  "ip": {
+    "ipId": "quyoufengdedifang",
+    "name": "去有风的地方",
+    "author": "原创电视剧（无原著）",
+    "kind": "tv",
+    "cover": "img/quyoufengdedifang.jpg",
+    "aliases": [
+      "去有风的地方",
+      "有风的地方",
+      "许红豆",
+      "谢之遥",
+      "有风小院",
+      "凤阳邑"
+    ],
+    "tags": {
+      "城市": [
+        "大理"
+      ],
+      "人物": [
+        "许红豆",
+        "谢之遥"
+      ],
+      "地名": [
+        "凤阳邑",
+        "喜洲古镇",
+        "大理古城"
+      ]
+    }
+  },
+  "line": {
+    "lineId": "quyoufengdedifang-dali",
+    "ipId": "quyoufengdedifang",
+    "title": "去有风的地方·大理",
+    "city": "大理",
+    "cover": "img/quyoufengdedifang-dali.jpg",
+    "recommendDays": 2
+  },
+  "clusters": [
+    "大理·凤阳邑",
+    "大理·喜洲",
+    "大理·古城",
+    "大理·苍山三塔",
+    "大理·洱海西岸",
+    "大理·海东双廊"
+  ],
+  "ipStops": [
+    {
+      "poiId": "yf-dl-ip-01",
+      "lineId": "quyoufengdedifang-dali",
+      "type": "ip",
+      "name": "凤阳邑村",
+      "alias": "",
+      "lng": 100.1872,
+      "lat": 25.6578,
+      "cluster": "大理·凤阳邑",
+      "tier": "S",
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "在古村街巷里感受《去有风的地方》的乡村生活气息。",
+      "quotes": [],
+      "basis": "云南网／大理日报《那些年在大理取景的影视剧》（2023-02-20）列为取景地（村落级）；具体镜头、时间码与入口待核。",
+      "realPhoto": "img/yf-dl-ip-01.jpg",
+      "photos": [
+        "img/yf-dl-ip-01.jpg",
+        "img/yf-dl-ip-01-2.jpg",
+        "img/yf-dl-ip-01-3.jpg",
+        "img/yf-dl-ip-01-4.jpg",
+        "img/yf-dl-ip-01-5.jpg",
+        "img/yf-dl-ip-01-6.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "skipNote": "若偏好城市地标，可压缩古村停留。",
+      "tips": "沿公共街巷步行，院落先确认开放。"
+    },
+    {
+      "poiId": "yf-dl-ip-02",
+      "lineId": "quyoufengdedifang-dali",
+      "type": "ip",
+      "name": "喜洲古镇",
+      "alias": "",
+      "lng": 100.1387,
+      "lat": 25.8551,
+      "cluster": "大理·喜洲",
+      "tier": "A",
+      "durationNormal": 150,
+      "durationRush": 75,
+      "intro": "从剧集取景地出发，慢看古镇街巷与白族民居。",
+      "quotes": [],
+      "basis": "云南网／大理日报（2023-02-20）列为取景地（古镇级）；具体镜头、时间码与入口待核。",
+      "realPhoto": "img/yf-dl-ip-02.jpg",
+      "photos": [
+        "img/yf-dl-ip-02.jpg",
+        "img/yf-dl-ip-02-2.jpg",
+        "img/yf-dl-ip-02-3.jpg",
+        "img/yf-dl-ip-02-4.jpg",
+        "img/yf-dl-ip-02-5.jpg",
+        "img/yf-dl-ip-02-6.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "skipNote": "往返占用时间，短行程可先舍弃。",
+      "tips": "古镇统一计时，店铺体验另行选择。"
+    },
+    {
+      "poiId": "yf-dl-ip-03",
+      "lineId": "quyoufengdedifang-dali",
+      "type": "ip",
+      "name": "大理古城",
+      "alias": "",
+      "lng": 100.1617,
+      "lat": 25.6946,
+      "cluster": "大理·古城",
+      "tier": "A",
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "把剧集取景地与古城散步合成一段轻松的行程。",
+      "quotes": [],
+      "basis": "云南网／大理日报（2023-02-20）列为取景地（古城级）；具体镜头、时间码与入口待核。",
+      "realPhoto": "img/yf-dl-ip-03.jpg",
+      "photos": [
+        "img/yf-dl-ip-03.jpg",
+        "img/yf-dl-ip-03-2.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "skipNote": "若已逛过古城，可把时间留给村落。",
+      "tips": "先选入口和结束点，避免反复折返。"
+    }
+  ],
+  "cityStops": [
+    {
+      "poiId": "yf-dl-sp-02",
+      "lineId": "quyoufengdedifang-dali",
+      "type": "classic",
+      "name": "崇圣寺三塔",
+      "lng": 100.147,
+      "lat": 25.708,
+      "cluster": "大理·苍山三塔",
+      "popularity": 5,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "寺院与三塔地标，可作为苍山一线的文化补充。",
+      "realPhoto": "img/yf-dl-sp-02.jpg",
+      "photos": [
+        "img/yf-dl-sp-02.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "yf-dl-sp-03",
+      "lineId": "quyoufengdedifang-dali",
+      "type": "classic",
+      "name": "苍山感通索道片区",
+      "lng": 100.1745,
+      "lat": 25.667,
+      "cluster": "大理·苍山三塔",
+      "popularity": 4,
+      "durationNormal": 180,
+      "durationRush": 90,
+      "intro": "山区支线，索道运行与天气情况待核。",
+      "realPhoto": "img/yf-dl-sp-03.jpg",
+      "photos": [
+        "img/yf-dl-sp-03.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "yf-dl-sp-04",
+      "lineId": "quyoufengdedifang-dali",
+      "type": "classic",
+      "name": "苍山洗马潭索道片区",
+      "lng": 100.132,
+      "lat": 25.713,
+      "cluster": "大理·苍山三塔",
+      "popularity": 4,
+      "durationNormal": 240,
+      "durationRush": 120,
+      "intro": "与感通索道择一安排，交通与海拔另行核算。",
+      "realPhoto": "img/yf-dl-sp-04.jpg",
+      "photos": [
+        "img/yf-dl-sp-04.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "yf-dl-sp-06",
+      "lineId": "quyoufengdedifang-dali",
+      "type": "classic",
+      "name": "周城村",
+      "lng": 100.131,
+      "lat": 25.901,
+      "cluster": "大理·喜洲",
+      "popularity": 3,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "白族村落与扎染体验候选，体验项目另计。",
+      "realPhoto": "img/yf-dl-sp-06.jpg",
+      "photos": [
+        "img/yf-dl-sp-06.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "yf-dl-sp-07",
+      "lineId": "quyoufengdedifang-dali",
+      "type": "classic",
+      "name": "海舌生态公园",
+      "lng": 100.142,
+      "lat": 25.826,
+      "cluster": "大理·喜洲",
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "洱海西岸湿地公园，开放与进入方式待核。",
+      "realPhoto": "img/yf-dl-sp-07.jpg",
+      "photos": [
+        "img/yf-dl-sp-07.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "yf-dl-sp-08",
+      "lineId": "quyoufengdedifang-dali",
+      "type": "classic",
+      "name": "磻溪村滨水片区",
+      "lng": 100.172,
+      "lat": 25.762,
+      "cluster": "大理·洱海西岸",
+      "popularity": 3,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "洱海西岸村落滨水段，公共入口待细化。",
+      "realPhoto": "img/yf-dl-sp-08.jpg",
+      "photos": [
+        "img/yf-dl-sp-08.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "yf-dl-sp-09",
+      "lineId": "quyoufengdedifang-dali",
+      "type": "classic",
+      "name": "才村码头周边",
+      "lng": 100.185,
+      "lat": 25.715,
+      "cluster": "大理·洱海西岸",
+      "popularity": 3,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "码头周边散步为主，游船项目另行核算。",
+      "realPhoto": "img/yf-dl-sp-09.jpg",
+      "photos": [
+        "img/yf-dl-sp-09.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "yf-dl-sp-10",
+      "lineId": "quyoufengdedifang-dali",
+      "type": "classic",
+      "name": "龙龛码头周边",
+      "lng": 100.2,
+      "lat": 25.686,
+      "cluster": "大理·洱海西岸",
+      "popularity": 3,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "洱海西岸观景段，步行范围待细化。",
+      "realPhoto": "img/yf-dl-sp-10.jpg",
+      "photos": [
+        "img/yf-dl-sp-10.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "yf-dl-sp-11",
+      "lineId": "quyoufengdedifang-dali",
+      "type": "classic",
+      "name": "双廊古镇",
+      "lng": 100.1845,
+      "lat": 25.899,
+      "cluster": "大理·海东双廊",
+      "popularity": 5,
+      "durationNormal": 150,
+      "durationRush": 75,
+      "intro": "洱海东岸古镇，属独立东岸支线。",
+      "realPhoto": "img/yf-dl-sp-11.jpg",
+      "photos": [
+        "img/yf-dl-sp-11.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "yf-dl-sp-12",
+      "lineId": "quyoufengdedifang-dali",
+      "type": "classic",
+      "name": "南诏风情岛",
+      "lng": 100.188,
+      "lat": 25.895,
+      "cluster": "大理·海东双廊",
+      "popularity": 4,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "双廊对岸岛屿，船程与候船时间另计。",
+      "realPhoto": "img/yf-dl-sp-12.jpg",
+      "photos": [
+        "img/yf-dl-sp-12.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "yf-dl-sp-13",
+      "lineId": "quyoufengdedifang-dali",
+      "type": "classic",
+      "name": "挖色镇滨水片区",
+      "lng": 100.215,
+      "lat": 25.872,
+      "cluster": "大理·海东双廊",
+      "popularity": 2,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "洱海东岸滨水段，避免与西岸点反复跨湖串联。",
+      "realPhoto": "img/yf-dl-sp-13.jpg",
+      "photos": [
+        "img/yf-dl-sp-13.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "yf-dl-sp-14",
+      "lineId": "quyoufengdedifang-dali",
+      "type": "classic",
+      "name": "大理市博物馆",
+      "lng": 100.164,
+      "lat": 25.6965,
+      "cluster": "大理·古城",
+      "popularity": 3,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "古城内博物馆，馆舍预约与展览待核。",
+      "realPhoto": "img/yf-dl-sp-14.jpg",
+      "photos": [
+        "img/yf-dl-sp-14.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "yf-dl-sp-15",
+      "lineId": "quyoufengdedifang-dali",
+      "type": "classic",
+      "name": "凤阳邑村公共街巷",
+      "lng": 100.1872,
+      "lat": 25.6578,
+      "cluster": "大理·凤阳邑",
+      "popularity": 4,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "与 IP 村落点合并计时，只计公共街巷范围。",
+      "realPhoto": "img/yf-dl-sp-15.jpg",
+      "photos": [
+        "img/yf-dl-sp-15.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    }
+  ]
+}

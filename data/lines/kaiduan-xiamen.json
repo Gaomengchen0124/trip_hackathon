@@ -1,0 +1,530 @@
+{
+  "_说明": "《开端》·厦门点位库（草稿）。内容取自 2026-10-07《填写模板·开端-厦门》。原著引文与剧集台词未核实，quotes 暂为空；入口坐标与实际图片待核。校验：node data/validate.mjs data/lines/kaiduan-xiamen.json",
+  "_版本": 1,
+  "_priority": 8,
+  "_bounds": {
+    "lng": [
+      117.9,
+      118.4
+    ],
+    "lat": [
+      24.4,
+      24.8
+    ]
+  },
+  "_expected": {
+    "ipStops": [
+      6,
+      8
+    ],
+    "cityStops": [
+      10,
+      20
+    ],
+    "maxTierS": 3
+  },
+  "ip": {
+    "ipId": "kaiduan",
+    "name": "开端",
+    "author": "祈祷君（原著）／电视剧《开端》",
+    "kind": "tv",
+    "cover": "img/kaiduan.jpg",
+    "aliases": [
+      "开端",
+      "祈祷君",
+      "李诗情",
+      "肖鹤云",
+      "嘉林",
+      "公交车"
+    ],
+    "tags": {
+      "城市": [
+        "厦门"
+      ],
+      "人物": [
+        "李诗情",
+        "肖鹤云"
+      ],
+      "地名": [
+        "和熙楼",
+        "海山东荣广场",
+        "联发华美空间",
+        "美峰天桥"
+      ]
+    }
+  },
+  "line": {
+    "lineId": "kaiduan-xiamen",
+    "ipId": "kaiduan",
+    "title": "开端·厦门",
+    "city": "厦门",
+    "cover": "img/kaiduan-xiamen.jpg",
+    "recommendDays": 2
+  },
+  "clusters": [
+    "厦门·岛内步道",
+    "厦门·东荣社区",
+    "厦门·华美空间",
+    "厦门·环东海域",
+    "厦门·海沧大道",
+    "厦门·鼓浪屿",
+    "厦门·中山路沙坡尾",
+    "厦门·环岛路",
+    "厦门·集美"
+  ],
+  "ipStops": [
+    {
+      "poiId": "kd-xm-ip-01",
+      "lineId": "kaiduan-xiamen",
+      "type": "ip",
+      "name": "和熙楼",
+      "alias": "",
+      "lng": 118.088,
+      "lat": 24.49,
+      "cluster": "厦门·岛内步道",
+      "tier": "S",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "沿螺旋步道回到男女主复盘循环的场景。",
+      "quotes": [],
+      "basis": "厦门网／厦门日报《厦门人气取景地打卡指南》（2025-11-10）报道支持实拍场景；地址线索为山海健康步道云海线1号口附近，具体镜头、时间码与入口待核。",
+      "realPhoto": "img/kd-xm-ip-01.jpg",
+      "photos": [
+        "img/kd-xm-ip-01.jpg",
+        "img/kd-xm-ip-01-2.jpg",
+        "img/kd-xm-ip-01-3.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "skipNote": "体力或时间不足时可缩短登高停留。",
+      "tips": "从云海线1号口附近确认步道入口。"
+    },
+    {
+      "poiId": "kd-xm-ip-02",
+      "lineId": "kaiduan-xiamen",
+      "type": "ip",
+      "name": "海山东荣广场站",
+      "alias": "港务新村（剧中站名）",
+      "lng": 118.0942,
+      "lat": 24.4682,
+      "cluster": "厦门·东荣社区",
+      "tier": "S",
+      "durationNormal": 30,
+      "durationRush": 15,
+      "intro": "在现实公交站辨认剧中反复出现的上车地点。",
+      "quotes": [],
+      "basis": "厦门网／厦门日报（2025-11-10）报道支持实拍场景；地址线索为东荣社区海山东荣广场公交站，需确认道路哪一侧。",
+      "realPhoto": "img/kd-xm-ip-02.jpg",
+      "photos": [
+        "img/kd-xm-ip-02.jpg",
+        "img/kd-xm-ip-02-2.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "skipNote": "不想复刻公交场景时可优先舍弃。",
+      "tips": "在人行区域拍照，避开乘客上下车。"
+    },
+    {
+      "poiId": "kd-xm-ip-03",
+      "lineId": "kaiduan-xiamen",
+      "type": "ip",
+      "name": "联发华美空间",
+      "alias": "",
+      "lng": 118.1163,
+      "lat": 24.5108,
+      "cluster": "厦门·华美空间",
+      "tier": "A",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "在《开端》官方主题线路中的园区继续城市散步。",
+      "quotes": [],
+      "basis": "东南网／集美报《2023厦门影视旅游线路发布》（2023-06-08）列为官方主题线路点位；单点镜头与入口待核。",
+      "realPhoto": "img/kd-xm-ip-03.jpg",
+      "photos": [
+        "img/kd-xm-ip-03.jpg",
+        "img/kd-xm-ip-03-2.jpg",
+        "img/kd-xm-ip-03-3.jpg",
+        "img/kd-xm-ip-03-4.jpg",
+        "img/kd-xm-ip-03-5.jpg",
+        "img/kd-xm-ip-03-6.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "skipNote": "与其他园区体验重复时可舍弃。",
+      "tips": "先确认园区可进入范围与拍摄位置。"
+    },
+    {
+      "poiId": "kd-xm-ip-04",
+      "lineId": "kaiduan-xiamen",
+      "type": "ip",
+      "name": "美峰天桥",
+      "alias": "",
+      "lng": 118.15,
+      "lat": 24.63,
+      "cluster": "厦门·环东海域",
+      "tier": "A",
+      "durationNormal": 30,
+      "durationRush": 15,
+      "intro": "把《开端》主题线路上的天桥留作滨海支线。",
+      "quotes": [],
+      "basis": "东南网／集美报（2023-06-08）列为官方主题线路点位；单点镜头与入口待核。",
+      "realPhoto": "img/kd-xm-ip-04.jpg",
+      "photos": [
+        "img/kd-xm-ip-04.jpg",
+        "img/kd-xm-ip-04-2.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "skipNote": "跨片区交通较多，短行程可舍弃。",
+      "tips": "按步行导航到桥面，不从车道停留。"
+    },
+    {
+      "poiId": "kd-xm-ip-05",
+      "lineId": "kaiduan-xiamen",
+      "type": "ip",
+      "name": "波特曼七星湾酒店",
+      "alias": "",
+      "lng": 118.148,
+      "lat": 24.618,
+      "cluster": "厦门·环东海域",
+      "tier": "B",
+      "durationNormal": 30,
+      "durationRush": 15,
+      "intro": "从公共区域观察主题线路中的滨海酒店外观。",
+      "quotes": [],
+      "basis": "东南网／集美报（2023-06-08）列为官方主题线路点位；公共可达位置待核。",
+      "realPhoto": "img/kd-xm-ip-05.jpg",
+      "photos": [
+        "img/kd-xm-ip-05.jpg",
+        "img/kd-xm-ip-05-2.jpg",
+        "img/kd-xm-ip-05-3.jpg",
+        "img/kd-xm-ip-05-4.jpg",
+        "img/kd-xm-ip-05-5.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "skipNote": "仅看外观时，可与天桥二选一。",
+      "tips": "酒店内部体验须另行确认和预约。"
+    },
+    {
+      "poiId": "kd-xm-ip-06",
+      "lineId": "kaiduan-xiamen",
+      "type": "ip",
+      "name": "海沧大道泰地站",
+      "alias": "",
+      "lng": 118.026,
+      "lat": 24.486,
+      "cluster": "厦门·海沧大道",
+      "tier": "B",
+      "durationNormal": 30,
+      "durationRush": 15,
+      "intro": "沿海沧大道补充一段《开端》主题线路体验。",
+      "quotes": [],
+      "basis": "东南网／集美报（2023-06-08）列为官方主题线路点位；现行站名与站台方向待核，暂不排程。",
+      "realPhoto": "img/kd-xm-ip-06.jpg",
+      "photos": [
+        "img/kd-xm-ip-06.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "skipNote": "需跨海安排，优先让位给岛内核心点。",
+      "tips": "先核对现行站名与站台方向。"
+    }
+  ],
+  "cityStops": [
+    {
+      "poiId": "kd-xm-sp-01",
+      "lineId": "kaiduan-xiamen",
+      "type": "classic",
+      "name": "鼓浪屿",
+      "lng": 118.067,
+      "lat": 24.448,
+      "cluster": "厦门·鼓浪屿",
+      "popularity": 5,
+      "durationNormal": 240,
+      "durationRush": 120,
+      "intro": "全岛总计时，子景点不重复叠加。",
+      "realPhoto": "img/kd-xm-sp-01.jpg",
+      "photos": [
+        "img/kd-xm-sp-01.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "kd-xm-sp-02",
+      "lineId": "kaiduan-xiamen",
+      "type": "classic",
+      "name": "日光岩",
+      "lng": 118.066,
+      "lat": 24.447,
+      "cluster": "厦门·鼓浪屿",
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "鼓浪屿内子点，与全岛时长去重。",
+      "realPhoto": "img/kd-xm-sp-02.jpg",
+      "photos": [
+        "img/kd-xm-sp-02.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "kd-xm-sp-03",
+      "lineId": "kaiduan-xiamen",
+      "type": "classic",
+      "name": "菽庄花园",
+      "lng": 118.064,
+      "lat": 24.441,
+      "cluster": "厦门·鼓浪屿",
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "鼓浪屿内子点，与全岛时长去重。",
+      "realPhoto": "img/kd-xm-sp-03.jpg",
+      "photos": [
+        "img/kd-xm-sp-03.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "kd-xm-sp-04",
+      "lineId": "kaiduan-xiamen",
+      "type": "classic",
+      "name": "中山路步行街",
+      "lng": 118.082,
+      "lat": 24.457,
+      "cluster": "厦门·中山路沙坡尾",
+      "popularity": 5,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "厦门老城街区，适合与周边点位串联。",
+      "realPhoto": "img/kd-xm-sp-04.jpg",
+      "photos": [
+        "img/kd-xm-sp-04.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "kd-xm-sp-05",
+      "lineId": "kaiduan-xiamen",
+      "type": "classic",
+      "name": "沙坡尾",
+      "lng": 118.087,
+      "lat": 24.443,
+      "cluster": "厦门·中山路沙坡尾",
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "公共街区范围待细化。",
+      "realPhoto": "img/kd-xm-sp-05.jpg",
+      "photos": [
+        "img/kd-xm-sp-05.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "kd-xm-sp-06",
+      "lineId": "kaiduan-xiamen",
+      "type": "classic",
+      "name": "厦门园林植物园",
+      "lng": 118.105,
+      "lat": 24.453,
+      "cluster": "厦门·岛内步道",
+      "popularity": 4,
+      "durationNormal": 180,
+      "durationRush": 90,
+      "intro": "入口与园内交通另行核算。",
+      "realPhoto": "img/kd-xm-sp-06.jpg",
+      "photos": [
+        "img/kd-xm-sp-06.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "kd-xm-sp-07",
+      "lineId": "kaiduan-xiamen",
+      "type": "classic",
+      "name": "南普陀寺",
+      "lng": 118.089,
+      "lat": 24.44,
+      "cluster": "厦门·中山路沙坡尾",
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "预约与参观范围待核。",
+      "realPhoto": "img/kd-xm-sp-07.jpg",
+      "photos": [
+        "img/kd-xm-sp-07.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "kd-xm-sp-08",
+      "lineId": "kaiduan-xiamen",
+      "type": "classic",
+      "name": "厦门大学访客参观",
+      "lng": 118.096,
+      "lat": 24.437,
+      "cluster": "厦门·中山路沙坡尾",
+      "popularity": 5,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "仅在获准预约时启用。",
+      "realPhoto": "img/kd-xm-sp-08.jpg",
+      "photos": [
+        "img/kd-xm-sp-08.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "kd-xm-sp-09",
+      "lineId": "kaiduan-xiamen",
+      "type": "classic",
+      "name": "胡里山炮台",
+      "lng": 118.108,
+      "lat": 24.43,
+      "cluster": "厦门·环岛路",
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "海滨文化景点候选。",
+      "realPhoto": "img/kd-xm-sp-09.jpg",
+      "photos": [
+        "img/kd-xm-sp-09.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "kd-xm-sp-10",
+      "lineId": "kaiduan-xiamen",
+      "type": "classic",
+      "name": "白城沙滩",
+      "lng": 118.1,
+      "lat": 24.434,
+      "cluster": "厦门·环岛路",
+      "popularity": 3,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "以公共开放范围为准。",
+      "realPhoto": "img/kd-xm-sp-10.jpg",
+      "photos": [
+        "img/kd-xm-sp-10.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "kd-xm-sp-11",
+      "lineId": "kaiduan-xiamen",
+      "type": "classic",
+      "name": "曾厝垵",
+      "lng": 118.118,
+      "lat": 24.431,
+      "cluster": "厦门·环岛路",
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "环岛路街区补充。",
+      "realPhoto": "img/kd-xm-sp-11.jpg",
+      "photos": [
+        "img/kd-xm-sp-11.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "kd-xm-sp-12",
+      "lineId": "kaiduan-xiamen",
+      "type": "classic",
+      "name": "黄厝海滩",
+      "lng": 118.139,
+      "lat": 24.429,
+      "cluster": "厦门·环岛路",
+      "popularity": 3,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "具体入口待核。",
+      "realPhoto": "img/kd-xm-sp-12.jpg",
+      "photos": [
+        "img/kd-xm-sp-12.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "kd-xm-sp-13",
+      "lineId": "kaiduan-xiamen",
+      "type": "classic",
+      "name": "集美学村",
+      "lng": 118.098,
+      "lat": 24.568,
+      "cluster": "厦门·集美",
+      "popularity": 4,
+      "durationNormal": 150,
+      "durationRush": 75,
+      "intro": "整片区计时，跨海交通另计。",
+      "realPhoto": "img/kd-xm-sp-13.jpg",
+      "photos": [
+        "img/kd-xm-sp-13.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "kd-xm-sp-14",
+      "lineId": "kaiduan-xiamen",
+      "type": "classic",
+      "name": "园博苑",
+      "lng": 118.075,
+      "lat": 24.576,
+      "cluster": "厦门·集美",
+      "popularity": 4,
+      "durationNormal": 180,
+      "durationRush": 90,
+      "intro": "跨片区支线，交通另计。",
+      "realPhoto": "img/kd-xm-sp-14.jpg",
+      "photos": [
+        "img/kd-xm-sp-14.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "kd-xm-sp-15",
+      "lineId": "kaiduan-xiamen",
+      "type": "classic",
+      "name": "海沧湾公园",
+      "lng": 118.034,
+      "lat": 24.483,
+      "cluster": "厦门·海沧大道",
+      "popularity": 3,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "跨海支线，交通另计。",
+      "realPhoto": "img/kd-xm-sp-15.jpg",
+      "photos": [
+        "img/kd-xm-sp-15.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    }
+  ]
+}

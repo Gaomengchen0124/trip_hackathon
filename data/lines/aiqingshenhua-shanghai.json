@@ -1,0 +1,517 @@
+{
+  "_说明": "《爱情神话》·上海点位库（草稿）。内容取自 2026-10-07《填写模板·爱情神话-上海》。与《繁花·上海》重合的点位复用原有图片（img/sh-*.jpg）与票务信息；其余点位图片待补。台词未核实，quotes 暂为空。校验：node data/validate.mjs data/lines/aiqingshenhua-shanghai.json",
+  "_版本": 1,
+  "_priority": 9,
+  "_bounds": {
+    "lng": [
+      121,
+      121.9
+    ],
+    "lat": [
+      30.6,
+      31.5
+    ]
+  },
+  "_expected": {
+    "ipStops": [
+      6,
+      8
+    ],
+    "cityStops": [
+      10,
+      20
+    ],
+    "maxTierS": 3
+  },
+  "ip": {
+    "ipId": "aiqingshenhua",
+    "name": "爱情神话",
+    "author": "邵艺辉（编剧／导演）",
+    "kind": "film",
+    "cover": "img/aiqingshenhua.jpg",
+    "aliases": [
+      "爱情神话",
+      "老白",
+      "李小姐",
+      "格洛瑞亚",
+      "蓓蓓",
+      "五原路"
+    ],
+    "tags": {
+      "城市": [
+        "上海"
+      ],
+      "人物": [
+        "老白",
+        "李小姐",
+        "格洛瑞亚",
+        "蓓蓓"
+      ],
+      "地名": [
+        "五原路",
+        "延庆路",
+        "马利美术馆"
+      ]
+    }
+  },
+  "line": {
+    "lineId": "aiqingshenhua-shanghai",
+    "ipId": "aiqingshenhua",
+    "title": "爱情神话·上海",
+    "city": "上海",
+    "cover": "img/aiqingshenhua-shanghai.jpg",
+    "recommendDays": 2
+  },
+  "clusters": [
+    "徐汇·衡复",
+    "静安",
+    "近郊",
+    "黄浦·外滩",
+    "黄浦·老城厢",
+    "黄浦·打浦桥",
+    "虹口·北外滩",
+    "浦东"
+  ],
+  "ipStops": [
+    {
+      "poiId": "aqsh-sh-ip-01",
+      "lineId": "aiqingshenhua-shanghai",
+      "type": "ip",
+      "name": "大通别墅",
+      "alias": "老白家",
+      "lng": 121.441,
+      "lat": 31.2137,
+      "cluster": "徐汇·衡复",
+      "tier": "S",
+      "durationNormal": 30,
+      "durationRush": 15,
+      "intro": "在五原路的住宅外，辨认电影中老白家的街景。",
+      "quotes": [],
+      "basis": "上观新闻转载《老白家取景地》（2022-01-11）报道支持；地址线索为五原路252弄，只定位临街公共区域，具体镜头与时间码待核。",
+      "realPhoto": "img/aqsh-sh-ip-01.jpg",
+      "photos": [
+        "img/aqsh-sh-ip-01.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "skipNote": "若只想逛开放场馆，可舍弃住宅外观。",
+      "tips": "只从公共道路看外立面。"
+    },
+    {
+      "poiId": "aqsh-sh-ip-02",
+      "lineId": "aiqingshenhua-shanghai",
+      "type": "ip",
+      "name": "自由公寓",
+      "alias": "",
+      "lng": 121.44,
+      "lat": 31.2137,
+      "cluster": "徐汇·衡复",
+      "tier": "A",
+      "durationNormal": 30,
+      "durationRush": 15,
+      "intro": "把自由公寓外观与五原路街巷一起纳入电影散步。",
+      "quotes": [],
+      "basis": "澎湃政务《探秘取景地①》（2022-01-19）报道支持；地址线索为五原路258号，不把报道推测当作角色住所定论。",
+      "realPhoto": "img/aqsh-sh-ip-02.jpg",
+      "photos": [
+        "img/aqsh-sh-ip-02.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "skipNote": "若时间很短，可合并为五原路一站。",
+      "tips": "与大通别墅顺路看，勿进入住户楼道。"
+    },
+    {
+      "poiId": "aqsh-sh-ip-03",
+      "lineId": "aiqingshenhua-shanghai",
+      "type": "ip",
+      "name": "延庆路4弄2号",
+      "alias": "",
+      "lng": 121.4485,
+      "lat": 31.212,
+      "cluster": "徐汇·衡复",
+      "tier": "A",
+      "durationNormal": 30,
+      "durationRush": 15,
+      "intro": "在延庆路街角寻找老白骑车经过的城市背景。",
+      "quotes": [],
+      "basis": "澎湃《城的更：延庆路与电影》（2024-12-09）采用报道门牌；地址线索为延庆路与东湖路口附近，具体镜头与时间码待核。",
+      "realPhoto": "img/aqsh-sh-ip-03.jpg",
+      "photos": [
+        "img/aqsh-sh-ip-03.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "skipNote": "同类街角较多，可缩短停留。",
+      "tips": "站在人行道取景，不占路口。"
+    },
+    {
+      "poiId": "aqsh-sh-ip-04",
+      "lineId": "aiqingshenhua-shanghai",
+      "type": "ip",
+      "name": "马利美术馆",
+      "alias": "外滩十八号画廊（电影场景称呼）",
+      "lng": 121.396,
+      "lat": 31.211,
+      "cluster": "近郊",
+      "tier": "S",
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "电影中的画展场景，实拍地点位于延安西路。",
+      "quotes": [],
+      "basis": "上观新闻《同款办展地》（2022-02-15）报道支持；地址线索为延安西路3300号，不是外滩18号，入口与当前开放待核。",
+      "realPhoto": "img/aqsh-sh-ip-04.jpg",
+      "photos": [
+        "img/aqsh-sh-ip-04.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "skipNote": "距主线较远，半日线路建议舍弃。",
+      "tips": "先核对开放与展览，再安排前往。"
+    },
+    {
+      "poiId": "aqsh-sh-ip-05",
+      "lineId": "aiqingshenhua-shanghai",
+      "type": "ip",
+      "name": "Host取景旧址",
+      "alias": "",
+      "lng": 121.456,
+      "lat": 31.218,
+      "cluster": "静安",
+      "tier": "B",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "寻找电影咖啡场景的历史取景线索。",
+      "quotes": [],
+      "basis": "2021年实访资料记作巨鹿路Host（历史商业取景地）；精确门牌与当前实体待核，暂不排程。",
+      "realPhoto": "img/aqsh-sh-ip-05.jpg",
+      "photos": [
+        "img/aqsh-sh-ip-05.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "skipNote": "店铺状态未确认，默认不安排。",
+      "tips": "当前店名、门牌、营业均核验后再去。"
+    },
+    {
+      "poiId": "aqsh-sh-ip-06",
+      "lineId": "aiqingshenhua-shanghai",
+      "type": "ip",
+      "name": "MayFive取景旧址",
+      "alias": "",
+      "lng": 121.453,
+      "lat": 31.214,
+      "cluster": "徐汇·衡复",
+      "tier": "B",
+      "durationNormal": 30,
+      "durationRush": 15,
+      "intro": "补充电影里年轻人物的咖啡店生活场景。",
+      "quotes": [],
+      "basis": "2021年实访资料记作新乐路May Five（历史商业取景地）；精确门牌与当前实体待核，暂不排程。",
+      "realPhoto": "img/aqsh-sh-ip-06.jpg",
+      "photos": [
+        "img/aqsh-sh-ip-06.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "skipNote": "店铺状态未确认，默认不安排。",
+      "tips": "先确认是否仍保留当年店面。"
+    }
+  ],
+  "cityStops": [
+    {
+      "poiId": "aqsh-sh-sp-01",
+      "lineId": "aiqingshenhua-shanghai",
+      "type": "classic",
+      "name": "外滩",
+      "lng": 121.49,
+      "lat": 31.24,
+      "cluster": "黄浦·外滩",
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "滨江步行候选，与南京路合理串联。",
+      "realPhoto": "img/aqsh-sh-sp-01.jpg",
+      "photos": [
+        "img/aqsh-sh-sp-01.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "aqsh-sh-sp-02",
+      "lineId": "aiqingshenhua-shanghai",
+      "type": "classic",
+      "name": "南京路步行街",
+      "lng": 121.475,
+      "lat": 31.235,
+      "cluster": "黄浦·外滩",
+      "popularity": 5,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "与外滩合理串联。",
+      "realPhoto": "img/sh-sp-04.jpg",
+      "photos": [
+        "img/sh-sp-04.jpg"
+      ],
+      "photoCredit": "沿用《繁花·上海》同点位图片，授权以该线记录为准。",
+      "ticket": "免费",
+      "openHours": "全天"
+    },
+    {
+      "poiId": "aqsh-sh-sp-03",
+      "lineId": "aiqingshenhua-shanghai",
+      "type": "classic",
+      "name": "豫园",
+      "lng": 121.492,
+      "lat": 31.227,
+      "cluster": "黄浦·老城厢",
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "园林内部参观另核预约。",
+      "realPhoto": "img/sh-sp-03.jpg",
+      "photos": [
+        "img/sh-sp-03.jpg"
+      ],
+      "photoCredit": "沿用《繁花·上海》同点位图片，授权以该线记录为准。",
+      "ticket": "¥40/免费",
+      "openHours": "09:00-16:30"
+    },
+    {
+      "poiId": "aqsh-sh-sp-04",
+      "lineId": "aiqingshenhua-shanghai",
+      "type": "classic",
+      "name": "城隍庙商圈",
+      "lng": 121.493,
+      "lat": 31.226,
+      "cluster": "黄浦·老城厢",
+      "popularity": 4,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "与豫园区分计时。",
+      "realPhoto": "img/aqsh-sh-sp-04.jpg",
+      "photos": [
+        "img/aqsh-sh-sp-04.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "aqsh-sh-sp-05",
+      "lineId": "aiqingshenhua-shanghai",
+      "type": "classic",
+      "name": "上海博物馆人民广场馆",
+      "lng": 121.4754,
+      "lat": 31.2286,
+      "cluster": "黄浦·外滩",
+      "popularity": 5,
+      "durationNormal": 180,
+      "durationRush": 90,
+      "intro": "沿用粗片区；实际入口与预约待核。",
+      "realPhoto": "img/sh-sp-05.jpg",
+      "photos": [
+        "img/sh-sp-05.jpg"
+      ],
+      "photoCredit": "沿用《繁花·上海》同点位图片，授权以该线记录为准。",
+      "ticket": "免费",
+      "openHours": "09:00-17:00，周一闭馆"
+    },
+    {
+      "poiId": "aqsh-sh-sp-06",
+      "lineId": "aiqingshenhua-shanghai",
+      "type": "classic",
+      "name": "田子坊",
+      "lng": 121.4729,
+      "lat": 31.2087,
+      "cluster": "黄浦·打浦桥",
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "街区补充。",
+      "realPhoto": "img/sh-sp-08.jpg",
+      "photos": [
+        "img/sh-sp-08.jpg"
+      ],
+      "photoCredit": "沿用《繁花·上海》同点位图片，授权以该线记录为准。",
+      "ticket": "免费",
+      "openHours": "全天"
+    },
+    {
+      "poiId": "aqsh-sh-sp-07",
+      "lineId": "aiqingshenhua-shanghai",
+      "type": "classic",
+      "name": "武康路与武康大楼外观",
+      "lng": 121.4357,
+      "lat": 31.2046,
+      "cluster": "徐汇·衡复",
+      "popularity": 5,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "与 IP 街巷合并去重。",
+      "realPhoto": "img/sh-sp-07.jpg",
+      "photos": [
+        "img/sh-sp-07.jpg"
+      ],
+      "photoCredit": "沿用《繁花·上海》同点位图片，授权以该线记录为准。",
+      "ticket": "免费",
+      "openHours": "全天"
+    },
+    {
+      "poiId": "aqsh-sh-sp-08",
+      "lineId": "aiqingshenhua-shanghai",
+      "type": "classic",
+      "name": "静安寺",
+      "lng": 121.4453,
+      "lat": 31.223,
+      "cluster": "静安",
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "参观范围待核。",
+      "realPhoto": "img/sh-sp-06.jpg",
+      "photos": [
+        "img/sh-sp-06.jpg"
+      ],
+      "photoCredit": "沿用《繁花·上海》同点位图片，授权以该线记录为准。",
+      "ticket": "¥50",
+      "openHours": "07:30-17:00"
+    },
+    {
+      "poiId": "aqsh-sh-sp-09",
+      "lineId": "aiqingshenhua-shanghai",
+      "type": "classic",
+      "name": "张园",
+      "lng": 121.458,
+      "lat": 31.2285,
+      "cluster": "静安",
+      "popularity": 4,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "公共区域及预约待核。",
+      "realPhoto": "img/aqsh-sh-sp-09.jpg",
+      "photos": [
+        "img/aqsh-sh-sp-09.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "aqsh-sh-sp-10",
+      "lineId": "aiqingshenhua-shanghai",
+      "type": "classic",
+      "name": "上海迪士尼乐园",
+      "lng": 121.6576,
+      "lat": 31.1434,
+      "cluster": "浦东",
+      "popularity": 5,
+      "durationNormal": 480,
+      "durationRush": 240,
+      "intro": "整日候选，不与市区多点硬塞。",
+      "realPhoto": "img/sh-sp-10.jpg",
+      "photos": [
+        "img/sh-sp-10.jpg"
+      ],
+      "photoCredit": "沿用《繁花·上海》同点位图片，授权以该线记录为准。",
+      "ticket": "¥475起",
+      "openHours": "08:30-20:30"
+    },
+    {
+      "poiId": "aqsh-sh-sp-11",
+      "lineId": "aiqingshenhua-shanghai",
+      "type": "classic",
+      "name": "朱家角古镇",
+      "lng": 121.0533,
+      "lat": 31.1116,
+      "cluster": "近郊",
+      "popularity": 5,
+      "durationNormal": 240,
+      "durationRush": 120,
+      "intro": "远郊候选，往返交通另计。",
+      "realPhoto": "img/sh-sp-11.jpg",
+      "photos": [
+        "img/sh-sp-11.jpg"
+      ],
+      "photoCredit": "沿用《繁花·上海》同点位图片，授权以该线记录为准。",
+      "ticket": "免费/联票¥80",
+      "openHours": "08:30-16:30"
+    },
+    {
+      "poiId": "aqsh-sh-sp-12",
+      "lineId": "aiqingshenhua-shanghai",
+      "type": "classic",
+      "name": "陆家嘴滨江步道",
+      "lng": 121.503,
+      "lat": 31.24,
+      "cluster": "浦东",
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "具体起止街段待核。",
+      "realPhoto": "img/aqsh-sh-sp-12.jpg",
+      "photos": [
+        "img/aqsh-sh-sp-12.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "aqsh-sh-sp-13",
+      "lineId": "aiqingshenhua-shanghai",
+      "type": "classic",
+      "name": "上海中心观光厅",
+      "lng": 121.5055,
+      "lat": 31.2336,
+      "cluster": "浦东",
+      "popularity": 5,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "预约、排队另核。",
+      "realPhoto": "img/sh-sp-02.jpg",
+      "photos": [
+        "img/sh-sp-02.jpg"
+      ],
+      "photoCredit": "沿用《繁花·上海》同点位图片，授权以该线记录为准。",
+      "ticket": "¥180",
+      "openHours": "10:00-21:00"
+    },
+    {
+      "poiId": "aqsh-sh-sp-14",
+      "lineId": "aiqingshenhua-shanghai",
+      "type": "classic",
+      "name": "北外滩滨江",
+      "lng": 121.508,
+      "lat": 31.25,
+      "cluster": "虹口·北外滩",
+      "popularity": 3,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "滨江步行补充。",
+      "realPhoto": "img/aqsh-sh-sp-14.jpg",
+      "photos": [
+        "img/aqsh-sh-sp-14.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "poiId": "aqsh-sh-sp-15",
+      "lineId": "aiqingshenhua-shanghai",
+      "type": "classic",
+      "name": "复兴公园",
+      "lng": 121.4629,
+      "lat": 31.2188,
+      "cluster": "黄浦·打浦桥",
+      "popularity": 4,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "城市公园补充。",
+      "realPhoto": "img/sh-ip-03.jpg",
+      "photos": [
+        "img/sh-ip-03.jpg"
+      ],
+      "photoCredit": "沿用《繁花·上海》同点位图片，授权以该线记录为准。",
+      "ticket": "",
+      "openHours": ""
+    }
+  ]
+}

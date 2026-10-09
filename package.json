@@ -4,8 +4,11 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/gen-img-manifest.mjs",
+    "prebuild": "node scripts/gen-img-manifest.mjs",
     "dev": "vite",
     "build": "vite build",
+    "img:manifest": "node scripts/gen-img-manifest.mjs",
     "preview": "vite preview",
     "data:gen": "node data/gen-template.mjs",
     "data:check": "node data/validate.mjs --all",

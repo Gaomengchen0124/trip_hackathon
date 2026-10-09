@@ -98,6 +98,11 @@
         }
       ],
       "realPhoto": "img/dm-ip-01.jpg",
+      "photos": [
+        "img/dm-ip-01.jpg",
+        "img/dm-ip-01-2.jpg",
+        "img/dm-ip-01-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "skipNote": "全书开篇点，S 级核心，不建议放弃。",
       "tips": "孤山路入口进，可与楼外楼连着走。"
@@ -124,6 +129,11 @@
         }
       ],
       "realPhoto": "img/dm-ip-02.jpg",
+      "photos": [
+        "img/dm-ip-02.jpg",
+        "img/dm-ip-02-2.jpg",
+        "img/dm-ip-02-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "skipNote": "可并入孤山半日，但就餐时间要留够。",
       "tips": "安排到正餐时间，点一份西湖醋鱼。"
@@ -169,6 +179,11 @@
       "durationRush": 45,
       "intro": "西湖十景之首，贯穿西湖南北的湖上长堤。",
       "realPhoto": "img/dm-sp-01.jpg",
+      "photos": [
+        "img/dm-sp-01.jpg",
+        "img/dm-sp-01-2.jpg",
+        "img/dm-sp-01-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "免费",
       "openHours": "全天"
@@ -186,6 +201,10 @@
       "durationRush": 30,
       "intro": "白堤东端的石拱桥，西湖十景之一。",
       "realPhoto": "img/dm-sp-02.jpg",
+      "photos": [
+        "img/dm-sp-02.jpg",
+        "img/dm-sp-02-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "免费",
       "openHours": "全天"
@@ -203,6 +222,11 @@
       "durationRush": 30,
       "intro": "夕照山上的楼阁式塔，可俯瞰西湖全景。",
       "realPhoto": "img/dm-sp-03.jpg",
+      "photos": [
+        "img/dm-sp-03.jpg",
+        "img/dm-sp-03-2.jpg",
+        "img/dm-sp-03-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "¥40",
       "openHours": "08:00-17:30"
@@ -220,6 +244,11 @@
       "durationRush": 60,
       "intro": "杭州最著名的古刹与石窟造像群。",
       "realPhoto": "img/dm-sp-04.jpg",
+      "photos": [
+        "img/dm-sp-04.jpg",
+        "img/dm-sp-04-2.jpg",
+        "img/dm-sp-04-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "¥75",
       "openHours": "07:00-18:00"
@@ -254,6 +283,9 @@
       "durationRush": 45,
       "intro": "杭州老城区的历史商业街区，紧邻吴山。",
       "realPhoto": "img/dm-sp-06.jpg",
+      "photos": [
+        "img/dm-sp-06.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "免费",
       "openHours": "全天"
@@ -273,7 +305,11 @@
       "realPhoto": "img/dm-sp-07.jpg",
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "¥80",
-      "openHours": "07:30-18:30"
+      "openHours": "07:30-18:30",
+      "photos": [
+        "img/dm-sp-07.jpg",
+        "img/dm-sp-07-2.jpg"
+      ]
     },
     {
       "poiId": "dm-sp-08",
@@ -339,6 +375,9 @@
       "durationRush": 30,
       "intro": "京杭大运河杭州段的标志性古桥与历史街区。",
       "realPhoto": "img/dm-sp-11.jpg",
+      "photos": [
+        "img/dm-sp-11.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "免费",
       "openHours": "全天"
@@ -356,6 +395,9 @@
       "durationRush": 90,
       "intro": "五千年前的良渚文化都邑遗址，世界遗产。",
       "realPhoto": "img/dm-sp-12.jpg",
+      "photos": [
+        "img/dm-sp-12.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "¥60",
       "openHours": "09:00-17:00"
@@ -390,6 +432,9 @@
       "durationRush": 30,
       "intro": "清末红顶商人胡雪岩的宅邸，江南园林建筑。",
       "realPhoto": "img/dm-sp-14.jpg",
+      "photos": [
+        "img/dm-sp-14.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "¥20",
       "openHours": "08:00-17:00"
@@ -407,6 +452,11 @@
       "durationRush": 45,
       "intro": "孤山上的省级博物馆，紧邻西泠印社。",
       "realPhoto": "img/dm-sp-15.jpg",
+      "photos": [
+        "img/dm-sp-15.jpg",
+        "img/dm-sp-15-2.jpg",
+        "img/dm-sp-15-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "免费（需预约）",
       "openHours": "09:00-17:00，周一闭馆"
