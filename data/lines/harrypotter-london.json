@@ -581,7 +581,9 @@
       "intro": "电影文化氛围浓厚。",
       "realPhoto": "img/hp-sp-14.jpg",
       "photos": [
-        "img/hp-sp-14.jpg"
+        "img/hp-sp-14.jpg",
+        "img/hp-sp-14-2.jpg",
+        "img/hp-sp-14-3.jpg"
       ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
       "ticket": "免费",
@@ -600,10 +602,8 @@
       "durationNormal": 360,
       "durationRush": 180,
       "intro": "原始电影布景、道具、服装与幕后体验；不在伦敦市内。",
-      "realPhoto": "img/hp-sp-15-2.jpg",
+      "realPhoto": "img/hp-sp-15.jpg",
       "photos": [
-        "img/hp-sp-15-2.jpg",
-        "img/hp-sp-15-3.jpg",
         "img/hp-sp-15.jpg"
       ],
       "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",

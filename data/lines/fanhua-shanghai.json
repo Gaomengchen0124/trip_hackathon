@@ -96,6 +96,11 @@
         }
       ],
       "realPhoto": "img/sh-ip-01.jpg",
+      "photos": [
+        "img/sh-ip-01.jpg",
+        "img/sh-ip-01-2.jpg",
+        "img/sh-ip-01-3.jpg"
+      ],
       "photoCredit": "项目组实拍；自有拍摄授权。若无法实拍，使用有明确 CC 授权的历史影像，并在最终素材中保留原授权信息。",
       "skipNote": "以原址历史感为主，现实体感与书中时代不同。",
       "tips": "傍晚前后到访，适合结合淮海中路街景拍摄。"
@@ -122,6 +127,11 @@
         }
       ],
       "realPhoto": "img/sh-ip-02.jpg",
+      "photos": [
+        "img/sh-ip-02.jpg",
+        "img/sh-ip-02-2.jpg",
+        "img/sh-ip-02-3.jpg"
+      ],
       "photoCredit": "项目组实拍；自有拍摄授权。",
       "skipNote": "点位范围较长，建议聚焦原著涉及的历史街段。",
       "tips": "白天步行体验最好，重点看街区住宅与梧桐环境。"
@@ -148,6 +158,11 @@
         }
       ],
       "realPhoto": "img/sh-ip-03.jpg",
+      "photos": [
+        "img/sh-ip-03.jpg",
+        "img/sh-ip-03-2.jpg",
+        "img/sh-ip-03-3.jpg"
+      ],
       "photoCredit": "项目组实拍；自有拍摄授权。",
       "skipNote": "公园本身较大，巡礼建议只安排原著相关区域。",
       "tips": "春秋季白天游览，适合拍梧桐、园林与周边街景。"
@@ -200,6 +215,11 @@
         }
       ],
       "realPhoto": "img/sh-ip-05.jpg",
+      "photos": [
+        "img/sh-ip-05.jpg",
+        "img/sh-ip-05-2.jpg",
+        "img/sh-ip-05-3.jpg"
+      ],
       "photoCredit": "项目组实拍；自有拍摄授权。",
       "skipNote": "原著关联偏生活史，戏剧性不如核心点位集中。",
       "tips": "白天步行，适合把提篮桥与周边石库门一起游览。"
@@ -297,6 +317,11 @@
       "durationRush": 45,
       "intro": "上海地标电视塔，可俯瞰黄浦江两岸城市景观。",
       "realPhoto": "img/sh-sp-01.jpg",
+      "photos": [
+        "img/sh-sp-01.jpg",
+        "img/sh-sp-01-2.jpg",
+        "img/sh-sp-01-3.jpg"
+      ],
       "photoCredit": "项目组实拍；自有拍摄授权",
       "ticket": "¥160起",
       "openHours": "09:00-21:00"
@@ -314,6 +339,11 @@
       "durationRush": 60,
       "intro": "超高层城市观景地，可体验陆家嘴高空视野。",
       "realPhoto": "img/sh-sp-02.jpg",
+      "photos": [
+        "img/sh-sp-02.jpg",
+        "img/sh-sp-02-2.jpg",
+        "img/sh-sp-02-3.jpg"
+      ],
       "photoCredit": "项目组实拍；自有拍摄授权",
       "ticket": "¥180",
       "openHours": "10:00-21:00"
@@ -331,6 +361,11 @@
       "durationRush": 60,
       "intro": "上海传统园林与老城厢文化集中区域。",
       "realPhoto": "img/sh-sp-03.jpg",
+      "photos": [
+        "img/sh-sp-03.jpg",
+        "img/sh-sp-03-2.jpg",
+        "img/sh-sp-03-3.jpg"
+      ],
       "photoCredit": "项目组实拍；自有拍摄授权",
       "ticket": "¥40/免费",
       "openHours": "09:00-16:30"
@@ -348,6 +383,11 @@
       "durationRush": 45,
       "intro": "上海最具代表性的商业步行街之一。",
       "realPhoto": "img/sh-sp-04.jpg",
+      "photos": [
+        "img/sh-sp-04.jpg",
+        "img/sh-sp-04-2.jpg",
+        "img/sh-sp-04-3.jpg"
+      ],
       "photoCredit": "项目组实拍；自有拍摄授权",
       "ticket": "免费",
       "openHours": "全天"
@@ -365,6 +405,11 @@
       "durationRush": 90,
       "intro": "上海重要综合性博物馆，适合了解城市与中国历史文化。",
       "realPhoto": "img/sh-sp-05.jpg",
+      "photos": [
+        "img/sh-sp-05.jpg",
+        "img/sh-sp-05-2.jpg",
+        "img/sh-sp-05-3.jpg"
+      ],
       "photoCredit": "项目组实拍；自有拍摄授权",
       "ticket": "免费",
       "openHours": "09:00-17:00，周一闭馆"
@@ -382,6 +427,11 @@
       "durationRush": 30,
       "intro": "上海市中心历史悠久的佛教寺院与城市地标。",
       "realPhoto": "img/sh-sp-06.jpg",
+      "photos": [
+        "img/sh-sp-06.jpg",
+        "img/sh-sp-06-2.jpg",
+        "img/sh-sp-06-3.jpg"
+      ],
       "photoCredit": "项目组实拍；自有拍摄授权",
       "ticket": "¥50",
       "openHours": "07:30-17:00"
@@ -399,6 +449,11 @@
       "durationRush": 45,
       "intro": "衡复历史文化风貌区代表性建筑与街道。",
       "realPhoto": "img/sh-sp-07.jpg",
+      "photos": [
+        "img/sh-sp-07.jpg",
+        "img/sh-sp-07-2.jpg",
+        "img/sh-sp-07-3.jpg"
+      ],
       "photoCredit": "项目组实拍；自有拍摄授权",
       "ticket": "免费",
       "openHours": "全天"
@@ -416,6 +471,11 @@
       "durationRush": 45,
       "intro": "石库门街巷与文创商业结合的城市街区。",
       "realPhoto": "img/sh-sp-08.jpg",
+      "photos": [
+        "img/sh-sp-08.jpg",
+        "img/sh-sp-08-2.jpg",
+        "img/sh-sp-08-3.jpg"
+      ],
       "photoCredit": "项目组实拍；自有拍摄授权",
       "ticket": "免费",
       "openHours": "全天"
@@ -433,6 +493,10 @@
       "durationRush": 45,
       "intro": "石库门建筑与现代商业融合的城市休闲街区。",
       "realPhoto": "img/sh-sp-09.jpg",
+      "photos": [
+        "img/sh-sp-09.jpg",
+        "img/sh-sp-09-2.jpg"
+      ],
       "photoCredit": "项目组实拍；自有拍摄授权",
       "ticket": "免费",
       "openHours": "全天"
@@ -450,6 +514,11 @@
       "durationRush": 240,
       "intro": "大型主题乐园，适合作为远距离取舍点。",
       "realPhoto": "img/sh-sp-10.jpg",
+      "photos": [
+        "img/sh-sp-10.jpg",
+        "img/sh-sp-10-2.jpg",
+        "img/sh-sp-10-3.jpg"
+      ],
       "photoCredit": "项目组实拍；自有拍摄授权",
       "ticket": "¥475起",
       "openHours": "08:30-20:30"
@@ -467,6 +536,11 @@
       "durationRush": 120,
       "intro": "江南水乡古镇，可体验上海近郊传统水乡景观。",
       "realPhoto": "img/sh-sp-11.jpg",
+      "photos": [
+        "img/sh-sp-11.jpg",
+        "img/sh-sp-11-2.jpg",
+        "img/sh-sp-11-3.jpg"
+      ],
       "photoCredit": "项目组实拍；自有拍摄授权",
       "ticket": "免费/联票¥80",
       "openHours": "08:30-16:30"
@@ -484,6 +558,11 @@
       "durationRush": 30,
       "intro": "具有独特工业建筑空间的城市文化地标。",
       "realPhoto": "img/sh-sp-12.jpg",
+      "photos": [
+        "img/sh-sp-12.jpg",
+        "img/sh-sp-12-2.jpg",
+        "img/sh-sp-12-3.jpg"
+      ],
       "photoCredit": "项目组实拍；自有拍摄授权",
       "ticket": "免费",
       "openHours": "09:00-22:00"
@@ -501,6 +580,11 @@
       "durationRush": 30,
       "intro": "近代文化名人活动与历史建筑集中的街区。",
       "realPhoto": "img/sh-sp-13.jpg",
+      "photos": [
+        "img/sh-sp-13.jpg",
+        "img/sh-sp-13-2.jpg",
+        "img/sh-sp-13-3.jpg"
+      ],
       "photoCredit": "项目组实拍；自有拍摄授权",
       "ticket": "免费",
       "openHours": "全天"
@@ -518,6 +602,9 @@
       "durationRush": 90,
       "intro": "面向公众展示自然科学与科技知识的综合场馆。",
       "realPhoto": "img/sh-sp-14.jpg",
+      "photos": [
+        "img/sh-sp-14.jpg"
+      ],
       "photoCredit": "项目组实拍；自有拍摄授权",
       "ticket": "¥45",
       "openHours": "09:00-17:00，周一闭馆"
@@ -535,6 +622,11 @@
       "durationRush": 60,
       "intro": "徐汇滨江艺术空间，适合城市文化与建筑打卡。",
       "realPhoto": "img/sh-sp-15.jpg",
+      "photos": [
+        "img/sh-sp-15.jpg",
+        "img/sh-sp-15-2.jpg",
+        "img/sh-sp-15-3.jpg"
+      ],
       "photoCredit": "项目组实拍；自有拍摄授权",
       "ticket": "免费/特展另计",
       "openHours": "10:00-18:00，周一闭馆"

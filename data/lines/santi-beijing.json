@@ -101,6 +101,9 @@
         }
       ],
       "realPhoto": "img/st-ip-01.jpg",
+      "photos": [
+        "img/st-ip-01.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "skipNote": "全程最远的孤点，时间不够第一个砍它。",
       "tips": "市区开车约 2 小时，必须单独留半天。"
@@ -127,6 +130,10 @@
         }
       ],
       "realPhoto": "img/st-ip-02.jpg",
+      "photos": [
+        "img/st-ip-02.jpg",
+        "img/st-ip-02-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "skipNote": "停留时间短，可并入王府井购物时段。",
       "tips": "就在王府井大街上，购物行程顺路。"
@@ -153,6 +160,11 @@
         }
       ],
       "realPhoto": "img/st-ip-03.jpg",
+      "photos": [
+        "img/st-ip-03.jpg",
+        "img/st-ip-03-2.jpg",
+        "img/st-ip-03-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "skipNote": "与密云基地讲同一场戏，时间紧留一个就够。",
       "tips": "和动物园、西直门一带可以连着排一天。"
@@ -179,6 +191,11 @@
         }
       ],
       "realPhoto": "img/st-ip-04.jpg",
+      "photos": [
+        "img/st-ip-04.jpg",
+        "img/st-ip-04-2.jpg",
+        "img/st-ip-04-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "skipNote": "校园不好「打卡」，限制多，可优先放弃。",
       "tips": "校园需预约入校，节假日提前查规则。"
@@ -205,6 +222,10 @@
         }
       ],
       "realPhoto": "img/st-ip-05.jpg",
+      "photos": [
+        "img/st-ip-05.jpg",
+        "img/st-ip-05-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "skipNote": "远郊点，和观测站捆成一组，取舍时整组砍。",
       "tips": "和密云观测站排同一天，中间留出车程。"
@@ -224,6 +245,9 @@
       "durationRush": 120,
       "intro": "明清两代皇宫，中轴线上规模最大的宫殿建筑群。",
       "realPhoto": "img/st-sp-01.jpg",
+      "photos": [
+        "img/st-sp-01.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "¥60",
       "openHours": "08:30-17:00，周一闭馆"
@@ -241,6 +265,12 @@
       "durationRush": 30,
       "intro": "北京的城市中心广场，看升旗与城楼的地方。",
       "realPhoto": "img/st-sp-02.jpg",
+      "photos": [
+        "img/st-sp-02.jpg",
+        "img/st-sp-02-2.jpg",
+        "img/st-sp-02-3.jpg",
+        "img/st-sp-02-4.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "免费（需预约）",
       "openHours": "全天"
@@ -258,6 +288,11 @@
       "durationRush": 120,
       "intro": "清代皇家园林，昆明湖与万寿山相映。",
       "realPhoto": "img/st-sp-03.jpg",
+      "photos": [
+        "img/st-sp-03.jpg",
+        "img/st-sp-03-2.jpg",
+        "img/st-sp-03-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "¥30",
       "openHours": "06:30-18:00"
@@ -275,6 +310,10 @@
       "durationRush": 60,
       "intro": "清代皇家园林遗址，西洋楼残柱是它的标志。",
       "realPhoto": "img/st-sp-04.jpg",
+      "photos": [
+        "img/st-sp-04.jpg",
+        "img/st-sp-04-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "¥25",
       "openHours": "07:00-19:00"
@@ -292,6 +331,11 @@
       "durationRush": 60,
       "intro": "明清皇帝祭天的场所，祈年殿是它的标志。",
       "realPhoto": "img/st-sp-05.jpg",
+      "photos": [
+        "img/st-sp-05.jpg",
+        "img/st-sp-05-2.jpg",
+        "img/st-sp-05-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "¥34",
       "openHours": "06:00-17:30"
@@ -309,6 +353,10 @@
       "durationRush": 150,
       "intro": "明长城保存最好的一段，北京最经典的登城点。",
       "realPhoto": "img/st-sp-06.jpg",
+      "photos": [
+        "img/st-sp-06.jpg",
+        "img/st-sp-06-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "¥40",
       "openHours": "07:30-16:00"
@@ -326,6 +374,11 @@
       "durationRush": 45,
       "intro": "2008 年奥运会主场馆，夜景灯光值得一看。",
       "realPhoto": "img/st-sp-07.jpg",
+      "photos": [
+        "img/st-sp-07.jpg",
+        "img/st-sp-07-2.jpg",
+        "img/st-sp-07-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "外观免费",
       "openHours": "全天"
@@ -343,6 +396,11 @@
       "durationRush": 45,
       "intro": "元代格局保留至今的胡同街区，小店密集。",
       "realPhoto": "img/st-sp-08.jpg",
+      "photos": [
+        "img/st-sp-08.jpg",
+        "img/st-sp-08-2.jpg",
+        "img/st-sp-08-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "免费",
       "openHours": "全天"
@@ -360,6 +418,11 @@
       "durationRush": 60,
       "intro": "由前海、后海组成的湖区，环湖是胡同与酒吧。",
       "realPhoto": "img/st-sp-09.jpg",
+      "photos": [
+        "img/st-sp-09.jpg",
+        "img/st-sp-09-2.jpg",
+        "img/st-sp-09-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "免费",
       "openHours": "全天"
@@ -377,6 +440,11 @@
       "durationRush": 30,
       "intro": "清代皇家寺院，北京规模最大的藏传佛教寺院。",
       "realPhoto": "img/st-sp-10.jpg",
+      "photos": [
+        "img/st-sp-10.jpg",
+        "img/st-sp-10-2.jpg",
+        "img/st-sp-10-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "¥25",
       "openHours": "09:00-16:30"
@@ -394,6 +462,11 @@
       "durationRush": 45,
       "intro": "皇家园林，白塔与琼华岛是北京的老地标。",
       "realPhoto": "img/st-sp-11.jpg",
+      "photos": [
+        "img/st-sp-11.jpg",
+        "img/st-sp-11-2.jpg",
+        "img/st-sp-11-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "¥10",
       "openHours": "06:30-20:00"
@@ -411,6 +484,11 @@
       "durationRush": 30,
       "intro": "故宫北侧的皇家园林，万春亭俯瞰紫禁城全景。",
       "realPhoto": "img/st-sp-12.jpg",
+      "photos": [
+        "img/st-sp-12.jpg",
+        "img/st-sp-12-2.jpg",
+        "img/st-sp-12-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "¥2",
       "openHours": "06:30-20:00"
@@ -445,6 +523,12 @@
       "durationRush": 90,
       "intro": "西山赏红叶的胜地，登顶可远眺北京城。",
       "realPhoto": "img/st-sp-14.jpg",
+      "photos": [
+        "img/st-sp-14.jpg",
+        "img/st-sp-14-2.jpg",
+        "img/st-sp-14-3.jpg",
+        "img/st-sp-14-4.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "¥10",
       "openHours": "06:00-18:30"
@@ -462,6 +546,11 @@
       "durationRush": 90,
       "intro": "天安门广场东侧的国家级博物馆，藏品逾百万件。",
       "realPhoto": "img/st-sp-15.jpg",
+      "photos": [
+        "img/st-sp-15.jpg",
+        "img/st-sp-15-2.jpg",
+        "img/st-sp-15-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "免费（需预约）",
       "openHours": "09:00-17:00，周一闭馆"

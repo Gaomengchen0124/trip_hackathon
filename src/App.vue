@@ -3,7 +3,7 @@
 
 <template>
   <header class="app-header">
-    <router-link to="/" class="brand">📖 跟着书本去旅行</router-link>
+    <router-link to="/" class="brand">📖 我的圣地巡礼</router-link>
   </header>
   <router-view />
 </template>

@@ -1,4 +1,4 @@
-# 跟着书本去旅行 · 前端骨架
+# 我的圣地巡礼 · 前端骨架
 
 > Vue 3 + Vite + vue-router + Pinia。无 UI 组件库、无地图 SDK 依赖（mock 全本地，可离线演示）。
 > 业务代码只通过 `src/api/adapter.js` 取数，mock / 真实后端一键切换。
@@ -7,9 +7,14 @@
 
 ```bash
 npm install
-npm run dev      # http://localhost:5173
-npm run build    # 产物在 dist/
+npm run dev      # 开发：http://localhost:5173
+npm run build    # 打包：产物在 dist/
+npm run preview  # 预览打包结果：http://localhost:4173
 ```
+
+> ⚠️ 页面必须通过 http 打开。直接双击 `dist/index.html`（file://）一定白屏——
+> 浏览器会以跨域为由拦截 `<script type="module">`，控制台报 CORS。
+> 想让别人看，用 `npm run preview`（或 `npx vite preview --host` 给局域网地址）。
 
 ## 环境开关（.env）
 
@@ -22,7 +27,7 @@ npm run build    # 产物在 dist/
 
 | 路径 | 页面 | 备注 |
 | --- | --- | --- |
-| `/` | S1 首页 | 搜索联想 + 按城市分组的卡片墙 |
+| `/` | S1 首页 | 搜索联想 + 「选择你的圣地巡礼之行」卡片墙 |
 | `/column/:key` | S2 栏目列表 | key = city（其他值回落到 city）|
 | `/customize/:lineId` | S3 定制页 | S4 取舍抽屉是内部状态，非路由 |
 | `/result/:tab` | S5 结果页 | tab = map / day / export；`/result` 重定向到 map |

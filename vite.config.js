@@ -15,4 +15,8 @@ export default defineConfig({
       },
     },
   },
+  preview: {
+    port: 4173,
+    host: true, // 预览打包产物时同样允许局域网访问
+  },
 })

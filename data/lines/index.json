@@ -203,7 +203,11 @@
         "左蓝",
         "李涯",
         "天津站",
-        "保密局天津站"
+        "保密局天津站",
+        "张园",
+        "静园",
+        "利顺德",
+        "利顺德大饭店"
       ],
       "tags": {
         "城市": [
@@ -218,11 +222,116 @@
         ],
         "地名": [
           "天津站",
+          "张园",
+          "静园",
+          "利顺德大饭店",
           "五大道",
           "意式风情区",
           "海河",
-          "静园",
+          "赤峰道",
           "盘山"
+        ]
+      }
+    },
+    {
+      "lineId": "quyoufengdedifang-dali",
+      "ipId": "quyoufengdedifang",
+      "ipName": "去有风的地方",
+      "title": "去有风的地方·大理",
+      "city": "大理",
+      "cover": "img/quyoufengdedifang-dali.jpg",
+      "file": "data/lines/quyoufengdedifang-dali.json",
+      "priority": 7,
+      "recommendDays": 2,
+      "aliases": [
+        "去有风的地方",
+        "有风的地方",
+        "许红豆",
+        "谢之遥",
+        "有风小院",
+        "凤阳邑"
+      ],
+      "tags": {
+        "城市": [
+          "大理"
+        ],
+        "人物": [
+          "许红豆",
+          "谢之遥"
+        ],
+        "地名": [
+          "凤阳邑",
+          "喜洲古镇",
+          "大理古城"
+        ]
+      }
+    },
+    {
+      "lineId": "kaiduan-xiamen",
+      "ipId": "kaiduan",
+      "ipName": "开端",
+      "title": "开端·厦门",
+      "city": "厦门",
+      "cover": "img/kaiduan-xiamen.jpg",
+      "file": "data/lines/kaiduan-xiamen.json",
+      "priority": 8,
+      "recommendDays": 2,
+      "aliases": [
+        "开端",
+        "祈祷君",
+        "李诗情",
+        "肖鹤云",
+        "嘉林",
+        "公交车"
+      ],
+      "tags": {
+        "城市": [
+          "厦门"
+        ],
+        "人物": [
+          "李诗情",
+          "肖鹤云"
+        ],
+        "地名": [
+          "和熙楼",
+          "海山东荣广场",
+          "联发华美空间",
+          "美峰天桥"
+        ]
+      }
+    },
+    {
+      "lineId": "aiqingshenhua-shanghai",
+      "ipId": "aiqingshenhua",
+      "ipName": "爱情神话",
+      "title": "爱情神话·上海",
+      "city": "上海",
+      "cover": "img/aiqingshenhua-shanghai.jpg",
+      "file": "data/lines/aiqingshenhua-shanghai.json",
+      "priority": 9,
+      "recommendDays": 2,
+      "aliases": [
+        "爱情神话",
+        "老白",
+        "李小姐",
+        "格洛瑞亚",
+        "蓓蓓",
+        "五原路"
+      ],
+      "tags": {
+        "城市": [
+          "上海"
+        ],
+        "人物": [
+          "老白",
+          "李小姐",
+          "格洛瑞亚",
+          "蓓蓓"
+        ],
+        "地名": [
+          "五原路",
+          "延庆路",
+          "马利美术馆"
         ]
       }
     },

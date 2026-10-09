@@ -21,7 +21,7 @@ watch(
   <article class="detail">
     <div class="gallery">
       <PhotoFrame :src="current" :alt="poi.name" />
-      <div v-if="photos.length > 1" class="thumbs" role="group" aria-label="现场实拍图">
+      <div v-if="photos.length" class="thumbs" role="group" aria-label="现场实拍图">
         <button
           v-for="(photo, index) in photos"
           :key="photo"
@@ -33,7 +33,9 @@ watch(
         >
           <PhotoFrame :src="photo" :alt="`${poi.name} 第 ${index + 1} 张`" ratio="4 / 3" />
         </button>
-        <p class="count">{{ active + 1 }} / {{ photos.length }}</p>
+        <p class="count">
+          {{ photos.length > 1 ? `${active + 1} / ${photos.length}` : '共 1 张实拍' }}
+        </p>
       </div>
     </div>
     <div class="content">

@@ -84,6 +84,10 @@
         }
       ],
       "realPhoto": "img/wd-ip-01.jpg",
+      "photos": [
+        "img/wd-ip-01.jpg",
+        "img/wd-ip-01-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "skipNote": "只做城市打卡时可压缩为园门与核心遗址区域。",
       "tips": "清晨或傍晚进入，重点看古殿、残墙、祭坛和老柏树。"
@@ -103,6 +107,11 @@
       "durationRush": 75,
       "intro": "北京代表性皇家祭祀建筑群，可作为“古园/祭坛”文化补充。",
       "realPhoto": "img/wd-sp-01.jpg",
+      "photos": [
+        "img/wd-sp-01.jpg",
+        "img/wd-sp-01-2.jpg",
+        "img/wd-sp-01-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "约¥15起",
       "openHours": ""
@@ -120,6 +129,9 @@
       "durationRush": 90,
       "intro": "北京最具代表性的历史文化景区。",
       "realPhoto": "img/wd-sp-02.jpg",
+      "photos": [
+        "img/wd-sp-02.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "约¥60",
       "openHours": ""
@@ -137,6 +149,11 @@
       "durationRush": 30,
       "intro": "可俯瞰故宫，是北京历史城市空间的高点。",
       "realPhoto": "img/wd-sp-03.jpg",
+      "photos": [
+        "img/wd-sp-03.jpg",
+        "img/wd-sp-03-2.jpg",
+        "img/wd-sp-03-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "约¥2",
       "openHours": ""
@@ -154,6 +171,11 @@
       "durationRush": 60,
       "intro": "北京传统皇家园林与水景代表。",
       "realPhoto": "img/wd-sp-04.jpg",
+      "photos": [
+        "img/wd-sp-04.jpg",
+        "img/wd-sp-04-2.jpg",
+        "img/wd-sp-04-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "约¥10",
       "openHours": ""
@@ -171,6 +193,11 @@
       "durationRush": 45,
       "intro": "与地坛距离较近，适合安排同日游览。",
       "realPhoto": "img/wd-sp-05.jpg",
+      "photos": [
+        "img/wd-sp-05.jpg",
+        "img/wd-sp-05-2.jpg",
+        "img/wd-sp-05-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "约¥25",
       "openHours": ""
@@ -188,6 +215,11 @@
       "durationRush": 45,
       "intro": "北京胡同文化代表街区。",
       "realPhoto": "img/wd-sp-06.jpg",
+      "photos": [
+        "img/wd-sp-06.jpg",
+        "img/wd-sp-06-2.jpg",
+        "img/wd-sp-06-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "免费",
       "openHours": ""
@@ -205,6 +237,11 @@
       "durationRush": 60,
       "intro": "胡同、水面与老北京生活结合的区域。",
       "realPhoto": "img/wd-sp-07.jpg",
+      "photos": [
+        "img/wd-sp-07.jpg",
+        "img/wd-sp-07-2.jpg",
+        "img/wd-sp-07-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "免费",
       "openHours": ""
@@ -222,6 +259,11 @@
       "durationRush": 45,
       "intro": "北京中轴线重要历史建筑群。",
       "realPhoto": "img/wd-sp-08.jpg",
+      "photos": [
+        "img/wd-sp-08.jpg",
+        "img/wd-sp-08-2.jpg",
+        "img/wd-sp-08-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "约¥30",
       "openHours": ""
@@ -239,6 +281,11 @@
       "durationRush": 45,
       "intro": "现代文学主题博物馆，适合文学线路补充。",
       "realPhoto": "img/wd-sp-09.jpg",
+      "photos": [
+        "img/wd-sp-09.jpg",
+        "img/wd-sp-09-2.jpg",
+        "img/wd-sp-09-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "免费/预约",
       "openHours": ""
@@ -256,6 +303,11 @@
       "durationRush": 60,
       "intro": "中国现代文学重要收藏、研究与展示机构。",
       "realPhoto": "img/wd-sp-10.jpg",
+      "photos": [
+        "img/wd-sp-10.jpg",
+        "img/wd-sp-10-2.jpg",
+        "img/wd-sp-10-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "预约",
       "openHours": ""
@@ -273,6 +325,10 @@
       "durationRush": 60,
       "intro": "北京重要文化教育地标。",
       "realPhoto": "img/wd-sp-11.jpg",
+      "photos": [
+        "img/wd-sp-11.jpg",
+        "img/wd-sp-11-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "预约",
       "openHours": ""
@@ -290,6 +346,9 @@
       "durationRush": 60,
       "intro": "史铁生北京人生背景的城市文化补充。",
       "realPhoto": "img/wd-sp-12.jpg",
+      "photos": [
+        "img/wd-sp-12.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "预约",
       "openHours": ""
@@ -307,6 +366,11 @@
       "durationRush": 60,
       "intro": "北京重要阅读与文化地标。",
       "realPhoto": "img/wd-sp-13.jpg",
+      "photos": [
+        "img/wd-sp-13.jpg",
+        "img/wd-sp-13-2.jpg",
+        "img/wd-sp-13-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "免费/预约",
       "openHours": ""
@@ -324,6 +388,10 @@
       "durationRush": 75,
       "intro": "北京重要遗址公园。",
       "realPhoto": "img/wd-sp-14.jpg",
+      "photos": [
+        "img/wd-sp-14.jpg",
+        "img/wd-sp-14-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "约¥10",
       "openHours": ""
@@ -341,6 +409,11 @@
       "durationRush": 90,
       "intro": "北京代表性皇家园林。",
       "realPhoto": "img/wd-sp-15.jpg",
+      "photos": [
+        "img/wd-sp-15.jpg",
+        "img/wd-sp-15-2.jpg",
+        "img/wd-sp-15-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "约¥30",
       "openHours": ""

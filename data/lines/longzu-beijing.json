@@ -97,6 +97,10 @@
       "tips": "从东宫门进最顺：长廊—佛香阁—昆明湖；傍晚在十七孔桥东南侧看金光穿洞。",
       "skipNote": "全线唯一 S 级场景，不建议放弃。",
       "realPhoto": "img/bj-ip-01.jpg",
+      "photos": [
+        "img/bj-ip-01.jpg",
+        "img/bj-ip-01-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "quotes": [
         {
@@ -129,6 +133,10 @@
       "tips": "地铁中关村站，可顺路逛北大清华。",
       "skipNote": "纯城市路段，打卡性质，可放弃。",
       "realPhoto": "img/bj-ip-03.jpg",
+      "photos": [
+        "img/bj-ip-03.jpg",
+        "img/bj-ip-03-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "quotes": [
         {
@@ -155,6 +163,10 @@
       "tips": "地下商场与地铁站连着，从王府井站下最方便。",
       "skipNote": "商场本身好逛，但戏份只在深夜，可压缩。",
       "realPhoto": "img/bj-ip-04.jpg",
+      "photos": [
+        "img/bj-ip-04.jpg",
+        "img/bj-ip-04-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "quotes": [
         {
@@ -181,6 +193,10 @@
       "tips": "一条街走完，顺路可以连大栅栏。",
       "skipNote": "短街，时间紧可以先去掉。",
       "realPhoto": "img/bj-ip-05.jpg",
+      "photos": [
+        "img/bj-ip-05.jpg",
+        "img/bj-ip-05-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "quotes": [
         {
@@ -207,6 +223,10 @@
       "tips": "傍晚沿湖走一圈，酒吧街在后海北沿。",
       "skipNote": "与什刹海同一片区，可合并。",
       "realPhoto": "img/bj-ip-06.jpg",
+      "photos": [
+        "img/bj-ip-06.jpg",
+        "img/bj-ip-06-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "quotes": [
         {
@@ -233,6 +253,11 @@
       "tips": "务必提前预约，周一闭馆。",
       "skipNote": "本身是必看景点，但书中只是背景板。",
       "realPhoto": "img/bj-ip-07.jpg",
+      "photos": [
+        "img/bj-ip-07.jpg",
+        "img/bj-ip-07-2.jpg",
+        "img/bj-ip-07-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "quotes": [
         {
@@ -259,6 +284,9 @@
       "tips": "西单商圈地铁直达，适合当机动点。",
       "skipNote": "购物属性为主的点位，可放弃。",
       "realPhoto": "img/bj-ip-08.jpg",
+      "photos": [
+        "img/bj-ip-08.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "quotes": [
         {
@@ -284,6 +312,10 @@
       "durationRush": 30,
       "intro": "北京的城市中心广场，看升旗与城楼的地方。",
       "realPhoto": "img/bj-sp-01.jpg",
+      "photos": [
+        "img/bj-sp-01.jpg",
+        "img/bj-sp-01-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -301,6 +333,9 @@
       "durationRush": 90,
       "intro": "天安门广场东侧的国家级博物馆，藏品逾百万件。",
       "realPhoto": "img/bj-sp-02.jpg",
+      "photos": [
+        "img/bj-sp-02.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -318,6 +353,10 @@
       "durationRush": 60,
       "intro": "明清皇帝祭天的场所，祈年殿是它的标志。",
       "realPhoto": "img/bj-sp-03.jpg",
+      "photos": [
+        "img/bj-sp-03.jpg",
+        "img/bj-sp-03-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -335,6 +374,10 @@
       "durationRush": 30,
       "intro": "清代皇家寺院，北京规模最大的藏传佛教寺院。",
       "realPhoto": "img/bj-sp-04.jpg",
+      "photos": [
+        "img/bj-sp-04.jpg",
+        "img/bj-sp-04-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -352,6 +395,10 @@
       "durationRush": 45,
       "intro": "元代格局保留至今的胡同街区，小店密集。",
       "realPhoto": "img/bj-sp-05.jpg",
+      "photos": [
+        "img/bj-sp-05.jpg",
+        "img/bj-sp-05-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -369,6 +416,11 @@
       "durationRush": 60,
       "intro": "由前海、后海组成的湖区，环湖是胡同与酒吧。",
       "realPhoto": "img/bj-sp-06.jpg",
+      "photos": [
+        "img/bj-sp-06.jpg",
+        "img/bj-sp-06-2.jpg",
+        "img/bj-sp-06-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -386,6 +438,11 @@
       "durationRush": 45,
       "intro": "皇家园林，白塔与琼华岛是北京的老地标。",
       "realPhoto": "img/bj-sp-07.jpg",
+      "photos": [
+        "img/bj-sp-07.jpg",
+        "img/bj-sp-07-2.jpg",
+        "img/bj-sp-07-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -403,6 +460,10 @@
       "durationRush": 30,
       "intro": "故宫北侧的皇家园林，万春亭俯瞰紫禁城全景。",
       "realPhoto": "img/bj-sp-08.jpg",
+      "photos": [
+        "img/bj-sp-08.jpg",
+        "img/bj-sp-08-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -420,6 +481,10 @@
       "durationRush": 60,
       "intro": "清代皇家园林遗址，西洋楼残柱是它的标志。",
       "realPhoto": "img/bj-sp-09.jpg",
+      "photos": [
+        "img/bj-sp-09.jpg",
+        "img/bj-sp-09-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -437,6 +502,11 @@
       "durationRush": 90,
       "intro": "西山赏红叶的胜地，登顶可远眺北京城。",
       "realPhoto": "img/bj-sp-10.jpg",
+      "photos": [
+        "img/bj-sp-10.jpg",
+        "img/bj-sp-10-2.jpg",
+        "img/bj-sp-10-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -454,6 +524,11 @@
       "durationRush": 45,
       "intro": "百年学府，二校门与清华园是经典取景点。",
       "realPhoto": "img/bj-sp-11.jpg",
+      "photos": [
+        "img/bj-sp-11.jpg",
+        "img/bj-sp-11-2.jpg",
+        "img/bj-sp-11-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -471,6 +546,11 @@
       "durationRush": 60,
       "intro": "旧厂房改造的当代艺术区，画廊与咖啡馆密集。",
       "realPhoto": "img/bj-sp-12.jpg",
+      "photos": [
+        "img/bj-sp-12.jpg",
+        "img/bj-sp-12-2.jpg",
+        "img/bj-sp-12-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -488,6 +568,11 @@
       "durationRush": 45,
       "intro": "2008 年奥运会主场馆，夜景灯光值得一看。",
       "realPhoto": "img/bj-sp-13.jpg",
+      "photos": [
+        "img/bj-sp-13.jpg",
+        "img/bj-sp-13-2.jpg",
+        "img/bj-sp-13-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -505,6 +590,10 @@
       "durationRush": 150,
       "intro": "怀柔段的明长城，敌楼密集、游人相对少。",
       "realPhoto": "img/bj-sp-14.jpg",
+      "photos": [
+        "img/bj-sp-14.jpg",
+        "img/bj-sp-14-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -522,6 +611,11 @@
       "durationRush": 210,
       "intro": "通州的大型主题乐园，一整天才能玩完。",
       "realPhoto": "img/bj-sp-15.jpg",
+      "photos": [
+        "img/bj-sp-15.jpg",
+        "img/bj-sp-15-2.jpg",
+        "img/bj-sp-15-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
