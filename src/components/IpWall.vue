@@ -1,8 +1,11 @@
 <script setup>
 // 首页 IP 墙:仿 siff.com 底部的整墙实景照片 + 水平无缝循环滚动。
 // 无缝原理:每条轨道渲染两份完全相同的拷贝,translateX(-50%) 恰好平移一份宽度。
-// 拷贝 A 是可交互的真链接;拷贝 B 加 inert + aria-hidden,不进 tab 序、不干扰读屏。
+// 两份拷贝都必须可点:滚动中视口里出现的常常是第二份。inert 会连指针事件一起屏蔽,
+// 曾导致"有的图点不动";无障碍改由 aria-hidden + tabindex=-1 负责 ——
+// 读屏与 Tab 序只走第一份,鼠标点哪一份都能跳转。
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import PhotoFrame from './ui/PhotoFrame.vue'
 import { buildWallRows } from '../utils/ip-wall'
 
@@ -16,6 +19,24 @@ const ROW_COUNT = 3
 const SECS_PER_TILE = 6
 
 const rows = computed(() => buildWallRows(props.lines, ROW_COUNT))
+
+const router = useRouter()
+
+// 兜底:正好点在两张 tile 之间的缝隙(12px)或行内边距上时,target 不是链接,
+// 这里按横坐标就近找同一行里最合适的一张 tile 跳转,保证"整面墙都能点"。
+function onRowClick(e) {
+  if (e.target?.closest?.('.wall-tile')) return
+  const x = e.clientX
+  const y = e.clientY
+  let best = null
+  for (const el of e.currentTarget.querySelectorAll('.wall-tile')) {
+    const r = el.getBoundingClientRect()
+    if (y < r.top || y > r.bottom) continue
+    const d = Math.abs(x - (r.left + r.width / 2))
+    if (!best || d < best.d) best = { d, to: el.getAttribute('href') }
+  }
+  if (best?.to) router.push(best.to)
+}
 </script>
 
 <template>
@@ -25,6 +46,7 @@ const rows = computed(() => buildWallRows(props.lines, ROW_COUNT))
       :key="i"
       class="wall-row"
       :class="{ reverse: i % 2 === 0 }"
+      @click="onRowClick"
     >
       <div
         class="wall-track"
@@ -34,7 +56,6 @@ const rows = computed(() => buildWallRows(props.lines, ROW_COUNT))
           v-for="copy in ['a', 'b']"
           :key="copy"
           class="wall-copy"
-          :inert="copy === 'b' ? true : undefined"
           :aria-hidden="copy === 'b' ? 'true' : undefined"
         >
           <router-link
