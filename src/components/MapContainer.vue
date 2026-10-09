@@ -89,7 +89,7 @@ function connect() {
   state.value = 'loading'
   const url = provider === 'Mapbox'
     ? `https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/512/{z}/{x}/{y}?access_token=${encodeURIComponent(token)}`
-    : 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+    : '/tiles/{z}/{x}/{y}.png' // 同源反代（生产经首尔服务器中转，国内直连稳定；本地 dev 由 vite 代理）
   const layer = L.tileLayer(url, { maxZoom: 19, ...(provider === 'Mapbox' ? { tileSize: 512, zoomOffset: -1, attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a>' } : {}) })
   tiles = layer
   const offline = () => { if (tiles !== layer) return; state.value = 'offline'; layer.off(); layer.setOpacity(0); clearTimeout(timer) }
