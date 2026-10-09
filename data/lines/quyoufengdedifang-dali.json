@@ -165,7 +165,9 @@
       "intro": "寺院与三塔地标，可作为苍山一线的文化补充。",
       "realPhoto": "img/yf-dl-sp-02.jpg",
       "photos": [
-        "img/yf-dl-sp-02.jpg"
+        "img/yf-dl-sp-02.jpg",
+        "img/yf-dl-sp-02-2.jpg",
+        "img/yf-dl-sp-02-3.jpg"
       ],
       "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
       "ticket": "",
@@ -185,7 +187,9 @@
       "intro": "山区支线，索道运行与天气情况待核。",
       "realPhoto": "img/yf-dl-sp-03.jpg",
       "photos": [
-        "img/yf-dl-sp-03.jpg"
+        "img/yf-dl-sp-03.jpg",
+        "img/yf-dl-sp-03-2.jpg",
+        "img/yf-dl-sp-03-3.jpg"
       ],
       "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
       "ticket": "",
@@ -205,7 +209,8 @@
       "intro": "与感通索道择一安排，交通与海拔另行核算。",
       "realPhoto": "img/yf-dl-sp-04.jpg",
       "photos": [
-        "img/yf-dl-sp-04.jpg"
+        "img/yf-dl-sp-04.jpg",
+        "img/yf-dl-sp-04-2.jpg"
       ],
       "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
       "ticket": "",
@@ -225,7 +230,9 @@
       "intro": "白族村落与扎染体验候选，体验项目另计。",
       "realPhoto": "img/yf-dl-sp-06.jpg",
       "photos": [
-        "img/yf-dl-sp-06.jpg"
+        "img/yf-dl-sp-06.jpg",
+        "img/yf-dl-sp-06-2.jpg",
+        "img/yf-dl-sp-06-3.jpg"
       ],
       "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
       "ticket": "",
@@ -245,7 +252,9 @@
       "intro": "洱海西岸湿地公园，开放与进入方式待核。",
       "realPhoto": "img/yf-dl-sp-07.jpg",
       "photos": [
-        "img/yf-dl-sp-07.jpg"
+        "img/yf-dl-sp-07.jpg",
+        "img/yf-dl-sp-07-2.jpg",
+        "img/yf-dl-sp-07-3.jpg"
       ],
       "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
       "ticket": "",
@@ -255,7 +264,7 @@
       "poiId": "yf-dl-sp-08",
       "lineId": "quyoufengdedifang-dali",
       "type": "classic",
-      "name": "磻溪村滨水片区",
+      "name": "磻溪村",
       "lng": 100.172,
       "lat": 25.762,
       "cluster": "大理·洱海西岸",
@@ -265,7 +274,8 @@
       "intro": "洱海西岸村落滨水段，公共入口待细化。",
       "realPhoto": "img/yf-dl-sp-08.jpg",
       "photos": [
-        "img/yf-dl-sp-08.jpg"
+        "img/yf-dl-sp-08.jpg",
+        "img/yf-dl-sp-08-2.jpg"
       ],
       "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
       "ticket": "",
@@ -275,7 +285,7 @@
       "poiId": "yf-dl-sp-09",
       "lineId": "quyoufengdedifang-dali",
       "type": "classic",
-      "name": "才村码头周边",
+      "name": "才村",
       "lng": 100.185,
       "lat": 25.715,
       "cluster": "大理·洱海西岸",
@@ -285,7 +295,9 @@
       "intro": "码头周边散步为主，游船项目另行核算。",
       "realPhoto": "img/yf-dl-sp-09.jpg",
       "photos": [
-        "img/yf-dl-sp-09.jpg"
+        "img/yf-dl-sp-09.jpg",
+        "img/yf-dl-sp-09-2.jpg",
+        "img/yf-dl-sp-09-3.jpg"
       ],
       "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
       "ticket": "",
@@ -295,7 +307,7 @@
       "poiId": "yf-dl-sp-10",
       "lineId": "quyoufengdedifang-dali",
       "type": "classic",
-      "name": "龙龛码头周边",
+      "name": "龙龛码头",
       "lng": 100.2,
       "lat": 25.686,
       "cluster": "大理·洱海西岸",
@@ -305,7 +317,9 @@
       "intro": "洱海西岸观景段，步行范围待细化。",
       "realPhoto": "img/yf-dl-sp-10.jpg",
       "photos": [
-        "img/yf-dl-sp-10.jpg"
+        "img/yf-dl-sp-10.jpg",
+        "img/yf-dl-sp-10-2.jpg",
+        "img/yf-dl-sp-10-3.jpg"
       ],
       "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
       "ticket": "",
@@ -325,7 +339,9 @@
       "intro": "洱海东岸古镇，属独立东岸支线。",
       "realPhoto": "img/yf-dl-sp-11.jpg",
       "photos": [
-        "img/yf-dl-sp-11.jpg"
+        "img/yf-dl-sp-11.jpg",
+        "img/yf-dl-sp-11-2.jpg",
+        "img/yf-dl-sp-11-3.jpg"
       ],
       "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
       "ticket": "",
@@ -345,7 +361,9 @@
       "intro": "双廊对岸岛屿，船程与候船时间另计。",
       "realPhoto": "img/yf-dl-sp-12.jpg",
       "photos": [
-        "img/yf-dl-sp-12.jpg"
+        "img/yf-dl-sp-12.jpg",
+        "img/yf-dl-sp-12-2.jpg",
+        "img/yf-dl-sp-12-3.jpg"
       ],
       "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
       "ticket": "",
@@ -355,7 +373,7 @@
       "poiId": "yf-dl-sp-13",
       "lineId": "quyoufengdedifang-dali",
       "type": "classic",
-      "name": "挖色镇滨水片区",
+      "name": "挖色镇",
       "lng": 100.215,
       "lat": 25.872,
       "cluster": "大理·海东双廊",
@@ -365,7 +383,8 @@
       "intro": "洱海东岸滨水段，避免与西岸点反复跨湖串联。",
       "realPhoto": "img/yf-dl-sp-13.jpg",
       "photos": [
-        "img/yf-dl-sp-13.jpg"
+        "img/yf-dl-sp-13.jpg",
+        "img/yf-dl-sp-13-2.jpg"
       ],
       "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
       "ticket": "",
@@ -385,27 +404,9 @@
       "intro": "古城内博物馆，馆舍预约与展览待核。",
       "realPhoto": "img/yf-dl-sp-14.jpg",
       "photos": [
-        "img/yf-dl-sp-14.jpg"
-      ],
-      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
-      "ticket": "",
-      "openHours": ""
-    },
-    {
-      "poiId": "yf-dl-sp-15",
-      "lineId": "quyoufengdedifang-dali",
-      "type": "classic",
-      "name": "凤阳邑村公共街巷",
-      "lng": 100.1872,
-      "lat": 25.6578,
-      "cluster": "大理·凤阳邑",
-      "popularity": 4,
-      "durationNormal": 120,
-      "durationRush": 60,
-      "intro": "与 IP 村落点合并计时，只计公共街巷范围。",
-      "realPhoto": "img/yf-dl-sp-15.jpg",
-      "photos": [
-        "img/yf-dl-sp-15.jpg"
+        "img/yf-dl-sp-14.jpg",
+        "img/yf-dl-sp-14-2.jpg",
+        "img/yf-dl-sp-14-3.jpg"
       ],
       "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
       "ticket": "",
