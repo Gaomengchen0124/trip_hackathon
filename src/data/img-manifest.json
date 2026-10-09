@@ -1,4 +1,27 @@
 {
+  "aiqingshenhua": [
+    "aiqingshenhua-shanghai.jpg"
+  ],
+  "aiqingshenhua.jpg": [
+    "aiqingshenhua.jpg"
+  ],
+  "aqsh": [
+    "aqsh-sh-ip-01-2.jpg",
+    "aqsh-sh-ip-01-3.jpg",
+    "aqsh-sh-ip-01.jpg",
+    "aqsh-sh-ip-02-2.jpg",
+    "aqsh-sh-ip-02-3.jpg",
+    "aqsh-sh-ip-02.jpg",
+    "aqsh-sh-ip-03-2.jpg",
+    "aqsh-sh-ip-03-3.jpg",
+    "aqsh-sh-ip-03.jpg",
+    "aqsh-sh-ip-04.jpg",
+    "aqsh-sh-sp-01.jpg",
+    "aqsh-sh-sp-04.jpg",
+    "aqsh-sh-sp-09.jpg",
+    "aqsh-sh-sp-12.jpg",
+    "aqsh-sh-sp-14.jpg"
+  ],
   "bj": [
     "bj-ip-01-2.jpg",
     "bj-ip-01.jpg",
@@ -157,6 +180,79 @@
     "hp-sp-14.jpg",
     "hp-sp-15.jpg"
   ],
+  "kaiduan": [
+    "kaiduan-xiamen.jpg"
+  ],
+  "kaiduan.jpg": [
+    "kaiduan.jpg"
+  ],
+  "kd": [
+    "kd-xm-ip-01-2.jpg",
+    "kd-xm-ip-01-3.jpg",
+    "kd-xm-ip-01.jpg",
+    "kd-xm-ip-02-2.jpg",
+    "kd-xm-ip-02.jpg",
+    "kd-xm-ip-03-2.jpg",
+    "kd-xm-ip-03-3.jpg",
+    "kd-xm-ip-03-4.jpg",
+    "kd-xm-ip-03-5.jpg",
+    "kd-xm-ip-03-6.jpg",
+    "kd-xm-ip-03.jpg",
+    "kd-xm-ip-04-2.jpg",
+    "kd-xm-ip-04.jpg",
+    "kd-xm-ip-05-2.jpg",
+    "kd-xm-ip-05-3.jpg",
+    "kd-xm-ip-05-4.jpg",
+    "kd-xm-ip-05-5.jpg",
+    "kd-xm-ip-05.jpg",
+    "kd-xm-ip-06.jpg",
+    "kd-xm-sp-01-2.jpg",
+    "kd-xm-sp-01-3.jpg",
+    "kd-xm-sp-01.jpg",
+    "kd-xm-sp-02-2.jpg",
+    "kd-xm-sp-02-3.jpg",
+    "kd-xm-sp-02.jpg",
+    "kd-xm-sp-03-2.jpg",
+    "kd-xm-sp-03-3.jpg",
+    "kd-xm-sp-03.jpg",
+    "kd-xm-sp-04-2.jpg",
+    "kd-xm-sp-04-3.jpg",
+    "kd-xm-sp-04.jpg",
+    "kd-xm-sp-05-2.jpg",
+    "kd-xm-sp-05-3.jpg",
+    "kd-xm-sp-05-4.jpg",
+    "kd-xm-sp-05.jpg",
+    "kd-xm-sp-06-2.jpg",
+    "kd-xm-sp-06-3.jpg",
+    "kd-xm-sp-06-4.jpg",
+    "kd-xm-sp-06.jpg",
+    "kd-xm-sp-07-2.jpg",
+    "kd-xm-sp-07-3.jpg",
+    "kd-xm-sp-07.jpg",
+    "kd-xm-sp-08-2.jpg",
+    "kd-xm-sp-08-3.jpg",
+    "kd-xm-sp-08-4.jpg",
+    "kd-xm-sp-08.jpg",
+    "kd-xm-sp-09-2.jpg",
+    "kd-xm-sp-09.jpg",
+    "kd-xm-sp-10-2.jpg",
+    "kd-xm-sp-10-3.jpg",
+    "kd-xm-sp-10.jpg",
+    "kd-xm-sp-11-2.jpg",
+    "kd-xm-sp-11-3.jpg",
+    "kd-xm-sp-11-4.jpg",
+    "kd-xm-sp-11.jpg",
+    "kd-xm-sp-12-2.jpg",
+    "kd-xm-sp-12.jpg",
+    "kd-xm-sp-13-2.jpg",
+    "kd-xm-sp-13-3.jpg",
+    "kd-xm-sp-13-4.jpg",
+    "kd-xm-sp-13.jpg",
+    "kd-xm-sp-14-2.jpg",
+    "kd-xm-sp-14.jpg",
+    "kd-xm-sp-15-2.jpg",
+    "kd-xm-sp-15.jpg"
+  ],
   "longzu": [
     "longzu-beijing.jpg",
     "longzu-japan.jpg"
@@ -177,6 +273,12 @@
   ],
   "qianfu.jpg": [
     "qianfu.jpg"
+  ],
+  "quyoufengdedifang": [
+    "quyoufengdedifang-dali.jpg"
+  ],
+  "quyoufengdedifang.jpg": [
+    "quyoufengdedifang.jpg"
   ],
   "santi": [
     "santi-beijing.jpg"
@@ -346,5 +448,54 @@
   ],
   "woyuditan.jpg": [
     "woyuditan.jpg"
+  ],
+  "yf": [
+    "yf-dl-ip-01-2.jpg",
+    "yf-dl-ip-01-3.jpg",
+    "yf-dl-ip-01-4.jpg",
+    "yf-dl-ip-01-5.jpg",
+    "yf-dl-ip-01-6.jpg",
+    "yf-dl-ip-01.jpg",
+    "yf-dl-ip-02-2.jpg",
+    "yf-dl-ip-02-3.jpg",
+    "yf-dl-ip-02-4.jpg",
+    "yf-dl-ip-02-5.jpg",
+    "yf-dl-ip-02-6.jpg",
+    "yf-dl-ip-02.jpg",
+    "yf-dl-ip-03-2.jpg",
+    "yf-dl-ip-03.jpg",
+    "yf-dl-sp-02-2.jpg",
+    "yf-dl-sp-02-3.jpg",
+    "yf-dl-sp-02.jpg",
+    "yf-dl-sp-03-2.jpg",
+    "yf-dl-sp-03-3.jpg",
+    "yf-dl-sp-03.jpg",
+    "yf-dl-sp-04-2.jpg",
+    "yf-dl-sp-04.jpg",
+    "yf-dl-sp-06-2.jpg",
+    "yf-dl-sp-06-3.jpg",
+    "yf-dl-sp-06.jpg",
+    "yf-dl-sp-07-2.jpg",
+    "yf-dl-sp-07-3.jpg",
+    "yf-dl-sp-07.jpg",
+    "yf-dl-sp-08-2.jpg",
+    "yf-dl-sp-08.jpg",
+    "yf-dl-sp-09-2.jpg",
+    "yf-dl-sp-09-3.jpg",
+    "yf-dl-sp-09.jpg",
+    "yf-dl-sp-10-2.jpg",
+    "yf-dl-sp-10-3.jpg",
+    "yf-dl-sp-10.jpg",
+    "yf-dl-sp-11-2.jpg",
+    "yf-dl-sp-11-3.jpg",
+    "yf-dl-sp-11.jpg",
+    "yf-dl-sp-12-2.jpg",
+    "yf-dl-sp-12-3.jpg",
+    "yf-dl-sp-12.jpg",
+    "yf-dl-sp-13-2.jpg",
+    "yf-dl-sp-13.jpg",
+    "yf-dl-sp-14-2.jpg",
+    "yf-dl-sp-14-3.jpg",
+    "yf-dl-sp-14.jpg"
   ]
 }

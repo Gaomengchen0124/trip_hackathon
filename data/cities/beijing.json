@@ -1,0 +1,536 @@
+{
+  "_说明": "北京 · 经典景点基准表（全城唯一）。各条北京线路的 cityStops = 本表剔除该线已作为 IP 点位的景点（excludeIp）。图片为全城唯一，所有线路共用同一批文件。由 data/gen-city-stops.mjs 落盘到各线路。",
+  "_版本": 1,
+  "city": "北京",
+  "spots": [
+    {
+      "key": "故宫",
+      "name": "故宫博物院",
+      "excludeIp": [
+        "故宫",
+        "故宫博物院"
+      ],
+      "unifyIp": [
+        "故宫",
+        "故宫博物院"
+      ],
+      "cluster": "东城",
+      "lng": 116.3972,
+      "lat": 39.9164,
+      "popularity": 5,
+      "durationNormal": 240,
+      "durationRush": 120,
+      "intro": "明清两代皇宫，中轴线上规模最大的宫殿建筑群。",
+      "realPhoto": "img/st-sp-01.jpg",
+      "photos": [
+        "img/st-sp-01.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "¥60",
+      "openHours": "08:30-17:00，周一闭馆"
+    },
+    {
+      "key": "天安门",
+      "name": "天安门广场",
+      "excludeIp": [
+        "天安门广场"
+      ],
+      "unifyIp": [],
+      "cluster": "东城",
+      "lng": 116.3972,
+      "lat": 39.9087,
+      "popularity": 5,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "北京的城市中心广场，看升旗与城楼的地方。",
+      "realPhoto": "img/st-sp-02.jpg",
+      "photos": [
+        "img/st-sp-02.jpg",
+        "img/st-sp-02-2.jpg",
+        "img/st-sp-02-3.jpg",
+        "img/st-sp-02-4.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "免费（需预约）",
+      "openHours": "全天"
+    },
+    {
+      "key": "天坛",
+      "name": "天坛公园",
+      "excludeIp": [
+        "天坛公园"
+      ],
+      "unifyIp": [],
+      "cluster": "东城",
+      "lng": 116.4066,
+      "lat": 39.8823,
+      "popularity": 5,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "明清皇帝祭天的场所，祈年殿是它的标志。",
+      "realPhoto": "img/st-sp-05.jpg",
+      "photos": [
+        "img/st-sp-05.jpg",
+        "img/st-sp-05-2.jpg",
+        "img/st-sp-05-3.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "¥34",
+      "openHours": "06:00-17:30"
+    },
+    {
+      "key": "雍和宫",
+      "name": "雍和宫",
+      "excludeIp": [
+        "雍和宫"
+      ],
+      "unifyIp": [],
+      "cluster": "东城",
+      "lng": 116.4174,
+      "lat": 39.9473,
+      "popularity": 4,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "清代皇家寺院，北京规模最大的藏传佛教寺院。",
+      "realPhoto": "img/st-sp-10.jpg",
+      "photos": [
+        "img/st-sp-10.jpg",
+        "img/st-sp-10-2.jpg",
+        "img/st-sp-10-3.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "¥25",
+      "openHours": "09:00-16:30"
+    },
+    {
+      "key": "南锣鼓巷",
+      "name": "南锣鼓巷",
+      "excludeIp": [
+        "南锣鼓巷"
+      ],
+      "unifyIp": [],
+      "cluster": "东城",
+      "lng": 116.4034,
+      "lat": 39.9371,
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "元代格局保留至今的胡同街区，小店密集。",
+      "realPhoto": "img/bj-sp-05.jpg",
+      "photos": [
+        "img/bj-sp-05.jpg",
+        "img/bj-sp-05-2.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "key": "景山",
+      "name": "景山公园",
+      "excludeIp": [
+        "景山公园"
+      ],
+      "unifyIp": [],
+      "cluster": "东城",
+      "lng": 116.3963,
+      "lat": 39.925,
+      "popularity": 3,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "故宫北侧的皇家园林，万春亭俯瞰紫禁城全景。",
+      "realPhoto": "img/st-sp-12.jpg",
+      "photos": [
+        "img/st-sp-12.jpg",
+        "img/st-sp-12-2.jpg",
+        "img/st-sp-12-3.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "¥2",
+      "openHours": "06:30-20:00"
+    },
+    {
+      "key": "国博",
+      "name": "中国国家博物馆",
+      "excludeIp": [
+        "中国国家博物馆"
+      ],
+      "unifyIp": [],
+      "cluster": "东城",
+      "lng": 116.418,
+      "lat": 39.9042,
+      "popularity": 5,
+      "durationNormal": 180,
+      "durationRush": 90,
+      "intro": "天安门广场东侧的国家级博物馆，藏品逾百万件。",
+      "realPhoto": "img/bj-sp-02.jpg",
+      "photos": [
+        "img/bj-sp-02.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "key": "鼓楼钟楼",
+      "name": "鼓楼·钟楼",
+      "excludeIp": [
+        "鼓楼·钟楼"
+      ],
+      "unifyIp": [],
+      "cluster": "东城",
+      "lng": 116.3927,
+      "lat": 39.947,
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "北京中轴线重要历史建筑群。",
+      "realPhoto": "img/wd-sp-08.jpg",
+      "photos": [
+        "img/wd-sp-08.jpg",
+        "img/wd-sp-08-2.jpg",
+        "img/wd-sp-08-3.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "约¥30",
+      "openHours": ""
+    },
+    {
+      "key": "什刹海",
+      "name": "什刹海",
+      "excludeIp": [
+        "什刹海",
+        "后海"
+      ],
+      "unifyIp": [],
+      "cluster": "西城",
+      "lng": 116.3947,
+      "lat": 39.9428,
+      "popularity": 4,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "由前海、后海组成的湖区，环湖是胡同与酒吧。",
+      "realPhoto": "img/st-sp-09.jpg",
+      "photos": [
+        "img/st-sp-09.jpg",
+        "img/st-sp-09-2.jpg",
+        "img/st-sp-09-3.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "免费",
+      "openHours": "全天"
+    },
+    {
+      "key": "北海",
+      "name": "北海公园",
+      "excludeIp": [
+        "北海公园"
+      ],
+      "unifyIp": [],
+      "cluster": "西城",
+      "lng": 116.3899,
+      "lat": 39.933,
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "皇家园林，白塔与琼华岛是北京的老地标。",
+      "realPhoto": "img/st-sp-11.jpg",
+      "photos": [
+        "img/st-sp-11.jpg",
+        "img/st-sp-11-2.jpg",
+        "img/st-sp-11-3.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "¥10",
+      "openHours": "06:30-20:00"
+    },
+    {
+      "key": "鲁迅博物馆",
+      "name": "北京鲁迅博物馆",
+      "excludeIp": [
+        "北京鲁迅博物馆"
+      ],
+      "unifyIp": [],
+      "cluster": "西城",
+      "lng": 116.3548,
+      "lat": 39.933,
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "现代文学主题博物馆，适合文学线路补充。",
+      "realPhoto": "img/wd-sp-09.jpg",
+      "photos": [
+        "img/wd-sp-09.jpg",
+        "img/wd-sp-09-2.jpg",
+        "img/wd-sp-09-3.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "免费/预约",
+      "openHours": ""
+    },
+    {
+      "key": "现代文学馆",
+      "name": "中国现代文学馆",
+      "excludeIp": [
+        "中国现代文学馆"
+      ],
+      "unifyIp": [],
+      "cluster": "朝阳",
+      "lng": 116.4268,
+      "lat": 39.985,
+      "popularity": 4,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "中国现代文学重要收藏、研究与展示机构。",
+      "realPhoto": "img/wd-sp-10.jpg",
+      "photos": [
+        "img/wd-sp-10.jpg",
+        "img/wd-sp-10-2.jpg",
+        "img/wd-sp-10-3.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "预约",
+      "openHours": ""
+    },
+    {
+      "key": "798",
+      "name": "798 艺术区",
+      "excludeIp": [
+        "798 艺术区"
+      ],
+      "unifyIp": [],
+      "cluster": "朝阳",
+      "lng": 116.4953,
+      "lat": 39.9846,
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "旧厂房改造的当代艺术区，画廊与咖啡馆密集。",
+      "realPhoto": "img/st-sp-13.jpg",
+      "photos": [
+        "img/st-sp-13.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "免费",
+      "openHours": "全天"
+    },
+    {
+      "key": "鸟巢水立方",
+      "name": "鸟巢 · 水立方",
+      "excludeIp": [
+        "鸟巢 · 水立方"
+      ],
+      "unifyIp": [],
+      "cluster": "朝阳",
+      "lng": 116.3969,
+      "lat": 39.9928,
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "2008 年奥运会主场馆，夜景灯光值得一看。",
+      "realPhoto": "img/st-sp-07.jpg",
+      "photos": [
+        "img/st-sp-07.jpg",
+        "img/st-sp-07-2.jpg",
+        "img/st-sp-07-3.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "外观免费",
+      "openHours": "全天"
+    },
+    {
+      "key": "颐和园",
+      "name": "颐和园",
+      "excludeIp": [
+        "颐和园"
+      ],
+      "unifyIp": [
+        "颐和园"
+      ],
+      "cluster": "海淀",
+      "lng": 116.2754,
+      "lat": 39.9995,
+      "popularity": 5,
+      "durationNormal": 240,
+      "durationRush": 120,
+      "intro": "清代皇家园林，昆明湖与万寿山相映。",
+      "realPhoto": "img/st-sp-03.jpg",
+      "photos": [
+        "img/st-sp-03.jpg",
+        "img/st-sp-03-2.jpg",
+        "img/st-sp-03-3.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "¥30",
+      "openHours": "06:30-18:00"
+    },
+    {
+      "key": "圆明园",
+      "name": "圆明园遗址公园",
+      "excludeIp": [
+        "圆明园遗址公园"
+      ],
+      "unifyIp": [],
+      "cluster": "海淀",
+      "lng": 116.3098,
+      "lat": 40.0076,
+      "popularity": 4,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "清代皇家园林遗址，西洋楼残柱是它的标志。",
+      "realPhoto": "img/st-sp-04.jpg",
+      "photos": [
+        "img/st-sp-04.jpg",
+        "img/st-sp-04-2.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "¥25",
+      "openHours": "07:00-19:00"
+    },
+    {
+      "key": "清华大学",
+      "name": "清华大学",
+      "excludeIp": [
+        "清华大学"
+      ],
+      "unifyIp": [
+        "清华大学"
+      ],
+      "cluster": "海淀",
+      "lng": 116.320963,
+      "lat": 40.0022905,
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "叶文洁任教一生的地方，叶哲泰的批斗会也发生在这里。",
+      "realPhoto": "img/st-ip-04.jpg",
+      "photos": [
+        "img/st-ip-04.jpg",
+        "img/st-ip-04-2.jpg",
+        "img/st-ip-04-3.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "key": "北京大学",
+      "name": "北京大学",
+      "excludeIp": [
+        "北京大学"
+      ],
+      "unifyIp": [],
+      "cluster": "海淀",
+      "lng": 116.3109,
+      "lat": 39.9929,
+      "popularity": 5,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "北京重要文化教育地标。",
+      "realPhoto": "img/wd-sp-11.jpg",
+      "photos": [
+        "img/wd-sp-11.jpg",
+        "img/wd-sp-11-2.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "预约",
+      "openHours": ""
+    },
+    {
+      "key": "香山",
+      "name": "香山公园",
+      "excludeIp": [
+        "香山公园"
+      ],
+      "unifyIp": [],
+      "cluster": "海淀",
+      "lng": 116.1888,
+      "lat": 39.9963,
+      "popularity": 3,
+      "durationNormal": 180,
+      "durationRush": 90,
+      "intro": "西山赏红叶的胜地，登顶可远眺北京城。",
+      "realPhoto": "img/st-sp-14.jpg",
+      "photos": [
+        "img/st-sp-14.jpg",
+        "img/st-sp-14-2.jpg",
+        "img/st-sp-14-3.jpg",
+        "img/st-sp-14-4.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "¥10",
+      "openHours": "06:00-18:30"
+    },
+    {
+      "key": "国家图书馆",
+      "name": "中国国家图书馆",
+      "excludeIp": [
+        "中国国家图书馆"
+      ],
+      "unifyIp": [],
+      "cluster": "海淀",
+      "lng": 116.3256,
+      "lat": 39.9437,
+      "popularity": 4,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "北京重要阅读与文化地标。",
+      "realPhoto": "img/wd-sp-13.jpg",
+      "photos": [
+        "img/wd-sp-13.jpg",
+        "img/wd-sp-13-2.jpg",
+        "img/wd-sp-13-3.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "免费/预约",
+      "openHours": ""
+    },
+    {
+      "key": "长城",
+      "name": "八达岭长城",
+      "excludeIp": [
+        "八达岭长城"
+      ],
+      "unifyIp": [],
+      "cluster": "近郊",
+      "lng": 116.0165,
+      "lat": 40.3586,
+      "popularity": 5,
+      "durationNormal": 300,
+      "durationRush": 150,
+      "intro": "明长城保存最好的一段，北京最经典的登城点。",
+      "realPhoto": "img/st-sp-06.jpg",
+      "photos": [
+        "img/st-sp-06.jpg",
+        "img/st-sp-06-2.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "¥40",
+      "openHours": "07:30-16:00"
+    },
+    {
+      "key": "环球影城",
+      "name": "北京环球影城",
+      "excludeIp": [
+        "北京环球影城"
+      ],
+      "unifyIp": [],
+      "cluster": "通州",
+      "lng": 116.6777865,
+      "lat": 39.8548383,
+      "popularity": 4,
+      "durationNormal": 420,
+      "durationRush": 210,
+      "intro": "通州的大型主题乐园，一整天才能玩完。",
+      "realPhoto": "img/bj-sp-15.jpg",
+      "photos": [
+        "img/bj-sp-15.jpg",
+        "img/bj-sp-15-2.jpg",
+        "img/bj-sp-15-3.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    }
+  ]
+}

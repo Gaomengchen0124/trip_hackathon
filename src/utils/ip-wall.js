@@ -3,13 +3,19 @@
 // 不读数据 JSON 里的 realPhoto(引用与磁盘不一致)。
 import manifest from '../data/img-manifest.json'
 
-// ipId → public/img 文件名前缀。无映射的 IP(如 harrypotter、longzu)走占位卡。
+// ipId → public/img 文件名前缀(取值同 gen-img-manifest 按磁盘文件分出的组名)。
+// 未列出的 IP 会退化成占位卡。
 export const IP_PREFIX = {
   fanhua: 'sh',
   santi: 'st',
   daomu: 'dm',
   woyuditan: 'wd',
-  qianfu: 'qf'
+  qianfu: 'qf',
+  kaiduan: 'kd',
+  quyoufengdedifang: 'yf',
+  aiqingshenhua: 'aqsh',
+  harrypotter: 'hp',
+  longzu: 'bj'
 }
 
 // 单行最少 tile 数:低于视口宽度会让无缝循环露出空白,太少时自我重复补齐。

@@ -1,0 +1,506 @@
+{
+  "_说明": "上海 · 经典景点基准表（全城唯一）。各条上海线路的 cityStops = 本表剔除该线已作为 IP 点位的景点（excludeIp）。图片为全城唯一，所有线路共用同一批文件。由 data/gen-city-stops.mjs 落盘到各线路。",
+  "_版本": 1,
+  "city": "上海",
+  "spots": [
+    {
+      "key": "外滩",
+      "name": "外滩",
+      "excludeIp": [
+        "外滩"
+      ],
+      "unifyIp": [],
+      "cluster": "黄浦·外滩",
+      "lng": 121.49,
+      "lat": 31.24,
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "万国建筑群在江畔诉说着旧上海的繁华与风情，江风、灯火与流动的岁月交织成一场穿越时光的浪漫邂逅。",
+      "realPhoto": "img/aqsh-sh-sp-01.jpg",
+      "photos": [
+        "img/aqsh-sh-sp-01.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "key": "南京路",
+      "name": "南京路步行街",
+      "excludeIp": [
+        "南京路步行街"
+      ],
+      "unifyIp": [],
+      "cluster": "黄浦·外滩",
+      "lng": 121.475,
+      "lat": 31.235,
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "上海最具代表性的商业步行街之一。",
+      "realPhoto": "img/sh-sp-04.jpg",
+      "photos": [
+        "img/sh-sp-04.jpg",
+        "img/sh-sp-04-2.jpg",
+        "img/sh-sp-04-3.jpg"
+      ],
+      "photoCredit": "项目组实拍；自有拍摄授权",
+      "ticket": "免费",
+      "openHours": "全天"
+    },
+    {
+      "key": "上博",
+      "name": "上海博物馆",
+      "excludeIp": [
+        "上海博物馆",
+        "上海博物馆人民广场馆"
+      ],
+      "unifyIp": [],
+      "cluster": "黄浦·外滩",
+      "lng": 121.4754,
+      "lat": 31.2286,
+      "popularity": 5,
+      "durationNormal": 180,
+      "durationRush": 90,
+      "intro": "上海重要综合性博物馆，在这里可以了解城市与中国历史文化。",
+      "realPhoto": "img/sh-sp-05.jpg",
+      "photos": [
+        "img/sh-sp-05.jpg",
+        "img/sh-sp-05-2.jpg",
+        "img/sh-sp-05-3.jpg"
+      ],
+      "photoCredit": "项目组实拍；自有拍摄授权",
+      "ticket": "免费",
+      "openHours": "09:00-17:00，周一闭馆"
+    },
+    {
+      "key": "豫园",
+      "name": "豫园",
+      "excludeIp": [
+        "豫园",
+        "豫园·城隍庙"
+      ],
+      "unifyIp": [],
+      "cluster": "黄浦·老城厢",
+      "lng": 121.492,
+      "lat": 31.227,
+      "popularity": 5,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "上海传统园林与老城厢文化集中区域。",
+      "realPhoto": "img/sh-sp-03.jpg",
+      "photos": [
+        "img/sh-sp-03.jpg",
+        "img/sh-sp-03-2.jpg",
+        "img/sh-sp-03-3.jpg"
+      ],
+      "photoCredit": "项目组实拍；自有拍摄授权",
+      "ticket": "¥40/免费",
+      "openHours": "09:00-16:30"
+    },
+    {
+      "key": "城隍庙",
+      "name": "城隍庙",
+      "excludeIp": [
+        "城隍庙",
+        "城隍庙商圈",
+        "豫园·城隍庙"
+      ],
+      "unifyIp": [],
+      "cluster": "黄浦·老城厢",
+      "lng": 121.493,
+      "lat": 31.226,
+      "popularity": 4,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "穿行于古色古香的飞檐灯影间，品味老上海的烟火气与传统韵味。",
+      "realPhoto": "img/aqsh-sh-sp-04.jpg",
+      "photos": [
+        "img/aqsh-sh-sp-04.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "key": "田子坊",
+      "name": "田子坊",
+      "excludeIp": [
+        "田子坊"
+      ],
+      "unifyIp": [],
+      "cluster": "黄浦·打浦桥",
+      "lng": 121.4729,
+      "lat": 31.2087,
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "在这里，石库门街巷与文创商业完美结合。",
+      "realPhoto": "img/sh-sp-08.jpg",
+      "photos": [
+        "img/sh-sp-08.jpg",
+        "img/sh-sp-08-2.jpg",
+        "img/sh-sp-08-3.jpg"
+      ],
+      "photoCredit": "项目组实拍；自有拍摄授权",
+      "ticket": "免费",
+      "openHours": "全天"
+    },
+    {
+      "key": "新天地",
+      "name": "新天地",
+      "excludeIp": [
+        "新天地"
+      ],
+      "unifyIp": [],
+      "cluster": "黄浦·打浦桥",
+      "lng": 121.475,
+      "lat": 31.221,
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "石库门建筑与现代商业融合的城市休闲街区，藏着老上海的风情与摩登，漫步弄堂街巷，邂逅海派文化的浪漫与时尚。",
+      "realPhoto": "img/sh-sp-09.jpg",
+      "photos": [
+        "img/sh-sp-09.jpg",
+        "img/sh-sp-09-2.jpg"
+      ],
+      "photoCredit": "项目组实拍；自有拍摄授权",
+      "ticket": "免费",
+      "openHours": "全天"
+    },
+    {
+      "key": "复兴公园",
+      "name": "复兴公园",
+      "excludeIp": [
+        "复兴公园"
+      ],
+      "unifyIp": [
+        "复兴公园"
+      ],
+      "cluster": "黄浦·打浦桥",
+      "lng": 121.4629,
+      "lat": 31.2188,
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "上海城市公园的代表。阿宝与蓓蒂童年视野中的重要地标，繁花书中反复出现的城市空间。",
+      "realPhoto": "img/sh-ip-03.jpg",
+      "photos": [
+        "img/sh-ip-03.jpg",
+        "img/sh-ip-03-2.jpg",
+        "img/sh-ip-03-3.jpg"
+      ],
+      "photoCredit": "项目组实拍；自有拍摄授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "key": "静安寺",
+      "name": "静安寺",
+      "excludeIp": [
+        "静安寺"
+      ],
+      "unifyIp": [],
+      "cluster": "静安",
+      "lng": 121.4453,
+      "lat": 31.223,
+      "popularity": 4,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "上海市中心历史悠久的佛教寺院与城市地标。",
+      "realPhoto": "img/sh-sp-06.jpg",
+      "photos": [
+        "img/sh-sp-06.jpg",
+        "img/sh-sp-06-2.jpg",
+        "img/sh-sp-06-3.jpg"
+      ],
+      "photoCredit": "项目组实拍；自有拍摄授权",
+      "ticket": "¥50",
+      "openHours": "07:30-17:00"
+    },
+    {
+      "key": "张园",
+      "name": "张园",
+      "excludeIp": [
+        "张园"
+      ],
+      "unifyIp": [],
+      "cluster": "静安",
+      "lng": 121.458,
+      "lat": 31.2285,
+      "popularity": 4,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "在老上海的时光印记中，邂逅历史与摩登的浪漫。",
+      "realPhoto": "img/aqsh-sh-sp-09.jpg",
+      "photos": [
+        "img/aqsh-sh-sp-09.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "key": "武康路",
+      "name": "武康大楼·武康路",
+      "excludeIp": [
+        "武康大楼·武康路",
+        "武康路与武康大楼外观"
+      ],
+      "unifyIp": [],
+      "cluster": "徐汇·衡复",
+      "lng": 121.4357,
+      "lat": 31.2046,
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "衡复历史文化风貌区代表性建筑与街道。",
+      "realPhoto": "img/sh-sp-07.jpg",
+      "photos": [
+        "img/sh-sp-07.jpg",
+        "img/sh-sp-07-2.jpg",
+        "img/sh-sp-07-3.jpg"
+      ],
+      "photoCredit": "项目组实拍；自有拍摄授权",
+      "ticket": "免费",
+      "openHours": "全天"
+    },
+    {
+      "key": "西岸滨江",
+      "name": "西岸滨江·龙美术馆",
+      "excludeIp": [
+        "西岸滨江·龙美术馆"
+      ],
+      "unifyIp": [],
+      "cluster": "徐汇·衡复",
+      "lng": 121.462,
+      "lat": 31.186,
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "徐汇滨江艺术空间，适合城市文化与建筑打卡。",
+      "realPhoto": "img/sh-sp-15.jpg",
+      "photos": [
+        "img/sh-sp-15.jpg",
+        "img/sh-sp-15-2.jpg",
+        "img/sh-sp-15-3.jpg"
+      ],
+      "photoCredit": "项目组实拍；自有拍摄授权",
+      "ticket": "免费/特展另计",
+      "openHours": "10:00-18:00，周一闭馆"
+    },
+    {
+      "key": "1933",
+      "name": "1933老场坊",
+      "excludeIp": [
+        "1933老场坊"
+      ],
+      "unifyIp": [],
+      "cluster": "虹口·北外滩",
+      "lng": 121.488,
+      "lat": 31.2518,
+      "popularity": 3,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "具有独特工业建筑空间的城市文化地标。",
+      "realPhoto": "img/sh-sp-12.jpg",
+      "photos": [
+        "img/sh-sp-12.jpg",
+        "img/sh-sp-12-2.jpg",
+        "img/sh-sp-12-3.jpg"
+      ],
+      "photoCredit": "项目组实拍；自有拍摄授权",
+      "ticket": "免费",
+      "openHours": "09:00-22:00"
+    },
+    {
+      "key": "多伦路",
+      "name": "多伦路文化名人街",
+      "excludeIp": [
+        "多伦路文化名人街"
+      ],
+      "unifyIp": [],
+      "cluster": "虹口·北外滩",
+      "lng": 121.477,
+      "lat": 31.2612,
+      "popularity": 3,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "近代文化名人活动与历史建筑集中的街区。",
+      "realPhoto": "img/sh-sp-13.jpg",
+      "photos": [
+        "img/sh-sp-13.jpg",
+        "img/sh-sp-13-2.jpg",
+        "img/sh-sp-13-3.jpg"
+      ],
+      "photoCredit": "项目组实拍；自有拍摄授权",
+      "ticket": "免费",
+      "openHours": "全天"
+    },
+    {
+      "key": "北外滩",
+      "name": "北外滩滨江",
+      "excludeIp": [
+        "北外滩滨江"
+      ],
+      "unifyIp": [],
+      "cluster": "虹口·北外滩",
+      "lng": 121.508,
+      "lat": 31.25,
+      "popularity": 3,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "沿江绿意与开阔江景相映，在自然与城市交织间，邂逅悠然惬意的滨江时光。",
+      "realPhoto": "img/aqsh-sh-sp-14.jpg",
+      "photos": [
+        "img/aqsh-sh-sp-14.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "key": "东方明珠",
+      "name": "东方明珠",
+      "excludeIp": [
+        "东方明珠"
+      ],
+      "unifyIp": [],
+      "cluster": "浦东",
+      "lng": 121.4998,
+      "lat": 31.2397,
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "上海地标电视塔，可俯瞰黄浦江两岸城市景观。",
+      "realPhoto": "img/sh-sp-01.jpg",
+      "photos": [
+        "img/sh-sp-01.jpg",
+        "img/sh-sp-01-2.jpg",
+        "img/sh-sp-01-3.jpg"
+      ],
+      "photoCredit": "项目组实拍；自有拍摄授权",
+      "ticket": "¥160起",
+      "openHours": "09:00-21:00"
+    },
+    {
+      "key": "上海中心",
+      "name": "上海中心·上海之巅",
+      "excludeIp": [
+        "上海中心·上海之巅",
+        "上海中心观光厅"
+      ],
+      "unifyIp": [],
+      "cluster": "浦东",
+      "lng": 121.5055,
+      "lat": 31.2336,
+      "popularity": 5,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "超高层城市观景地，登上顶层，体验陆家嘴高空视野。",
+      "realPhoto": "img/sh-sp-02.jpg",
+      "photos": [
+        "img/sh-sp-02.jpg",
+        "img/sh-sp-02-2.jpg",
+        "img/sh-sp-02-3.jpg"
+      ],
+      "photoCredit": "项目组实拍；自有拍摄授权",
+      "ticket": "¥180",
+      "openHours": "10:00-21:00"
+    },
+    {
+      "key": "陆家嘴滨江",
+      "name": "陆家嘴滨江步道",
+      "excludeIp": [
+        "陆家嘴滨江步道"
+      ],
+      "unifyIp": [],
+      "cluster": "浦东",
+      "lng": 121.503,
+      "lat": 31.24,
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "漫步黄浦江畔，将浦江风光与陆家嘴摩天楼群尽收眼底，感受繁华都市的浪漫与活力。",
+      "realPhoto": "img/aqsh-sh-sp-12.jpg",
+      "photos": [
+        "img/aqsh-sh-sp-12.jpg"
+      ],
+      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
+      "ticket": "",
+      "openHours": ""
+    },
+    {
+      "key": "上海科技馆",
+      "name": "上海科技馆",
+      "excludeIp": [
+        "上海科技馆"
+      ],
+      "unifyIp": [],
+      "cluster": "浦东",
+      "lng": 121.541,
+      "lat": 31.22,
+      "popularity": 4,
+      "durationNormal": 180,
+      "durationRush": 90,
+      "intro": "展示自然科学与科技知识。",
+      "realPhoto": "img/sh-sp-14.jpg",
+      "photos": [
+        "img/sh-sp-14.jpg"
+      ],
+      "photoCredit": "项目组实拍；自有拍摄授权",
+      "ticket": "¥45",
+      "openHours": "09:00-17:00，周一闭馆"
+    },
+    {
+      "key": "迪士尼",
+      "name": "上海迪士尼乐园",
+      "excludeIp": [
+        "上海迪士尼乐园"
+      ],
+      "unifyIp": [],
+      "cluster": "浦东",
+      "lng": 121.6576,
+      "lat": 31.1434,
+      "popularity": 5,
+      "durationNormal": 480,
+      "durationRush": 240,
+      "intro": "让童话照进现实，在奇幻城堡与梦幻光影间，开启一场关于梦想与奇迹的旅程。",
+      "realPhoto": "img/sh-sp-10.jpg",
+      "photos": [
+        "img/sh-sp-10.jpg",
+        "img/sh-sp-10-2.jpg",
+        "img/sh-sp-10-3.jpg"
+      ],
+      "photoCredit": "项目组实拍；自有拍摄授权",
+      "ticket": "¥475起",
+      "openHours": "08:30-20:30"
+    },
+    {
+      "key": "朱家角",
+      "name": "朱家角古镇",
+      "excludeIp": [
+        "朱家角古镇"
+      ],
+      "unifyIp": [],
+      "cluster": "近郊",
+      "lng": 121.0533,
+      "lat": 31.1116,
+      "popularity": 5,
+      "durationNormal": 240,
+      "durationRush": 120,
+      "intro": "江南水乡古镇，可体验上海近郊传统水乡景观。",
+      "realPhoto": "img/sh-sp-11.jpg",
+      "photos": [
+        "img/sh-sp-11.jpg",
+        "img/sh-sp-11-2.jpg",
+        "img/sh-sp-11-3.jpg"
+      ],
+      "photoCredit": "项目组实拍；自有拍摄授权",
+      "ticket": "免费/联票¥80",
+      "openHours": "08:30-16:30"
+    }
+  ]
+}

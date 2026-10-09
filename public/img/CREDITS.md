@@ -202,3 +202,168 @@
 | daomu-hangzhou | dm-sp-10.jpg | 六和塔（用户提供） | 【待用户补充来源】 | 【待确认】 | — | 用户提供 |
 | daomu-hangzhou | dm-ip-03.jpg | 宝石山摩崖石刻（用户提供） | 小红书用户 书号761015720 | 待授权（演示用） | — | 用户提供，带水印 |
 | daomu-hangzhou | dm-sp-07.jpg + dm-sp-07-2.jpg | 西溪湿地摇橹船/西溪白墙（用户提供） | 【待用户补充来源】 | 【待确认】 | — | 用户提供，多图 |
+
+## 厦门（开端）/ 大理（去有风的地方）打卡点实拍（2026-10-08）
+
+素材来自「厦门大理景点图片_32张」；统一压到最长边 1280px。授权差异见「许可」列，上线前按各来源许可处理。
+
+| 线路 | 文件 | 景点 / 画面 | 作者或署名 | 许可 | 来源 |
+| --- | --- | --- | --- | --- | --- |
+| kaiduan-xiamen | kd-xm-ip-01.jpg | 和熙楼 · 螺旋步道外观 | wishingbone | Flickr：All Rights Reserved | [链接](https://www.flickr.com/photos/wishingbone/52731537721/) |
+| kaiduan-xiamen | kd-xm-ip-01-2.jpg | 和熙楼 · 街景与螺旋楼体 | wishingbone | Flickr：All Rights Reserved | [链接](https://www.flickr.com/photos/wishingbone/52731537866/) |
+| kaiduan-xiamen | kd-xm-ip-01-3.jpg | 和熙楼 · 楼内螺旋结构 | wishingbone | Flickr：All Rights Reserved | [链接](https://www.flickr.com/photos/wishingbone/52731537626/) |
+| kaiduan-xiamen | kd-xm-ip-05.jpg | 波特曼七星湾酒店 · 酒店与滨海花园航拍 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://www.portmansevenstars.com/picture.html) |
+| kaiduan-xiamen | kd-xm-ip-05-2.jpg | 波特曼七星湾酒店 · 室外泳池与楼体 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://hotels.ctrip.com/hotels/60185397.html) |
+| kaiduan-xiamen | kd-xm-ip-05-3.jpg | 波特曼七星湾酒店 · 室内泳池 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://hotels.ctrip.com/hotels/60185397.html) |
+| kaiduan-xiamen | kd-xm-ip-05-4.jpg | 波特曼七星湾酒店 · 宴会餐厅 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://hotels.ctrip.com/hotels/60185397.html) |
+| kaiduan-xiamen | kd-xm-ip-05-5.jpg | 波特曼七星湾酒店 · 餐饮空间 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://hotels.ctrip.com/hotels/60185397.html) |
+| kaiduan-xiamen | kd-xm-ip-02.jpg | 海山东荣广场站 · 公交站与沿街建筑 | 小红书 Devill芃（新浪转载署名） | 来源页未提供明确开放许可 | [链接](https://fj.sina.com.cn/news/2022-06-13/detail-imizirau8113034.shtml) |
+| kaiduan-xiamen | kd-xm-ip-02-2.jpg | 海山东荣广场站 · 站台正面 | 小红书 Devill芃（新浪转载署名） | 来源页未提供明确开放许可 | [链接](https://fj.sina.com.cn/news/2022-06-13/detail-imizirau8113034.shtml) |
+| kaiduan-xiamen | kd-xm-ip-04.jpg | 美峰天桥 · 方框步道灯光夜景 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://www.sohu.com/a/602856099_121117479) |
+| kaiduan-xiamen | kd-xm-ip-04-2.jpg | 美峰天桥 · 跨路天桥外观 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://www.sohu.com/a/522176512_121117464) |
+| kaiduan-xiamen | kd-xm-ip-03.jpg | 联发华美空间 · 厂房街景 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://you.ctrip.com/sight/xiamen21/2042280.html) |
+| kaiduan-xiamen | kd-xm-ip-03-2.jpg | 联发华美空间 · 咖啡店外景 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://you.ctrip.com/sight/xiamen21/2042280.html) |
+| kaiduan-xiamen | kd-xm-ip-03-3.jpg | 联发华美空间 · 中庭建筑 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://you.ctrip.com/sight/xiamen21/2042280.html) |
+| kaiduan-xiamen | kd-xm-ip-03-4.jpg | 联发华美空间 · 园区入口夜景 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://you.ctrip.com/sight/xiamen21/2042280.html) |
+| kaiduan-xiamen | kd-xm-ip-03-5.jpg | 联发华美空间 · 蝴蝶阶梯 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://you.ctrip.com/sight/xiamen21/2042280.html) |
+| kaiduan-xiamen | kd-xm-ip-03-6.jpg | 联发华美空间 · 园区长廊夜景 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://you.ctrip.com/sight/xiamen21/2042280.html) |
+| quyoufengdedifang-dali | yf-dl-ip-01.jpg | 凤阳邑村 · 花巷街景 | q_95/strip" | 具体作者见来源页面 | [链接](https://www.yndaily.com/html/2025/yunxinwen_0806/137022.html) |
+| quyoufengdedifang-dali | yf-dl-ip-01-2.jpg | 凤阳邑村 · 绿植庭院 | q_95/strip" | 具体作者见来源页面 | [链接](https://www.yndaily.com/html/2025/yunxinwen_0806/137022.html) |
+| quyoufengdedifang-dali | yf-dl-ip-01-3.jpg | 凤阳邑村 · 扎染体验店 | q_95/strip" | 具体作者见来源页面 | [链接](https://www.yndaily.com/html/2025/yunxinwen_0806/137022.html) |
+| quyoufengdedifang-dali | yf-dl-ip-01-4.jpg | 凤阳邑村 · 村中庭院 | q_95/strip" | 具体作者见来源页面 | [链接](https://www.yndaily.com/html/2025/yunxinwen_0806/137022.html) |
+| quyoufengdedifang-dali | yf-dl-ip-01-5.jpg | 凤阳邑村 · 有风小院门口 | q_95/strip" | 具体作者见来源页面 | [链接](https://www.yndaily.com/html/2025/yunxinwen_0806/137022.html) |
+| quyoufengdedifang-dali | yf-dl-ip-01-6.jpg | 凤阳邑村 · 石板路集市 | q_95/strip" | 具体作者见来源页面 | [链接](https://www.yndaily.com/html/2025/yunxinwen_0806/137022.html) |
+| quyoufengdedifang-dali | yf-dl-ip-02.jpg | 喜洲古镇 · 古镇与洱海航拍 | 新华网 赵普凡 | 来源页未提供明确开放许可 | [链接](https://yn.yunnan.cn/system/2020/12/30/031208262.shtml) |
+| quyoufengdedifang-dali | yf-dl-ip-02-2.jpg | 喜洲古镇 · 转角楼 | 新华网 丁凝 | 来源页未提供明确开放许可 | [链接](https://yn.yunnan.cn/system/2020/12/30/031208262.shtml) |
+| quyoufengdedifang-dali | yf-dl-ip-02-3.jpg | 喜洲古镇 · 扎染街景 | 新华网 丁凝 | 来源页未提供明确开放许可 | [链接](https://yn.yunnan.cn/system/2020/12/30/031208262.shtml) |
+| quyoufengdedifang-dali | yf-dl-ip-02-4.jpg | 喜洲古镇 · 白族院落俯瞰 | 新华网 赵普凡 | 来源页未提供明确开放许可 | [链接](https://yn.yunnan.cn/system/2020/12/30/031208262.shtml) |
+| quyoufengdedifang-dali | yf-dl-ip-02-5.jpg | 喜洲古镇 · 白墙巷道 | 新华网 丁凝 | 来源页未提供明确开放许可 | [链接](https://yn.yunnan.cn/system/2020/12/30/031208262.shtml) |
+| quyoufengdedifang-dali | yf-dl-ip-02-6.jpg | 喜洲古镇 · 题名坊 | 新华网 赵普凡 | 来源页未提供明确开放许可 | [链接](https://yn.yunnan.cn/system/2020/12/30/031208262.shtml) |
+| quyoufengdedifang-dali | yf-dl-ip-03.jpg | 大理古城 · 古城街巷航拍 | 瑞丽江的河水 | CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/ | [链接](https://commons.wikimedia.org/wiki/File:%E5%A4%A7%E7%90%86%E5%8F%A4%E5%9F%8E_-_%E8%88%AA%E6%8B%8D_-_2024-10-13_05.jpg) |
+| quyoufengdedifang-dali | yf-dl-ip-03-2.jpg | 大理古城 · 古城屋顶与苍山 | ShuQizhe | CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/ | [链接](https://commons.wikimedia.org/wiki/File:Dali_Ancient_Town_20260220-2.jpg) |
+
+## 线路封面（2026-10-08）：去有风的地方·大理 / 开端·厦门 / 爱情神话·上海
+
+| 线路 | 文件 | 画面 | 作者或署名 | 许可 | 来源 | 备注 |
+| --- | --- | --- | --- | --- | --- | --- |
+| quyoufengdedifang-dali | quyoufengdedifang-dali.jpg（同时用作 IP 封面 quyoufengdedifang.jpg） | 凤阳邑村 · 有风小院门口 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://www.yndaily.com/html/2025/yunxinwen_0806/137022.html) | 用户提供，压到 1280px |
+| kaiduan-xiamen | kaiduan-xiamen.jpg（同时用作 IP 封面 kaiduan.jpg） | 鼓浪屿与厦门 city 天际线 | 【用户提供，来源待补】 | 【待确认】 | — | 用户提供 |
+| aiqingshenhua-shanghai | aiqingshenhua-shanghai.jpg（同时用作 IP 封面 aiqingshenhua.jpg） | 《爱情神话》屋顶剧照 | 【用户提供，来源待补】 | 【待确认】 | — | 用户提供；影视剧照，上线前需确认版权 | 
+
+
+## 厦门/大理 其他知名景点实拍（2026-10-09）
+
+素材来自用户提供的「厦门大理景点图片_32张」中按「其他知名景点」顺序编号的 sp01…spNN 文件夹；统一压到最长边 1280px / q78。
+除 kd-xm-ip-06.jpg 外，本批素材缺 CSV 来源页与授权信息，上线前须逐张核对（尤其来自携程/媒体页的图）。
+
+| 文件 | 景点 | 原文件名 | 作者 | 授权 | 来源 | 备注 |
+| --- | --- | --- | --- | --- | --- | --- |
+| kd-xm-sp-01.jpg | 鼓浪屿 | 鼓浪屿_-_panoramio.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-01-2.jpg | 鼓浪屿 | images.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-01-3.jpg | 鼓浪屿 | shutterstock_259376561compress.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-02.jpg | 日光岩 | 1.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-02-2.jpg | 日光岩 | 1718375302-1615009012-g.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-02-3.jpg | 日光岩 | images.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-04.jpg | 中山路步行街 | banner_xiamen-zhongshan-road-tour.webp | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-04-2.jpg | 中山路步行街 | c69267d872573e8.webp | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-04-3.jpg | 中山路步行街 | Zhongshan_Rd.,_Xiamen.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-07.jpg | 南普陀寺 | 1.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-07-2.jpg | 南普陀寺 | 19b0acbddbdd629.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-07-3.jpg | 南普陀寺 | shutterstock_431286571compress.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-08.jpg | 厦门大学 | 674841897b3647ada06e31560e5db9b0.webp | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-08-2.jpg | 厦门大学 | 1623217269313.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-08-3.jpg | 厦门大学 | images.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-08-4.jpg | 厦门大学 | one-of-the-buildings.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-03.jpg | 菽庄花园 | CN_139482179.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-03-2.jpg | 菽庄花园 | images.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-03-3.jpg | 菽庄花园 | shuzhuang-garden.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-05.jpg | 沙坡尾 | 1.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-05-2.jpg | 沙坡尾 | 892685646395859553.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-05-3.jpg | 沙坡尾 | images.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-05-4.jpg | 沙坡尾 | mini-three-link-transportation_273.webp | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-06.jpg | 厦门园林植物园 | 1mi2p12000f1fsz6r8B62.avif | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-06-2.jpg | 厦门园林植物园 | 1766556066-1-1024x665.webp | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-06-3.jpg | 厦门园林植物园 | images-1.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-06-4.jpg | 厦门园林植物园 | images.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-09.jpg | 胡里山炮台 | 5fa60d17e4b07efb96ffb191.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-09-2.jpg | 胡里山炮台 | caption.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-11.jpg | 曾厝垵 | 曾厝垵01_x1.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-11-2.jpg | 曾厝垵 | 100m0z000000nnhohE7CA_C_1200_800_Q70.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-11-3.jpg | 曾厝垵 | 廈門曾厝垵_x1.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-11-4.jpg | 曾厝垵 | mini-three-link-transportation_179.webp | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-13.jpg | 集美学村 | 集美學村.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-13-2.jpg | 集美学村 | 0350412000dol52o3BB88_C_1000_1000_Q50.jpg_.w | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-13-3.jpg | 集美学村 | 廈門集美學村+環島路+盼歸塔+曾厝垵+胡裡山炮臺1日遊.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-13-4.jpg | 集美学村 | photo1jpg.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-14.jpg | 园博苑 | 0106k1200073zht3q7335_W_750_0.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-14-2.jpg | 园博苑 | images.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-10.jpg | 白城沙滩 | 1.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-10-2.jpg | 白城沙滩 | 0101412000h45qsnh9E63_W_750_0.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-10-3.jpg | 白城沙滩 | images-1.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-12.jpg | 黄厝海滩 | 1.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-12-2.jpg | 黄厝海滩 | images-1.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-15.jpg | 海沧湾公园 | images-1.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-sp-15-2.jpg | 海沧湾公园 | images.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| kd-xm-ip-06.jpg | 海沧大道泰地站 | Exit 3 of Haicang Business Center Station.jpg | HualinXMN | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Exit_3_of_Haicang_Business_Center_Station.jpg) | 最长边 1280px |
+| yf-dl-sp-02.jpg | 崇圣寺三塔 | Dalisanta.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-02-2.jpg | 崇圣寺三塔 | images.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-02-3.jpg | 崇圣寺三塔 | pagoda-complex.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-11.jpg | 双廊古镇 | 大理洱海與雙廊一日遊船之旅.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-11-2.jpg | 双廊古镇 | 1.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-11-3.jpg | 双廊古镇 | images-1.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-03.jpg | 苍山感通索道片区 | 1lo6s12000l3sko8tE061_R_750_370.jpg_.webp | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-03-2.jpg | 苍山感通索道片区 | 1767618026-1.webp | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-03-3.jpg | 苍山感通索道片区 | images.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-04.jpg | 苍山洗马潭索道片区 | 1.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-04-2.jpg | 苍山洗马潭索道片区 | images-1.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-07.jpg | 海舌生态公园 | 1.webp | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-07-2.jpg | 海舌生态公园 | images.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-07-3.jpg | 海舌生态公园 | rBANDFpPMV6AXCZOAAMZ6wx1Ckg572_640x320_00.jp | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-12.jpg | 南诏风情岛 | images-1.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-12-2.jpg | 南诏风情岛 | images-2.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-12-3.jpg | 南诏风情岛 | images.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-06.jpg | 周城村 | 大理洱海雙廊喜洲小普陀周城村扎染體驗獨立組團一日遊-Klook.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-06-2.jpg | 周城村 | caption.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-06-3.jpg | 周城村 | wb8n4jx71egarfmi7ab2.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-08.jpg | 磻溪村 | c5f77e03027640c4b279208daed6759b.webp | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-08-2.jpg | 磻溪村 | images.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-09.jpg | 才村 | 1mi5l12000ivardmp2950.avif | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-09-2.jpg | 才村 | 1mi3412000ivas3vr769B_Q90.avif | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-09-3.jpg | 才村 | images.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-10.jpg | 龙龛码头 | 0101j12000ffgspi99F00_W_750_0.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-10-2.jpg | 龙龛码头 | 0105b12000992mc9m2378_W_640_0_Q90.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-10-3.jpg | 龙龛码头 | images.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-14.jpg | 大理市博物馆 | 大理市博物馆01.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-14-2.jpg | 大理市博物馆 | 大理白族自治州博物馆_202307_02.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-14-3.jpg | 大理市博物馆 | images.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-13.jpg | 挖色镇 | 895.jpg!list2x.webp | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+| yf-dl-sp-13-2.jpg | 挖色镇 | images.jpg | 【待补充】 | 【待确认】 | — | 用户提供·来源待核（厦门大理景点图片_32张） |
+
+## 上海 · 经典景点与 IP 点位补图（2026-10-09）
+
+《爱情神话·上海》城市景点补图，均为维基共享资源（Wikimedia Commons）素材，统一压到最长边 1280px / q78。
+
+| 文件 | 景点 | 标题 | 作者 | 授权 | 来源 |
+| --- | --- | --- | --- | --- | --- |
+| aqsh-sh-sp-01.jpg | 外滩 | File:Shanghai skyline waterfront pudong 5166168 69 70.jpg | Ermell | CC0 | [链接](https://commons.wikimedia.org/wiki/File:Shanghai_skyline_waterfront_pudong_5166168_69_70.jpg) |
+| aqsh-sh-sp-04.jpg | 城隍庙 | File:2024-Apr Shanghai City God Temple 上海城隍廟 - img 01.jpg | Chainwit. | CC BY 4.0 | [链接](https://commons.wikimedia.org/wiki/File:2024-Apr_Shanghai_City_God_Temple_%E4%B8%8A%E6%B5%B7%E5%9F%8E%E9%9A%8D%E5%BB%9F_-_img_01.jpg) |
+| aqsh-sh-sp-09.jpg | 张园 | File:Zhang Yuan, Shanghai, China 2024 (54281266880).jpg | Juan Antonio Segal | CC BY 2.0 | [链接](https://commons.wikimedia.org/wiki/File:Zhang_Yuan,_Shanghai,_China_2024_(54281266880).jpg) |
+| aqsh-sh-sp-12.jpg | 陆家嘴滨江步道 | File:Minor skyscrapers in Lujiazui, Shanghai as seen from Lujiazui Pedestrian Bridge 20120602 1.jpg | DXR | CC BY-SA 4.0 | [链接](https://commons.wikimedia.org/wiki/File:Minor_skyscrapers_in_Lujiazui,_Shanghai_as_seen_from_Lujiazui_Pedestrian_Bridge_20120602_1.jpg) |
+| aqsh-sh-sp-14.jpg | 北外滩滨江 | File:The North Bund Entrance 20251127.jpg | Supanut Arunoprayote | CC BY 4.0 | [链接](https://commons.wikimedia.org/wiki/File:The_North_Bund_Entrance_20251127.jpg) |
+
+### 《爱情神话·上海》IP 点位实拍（项目组提供，2026-10-09）
+
+按点位文件夹归入 `public/img/aqsh-sh-ip-*.jpg`（最长边 1280px / q78）。本批素材未附来源页与授权信息，上线前须逐张核对。
+
+| 文件 | 点位 | 原文件名 | 备注 |
+| --- | --- | --- | --- |
+| aqsh-sh-ip-01.jpg | 大通别墅 | 大通别墅/images.jpg | 用户提供·来源待核（aiqingshenhua shanghai） |
+| aqsh-sh-ip-01-2.jpg | 大通别墅 | 大通别墅/4d554fa044694fca984cd2c0f52abf43.jpg | 用户提供·来源待核；含片名 logo 的影片剧照 |
+| aqsh-sh-ip-01-3.jpg | 大通别墅 | 大通别墅/images-1.jpg | 用户提供·来源待核（aiqingshenhua shanghai） |
+| aqsh-sh-ip-02.jpg | 延庆路 | 延庆路/1mi6f12000tdojvkaEBD9.avif | 用户提供·来源待核；AVIF 经 QuickLook 转码 |
+| aqsh-sh-ip-02-2.jpg | 延庆路 | 延庆路/v2-a828d1852e3eadec09d36189c9aa8533_1440w.jpg | 用户提供·来源待核（源为知乎图床，含站内水印风险） |
+| aqsh-sh-ip-02-3.jpg | 延庆路 | 延庆路/images.jpg | 用户提供·来源待核（aiqingshenhua shanghai） |
+| aqsh-sh-ip-03.jpg | 上海浦东美术馆（MAP） | 浦东美术馆/1.jpg | 用户提供·来源待核（aiqingshenhua shanghai） |
+| aqsh-sh-ip-03-2.jpg | 上海浦东美术馆（MAP） | 浦东美术馆/上海浦東美術館MAP門票-Klook.jpg | 用户提供·来源待核；取自 Klook 门票页 |
+| aqsh-sh-ip-03-3.jpg | 上海浦东美术馆（MAP） | 浦东美术馆/images.jpg | 用户提供·来源待核（aiqingshenhua shanghai） |
+| aqsh-sh-ip-04.jpg | Meyfive咖啡厅 | MayFive取景旧址/0e823ca42a4b478fb522dfb60772a14f4v7T_l.jpg | 用户提供·来源待核（aiqingshenhua shanghai） |

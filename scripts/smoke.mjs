@@ -48,18 +48,18 @@ try {
   check('搜「汪小姐」命中（人物标签）', mock.search('汪小姐').length === 1)
   check('搜「龙族」命中两条', mock.search('龙族').length === 2)
   check('搜「原神」返回空（页面显示"暂未收录"）', mock.search('原神').length === 0)
-  check('搜「东方明珠」命中（POI 名）', mock.search('东方明珠').length === 1)
+  check('搜「东方明珠」命中（上海两条线共享的城市景点）', mock.search('东方明珠').length === 2)
   check('搜「曹杨新村」命中（IP 点名）', mock.search('曹杨新村').length === 1)
   check('搜「哈利波特」命中伦敦线', mock.search('哈利波特')[0]?.lineId === 'harrypotter-london')
   check('搜「地坛」命中北京文学线', mock.search('地坛')[0]?.lineId === 'woyuditan-beijing')
 
   console.log('\n【端点 3 · 路线详情】')
   const detail = mock.getLineDetail('fanhua-shanghai')
-  check('返回 8 个 IP 点 + 15 个城市景点', detail.pois.length === 23)
+  check('返回 8 个 IP 点 + 19 个城市景点', detail.pois.length === 27)
   check('IP 点带 tier', detail.pois.filter((p) => p.type === 'ip').every((p) => p.tier))
   check('城市景点带 popularity', detail.pois.filter((p) => p.type === 'classic').every((p) => p.popularity))
   const pending = detail.pois.filter((p) => p.name.includes('【') || p.cluster.includes('【')).length
-  check('繁花 23 个点位已全部填写（无占位）', pending === 0, `剩余占位 ${pending}`)
+  check('繁花 27 个点位已全部填写（无占位）', pending === 0, `剩余占位 ${pending}`)
   check('每个 IP 点都有带出处的原著引文',
     detail.pois.filter((p) => p.type === 'ip').every((p) => p.quotes?.length && p.quotes.every((q) => q.source && q.full)))
 
@@ -76,7 +76,7 @@ try {
   check('每天带可用/已用分钟', r1.days[0]?.availableMin > 0 && r1.days[0]?.usedMin > 0)
 
   const r2 = await mock.plan({ lineId: 'fanhua-shanghai', poiIds: detail.pois.map((p) => p.poiId), timeRange: { ...TR, endDate: '2026-11-01' }, hoursPerDay: 8 })
-  check('1 天塞 23 个点 → overload', r2.status === 'overload', r2.message || '')
+  check('1 天塞 27 个点 → overload', r2.status === 'overload', r2.message || '')
   check('给出舍弃建议并标出必砍', r2.suggestions.some((s) => s.mustDrop))
   check('孤点效应生效（远的点省得最多）',
     (r2.suggestions[0]?.savesMinutes ?? 0) > 0,
