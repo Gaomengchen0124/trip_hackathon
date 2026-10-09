@@ -86,7 +86,12 @@
       "basis": "云南网／大理日报《那些年在大理取景的影视剧》（2023-02-20）列为取景地（村落级）；具体镜头、时间码与入口待核。",
       "realPhoto": "img/yf-dl-ip-01.jpg",
       "photos": [
-        "img/yf-dl-ip-01.jpg"
+        "img/yf-dl-ip-01.jpg",
+        "img/yf-dl-ip-01-2.jpg",
+        "img/yf-dl-ip-01-3.jpg",
+        "img/yf-dl-ip-01-4.jpg",
+        "img/yf-dl-ip-01-5.jpg",
+        "img/yf-dl-ip-01-6.jpg"
       ],
       "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
       "skipNote": "若偏好城市地标，可压缩古村停留。",
@@ -109,7 +114,12 @@
       "basis": "云南网／大理日报（2023-02-20）列为取景地（古镇级）；具体镜头、时间码与入口待核。",
       "realPhoto": "img/yf-dl-ip-02.jpg",
       "photos": [
-        "img/yf-dl-ip-02.jpg"
+        "img/yf-dl-ip-02.jpg",
+        "img/yf-dl-ip-02-2.jpg",
+        "img/yf-dl-ip-02-3.jpg",
+        "img/yf-dl-ip-02-4.jpg",
+        "img/yf-dl-ip-02-5.jpg",
+        "img/yf-dl-ip-02-6.jpg"
       ],
       "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
       "skipNote": "往返占用时间，短行程可先舍弃。",
@@ -132,7 +142,8 @@
       "basis": "云南网／大理日报（2023-02-20）列为取景地（古城级）；具体镜头、时间码与入口待核。",
       "realPhoto": "img/yf-dl-ip-03.jpg",
       "photos": [
-        "img/yf-dl-ip-03.jpg"
+        "img/yf-dl-ip-03.jpg",
+        "img/yf-dl-ip-03-2.jpg"
       ],
       "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
       "skipNote": "若已逛过古城，可把时间留给村落。",
@@ -140,26 +151,6 @@
     }
   ],
   "cityStops": [
-    {
-      "poiId": "yf-dl-sp-01",
-      "lineId": "quyoufengdedifang-dali",
-      "type": "classic",
-      "name": "大理古城",
-      "lng": 100.1617,
-      "lat": 25.6946,
-      "cluster": "大理·古城",
-      "popularity": 5,
-      "durationNormal": 120,
-      "durationRush": 60,
-      "intro": "与同名 IP 点合并计时，古城街巷公共开放。",
-      "realPhoto": "img/yf-dl-sp-01.jpg",
-      "photos": [
-        "img/yf-dl-sp-01.jpg"
-      ],
-      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
-      "ticket": "",
-      "openHours": ""
-    },
     {
       "poiId": "yf-dl-sp-02",
       "lineId": "quyoufengdedifang-dali",
@@ -215,26 +206,6 @@
       "realPhoto": "img/yf-dl-sp-04.jpg",
       "photos": [
         "img/yf-dl-sp-04.jpg"
-      ],
-      "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
-      "ticket": "",
-      "openHours": ""
-    },
-    {
-      "poiId": "yf-dl-sp-05",
-      "lineId": "quyoufengdedifang-dali",
-      "type": "classic",
-      "name": "喜洲古镇",
-      "lng": 100.1387,
-      "lat": 25.8551,
-      "cluster": "大理·喜洲",
-      "popularity": 5,
-      "durationNormal": 150,
-      "durationRush": 75,
-      "intro": "与同名 IP 点合并计时，避免重复计算。",
-      "realPhoto": "img/yf-dl-sp-05.jpg",
-      "photos": [
-        "img/yf-dl-sp-05.jpg"
       ],
       "photoCredit": "暂无实际素材，待补；项目组实拍优先，网络图片须逐图核实授权。",
       "ticket": "",

@@ -9,7 +9,9 @@ export const IP_PREFIX = {
   santi: 'st',
   daomu: 'dm',
   woyuditan: 'wd',
-  qianfu: 'qf'
+  qianfu: 'qf',
+  kaiduan: 'kd',
+  quyoufengdedifang: 'yf'
 }
 
 // 单行最少 tile 数:低于视口宽度会让无缝循环露出空白,太少时自我重复补齐。

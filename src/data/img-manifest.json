@@ -157,6 +157,26 @@
     "hp-sp-14.jpg",
     "hp-sp-15.jpg"
   ],
+  "kd": [
+    "kd-xm-ip-01-2.jpg",
+    "kd-xm-ip-01-3.jpg",
+    "kd-xm-ip-01.jpg",
+    "kd-xm-ip-02-2.jpg",
+    "kd-xm-ip-02.jpg",
+    "kd-xm-ip-03-2.jpg",
+    "kd-xm-ip-03-3.jpg",
+    "kd-xm-ip-03-4.jpg",
+    "kd-xm-ip-03-5.jpg",
+    "kd-xm-ip-03-6.jpg",
+    "kd-xm-ip-03.jpg",
+    "kd-xm-ip-04-2.jpg",
+    "kd-xm-ip-04.jpg",
+    "kd-xm-ip-05-2.jpg",
+    "kd-xm-ip-05-3.jpg",
+    "kd-xm-ip-05-4.jpg",
+    "kd-xm-ip-05-5.jpg",
+    "kd-xm-ip-05.jpg"
+  ],
   "longzu": [
     "longzu-beijing.jpg",
     "longzu-japan.jpg"
@@ -346,5 +366,21 @@
   ],
   "woyuditan.jpg": [
     "woyuditan.jpg"
+  ],
+  "yf": [
+    "yf-dl-ip-01-2.jpg",
+    "yf-dl-ip-01-3.jpg",
+    "yf-dl-ip-01-4.jpg",
+    "yf-dl-ip-01-5.jpg",
+    "yf-dl-ip-01-6.jpg",
+    "yf-dl-ip-01.jpg",
+    "yf-dl-ip-02-2.jpg",
+    "yf-dl-ip-02-3.jpg",
+    "yf-dl-ip-02-4.jpg",
+    "yf-dl-ip-02-5.jpg",
+    "yf-dl-ip-02-6.jpg",
+    "yf-dl-ip-02.jpg",
+    "yf-dl-ip-03-2.jpg",
+    "yf-dl-ip-03.jpg"
   ]
 }

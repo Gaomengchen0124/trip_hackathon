@@ -202,3 +202,50 @@
 | daomu-hangzhou | dm-sp-10.jpg | 六和塔（用户提供） | 【待用户补充来源】 | 【待确认】 | — | 用户提供 |
 | daomu-hangzhou | dm-ip-03.jpg | 宝石山摩崖石刻（用户提供） | 小红书用户 书号761015720 | 待授权（演示用） | — | 用户提供，带水印 |
 | daomu-hangzhou | dm-sp-07.jpg + dm-sp-07-2.jpg | 西溪湿地摇橹船/西溪白墙（用户提供） | 【待用户补充来源】 | 【待确认】 | — | 用户提供，多图 |
+
+## 厦门（开端）/ 大理（去有风的地方）打卡点实拍（2026-10-08）
+
+素材来自「厦门大理景点图片_32张」；统一压到最长边 1280px。授权差异见「许可」列，上线前按各来源许可处理。
+
+| 线路 | 文件 | 景点 / 画面 | 作者或署名 | 许可 | 来源 |
+| --- | --- | --- | --- | --- | --- |
+| kaiduan-xiamen | kd-xm-ip-01.jpg | 和熙楼 · 螺旋步道外观 | wishingbone | Flickr：All Rights Reserved | [链接](https://www.flickr.com/photos/wishingbone/52731537721/) |
+| kaiduan-xiamen | kd-xm-ip-01-2.jpg | 和熙楼 · 街景与螺旋楼体 | wishingbone | Flickr：All Rights Reserved | [链接](https://www.flickr.com/photos/wishingbone/52731537866/) |
+| kaiduan-xiamen | kd-xm-ip-01-3.jpg | 和熙楼 · 楼内螺旋结构 | wishingbone | Flickr：All Rights Reserved | [链接](https://www.flickr.com/photos/wishingbone/52731537626/) |
+| kaiduan-xiamen | kd-xm-ip-05.jpg | 波特曼七星湾酒店 · 酒店与滨海花园航拍 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://www.portmansevenstars.com/picture.html) |
+| kaiduan-xiamen | kd-xm-ip-05-2.jpg | 波特曼七星湾酒店 · 室外泳池与楼体 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://hotels.ctrip.com/hotels/60185397.html) |
+| kaiduan-xiamen | kd-xm-ip-05-3.jpg | 波特曼七星湾酒店 · 室内泳池 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://hotels.ctrip.com/hotels/60185397.html) |
+| kaiduan-xiamen | kd-xm-ip-05-4.jpg | 波特曼七星湾酒店 · 宴会餐厅 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://hotels.ctrip.com/hotels/60185397.html) |
+| kaiduan-xiamen | kd-xm-ip-05-5.jpg | 波特曼七星湾酒店 · 餐饮空间 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://hotels.ctrip.com/hotels/60185397.html) |
+| kaiduan-xiamen | kd-xm-ip-02.jpg | 海山东荣广场站 · 公交站与沿街建筑 | 小红书 Devill芃（新浪转载署名） | 来源页未提供明确开放许可 | [链接](https://fj.sina.com.cn/news/2022-06-13/detail-imizirau8113034.shtml) |
+| kaiduan-xiamen | kd-xm-ip-02-2.jpg | 海山东荣广场站 · 站台正面 | 小红书 Devill芃（新浪转载署名） | 来源页未提供明确开放许可 | [链接](https://fj.sina.com.cn/news/2022-06-13/detail-imizirau8113034.shtml) |
+| kaiduan-xiamen | kd-xm-ip-04.jpg | 美峰天桥 · 方框步道灯光夜景 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://www.sohu.com/a/602856099_121117479) |
+| kaiduan-xiamen | kd-xm-ip-04-2.jpg | 美峰天桥 · 跨路天桥外观 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://www.sohu.com/a/522176512_121117464) |
+| kaiduan-xiamen | kd-xm-ip-03.jpg | 联发华美空间 · 厂房街景 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://you.ctrip.com/sight/xiamen21/2042280.html) |
+| kaiduan-xiamen | kd-xm-ip-03-2.jpg | 联发华美空间 · 咖啡店外景 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://you.ctrip.com/sight/xiamen21/2042280.html) |
+| kaiduan-xiamen | kd-xm-ip-03-3.jpg | 联发华美空间 · 中庭建筑 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://you.ctrip.com/sight/xiamen21/2042280.html) |
+| kaiduan-xiamen | kd-xm-ip-03-4.jpg | 联发华美空间 · 园区入口夜景 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://you.ctrip.com/sight/xiamen21/2042280.html) |
+| kaiduan-xiamen | kd-xm-ip-03-5.jpg | 联发华美空间 · 蝴蝶阶梯 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://you.ctrip.com/sight/xiamen21/2042280.html) |
+| kaiduan-xiamen | kd-xm-ip-03-6.jpg | 联发华美空间 · 园区长廊夜景 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://you.ctrip.com/sight/xiamen21/2042280.html) |
+| quyoufengdedifang-dali | yf-dl-ip-01.jpg | 凤阳邑村 · 花巷街景 | q_95/strip" | 具体作者见来源页面 | [链接](https://www.yndaily.com/html/2025/yunxinwen_0806/137022.html) |
+| quyoufengdedifang-dali | yf-dl-ip-01-2.jpg | 凤阳邑村 · 绿植庭院 | q_95/strip" | 具体作者见来源页面 | [链接](https://www.yndaily.com/html/2025/yunxinwen_0806/137022.html) |
+| quyoufengdedifang-dali | yf-dl-ip-01-3.jpg | 凤阳邑村 · 扎染体验店 | q_95/strip" | 具体作者见来源页面 | [链接](https://www.yndaily.com/html/2025/yunxinwen_0806/137022.html) |
+| quyoufengdedifang-dali | yf-dl-ip-01-4.jpg | 凤阳邑村 · 村中庭院 | q_95/strip" | 具体作者见来源页面 | [链接](https://www.yndaily.com/html/2025/yunxinwen_0806/137022.html) |
+| quyoufengdedifang-dali | yf-dl-ip-01-5.jpg | 凤阳邑村 · 有风小院门口 | q_95/strip" | 具体作者见来源页面 | [链接](https://www.yndaily.com/html/2025/yunxinwen_0806/137022.html) |
+| quyoufengdedifang-dali | yf-dl-ip-01-6.jpg | 凤阳邑村 · 石板路集市 | q_95/strip" | 具体作者见来源页面 | [链接](https://www.yndaily.com/html/2025/yunxinwen_0806/137022.html) |
+| quyoufengdedifang-dali | yf-dl-ip-02.jpg | 喜洲古镇 · 古镇与洱海航拍 | 新华网 赵普凡 | 来源页未提供明确开放许可 | [链接](https://yn.yunnan.cn/system/2020/12/30/031208262.shtml) |
+| quyoufengdedifang-dali | yf-dl-ip-02-2.jpg | 喜洲古镇 · 转角楼 | 新华网 丁凝 | 来源页未提供明确开放许可 | [链接](https://yn.yunnan.cn/system/2020/12/30/031208262.shtml) |
+| quyoufengdedifang-dali | yf-dl-ip-02-3.jpg | 喜洲古镇 · 扎染街景 | 新华网 丁凝 | 来源页未提供明确开放许可 | [链接](https://yn.yunnan.cn/system/2020/12/30/031208262.shtml) |
+| quyoufengdedifang-dali | yf-dl-ip-02-4.jpg | 喜洲古镇 · 白族院落俯瞰 | 新华网 赵普凡 | 来源页未提供明确开放许可 | [链接](https://yn.yunnan.cn/system/2020/12/30/031208262.shtml) |
+| quyoufengdedifang-dali | yf-dl-ip-02-5.jpg | 喜洲古镇 · 白墙巷道 | 新华网 丁凝 | 来源页未提供明确开放许可 | [链接](https://yn.yunnan.cn/system/2020/12/30/031208262.shtml) |
+| quyoufengdedifang-dali | yf-dl-ip-02-6.jpg | 喜洲古镇 · 题名坊 | 新华网 赵普凡 | 来源页未提供明确开放许可 | [链接](https://yn.yunnan.cn/system/2020/12/30/031208262.shtml) |
+| quyoufengdedifang-dali | yf-dl-ip-03.jpg | 大理古城 · 古城街巷航拍 | 瑞丽江的河水 | CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/ | [链接](https://commons.wikimedia.org/wiki/File:%E5%A4%A7%E7%90%86%E5%8F%A4%E5%9F%8E_-_%E8%88%AA%E6%8B%8D_-_2024-10-13_05.jpg) |
+| quyoufengdedifang-dali | yf-dl-ip-03-2.jpg | 大理古城 · 古城屋顶与苍山 | ShuQizhe | CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/ | [链接](https://commons.wikimedia.org/wiki/File:Dali_Ancient_Town_20260220-2.jpg) |
+
+## 线路封面（2026-10-08）：去有风的地方·大理 / 开端·厦门 / 爱情神话·上海
+
+| 线路 | 文件 | 画面 | 作者或署名 | 许可 | 来源 | 备注 |
+| --- | --- | --- | --- | --- | --- | --- |
+| quyoufengdedifang-dali | quyoufengdedifang-dali.jpg（同时用作 IP 封面 quyoufengdedifang.jpg） | 凤阳邑村 · 有风小院门口 | 具体作者见来源页面 | 来源页未提供明确开放许可 | [链接](https://www.yndaily.com/html/2025/yunxinwen_0806/137022.html) | 用户提供，压到 1280px |
+| kaiduan-xiamen | kaiduan-xiamen.jpg（同时用作 IP 封面 kaiduan.jpg） | 鼓浪屿与厦门 city 天际线 | 【用户提供，来源待补】 | 【待确认】 | — | 用户提供 |
+| aiqingshenhua-shanghai | aiqingshenhua-shanghai.jpg（同时用作 IP 封面 aiqingshenhua.jpg） | 《爱情神话》屋顶剧照 | 【用户提供，来源待补】 | 【待确认】 | — | 用户提供；影视剧照，上线前需确认版权 | 
