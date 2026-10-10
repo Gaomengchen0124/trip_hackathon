@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的圣地巡礼 · 产品介绍</title>
+<style>
+  :root{
+    --bg:#14161f; --bg2:#191c27; --ink:#ece8de; --dim:#a9a497;
+    --red:#c8553d; --gold:#d9a441; --line:rgba(236,232,222,.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei",sans-serif;
+    overflow-x:hidden;}
+  .serif{font-family:"Noto Serif SC","Songti SC","SimSun",serif;}
+
+  .kicker{font-size:13px;letter-spacing:.35em;color:var(--gold);font-weight:600;text-transform:uppercase;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+  section{padding:110px 0;position:relative;}
+  .reveal{opacity:0;transform:translateY(36px);transition:opacity .8s ease,transform .8s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;display:flex;align-items:flex-end;
+    padding:0 0 12vh;
+    background:
+      linear-gradient(180deg,rgba(16,18,26,.5) 0%,rgba(16,18,26,.3) 40%,rgba(16,18,26,.94) 100%),
+      url("南京路.jpg") center 30%/cover no-repeat,
+      var(--bg);
+  }
+  .hero h1{font-size:clamp(44px,8vw,96px);font-weight:700;line-height:1.12;margin:14px 0 20px;}
+  .hero .rule{width:72px;height:3px;background:var(--red);margin-bottom:26px;}
+  .hero p{max-width:36em;color:var(--dim);font-size:clamp(15px,1.6vw,19px);line-height:1.9;}
+  .scrollhint{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);
+    color:var(--dim);font-size:12px;letter-spacing:.3em;animation:bob 2s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+  /* ---------- 全屏图章节 ---------- */
+  .photosec{
+    min-height:72vh;display:flex;align-items:center;justify-content:center;text-align:center;
+    background-size:cover;background-position:center;
+  }
+  .photosec .inner{max-width:760px;padding:0 24px;
+    background:rgba(16,18,26,.55);backdrop-filter:blur(4px);
+    border-radius:16px;padding:48px 40px;}
+  .photosec h2{font-size:clamp(26px,4vw,44px);line-height:1.4;font-weight:700;}
+  .photosec p{color:var(--dim);margin-top:16px;line-height:1.9;font-size:clamp(14px,1.4vw,17px);}
+
+  h2.sec{font-size:clamp(28px,3.6vw,46px);font-weight:700;margin:12px 0 8px;}
+  .secsub{color:var(--dim);max-width:44em;line-height:1.9;margin-top:10px;font-size:clamp(14px,1.3vw,17px);}
+  .rule{width:56px;height:3px;background:var(--red);margin:22px 0;}
+
+  /* ---------- 卡片 ---------- */
+  .grid{display:grid;gap:18px;margin-top:44px;}
+  .g4{grid-template-columns:repeat(4,1fr);}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  @media(max-width:900px){.g4,.g3{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.g4,.g3,.g2{grid-template-columns:1fr;}}
+  .card{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:26px 24px;}
+  .card .num{font-size:13px;letter-spacing:.2em;color:var(--gold);margin-bottom:12px;}
+  .card h3{font-size:19px;margin-bottom:10px;}
+  .card p{font-size:14px;color:var(--dim);line-height:1.8;}
+  .card b{color:var(--ink);}
+
+  .quote{border-left:3px solid var(--red);padding:4px 0 4px 22px;margin-top:44px;
+    font-size:clamp(18px,2vw,26px);line-height:1.7;}
+  .quote small{display:block;font-size:13px;color:var(--dim);margin-top:10px;letter-spacing:.08em;}
+
+  /* ---------- 流程 ---------- */
+  .flow{display:flex;align-items:stretch;gap:0;margin-top:44px;flex-wrap:wrap;}
+  .flow .step{flex:1;min-width:180px;background:rgba(255,255,255,.04);
+    border:1px solid var(--line);border-radius:14px;padding:22px 18px;text-align:center;}
+  .flow .step b{display:block;font-size:17px;margin-bottom:8px;}
+  .flow .step span{font-size:13px;color:var(--dim);line-height:1.7;}
+  .flow .arrow{align-self:center;color:var(--gold);font-size:22px;padding:10px;}
+  @media(max-width:900px){.flow{flex-direction:column;}.flow .arrow{transform:rotate(90deg);}}
+
+  /* ---------- 用户 ---------- */
+  .avatar{width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.05);
+    border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
+    font-size:27px;margin-bottom:14px;}
+  .ucard{display:flex;flex-direction:column;align-items:center;text-align:center;}
+  .plat{display:flex;gap:20px;align-items:flex-start;margin-top:18px;
+    background:rgba(217,164,65,.06);border:1px solid rgba(217,164,65,.35);
+    border-radius:14px;padding:26px 24px;}
+  .plat .avatar{flex:none;margin:0;background:rgba(217,164,65,.1);border-color:rgba(217,164,65,.4);}
+  .plat .num{font-size:13px;letter-spacing:.2em;color:var(--gold);margin-bottom:8px;}
+  .plat h3{font-size:19px;margin-bottom:8px;}
+  .plat p{font-size:14px;color:var(--dim);line-height:1.8;}
+
+  /* ---------- 网址入口 ---------- */
+  .sitelink{display:inline-flex;align-items:center;gap:8px;margin-top:28px;padding:11px 24px;
+    border:1px solid var(--gold);border-radius:999px;color:var(--gold);text-decoration:none;
+    font-size:14px;letter-spacing:.1em;transition:all .3s;}
+  .sitelink:hover{background:var(--gold);color:#14161f;}
+
+  /* ---------- 手机演示 ---------- */
+  .demo{background:var(--bg2);padding:0;}
+  .demo-inner{display:grid;grid-template-columns:1fr 500px;gap:60px;max-width:1180px;margin:0 auto;padding:0 24px;}
+  @media(max-width:1020px){.demo-inner{grid-template-columns:1fr;}}
+  .steps{padding:12vh 0;}
+  .dstep{min-height:78vh;display:flex;flex-direction:column;justify-content:center;opacity:.28;
+    transition:opacity .5s ease;cursor:pointer;}
+  .dstep.active{opacity:1;}
+  .dstep .dk{font-size:12px;letter-spacing:.3em;color:var(--gold);margin-bottom:12px;}
+  .dstep h3{font-size:clamp(22px,2.4vw,30px);margin-bottom:14px;font-weight:700;}
+  .dstep h3 .solve{font-size:13px;color:var(--red);letter-spacing:.1em;margin-left:10px;font-weight:600;}
+  .dstep p{color:var(--dim);line-height:1.9;font-size:15px;max-width:30em;}
+  .dstep .mini-quote{margin-top:16px;border-left:2px solid var(--gold);padding-left:14px;
+    color:var(--ink);font-size:14px;line-height:1.8;}
+
+  .phonecol{position:relative;}
+  .phone-sticky{position:sticky;top:10vh;padding:8vh 0 12vh;display:flex;justify-content:center;}
+  .phone{
+    width:460px;max-width:86vw;aspect-ratio:64/45;
+    border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;position:relative;
+    box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 8px #262a38;
+    background:#000;
+  }
+  .phone img{width:100%;height:100%;object-fit:cover;object-position:top center;
+    transition:opacity .45s ease;opacity:1;}
+  .phone img.fading{opacity:0;}
+  .phone .toolbar{position:absolute;top:0;left:0;right:0;height:30px;z-index:2;
+    background:#262a38;display:flex;align-items:center;gap:6px;padding:0 12px;}
+  .phone .toolbar i{width:10px;height:10px;border-radius:50%;}
+  .phone .toolbar i:nth-child(1){background:#c8553d;}
+  .phone .toolbar i:nth-child(2){background:#d9a441;}
+  .phone .toolbar i:nth-child(3){background:#5a9270;}
+  .phone .toolbar .url{flex:1;margin-left:10px;height:18px;border-radius:9px;
+    background:rgba(255,255,255,.08);font-size:10.5px;color:var(--dim);
+    display:flex;align-items:center;padding:0 10px;letter-spacing:.03em;}
+  .phone .shotbox{position:absolute;top:30px;left:0;right:0;bottom:0;}
+  .phone .caption{position:absolute;left:0;right:0;bottom:0;z-index:2;
+    background:linear-gradient(0deg,rgba(10,11,17,.92),transparent);
+    padding:34px 16px 14px;font-size:12.5px;color:var(--dim);letter-spacing:.05em;}
+  .phone .caption b{color:var(--ink);}
+  .dots{position:absolute;left:50%;transform:translateX(-50%);bottom:4vh;display:flex;gap:8px;}
+  .dots i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:all .3s;}
+  .dots i.on{background:var(--red);transform:scale(1.35);}
+
+  /* ---------- 矩阵表 ---------- */
+  table.matrix{width:100%;border-collapse:collapse;margin-top:40px;font-size:15px;}
+  table.matrix th,table.matrix td{border:1px solid var(--line);padding:15px 18px;text-align:left;line-height:1.7;}
+  table.matrix th{background:rgba(255,255,255,.05);color:var(--gold);white-space:nowrap;}
+  table.matrix td{color:var(--dim);}
+  table.matrix td:first-child{color:var(--ink);font-weight:600;white-space:nowrap;}
+  @media(max-width:700px){table.matrix{display:block;overflow-x:auto;}}
+
+  ul.plain{list-style:none;margin-top:34px;}
+  ul.plain li{padding:13px 0 13px 26px;position:relative;color:var(--dim);
+    line-height:1.85;font-size:15px;border-bottom:1px dashed var(--line);}
+  ul.plain li::before{content:"";position:absolute;left:2px;top:26px;width:8px;height:8px;background:var(--red);border-radius:2px;}
+  ul.plain li b{color:var(--ink);}
+
+  footer{padding:120px 24px 90px;text-align:center;background:var(--bg2);}
+  footer .big{font-size:clamp(26px,4vw,44px);font-weight:700;}
+  footer p{color:var(--dim);margin-top:18px;font-size:14px;letter-spacing:.12em;}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Literary Pilgrimage · Trip Planner</div>
+    <h1 class="serif">我的圣地巡礼</h1>
+    <div class="rule"></div>
+    <p>知道"这里曾是故事的发生地"，就想去走一走、拍一张照，<br>让虚构的故事在现实里落地 —— 一个从作品出发的巡礼行程规划工具</p>
+    <a class="sitelink" href="https://storyypilgrim.com" target="_blank" rel="noopener">storyypilgrim.com ↗</a>
+  </div>
+  <div class="scrollhint">向下滑动 ↓</div>
+</header>
+
+<!-- ============ 为什么做 ============ -->
+<div class="photosec" style="background-image:linear-gradient(rgba(16,18,26,.45),rgba(16,18,26,.78)),url('进贤路.jpg')">
+  <div class="inner reveal">
+    <div class="kicker">Why</div>
+    <h2 class="serif">为一个故事出发</h2>
+    <p>"圣地巡礼"是内容驱动型用户的自发行为——打卡取景地、参观主题展览、重游角色旅途，寻找与文艺作品的真实连接。《繁花》带火黄河路，《开端》让厦门成为"循环之城"……在日本它已是成熟文化，在国内，它正在成为IP与现实之间新的连接方式。</p>
+  </div>
+</div>
+
+<!-- ============ 解决什么问题 ============ -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker">Pain Points</div>
+      <h2 class="sec serif">解决什么问题</h2>
+      <p class="secsub">真正规划行程时，"我想去"和"我去得了"之间隔着四件事——用户缺的不是攻略信息，而是把情怀翻译成行程的那一步。</p>
+    </div>
+    <div class="grid g4">
+      <div class="card reveal"><div class="num">01</div><h3>找点难</h3><p>书里的地点要从文字里寻找，影视取景地要逐条核对，互联网信息要多方比较才可信，人工找点费时费力。</p></div>
+      <div class="card reveal"><div class="num">02</div><h3>串线难</h3><p>打卡点确定后，路线规划缺少高效工具，同时错过附近名胜也颇为可惜。</p></div>
+      <div class="card reveal"><div class="num">03</div><h3>取舍难</h3><p>对游览时间缺少参考，计划与实际不符，不得不忍痛删减心仪的目的地。</p></div>
+      <div class="card reveal"><div class="num">04</div><h3>断档难</h3><p>从攻略到出发之间，还有购票预约等关卡，过程琐碎耗时。</p></div>
+    </div>
+    <div class="quote serif reveal">把"我想去"和"我去得了"之间的鸿沟填平。<small>我们要做一个从作品出发的巡礼行程规划工具</small></div>
+  </div>
+</section>
+
+<!-- ============ 核心功能 + 技术实现 ============ -->
+<section style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker">Solution</div>
+      <h2 class="sec serif">核心功能</h2>
+      <p class="secsub">把圣地巡礼从"手工考古"变成"一键成行"：选作品 → 选巡礼点/景点 → 自动规划路线与时间 → 衔接携程预订酒店门票。</p>
+    </div>
+    <div class="flow reveal">
+      <div class="step"><b>① 选作品</b><span>滚动 IP 墙<br>按城市 / 人物 / 地名浏览<br>或直接搜索书名</span></div>
+      <div class="arrow">→</div>
+      <div class="step"><b>② 选巡礼点</b><span>勾选打卡点<br>顺手加入附近名胜<br>点卡片看目的地详情</span></div>
+      <div class="arrow">→</div>
+      <div class="step"><b>③ 自动规划</b><span>设定日期与每日时长<br>引擎自动计算<br>逐日、逐时刻路线</span></div>
+      <div class="arrow">→</div>
+      <div class="step"><b>④ 衔接预订</b><span>生成可分享行程单<br>跳转携程预订<br>酒店与门票</span></div>
+    </div>
+    <div class="quote serif reveal">把一次巡礼旅行的前期准备，从平均数天的"信息考古"压缩到几分钟的"选择 + 确认"。<small>让"为一个故事出发"的决策成本趋近于零</small></div>
+  </div>
+</section>
+
+<!-- ============ 用户 ============ -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker">Users & Value</div>
+      <h2 class="sec serif">面向哪类用户</h2>
+    </div>
+    <div class="grid g2">
+      <div class="card ucard reveal"><div class="avatar">🎬</div><div class="num">核心用户 · 专程巡礼</div><h3>内容驱动型旅行者</h3><p>二次元爱好者、影迷、剧迷、文学读者等爱好者，自发为一部作品奔赴一座城。</p></div>
+      <div class="card ucard reveal"><div class="avatar">🧭</div><div class="num">次级用户 · 顺路拜访</div><h3>被"主题"吸引的泛旅行者</h3><p>现象级话题作品的舆论参与者、偏好历史人文主题游的文化旅行者，以及想给常规城市游"加一个主题"的轻度用户。</p></div>
+    </div>
+    <div class="plat reveal">
+      <div class="avatar">🏢</div>
+      <div>
+        <div class="num">平台侧价值</div>
+        <h3>把模糊的 IP 热爱转化为明确的旅行需求</h3>
+        <p>打通"种草 → 规划 → 预订"链路，减少用户决策时间；一次考据长期复用，一部作品沉淀为一条可持续运营的巡礼产品线。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 交互演示 ============ -->
+<section class="demo">
+  <div class="wrap" style="text-align:center;padding-top:110px">
+    <div class="reveal">
+      <div class="kicker">Live Walkthrough</div>
+      <h2 class="sec serif">产品流程</h2>
+      <p class="secsub" style="margin-left:auto;margin-right:auto;">向下滚动，或点击左侧任意步骤 —— 右侧真机截图同步切换。</p>
+    </div>
+  </div>
+  <div class="demo-inner">
+    <div class="steps" id="steps">
+
+      <div class="dstep" data-step="01" data-img="travel-web/screenshots/01-home.png" data-cap="首页 · IP 墙与城市分组卡片">
+        <div class="dk">STEP 01 · 找作品</div>
+        <h3>找到故事的地方<span class="solve">解决"找点难"</span></h3>
+        <p>首页支持按城市、人物、地名三种方式浏览作品线路，也可以直接搜索书名、人物或地点，实时联想。滚动 IP 墙，或点选下方的城市分组卡片——目前仓库已有 8 条线路、130 多个考据点位。</p>
+      </div>
+
+      <div class="dstep" data-step="01" data-img="travel-web/screenshots/01-city.png" data-cap="按城市浏览 · 全部线路分组">
+        <div class="dk">STEP 01 · 按城市选作品</div>
+        <h3>按城市，找到那座城的故事</h3>
+        <p>从 IP 墙下方的城市分组卡片进入"全部线路"页：上海有《繁花》《爱情神话》，北京有《三体》《龙族》《我与地坛》，伦敦有《哈利波特》……按城市浏览，点进任意一条，考据点位直接上地图。</p>
+      </div>
+
+      <div class="dstep" data-step="01" data-img="travel-web/screenshots/02-search.png" data-cap="搜索联想 · 书名 / 人物 / 地名">
+        <div class="dk">STEP 01 · 搜索直达</div>
+        <h3>搜"黄河路"，"繁花·上海"直接出来</h3>
+        <p>搜选"繁花·上海"，黄河路、进贤路、国泰电影院这些考据过的点位直接出现在地图上。每个巡礼点包含坐标、片区、引文、出处、停留时长、机位贴士，无需翻阅任何攻略。</p>
+      </div>
+
+      <div class="dstep" data-step="02" data-img="travel-web/screenshots/04-customize-selected.png" data-cap="定制页 · 勾选巡礼点与名胜">
+        <div class="dk">STEP 02 · 选点</div>
+        <h3>把路线和时间交给引擎<span class="solve">解决"串线难"</span></h3>
+        <p>规划页支持输入出行日期区间和每天可用时长，勾选打卡地点与附近名胜，中途可点击卡片了解目的地信息。巡礼点与城市名胜进同一张行程单，"专程巡礼"与"顺路旅游"两不误。</p>
+      </div>
+
+      <div class="dstep" data-step="03" data-img="travel-web/screenshots/06-drawer.png" data-cap="取舍协商面板 · 每个被砍的点都有理由">
+        <div class="dk">STEP 03 · 取舍 ⭐ 全场最有人味的交互</div>
+        <h3>和系统商量着取舍<span class="solve">解决"取舍难"</span></h3>
+        <p>时间装不下时，弹出建议舍弃清单，每个被砍的点都附算术理由和"能省多久"；用户可勾选保留或放弃，系统实时重算；时间有富余则反过来主动推荐追加景点。最终行程决定权由用户所有。</p>
+        <div class="mini-quote">"朱家角单独在远郊，往返 4.5 小时，放弃能省 6.5 小时。"</div>
+      </div>
+
+      <div class="dstep" data-step="04" data-img="travel-web/screenshots/07-result-map.png" data-cap="结果页 · 逐日逐时刻路线地图">
+        <div class="dk">STEP 04 · 生成</div>
+        <h3>一键生成，逐日、逐时刻</h3>
+        <p>输入完毕点击生成行程，引擎自动计算逐日、逐时刻的路线。"装得下 / 装不下"是可计算的问题，不是 AI 玄学。</p>
+      </div>
+
+      <div class="dstep" data-step="05" data-img="travel-web/screenshots/08-poi-card.png" data-cap="地图浮层 · 引文 + 出处 + 机位贴士">
+        <div class="dk">STEP 05 · 看懂每个点</div>
+        <h3>点一下标点，书里的话出现在眼前</h3>
+        <p>地图上点击任意巡礼点，悬浮卡展示情节、原文引用与出处、机位贴士——引文逐字来自原著/剧集并标注出处，正是巡礼者最想要的那一下心跳。</p>
+      </div>
+
+      <div class="dstep" data-step="06" data-img="travel-web/screenshots/09-detail.png" data-cap="POI 详情页 · 深度考据信息">
+        <div class="dk">STEP 06 · 深度了解</div>
+        <h3>每个点位，都经得起核对</h3>
+        <p>详情页沉淀完整考据：坐标、片区、原文引文与出处章节、停留时长建议、拍摄机位。点位库逐点经过内容组人工考据，绝不"AI 编故事"。</p>
+      </div>
+
+      <div class="dstep" data-step="07" data-img="travel-web/screenshots/10-day.png" data-cap="日程视图 · 逐日逐时刻行程单">
+        <div class="dk">STEP 07 · 日程</div>
+        <h3>每天几点出发、先到哪、停留多久</h3>
+        <p>日程视图把引擎结果逐日排开：每天几点出发、先到哪、停留多久，清清楚楚。</p>
+      </div>
+
+      <div class="dstep" data-step="08" data-img="travel-web/screenshots/11-export.png" data-cap="行程导出 · 可保存分享，跳转携程预订">
+        <div class="dk">STEP 08 · 成行</div>
+        <h3>从行程到出发，一键闭环<span class="solve">解决"断档难"</span></h3>
+        <p>行程页支持一键生成文字版/图片行程单，可保存分享；同时设置按钮直接跳转携程完成酒店、门票预订，实现从巡礼规划到实际出行的闭环。</p>
+      </div>
+
+    </div>
+
+    <div class="phonecol">
+      <div class="phone-sticky">
+        <div class="phone">
+          <div class="toolbar"><i></i><i></i><i></i><span class="url">storyypilgrim.com</span></div>
+          <div class="shotbox">
+            <img id="shot" src="travel-web/screenshots/01-home.png" alt="产品截图">
+          </div>
+          <div class="caption" id="cap"><b>STEP 01</b> · 首页 IP 墙</div>
+        </div>
+        <div class="dots" id="dots"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 三处创新 ============ -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker">Why Us</div>
+      <h2 class="sec serif">三处创新</h2>
+    </div>
+    <div class="grid g3">
+      <div class="card reveal"><div class="num">创新 ①</div><h3>考据驱动，绝不"AI 编故事"</h3><p>点位库逐点经过内容组成员考据，引文必须逐字来自原著/剧集并标注出处，保证巡礼内容的可信度。</p></div>
+      <div class="card reveal"><div class="num">创新 ②</div><h3>规划引擎可复利</h3><p>引擎将巡礼规划建模为带时间硬约束的多日协同优化问题：片区聚类后以最近邻 + 2-opt 逼近路线最优，按每日可用时长做排程，复用性强。国内外影视 / 严肃文学 / 网文等作品通用。</p></div>
+      <div class="card reveal"><div class="num">创新 ③</div><h3>智能取舍的可解释</h3><p>按地点重要度、片区距离、可用时间动态取舍，并把理由摊开给用户看；时间有富余则主动建议追加。</p></div>
+    </div>
+    <table class="matrix reveal">
+      <tr><th>题材</th><th>代表线路</th></tr>
+      <tr><td>电视剧</td><td>繁花·上海 / 开端·厦门 / 去有风的地方·大理 / 潜伏·天津</td></tr>
+      <tr><td>网文 / 科幻</td><td>盗墓笔记·杭州 / 龙族·北京·日本 / 三体·北京</td></tr>
+      <tr><td>严肃文学</td><td>我与地坛·北京</td></tr>
+      <tr><td>海外 IP</td><td>哈利波特·伦敦</td></tr>
+    </table>
+    <ul class="plain reveal">
+      <li><b>巡礼不脱离旅行</b>：每条线路同步混入当地代表性景点，巡礼点与城市景点进同一张行程单，"专程巡礼"与"顺路旅游"两不误；</li>
+      <li><b>需求可持续沉淀</b>：首页对未收录作品保留"想去这本书？"许愿位，收集真实需求反哺内容排期。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 愿景 ============ -->
+<div class="photosec" style="background-image:linear-gradient(rgba(16,18,26,.5),rgba(16,18,26,.85)),url('故宫.jpg');min-height:88vh">
+  <div class="inner reveal">
+    <div class="kicker">Vision</div>
+    <h2 class="serif">让虚构的故事，在现实里落地</h2>
+    <p>从《繁花》上海、《盗墓笔记》杭州、《三体》北京到《徐霞客游记》桂林——任何一部被热爱的作品，都值得一条通往现实的路线。</p>
+  </div>
+</div>
+
+<footer>
+  <div class="big serif">我的圣地巡礼</div>
+  <p>把热爱翻译成行程 · LITERARY PILGRIMAGE TRIP PLANNER</p>
+  <p style="margin-top:14px"><a class="sitelink" style="margin-top:0" href="https://storyypilgrim.com" target="_blank" rel="noopener">线上体验 → storyypilgrim.com ↗</a></p>
+</footer>
+
+<script>
+  /* 渐显 */
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  /* 手机演示：滚动切换 */
+  const steps=[...document.querySelectorAll('.dstep')];
+  const img=document.getElementById('shot');
+  const cap=document.getElementById('cap');
+  const dotsBox=document.getElementById('dots');
+  let curIdx=0, switching=false;
+
+  steps.forEach((s,i)=>{
+    const d=document.createElement('i');
+    d.onclick=()=>{s.scrollIntoView({behavior:'smooth',block:'center'});activate(i);};
+    dotsBox.appendChild(d);
+  });
+  const dots=[...dotsBox.children];
+
+  function activate(i){
+    if(i===curIdx)return;
+    curIdx=i;
+    steps.forEach((s,j)=>s.classList.toggle('active',j===i));
+    dots.forEach((d,j)=>d.classList.toggle('on',j===i));
+    const src=steps[i].dataset.img, text=steps[i].dataset.cap;
+    const num=steps[i].dataset.step||String(i+1).padStart(2,'0');
+    img.classList.add('fading');
+    setTimeout(()=>{
+      img.src=src;
+      img.onload=()=>{img.classList.remove('fading');switching=false;};
+      /* 缓存过的图片 onload 不触发 */
+      if(img.complete)img.classList.remove('fading');
+    },180);
+    cap.innerHTML='<b>STEP '+num+'</b> · '+text;
+  }
+  const sio=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting){
+        const i=steps.indexOf(e.target);
+        if(Math.abs(i-curIdx)>=0)activate(i);
+      }
+    });
+  },{rootMargin:'-42% 0px -42% 0px'});
+  steps.forEach(s=>sio.observe(s));
+  activate(0);
+</script>
+</body>
+</html>
