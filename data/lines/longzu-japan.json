@@ -99,6 +99,10 @@
       "tips": "150 米与 250 米两个瞭望台分开买票。",
       "skipNote": "全线最重的一场戏，不建议放弃。",
       "realPhoto": "img/jp-ip-01.jpg",
+      "photos": [
+        "img/jp-ip-01.jpg",
+        "img/jp-ip-01-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "quotes": [
         {
@@ -125,6 +129,11 @@
       "tips": "原宿站下车，从南参道进。",
       "skipNote": "东京三大神宫之一，顺路也要看。",
       "realPhoto": "img/jp-ip-02.jpg",
+      "photos": [
+        "img/jp-ip-02.jpg",
+        "img/jp-ip-02-2.jpg",
+        "img/jp-ip-02-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "quotes": [
         {
@@ -151,6 +160,11 @@
       "tips": "夜里去最热闹，注意安全和随身物品。",
       "skipNote": "街区性质的点，可换成新宿御苑。",
       "realPhoto": "img/jp-ip-03.jpg",
+      "photos": [
+        "img/jp-ip-03.jpg",
+        "img/jp-ip-03-2.jpg",
+        "img/jp-ip-03-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "quotes": [
         {
@@ -165,8 +179,8 @@
       "poiId": "jp-ip-04",
       "lineId": "longzu-japan",
       "type": "ip",
-      "name": "浅草寺 · 雷门",
-      "alias": "",
+      "name": "浅草寺",
+      "alias": "雷门",
       "lng": 139.7955265,
       "lat": 35.7134032,
       "cluster": "台东·浅草",
@@ -177,6 +191,12 @@
       "tips": "雷门—仲见世—本堂一条直线走完。",
       "skipNote": "和仲见世商店街可以合并成一次。",
       "realPhoto": "img/jp-ip-04.jpg",
+      "photos": [
+        "img/jp-ip-04.jpg",
+        "img/jp-ip-04-2.jpg",
+        "img/jp-ip-04-3.jpg",
+        "img/jp-ip-04-4.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "quotes": [
         {
@@ -203,6 +223,10 @@
       "tips": "电器街口出站，主街向北逛。",
       "skipNote": "购物时间长，时间紧可只走过主街。",
       "realPhoto": "img/jp-ip-05.jpg",
+      "photos": [
+        "img/jp-ip-05.jpg",
+        "img/jp-ip-05-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "quotes": [
         {
@@ -229,6 +253,11 @@
       "tips": "东京站坐新干线约 40 分钟，建议住一晚。",
       "skipNote": "离东京远，只有两天就优先砍它。",
       "realPhoto": "img/jp-ip-06.jpg",
+      "photos": [
+        "img/jp-ip-06.jpg",
+        "img/jp-ip-06-2.jpg",
+        "img/jp-ip-06-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "quotes": [
         {
@@ -255,6 +284,12 @@
       "tips": "周末下午中央通会封路变成步行街。",
       "skipNote": "纯购物点，随时可去掉。",
       "realPhoto": "img/jp-ip-07.jpg",
+      "photos": [
+        "img/jp-ip-07.jpg",
+        "img/jp-ip-07-2.jpg",
+        "img/jp-ip-07-3.jpg",
+        "img/jp-ip-07-4.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "quotes": [
         {
@@ -281,6 +316,11 @@
       "tips": "百合海鸥号到台场站，夜景最好。",
       "skipNote": "游乐场耗时长，赶时间就砍。",
       "realPhoto": "img/jp-ip-08.jpg",
+      "photos": [
+        "img/jp-ip-08.jpg",
+        "img/jp-ip-08-2.jpg",
+        "img/jp-ip-08-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "quotes": [
         {
@@ -306,6 +346,11 @@
       "durationRush": 60,
       "intro": "634 米的电波塔，350 米与 450 米两层观景台。",
       "realPhoto": "img/jp-sp-01.jpg",
+      "photos": [
+        "img/jp-sp-01.jpg",
+        "img/jp-sp-01-2.jpg",
+        "img/jp-sp-01-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -323,6 +368,10 @@
       "durationRush": 60,
       "intro": "东京老牌公园，博物馆群与樱花大道都在这儿。",
       "realPhoto": "img/jp-sp-02.jpg",
+      "photos": [
+        "img/jp-sp-02.jpg",
+        "img/jp-sp-02-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -340,6 +389,11 @@
       "durationRush": 30,
       "intro": "雷门到浅草寺本堂的参道，小吃与伴手礼集中。",
       "realPhoto": "img/jp-sp-03.jpg",
+      "photos": [
+        "img/jp-sp-03.jpg",
+        "img/jp-sp-03-2.jpg",
+        "img/jp-sp-03-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -357,6 +411,11 @@
       "durationRush": 30,
       "intro": "世界最繁忙的十字路口，看人潮的经典机位。",
       "realPhoto": "img/jp-sp-04.jpg",
+      "photos": [
+        "img/jp-sp-04.jpg",
+        "img/jp-sp-04-2.jpg",
+        "img/jp-sp-04-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -374,6 +433,11 @@
       "durationRush": 45,
       "intro": "旧啤酒厂改造的商业区，冬天的灯饰很出名。",
       "realPhoto": "img/jp-sp-05.jpg",
+      "photos": [
+        "img/jp-sp-05.jpg",
+        "img/jp-sp-05-2.jpg",
+        "img/jp-sp-05-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -391,6 +455,11 @@
       "durationRush": 45,
       "intro": "新宿中心的大型庭院，春樱与秋枫都出名。",
       "realPhoto": "img/jp-sp-06.jpg",
+      "photos": [
+        "img/jp-sp-06.jpg",
+        "img/jp-sp-06-2.jpg",
+        "img/jp-sp-06-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -408,6 +477,11 @@
       "durationRush": 30,
       "intro": "两百多家小酒馆挤成的窄巷，夜里最有味道。",
       "realPhoto": "img/jp-sp-07.jpg",
+      "photos": [
+        "img/jp-sp-07.jpg",
+        "img/jp-sp-07-2.jpg",
+        "img/jp-sp-07-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -425,6 +499,10 @@
       "durationRush": 45,
       "intro": "皇居对公众开放的部分，江户城遗迹尚存。",
       "realPhoto": "img/jp-sp-08.jpg",
+      "photos": [
+        "img/jp-sp-08.jpg",
+        "img/jp-sp-08-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -442,6 +520,11 @@
       "durationRush": 45,
       "intro": "老筑地市场外的商店街，海鲜饭与玉子烧集中。",
       "realPhoto": "img/jp-sp-09.jpg",
+      "photos": [
+        "img/jp-sp-09.jpg",
+        "img/jp-sp-09-2.jpg",
+        "img/jp-sp-09-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -459,6 +542,11 @@
       "durationRush": 30,
       "intro": "红砖车站建筑，地下街与丸之内商圈都从这里起。",
       "realPhoto": "img/jp-sp-10.jpg",
+      "photos": [
+        "img/jp-sp-10.jpg",
+        "img/jp-sp-10-2.jpg",
+        "img/jp-sp-10-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -476,23 +564,10 @@
       "durationRush": 45,
       "intro": "东京塔旁的净土宗古刹，德川家的灵庙所在地。",
       "realPhoto": "img/jp-sp-11.jpg",
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
-      "ticket": "",
-      "openHours": ""
-    },
-    {
-      "poiId": "jp-sp-12",
-      "lineId": "longzu-japan",
-      "type": "classic",
-      "name": "台场海滨公园",
-      "lng": 139.7773535,
-      "lat": 35.631084,
-      "cluster": "港区·台场",
-      "popularity": 4,
-      "durationNormal": 120,
-      "durationRush": 60,
-      "intro": "人工海滨公园，能同时拍到彩虹大桥与自由女神像。",
-      "realPhoto": "img/jp-sp-12.jpg",
+      "photos": [
+        "img/jp-sp-11.jpg",
+        "img/jp-sp-11-2.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -510,6 +585,11 @@
       "durationRush": 150,
       "intro": "富士五湖之一，湖畔是看富士山倒影的名所。",
       "realPhoto": "img/jp-sp-13.jpg",
+      "photos": [
+        "img/jp-sp-13.jpg",
+        "img/jp-sp-13-2.jpg",
+        "img/jp-sp-13-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -527,6 +607,11 @@
       "durationRush": 120,
       "intro": "箱根火山湖，海盗船与箱根神社都在水边。",
       "realPhoto": "img/jp-sp-14.jpg",
+      "photos": [
+        "img/jp-sp-14.jpg",
+        "img/jp-sp-14-2.jpg",
+        "img/jp-sp-14-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
@@ -544,6 +629,11 @@
       "durationRush": 90,
       "intro": "横滨湾边的现代港区，夜景与中华街相邻。",
       "realPhoto": "img/jp-sp-15.jpg",
+      "photos": [
+        "img/jp-sp-15.jpg",
+        "img/jp-sp-15-2.jpg",
+        "img/jp-sp-15-3.jpg"
+      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
       "openHours": ""
