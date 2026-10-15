@@ -3,9 +3,16 @@ import { computed, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import RouteCard from '../components/RouteCard.vue'
 import IpWall from '../components/IpWall.vue'
+import WishForm from '../components/WishForm.vue'
 import * as api from '../api/adapter'
 
 const router = useRouter()
+const wishOpen = ref(false)
+const wishIp = ref('')
+function openWish(ip = '') { wishIp.value = ip; wishOpen.value = true }
+const searching = ref(false)
+const searchError = ref(false)
+let searchVersion = 0
 const keyword = ref('')
 const suggestions = ref([])
 const columns = ref({ city: [] })
@@ -23,12 +30,21 @@ const wallLines = computed(() => {
     .filter((l) => l?.ipId && !seen.has(l.ipId) && seen.add(l.ipId))
 })
 
-// 输入即联想（简单防抖）
+// 丢弃过期请求，避免搜索中闪现空结果。
 let timer = null
 watch(keyword, (kw) => {
   clearTimeout(timer)
+  const version = ++searchVersion
+  suggestions.value = []
+  searchError.value = false
+  searching.value = !!kw.trim()
+  if (!kw.trim()) return
   timer = setTimeout(async () => {
-    suggestions.value = kw.trim() ? await api.search(kw) : []
+    try {
+      const result = await api.search(kw)
+      if (version === searchVersion) suggestions.value = result
+    } catch { if (version === searchVersion) searchError.value = true }
+    finally { if (version === searchVersion) searching.value = false }
   }, 200)
 })
 
@@ -49,9 +65,12 @@ function go(lineId) {
           placeholder="搜书名 / 人物 / 地名 / 城市，如：繁花、阿宝、黄河路"
         />
         <div v-if="keyword.trim()" class="dropdown">
-          <p v-if="!suggestions.length" class="none">
-            抱歉，暂时未收录该圣地巡礼内容
-          </p>
+          <p v-if="searching" class="none" role="status">搜索中…</p>
+          <p v-else-if="searchError" class="none" role="alert">搜索暂不可用，请稍后重试</p>
+          <div v-else-if="!suggestions.length" class="none">
+            <p>暂无相关路线</p>
+            <button class="wish-link" @click="openWish(keyword.trim())">去许愿 →</button>
+          </div>
           <button
             v-for="l in suggestions"
             :key="l.lineId"
@@ -65,7 +84,9 @@ function go(lineId) {
           </button>
         </div>
       </div>
+      <div class="wish-entry"><div><strong>巡礼许愿</strong><span>留下你期待的下一站</span></div><button @click="openWish()">去许愿 →</button></div>
     </section>
+    <WishForm v-if="wishOpen" :initial-ip="wishIp" @close="wishOpen = false" />
 
     <IpWall :lines="wallLines" />
 
@@ -90,6 +111,11 @@ function go(lineId) {
 </template>
 
 <style scoped>
+.wish-entry{max-width:480px;margin:18px auto 0;padding:15px 20px;border:1px solid var(--line);border-radius:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(255,255,255,.76);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 3px 12px rgba(43,43,43,.025);transition:transform .2s ease,box-shadow .2s ease;text-align:left}
+@media(hover:hover){.wish-entry:hover{transform:translateY(-2px) scale(1.015);box-shadow:0 8px 24px rgba(43,43,43,.055)}}
+.wish-entry:focus-within{box-shadow:0 8px 24px rgba(43,43,43,.055)}
+@media(prefers-reduced-motion:reduce){.wish-entry{transition:none}.wish-entry:hover{transform:none}}
+.wish-entry strong{display:block;font-size:15px}.wish-entry span{font-size:12px;color:var(--ink-2)}.wish-entry button,.wish-link{color:var(--brand);font-size:14px;white-space:nowrap}.wish-link{margin-top:8px}
 .hero {
   text-align: center;
   padding: 48px 0 24px;

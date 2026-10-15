@@ -6,3 +6,6 @@ dist
 # 测试截图产物 / 临时图片账本
 test-output/
 public/img/credits.tsv
+
+# Private wish submissions
+var/
