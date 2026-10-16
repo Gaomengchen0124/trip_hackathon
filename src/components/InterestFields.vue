@@ -2,9 +2,9 @@
 import { computed,ref } from 'vue'
 import { dictionaries } from '../recommendation/options.mjs'
 const model=defineModel({required:true})
-const props=defineProps({works:{type:Array,default:()=>[]},showWorks:{type:Boolean,default:true}})
+const props=defineProps({works:{type:Array,default:()=>[]},showWorks:{type:Boolean,default:true},groups:{type:Array,default:()=>['kinds','themes','moods']}})
 const search=ref('')
-const groups=[['kinds','内容类型'],['themes','故事题材'],['moods','故事氛围']]
+const groups=computed(()=>[['kinds','内容类型'],['themes','故事题材'],['moods','故事氛围']].filter(([key])=>props.groups.includes(key)))
 const works=computed(()=>props.works.filter(w=>[w.name,...(w.aliases||[])].some(x=>x.toLowerCase().includes(search.value.trim().toLowerCase()))))
 function toggle(key,id){const selected=model.value[key] || [];model.value={...model.value,[key]:selected.includes(id)?selected.filter(x=>x!==id):[...selected,id].slice(0,20)}}
 </script>
