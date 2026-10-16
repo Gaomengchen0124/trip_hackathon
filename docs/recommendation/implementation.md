@@ -18,7 +18,7 @@
 2. 默认 `DEEPSEEK_MODEL=deepseek-flash`、`DEEPSEEK_BASE_URL=https://api.deepseek.com`、`DEEPSEEK_TIMEOUT_MS=20000`。模型名可按账户可用模型修改。
 3. `npm run dev:api`：现有 8787 服务承载推荐、许愿等接口。修改 Key 后重启该服务。
 4. 按原账号说明启动 `node server/auth.mjs`，使用 8788。PowerShell 本地前端为 127.0.0.1 时，先设置 `$env:AUTH_ORIGIN='http://127.0.0.1:5178'`、`$env:AUTH_LOCAL_HTTP='1'`。原有邮箱服务配置保持不变。
-账号服务必须使用本推荐分支的 `server/auth.mjs`，仅更新前端或重启 8787 不会更新 8788。匿名请求 `/api/me/interests` 应返回 401；404 表示运行的是不含兴趣接口的旧账号服务。`AUTH_ORIGIN` 必须与浏览器完整来源一致，`localhost` 与 `127.0.0.1` 不能混用。已有配置在 `server/.env.auth.local` 时，用 `node --env-file=server/.env.auth.local server/auth.mjs` 加载配置；切换工作目录时显式指向原有 `AUTH_DATA_FILE`，避免误建空账号库。升级前备份现有 SQLite 数据库。
+账号服务必须使用本推荐分支的 `server/auth.mjs`，仅更新前端或重启 8787 不会更新 8788。匿名请求 `/api/me/interests` 应返回 401；404 表示运行的是不含兴趣接口的旧账号服务。`AUTH_ORIGIN` 必须与浏览器完整来源一致；需要同时使用本项目的两个本地地址时，设置 `AUTH_ORIGIN=http://127.0.0.1:5178` 和 `AUTH_ADDITIONAL_ORIGINS=http://localhost:5178`。只接受明确配置的来源，其他域名和端口仍拒绝。已有配置在 `server/.env.auth.local` 时，用 `node --env-file=server/.env.auth.local server/auth.mjs` 加载配置；切换工作目录时显式指向原有 `AUTH_DATA_FILE`，避免误建空账号库。升级前备份现有 SQLite 数据库。
 
 5. `npm run dev -- --host 127.0.0.1 --port 5178 --strictPort`，访问 `http://127.0.0.1:5178/recommend`。端口被其他项目占用时不自动换端口或结束其他进程。
 
