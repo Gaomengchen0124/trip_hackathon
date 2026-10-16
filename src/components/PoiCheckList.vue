@@ -24,7 +24,7 @@ function bulk(select) {
   <section class="poi-list" :aria-label="title">
     <header>
       <h2>
-        {{ title }} <small>{{ count }} / {{ pois.length }}</small>
+        {{ title }} · 已选 {{ count }}/{{ pois.length }}
       </h2>
       <div class="tools">
         <button
@@ -42,6 +42,7 @@ function bulk(select) {
         </button>
       </div>
     </header>
+    <p class="selection-hint">点卡片勾选 / 取消</p>
     <div class="options">
       <PoiSelectCard
         v-for="poi in pois"
@@ -72,7 +73,10 @@ header {
   flex-wrap: wrap;
 }
 h2 {
-  font-size: 15px;
+  font-size: 23px;
+  font-family: Georgia, "Songti SC", serif;
+  font-weight: 600;
+  color: var(--ink);
 }
 small {
   font-weight: 400;
@@ -107,4 +111,10 @@ small {
   text-align: center;
   font-size: 13px;
 }
+</style>
+
+<style scoped>
+.selection-hint { color: var(--ink-2); font-size:13px; margin-bottom:14px; }
+.options { gap:12px; }
+.poi-list {padding:20px;border:1px solid var(--line);border-radius:16px;}
 </style>

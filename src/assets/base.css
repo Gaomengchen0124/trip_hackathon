@@ -1,7 +1,7 @@
 /* 设计令牌：视觉规范冻结后由设计同学在此统一调整 */
 :root {
-  --brand: #8b1e2d;        /* 主色：书卷红 */
-  --brand-light: #f6ecec;
+  --brand: #a88d58;        /* 主色：卡其棕 */
+  --brand-light: #f3eddf;
   --ink: #2b2b2b;
   --ink-2: #6b6b6b;
   --line: #e5e0d8;
@@ -13,7 +13,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
   color: var(--ink);
   background: var(--bg);
   line-height: 1.6;
@@ -31,11 +31,11 @@ input, select { font: inherit; }
   display: inline-block;
   padding: 10px 28px;
   border-radius: 999px;
-  background: var(--brand);
-  color: #fff;
+  background: #e4d5b7;
+  color: #493d29;
   font-size: 15px;
 }
-.btn:disabled { background: #c9b8ba; cursor: not-allowed; }
+.btn:disabled { background: #d9cfbc; cursor: not-allowed; }
 .btn-ghost {
   display: inline-block;
   padding: 10px 28px;
@@ -47,3 +47,6 @@ input, select { font: inherit; }
 }
 
 .page { flex: 1; width: 100%; max-width: 1080px; margin: 0 auto; padding: 20px 16px 48px; }
+
+/* 与账号演示页统一的标题字体。 */
+h1, h2, h3 { font-family: Georgia, "Songti SC", serif; font-weight: 600; }

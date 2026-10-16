@@ -9,3 +9,13 @@ public/img/credits.tsv
 
 # Private wish submissions
 var/
+
+# Server-only credentials and SQLite sidecars
+.env
+.env.*
+!.env.example
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite-journal
+
+!server/.env.auth.example

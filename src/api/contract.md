@@ -191,3 +191,16 @@ plan(params: {
 
 远郊点位（迪士尼、朱家角、环球影城、古北水镇、富士山）单独成片区，
 砍掉它们能省一整个往返，所以会被优先建议放弃——这是取舍抽屉最好看的一幕。
+
+
+## 点位投稿（独立持久化服务）
+
+详见《路线介绍与点位投稿.md》。介绍页复用 getLineDetail，不更改原有规划协议。
+
+GET /api/places?q=...&city=...&lineId=... → {results:[{name,address,lat,lng,source,existing?}],notice}
+
+POST /api/poi-submissions → {id,status}，请求含 requestId、lineId、type(ip/classic)、place{name,address,lat,lng,source}、intro、locationDetail、tips、alias、scene、relation、edition、chapter、excerpt、source、confirmed、photos(JPEG data URL 数组)。IP 点的 scene、relation、edition 必填；照片及说明两类都必填。
+
+团队 GET /api/poi-submissions、GET /api/poi-submissions/:id/photos/:index、PATCH /api/poi-submissions/:id 使用 Bearer 团队密钥。PATCH {status,reviewNote}，status 为待审核/待收录/需补充/不收录，待收录不等于正式发布。
+
+地址搜索默认使用 Photon 公共服务；服务不可用返回 503，空结果为 200 results:[]。GET /api/places/reverse?lat=...&lng=...&city=...&lineId=... 返回 {place,nearby,notice}；坐标统一为 WGS84。Photon 候选地址基于 OSM；门牌无精确结果时返回真实道路候选，并标记 approximate:true，提示用户地图确认与补充具体位置。

@@ -49,14 +49,13 @@ watch(keyword, (kw) => {
 })
 
 function go(lineId) {
-  router.push(`/customize/${lineId}`)
+  router.push(`/line/${lineId}`)
 }
 </script>
 
 <template>
   <div class="page">
     <section class="hero">
-      <h1>我的圣地巡礼</h1>
       <p class="slogan">循着文字与光影的足迹，赴一场现实的朝圣。</p>
 
       <div class="searchbox">
@@ -118,13 +117,18 @@ function go(lineId) {
 .wish-entry strong{display:block;font-size:15px}.wish-entry span{font-size:12px;color:var(--ink-2)}.wish-entry button,.wish-link{color:var(--brand);font-size:14px;white-space:nowrap}.wish-link{margin-top:8px}
 .hero {
   text-align: center;
-  padding: 48px 0 24px;
+  padding: 20px 0 24px;
 }
 h1 {
   font-size: 30px;
   letter-spacing: 4px;
 }
 .slogan {
+  font-family: Georgia, "Songti SC", "STSong", serif;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  line-height: 1.9;
   color: var(--ink-2);
   margin: 8px 0 24px;
 }

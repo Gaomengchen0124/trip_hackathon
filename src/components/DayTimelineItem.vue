@@ -17,9 +17,9 @@ const cover = computed(() => poiCover(props.poi))
       :aria-label="`在地图查看${poi?.name || item.poiId}`"
       @click="emit('locate', item.poiId)"
     >
+      <span class="time"><b>{{ item.arrive || '待定' }}–{{ item.leave || '待定' }}</b><small>{{ item.legMinutes ? `路上 ${item.legMinutes} 分钟` : item.order === 1 ? '起点' : '下一站' }}</small></span>
       <span class="cover">
-        <PhotoFrame :src="cover" :alt="poi?.name || ''" ratio="16 / 10" />
-        <span class="number">D{{ day }}-{{ item.order }}</span>
+        <PhotoFrame :src="cover" :alt="poi?.name || ''" ratio="1 / 1" />
       </span>
       <span class="body">
         <strong>{{ poi?.name || '景点信息待补充' }}</strong>
@@ -41,18 +41,21 @@ const cover = computed(() => poiCover(props.poi))
   display: flex;
   min-width: 0;
   /* 一天只有两三站时不要让封面图被拉得过大 */
-  max-width: 420px;
+  max-width: none;
 }
 button {
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
   text-align: left;
-  padding: 0;
-  border: 1px solid var(--line);
+  padding: 14px 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
   border-radius: 12px;
   overflow: hidden;
-  background: var(--bg);
+  background: transparent;
 }
 button:hover {
   background: var(--brand-light);
@@ -61,24 +64,18 @@ button:focus-visible {
   outline: 2px solid var(--brand);
   outline-offset: 2px;
 }
+.time { width:110px;flex-shrink:0;font-size:13px;padding-left:8px; }
+.time b {display:block;}
 .cover {
+  width:84px;
+  flex-shrink:0;
   position: relative;
   display: block;
 }
-.number {
-  position: absolute;
-  left: 8px;
-  top: 8px;
-  padding: 2px 8px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.9);
-  color: var(--brand);
-  font-size: 11px;
-  font-weight: 600;
-}
 .body {
   display: block;
-  padding: 10px 12px 12px;
+  padding: 0 8px 0 0;
+  min-width: 0;
 }
 strong {
   display: block;
@@ -103,4 +100,5 @@ small {
   font-size: 11px;
   color: var(--ink-2);
 }
+@media(max-width:480px){button{gap:8px;flex-wrap:wrap;}.time{width:100%;padding-left:0;}.cover{width:68px;}.body{flex:1;}}
 </style>

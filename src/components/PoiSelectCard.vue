@@ -1,11 +1,14 @@
 <script setup>
-import { TIER_LABELS, formatMinutes } from '../utils/travel-ui'
-defineProps({
+import { computed } from 'vue'
+import PhotoFrame from './ui/PhotoFrame.vue'
+import { poiCover, formatMinutes } from '../utils/travel-ui'
+const props = defineProps({
   poi: { type: Object, required: true },
   checked: Boolean,
   disabled: Boolean
 })
 const emit = defineEmits(['toggle'])
+const cover = computed(() => poiCover(props.poi))
 </script>
 <template>
   <label class="poi-option" :class="{ selected: checked, disabled }">
@@ -16,16 +19,11 @@ const emit = defineEmits(['toggle'])
       :aria-label="`选择${poi.name}`"
       @change="emit('toggle', poi.poiId)"
     />
-    <span class="content"
-      ><span class="headline"
-        ><strong>{{ poi.name }}</strong
-        ><span class="tag">{{
-          poi.type === 'ip' ? TIER_LABELS[poi.tier] || '圣地巡礼' : '其他知名景点'
-        }}</span></span
-      ><span class="meta"
-        >{{ poi.cluster }} · {{ formatMinutes(poi.durationNormal) }}</span
-      ></span
-    >
+    <span class="photo"><PhotoFrame :src="cover" :alt="poi.name" ratio="4 / 3" /></span>
+    <span class="content">
+      <strong>{{ poi.name }}</strong>
+      <span class="meta">{{ poi.cluster }} · {{ formatMinutes(poi.durationNormal) }}</span>
+    </span>
   </label>
 </template>
 <style scoped>
@@ -33,17 +31,18 @@ const emit = defineEmits(['toggle'])
   display: flex;
   gap: 12px;
   align-items: center;
-  min-height: 88px;
-  padding: 14px;
+  min-height: 104px;
+  position: relative;
+  padding: 12px;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 16px;
   background: #fff;
   cursor: pointer;
 }
 .poi-option.selected {
   border-color: var(--brand);
   background: var(--brand-light);
-  box-shadow: inset 3px 0 var(--brand);
+  box-shadow: inset 0 0 0 1px var(--brand);
 }
 .poi-option:focus-within {
   outline: 2px solid var(--brand);
@@ -54,6 +53,8 @@ const emit = defineEmits(['toggle'])
   cursor: wait;
 }
 input {
+  position: absolute;
+  opacity: 0;
   accent-color: var(--brand);
   width: 18px;
   height: 18px;
@@ -70,7 +71,8 @@ input {
   flex-wrap: wrap;
 }
 strong {
-  font-size: 14px;
+  display: block;
+  font-size: 16px;
   overflow-wrap: anywhere;
 }
 .tag {
@@ -85,6 +87,10 @@ strong {
   display: block;
   margin-top: 5px;
   color: var(--ink-2);
-  font-size: 12px;
+  font-size: 13px;
 }
+.photo {display:block;width:88px;flex-shrink:0;border-radius:10px;overflow:hidden;}
+.content {text-align:center;}
+.meta {line-height:1.7;overflow-wrap:anywhere;}
+@media(max-width:380px){.photo{width:72px;}.poi-option{gap:10px;}strong{font-size:15px;}}
 </style>

@@ -1,3 +1,5 @@
+import './env.mjs'
+import { createPoiHandler } from './poi-submissions.mjs'
 import { createServer } from 'node:http'
 import { mkdir, readFile, appendFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
@@ -21,7 +23,9 @@ export async function createWishServer({ file = resolve('var/wishes.jsonl'), adm
   try { for (const line of (await readFile(file,'utf8')).split('\n').filter(Boolean)) { const row = JSON.parse(line); records.set(row.requestId,row) } } catch(e) { if (e.code !== 'ENOENT') throw e }
   let queue = Promise.resolve()
   const limits = new Map()
+  const poiHandler = await createPoiHandler({ directory: resolve(dirname(file), 'poi-submissions'), adminToken, allowedOrigins })
   return createServer(async (req,res) => {
+    if (await poiHandler(req,res)) return
     const reply = (code,body) => { res.writeHead(code, { 'Content-Type':'application/json; charset=utf-8', 'Cache-Control':'no-store', 'X-Content-Type-Options':'nosniff' }); res.end(JSON.stringify(body)) }
     const path = new URL(req.url,'http://localhost').pathname
     if (path === '/api/wishes' && req.method === 'POST') {

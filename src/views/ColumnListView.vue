@@ -15,7 +15,7 @@ const title = computed(() => NAMES[key.value] || '栏目')
 api.listColumns().then((c) => (columns.value = c))
 
 function go(lineId) {
-  router.push(`/customize/${lineId}`)
+  router.push(`/line/${lineId}`)
 }
 </script>
 

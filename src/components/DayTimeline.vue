@@ -19,9 +19,12 @@ function total(day) {
   <div class="timeline">
     <section v-for="day in days" :key="day.day" class="day">
       <header>
-        <h2>Day {{ day.day }}</h2>
+        <h2>第 {{ day.day }} 天 <small>{{ day.date }}</small></h2>
         <p>
           {{ day.items?.length || 0 }} 站 · 游览 {{ formatMinutes(total(day)) }}
+          <template v-if="day.availableMin != null"> · 可用 {{ formatMinutes(day.availableMin) }}</template>
+          <template v-if="day.usedMin != null"> · 已用 {{ formatMinutes(day.usedMin) }}</template>
+          <template v-if="day.idleMin != null"> · 空闲 {{ formatMinutes(day.idleMin) }}</template>
         </p>
       </header>
       <ol>
@@ -61,7 +64,7 @@ header {
   margin-bottom: 18px;
 }
 h2 {
-  font-family: serif;
+  font-family: Georgia, "Songti SC", serif;
   font-size: 24px;
   color: var(--brand);
 }
@@ -69,24 +72,8 @@ header p {
   font-size: 12px;
   color: var(--ink-2);
 }
-/* 每站一张实拍封面图，像画廊一样铺开；点卡片仍然会定位到地图。 */
-ol {
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
-}
-.empty {
-  padding: 24px;
-  color: var(--ink-2);
-}
-@media (max-width: 480px) {
-  .day {
-    padding: 16px;
-  }
-  ol {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-  }
-}
+ol { padding:0;display:grid;gap:0; }
+h2 small {font-size:13px;color:var(--ink-2);font-weight:normal;}
+.empty {padding:24px;color:var(--ink-2);}
+@media(max-width:480px){.day{padding:14px;}}
 </style>

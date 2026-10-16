@@ -62,7 +62,7 @@ function onRowClick(e) {
             v-for="tile in row"
             :key="`${tile.key}-${copy}`"
             class="wall-tile"
-            :to="`/customize/${tile.lineId}`"
+            :to="`/line/${tile.lineId}`"
             :tabindex="copy === 'b' ? -1 : undefined"
           >
             <PhotoFrame :src="tile.src" :alt="tile.ipName" ratio="4 / 3" eager />

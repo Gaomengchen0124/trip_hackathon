@@ -4,6 +4,8 @@
  */
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import FavoriteButton from '../components/FavoriteButton.vue'
+import CommentSection from '../components/CommentSection.vue'
 import DetailContent from '../components/DetailContent.vue'
 import { usePlanStore } from '../stores/plan'
 
@@ -23,7 +25,11 @@ const poi = computed(() =>
       <h1>{{ poi?.name || '未找到该景点' }}</h1>
     </header>
 
-    <DetailContent v-if="poi" :poi="poi" />
+    <template v-if="poi">
+      <FavoriteButton :key="poi.poiId" :entity-key="`poi:${poi.poiId}`" />
+      <DetailContent :poi="poi" />
+      <CommentSection :entity-key="`poi:${poi.poiId}`" />
+    </template>
 
     <router-link v-else class="btn" to="/">回首页</router-link>
   </div>

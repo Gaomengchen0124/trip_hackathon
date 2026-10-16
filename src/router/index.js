@@ -4,6 +4,8 @@ import { usePlanStore } from '../stores/plan'
 const router = createRouter({
   history: createWebHistory(),
   routes: [
+    { path: '/line/:lineId', name: 'route-intro', component: () => import('../views/RouteIntroView.vue') },
+    { path: '/review/points', name: 'submission-review', component: () => import('../views/SubmissionReviewView.vue') },
     { path: '/', name: 'home', component: () => import('../views/HomeView.vue') },
     { path: '/column/:key', name: 'column', component: () => import('../views/ColumnListView.vue') },
     { path: '/customize/:lineId', name: 'customize', component: () => import('../views/CustomizeView.vue') },

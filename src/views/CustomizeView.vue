@@ -185,14 +185,14 @@ async function onConfirmed({ poiIds, force = false } = {}) {
 
     <div class="cols">
       <PoiCheckList
-        title="📖 圣地巡礼"
+        title="IP 打卡点"
         :pois="sortedIp"
         :checked-ids="store.checkedIds"
         :disabled="planning || loading"
         @toggle="store.togglePoi"
       />
       <PoiCheckList
-        title="🏙 其他知名景点"
+        title="其他景点"
         :pois="store.classicPois"
         :checked-ids="store.checkedIds"
         :disabled="planning || loading"
