@@ -39,12 +39,40 @@ export function openLoginDialog({ onClose } = {}) {
   const error = dialog.querySelector('#travel-login-error')
   const notice = dialog.querySelector('[data-notice]')
   let method = live ? 'email' : 'phone'
+  let methodLive = 'email'
+  let pwField = null
   if (live) {
-    dialog.querySelector('.login-demo').textContent = '使用邮箱验证码登录。'
-    dialog.querySelector('.login-methods').hidden = true
+    dialog.querySelector('.login-demo').textContent = '使用邮箱验证码或密码登录。'
     dialog.querySelector('[data-account-label]').textContent = '邮箱'
     account.type = 'email'; account.inputMode = 'email'; account.autocomplete = 'email'; account.placeholder = '请输入邮箱地址'
     form.querySelector('[type="submit"]').textContent = '登录'
+    // 服务端模式：手机号 tab 换成"密码"登录
+    const pwTab = dialog.querySelector('[data-method="phone"]')
+    pwTab.dataset.method = 'password'
+    pwTab.textContent = '密码'
+    pwTab.setAttribute('aria-pressed', 'false')
+    dialog.querySelector('[data-method="email"]').textContent = '邮箱验证码'
+    pwField = document.createElement('input')
+    pwField.id = 'travel-login-password'
+    pwField.name = 'password'
+    pwField.type = 'password'
+    pwField.autocomplete = 'current-password'
+    pwField.placeholder = '8 位以上密码'
+    pwField.hidden = true
+    code.insertAdjacentElement('afterend', pwField)
+    for (const button of dialog.querySelectorAll('[data-method]')) {
+      button.onclick = () => {
+        methodLive = button.dataset.method
+        for (const tab of dialog.querySelectorAll('[data-method]')) tab.setAttribute('aria-pressed', String(tab === button))
+        const isPw = methodLive === 'password'
+        send.parentElement.hidden = isPw
+        code.hidden = isPw
+        pwField.hidden = !isPw
+        account.value = ''; code.value = ''; pwField.value = ''; notice.textContent = ''; clearError()
+        account.type = 'email'; account.inputMode = 'email'; account.autocomplete = 'email'; account.placeholder = '请输入邮箱地址'
+        account.focus()
+      }
+    }
   }
   const clearError = () => {
     error.textContent = ''
@@ -57,6 +85,8 @@ export function openLoginDialog({ onClose } = {}) {
     send.textContent = remaining ? `${remaining} 秒后重新获取` : live ? '获取验证码' : '获取演示验证码'
   }
   for (const button of dialog.querySelectorAll('[data-method]')) {
+    // live 模式的 tab 切换在上方已单独绑定（邮箱验证码 / 密码），不能交给演示逻辑
+    if (live) break
     button.onclick = () => {
       method = button.dataset.method
       for (const tab of dialog.querySelectorAll('[data-method]')) tab.setAttribute('aria-pressed', String(tab === button))
@@ -100,6 +130,22 @@ export function openLoginDialog({ onClose } = {}) {
       if (dialog.open) dialog.close()
     } catch (failure) { if (dialog.isConnected) { error.textContent = failure.message; code.focus() } }
     finally { verifying = false; submit.disabled = false }
+  }
+  if (live) {
+    pwField.oninput = clearError
+    const emailSubmit = form.onsubmit
+    form.onsubmit = async event => {
+      if (methodLive === 'email') return emailSubmit(event)
+      event.preventDefault(); clearError()
+      if (verifying) return
+      verifying = true
+      const submit = form.querySelector('[type="submit"]'); submit.disabled = true
+      try {
+        await auth.loginPassword(account.value.trim(), pwField.value)
+        if (dialog.open) dialog.close()
+      } catch (failure) { if (dialog.isConnected) { error.textContent = failure.message; pwField.focus() } }
+      finally { verifying = false; submit.disabled = false }
+    }
   }
   dialog.querySelector('[data-close]').onclick = () => dialog.close()
   dialog.onclick = event => {

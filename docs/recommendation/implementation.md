@@ -57,13 +57,13 @@ HTTP 返回 400（输入无效）、403（来源不允许）、413（超过 12KB
 
 扩充路线后，无需修改前端；补齐分类后重启 8787 服务即可读取。缺失分类的作品仍可按作品／目的地发现，标签匹配保留未知。单条路线可用 `recommendationEnabled:false` 从推荐候选中下线。本地现有目录包含草稿资料，因此卡片展示资料仍在完善的提示，不能把进入推荐视为内容核验完成。
 
-账号 SQLite 自动增量新增 recommendation_profiles 表：user_id（关联 users）、interests（JSON）、status、updated_at。数据库 user_version 从 5 增至 6，保留原有用户、会话、收藏和评论。回滚旧服务前注意旧代码会拒绝版本 6；应保留兼容迁移，不直接删除用户数据。
+账号 SQLite 自动增量新增 recommendation_profiles 表：user_id（关联 users）、interests（JSON）、status、updated_at。数据库兼容原有版本 5／推荐版 6／密码登录版 7，增量升至 user_version 8，保留原有用户、密码、会话、兴趣、收藏和评论。回滚旧服务前注意旧代码会拒绝版本 8；应保留兼容迁移，不直接删除用户数据。
 
 数据库同学后续接管时，保持上述接口形状，替换 loadRecommendationCatalog 和兴趣 store 实现即可。数据字典、标签表及 API 以这份说明和 src/api/contract.md 的引用为准。
 
 ## 验证
 
-- `node --test tests/recommendation.test.mjs tests/auth-server.test.mjs tests/email-favorites.test.mjs tests/comments.test.mjs tests/travel-ui.test.mjs`
+- `node --test tests/recommendation.test.mjs tests/recommendation-migration.test.mjs tests/auth-password.test.mjs tests/auth-server.test.mjs tests/email-favorites.test.mjs tests/comments.test.mjs tests/travel-ui.test.mjs`
 - `npm run build`
 - 前后端启动后 `node scripts/test-recommendation-ui.mjs`。默认 Windows Edge，可用 BROWSER_PATH 指定浏览器，用 TEST_BASE_URL 指定站点；测试截图在忽略提交的 test-output/。浏览器测试将推荐请求交给显式 apiKey 为空的本地规则实现，拦截目录和账号接口，保证不调用真实 DeepSeek 或使用本机 Key；真实身份隔离由 HTTP 测试验证。
 

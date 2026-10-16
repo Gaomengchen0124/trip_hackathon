@@ -109,6 +109,11 @@ try{
  await page.reload({waitUntil:'domcontentloaded'});await page.waitForSelector('.toggle-filter');await openFilters()
  await clickText('清空条件');await clickText('我的兴趣');await page.click('.generate');await waitResults()
  assert.deepEqual(requests.at(-1).interests,profile.interests)
- assert.equal(await page.$('dialog[open]'),null);assert.deepEqual(errors,[])
+ assert.equal(await page.$('dialog[open]'),null)
+ await clickText('个人中心');await page.waitForSelector('[data-password-form]')
+ assert.ok(await page.$('[data-password-form] input[aria-label="登录密码"]'))
+ await clickText('编辑我的内容兴趣');await page.waitForSelector('dialog[aria-label="我的兴趣"]')
+ await clickText('取消','dialog button');await page.waitForFunction(()=>!document.querySelector('dialog[open]'))
+ assert.deepEqual(errors,[])
  console.log('PASS: optional unified preferences, inspiration only, whole summary/outside/keyboard collapse, preserved draft, mobile, route top/back restoration, legacy cache migration, matching login interests')
 }catch(error){await page.screenshot({path:'test-output/recommendation-failure.png'});console.log((await page.$eval('main',el=>el.innerText)).slice(-1600));throw error}finally{await browser.close()}
