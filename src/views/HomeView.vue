@@ -102,7 +102,7 @@ function go(lineId) {
         >
           <RouteCard :line="g.lines[0]" :label="g.label" @select="go" />
         </div>
-        <router-link class="card more" :to="`/column/${meta.key}`"
+        <router-link class="card more" aria-label="查看全部巡礼路线" :to="`/column/${meta.key}`"
           >···</router-link
         >
       </div>

@@ -9,7 +9,8 @@ const browser=await puppeteer.launch({executablePath:process.env.BROWSER_PATH ||
 const base=process.env.TEST_BASE_URL || 'http://127.0.0.1:5178'
 await mkdir('test-output',{recursive:true})
 const page=await browser.newPage(),errors=[],requests=[]
-let profile=null,user=null
+let profile=null,user=null,failFavorite=false
+const favorites=new Set(),favoriteWrites=[]
 page.on('pageerror',e=>errors.push(e.message))
 // Exercise real catalog/ranking with an explicitly empty key; never call the live model.
 await page.setRequestInterception(true)
@@ -20,6 +21,15 @@ page.on('request',async req=>{
  if(path==='/api/recommendations'){
   const body=JSON.parse(req.postData());requests.push(body)
   return respond(await recommend(validateRequest(body,catalog),catalog,{apiKey:''}))
+ }
+ if(path==='/api/favorites'){
+  if(!user)return req.respond({status:401,contentType:'application/json',body:JSON.stringify({error:'请先登录'})})
+  if(req.method()==='PUT'){
+   const body=JSON.parse(req.postData());favoriteWrites.push(body)
+   if(failFavorite){failFavorite=false;return req.respond({status:500,contentType:'application/json',body:JSON.stringify({error:'收藏暂时不可用，请重试。'})})}
+   body.saved?favorites.add(body.entityKey):favorites.delete(body.entityKey)
+  }
+  return respond({favorites:[...favorites]})
  }
  if(path==='/api/auth/session')return respond({user,isLoggedIn:!!user})
  if(path==='/api/me/interests'){
@@ -38,6 +48,12 @@ const openFilters=async()=>{if(await expanded()==='false')await page.click('.fil
 try{
  await page.setViewport({width:1280,height:900})
  await page.goto(base,{waitUntil:'domcontentloaded'})
+ await page.waitForSelector('.more');await page.$eval('.more',el=>el.scrollIntoView({block:'center'}))
+ const homePosition=await page.evaluate(()=>scrollY);assert.ok(homePosition>0)
+ await page.click('.more');await page.waitForSelector('.group');assert.match(page.url(),/column\/city/)
+ await page.waitForFunction(()=>scrollY===0)
+ await page.goBack({waitUntil:'domcontentloaded'});await page.waitForSelector('.more')
+ await page.waitForFunction(y=>Math.abs(scrollY-y)<3,{},homePosition)
  await page.waitForSelector('.recommend-entry');await page.click('.recommend-entry')
  await page.waitForSelector('.toggle-filter');assert.equal(await expanded(),'true')
  assert.equal(await page.$('.mode-grid'),null)
@@ -48,6 +64,23 @@ try{
  // Completely optional: submit without interests/text/works.
  await page.click('.generate');await waitResults()
  assert.equal(await expanded(),'false');assert.deepEqual(requests.at(-1).interests,emptyInterests());assert.equal(requests.at(-1).text,'')
+ // Source badge opens useful details; opening/closing does not trigger a request.
+ const sourceRequests=requests.length
+ await page.click('.source-badge');await page.waitForSelector('dialog[aria-label="关于基础推荐"]')
+ assert.match(await page.$eval('dialog',el=>el.innerText),/自由描述尚未经过 AI 理解/)
+ assert.equal(requests.length,sourceRequests)
+ await clickText('知道了','dialog button');await page.waitForFunction(()=>!document.querySelector('dialog[open]'))
+ await page.click('.source-badge');await clickText('按当前条件重新推荐','dialog button');await waitResults()
+ assert.equal(requests.length,sourceRequests+1)
+ // A guest cannot favorite or mutate recommendation conditions by opening/cancelling login.
+ const guestDraft=await page.evaluate(()=>JSON.parse(sessionStorage.getItem('pilgrimage.recommendation.v1:guest')).form)
+ await page.click('.recommend-card .favorite-action button');await page.waitForSelector('dialog[aria-label="邮箱登录"]')
+ assert.equal(favoriteWrites.length,0)
+ await page.click('[aria-label="关闭登录弹窗"]');await page.waitForFunction(()=>!document.querySelector('dialog[open]'))
+ assert.equal(await page.$eval('.favorite-action button',el=>el.getAttribute('aria-pressed')),'false')
+ assert.deepEqual(await page.evaluate(()=>JSON.parse(sessionStorage.getItem('pilgrimage.recommendation.v1:guest')).form),guestDraft)
+ assert.equal(favoriteWrites.length,0)
+
  // Clicking the left summary and empty header area works, not just the chevron.
  await page.click('.filter-summary');assert.equal(await expanded(),'true')
  await page.type('#recommend-text','喜欢悬疑反转与探险故事')
@@ -109,11 +142,33 @@ try{
  await page.reload({waitUntil:'domcontentloaded'});await page.waitForSelector('.toggle-filter');await openFilters()
  await clickText('清空条件');await clickText('我的兴趣');await page.click('.generate');await waitResults()
  assert.deepEqual(requests.at(-1).interests,profile.interests)
+ // Saving, failed removal, retry and reload affect only favorites, never recommendation conditions/profile.
+ const savedDraft=await page.evaluate(()=>JSON.parse(sessionStorage.getItem('pilgrimage.recommendation.v1:ui-test-user')).form)
+ const savedProfile=JSON.stringify(profile),recommendationCount=requests.length
+ const savedLine=await page.$eval('.route-link',el=>'line:'+el.getAttribute('href').split('/').pop())
+ await page.click('.recommend-card .favorite-action button')
+ await page.waitForFunction(()=>document.querySelector('.favorite-action button')?.getAttribute('aria-pressed')==='true')
+ assert.ok(favorites.has(savedLine));assert.deepEqual(favoriteWrites.at(-1),{entityKey:savedLine,saved:true})
+ failFavorite=true;await page.click('.recommend-card .favorite-action button')
+ await page.waitForFunction(()=>document.querySelector('.favorite-action p')?.textContent.includes('收藏暂时不可用'))
+ assert.equal(await page.$eval('.favorite-action button',el=>el.getAttribute('aria-pressed')),'true')
+ assert.deepEqual(await page.evaluate(()=>JSON.parse(sessionStorage.getItem('pilgrimage.recommendation.v1:ui-test-user')).form),savedDraft)
+ assert.equal(JSON.stringify(profile),savedProfile);assert.equal(requests.length,recommendationCount)
+ await page.reload({waitUntil:'domcontentloaded'});await page.waitForSelector('.recommend-card')
+ await page.waitForFunction(()=>document.querySelector('.favorite-action button')?.getAttribute('aria-pressed')==='true')
+ await page.click('.route-link');await page.waitForSelector('.leaflet-container')
+ await page.waitForFunction(()=>document.querySelector('.favorite-action button')?.getAttribute('aria-pressed')==='true')
+ await page.goBack({waitUntil:'domcontentloaded'});await page.waitForSelector('.recommend-card')
+ await page.click('.recommend-card .favorite-action button')
+ await page.waitForFunction(()=>document.querySelector('.favorite-action button')?.getAttribute('aria-pressed')==='false')
+ assert.equal(favorites.has(savedLine),false)
+ assert.deepEqual(await page.evaluate(()=>JSON.parse(sessionStorage.getItem('pilgrimage.recommendation.v1:ui-test-user')).form),savedDraft)
+
  assert.equal(await page.$('dialog[open]'),null)
  await clickText('个人中心');await page.waitForSelector('[data-password-form]')
  assert.ok(await page.$('[data-password-form] input[aria-label="登录密码"]'))
  await clickText('编辑我的内容兴趣');await page.waitForSelector('dialog[aria-label="我的兴趣"]')
  await clickText('取消','dialog button');await page.waitForFunction(()=>!document.querySelector('dialog[open]'))
  assert.deepEqual(errors,[])
- console.log('PASS: optional unified preferences, inspiration only, whole summary/outside/keyboard collapse, preserved draft, mobile, route top/back restoration, legacy cache migration, matching login interests')
+ console.log('PASS: authenticated favorites without changing filters, source explanation/retry, homepage more scroll, optional unified preferences, inspiration only, whole summary/outside/keyboard collapse, preserved draft, mobile, route top/back restoration, legacy cache migration, matching login interests')
 }catch(error){await page.screenshot({path:'test-output/recommendation-failure.png'});console.log((await page.$eval('main',el=>el.innerText)).slice(-1600));throw error}finally{await browser.close()}
