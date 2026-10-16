@@ -75,20 +75,22 @@ try{
  await clickText('科幻','dialog button');await clickText('下一题','dialog button');await waitStep(3)
  assert.equal(await page.$eval('dialog button[aria-pressed=true]',el=>el.textContent),'温暖治愈')
  await clickText('下一题','dialog button');await waitStep(4)
+ await page.type('dialog textarea[aria-label="自由填写喜欢的作品"]','葬送的芙莉莲，喜欢旅途中的陪伴');
+ await page.screenshot({path:'test-output/interest-free-works.png'});
  await page.type('dialog input[type=search]','哈利');await clickText('哈利波特','dialog button')
  failSave=true;await clickText('完成并保存','dialog button')
  await page.waitForFunction(()=>document.querySelector('dialog [role=alert]')?.textContent.includes('保存暂时失败'))
  assert.equal(profiles.has('first@example.com'),false)
  assert.equal(await page.$eval('dialog button[aria-pressed=true]',el=>el.textContent),'哈利波特')
  await clickText('完成并保存','dialog button');await page.waitForFunction(()=>!document.querySelector('dialog[open]'))
- assert.deepEqual(profiles.get('first@example.com'),{status:'saved',interests:{kinds:['anime'],themes:['scifi'],moods:['healing'],ipIds:['harrypotter']}})
+ assert.deepEqual(profiles.get('first@example.com'),{status:'saved',interests:{kinds:['anime'],themes:['scifi'],moods:['healing'],ipIds:['harrypotter'],favoriteWorks:'葬送的芙莉莲，喜欢旅途中的陪伴'}})
  await reload();assert.equal(await page.$('dialog[open]'),null)
  await clickText('退出登录');await login('first@example.com');await settled();assert.equal(await page.$('dialog[open]'),null)
  // Every question is skippable, and a skipped account is not interrupted on refresh.
  await clickText('退出登录');await login('skip@example.com');await waitStep(1)
  await page.setViewport({width:390,height:844});await page.screenshot({path:'test-output/interest-step-mobile.png'})
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth))
- for(let n=1;n<=4;n++){await waitStep(n);await clickText('跳过本题','dialog button')}
+ for(let n=1;n<=4;n++){await waitStep(n);if(n===4)await page.type('dialog textarea','星际穿越');await clickText('跳过本题','dialog button')}
  await page.waitForFunction(()=>!document.querySelector('dialog[open]'));assert.equal(profiles.get('skip@example.com').status,'skipped')
  assert.ok(Object.values(profiles.get('skip@example.com').interests).every(x=>x.length===0))
  await reload();assert.equal(await page.$('dialog[open]'),null)

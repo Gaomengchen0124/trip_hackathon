@@ -22,7 +22,7 @@
 
 5. `npm run dev -- --host 127.0.0.1 --port 5178 --strictPort`，访问 `http://127.0.0.1:5178/recommend`。端口被其他项目占用时不自动换端口或结束其他进程。
 
-Key 只由 Node 读取，不使用 VITE_ 前缀；`.env.local` 被 Git 忽略。前端不会接触 Key。本机已通过无偏好、奇幻、悬疑三类真实 DeepSeek 调用验证；其他环境仍需填写 Key 并验收。没有 Key 或上游异常会标为基础推荐，并明确自由描述未被应用。
+Key 只由 Node 读取，不使用 VITE_ 前缀；`.env.local` 被 Git 忽略。前端不会接触 Key。本机已通过无偏好、奇幻、悬疑三类真实 DeepSeek 调用验证；新增仅填写《星际穿越》和《葬送的芙莉莲》的真实调用，均返回 source=ai、已校验的偏好标签及现有路线 ID；其他环境仍需填写 Key 并验收。没有 Key 或上游异常会标为基础推荐，并明确自由描述未被应用。
 
 接口采用 DeepSeek 官方 Chat Completions 与 JSON Output，模型只排序服务端候选并选择服务端给出的理由 key。每条解释最多展示三个；模型返回超过三个有效理由时，先校验全部理由，再去重并截取前三个，避免将有效推荐误判为失败。返回未知路线、无效理由（包括第四条以后的无效理由）、重复路线、截断或错误结构都会降级，展示文案由已验证资料生成，模型不生成坐标、引文或排程。
 
@@ -40,12 +40,14 @@ Key 只由 Node 读取，不使用 VITE_ 前缀；`.env.local` 被 Git 忽略。
   "ipId": "",
   "city": "厦门",
   "text": "喜欢悬疑故事里的反转",
-  "interests": { "kinds": [], "themes": ["mystery"], "moods": [], "ipIds": [] },
+  "interests": { "kinds": [], "themes": ["mystery"], "moods": [], "ipIds": [], "favoriteWorks": "星际穿越，喜欢宇宙探索" },
   "excludedIpIds": []
 }
 ```
 
-当前前端固定发送 mode: discover、ipId: ""。服务端暂保留 by_work 以兼容旧客户端（其 ipId 必须是已收录作品），不再提供该模式的前端入口。city 空字符串表示不限。描述最多 500 字，各组兴趣最多 20 个。响应为 `{source,notice,items}`，source 为 ai/basic/empty。items 含现有路线字段、ip、themes、moods、reasons 文本数组、highlights、caveat、dataNotice。排除作品与目的地在调用模型前由服务端过滤。文本用于 AI 排序，目的地硬限制通过下拉选项指定，点选作品属于软偏好；基础推荐不理解自由描述。
+当前前端固定发送 mode: discover、ipId: ""。服务端暂保留 by_work 以兼容旧客户端（其 ipId 必须是已收录作品），不再提供该模式的前端入口。city 空字符串表示不限。描述 text 与自由作品偏好 interests.favoriteWorks 各最多 500 字，各组兴趣标签最多 20 个。favoriteWorks 为可选字符串（旧数据缺省为空），允许未收录作品、作者／版本与喜欢的原因。直接输入推荐页的作品描述仍使用 text；登录第四题及手动画像编辑保存 favoriteWorks，推荐页带入后显示在同一“偏好补充”区域。原 ipIds 字段与现有 ID 保持不变。响应为 `{source,notice,items,preferenceAnalysis?}`，source 为 ai/basic/empty。items 含现有路线字段、ip、themes、moods、reasons 文本数组、highlights、caveat、dataNotice。排除作品与目的地在调用模型前由服务端过滤。文本用于 AI 排序，目的地硬限制通过下拉选项指定，点选作品属于软偏好；基础推荐不理解自由描述或自行填写的作品。
+
+存在 text 或 favoriteWorks 时，AI 同一次请求返回 preferenceAnalysis：`{kinds:[],themes:[],moods:[],needsClarification:false}`。标签必须来自现有字典，前端展示为“AI 理解的偏好”，不自动改写表单或已保存画像；明确选择优先于推测。作品不熟悉、歧义或未提取到标签时提示补充说明。分析结构或标签校验失败会降级，不展示伪造分析。推荐仍仅接受候选中的 lineId 和理由 key。保存兴趣本身不发起模型请求，用户点击推荐时才分析。
 
 HTTP 返回 400（输入无效）、403（来源不允许）、413（超过 12KB）、415（非 JSON）、429（每来源地址每分钟超过 12 次或全局超过 4 个并发）。上游超时最多 30 秒，前端等待 35 秒；用户切换账号或离开页面会放弃旧响应。
 
@@ -60,6 +62,8 @@ HTTP 返回 400（输入无效）、403（来源不允许）、413（超过 12KB
 扩充路线后，无需修改前端；补齐分类后重启 8787 服务即可读取。缺失分类的作品仍可按作品／目的地发现，标签匹配保留未知。单条路线可用 `recommendationEnabled:false` 从推荐候选中下线。本地现有目录包含草稿资料，因此卡片展示资料仍在完善的提示，不能把进入推荐视为内容核验完成。
 
 账号 SQLite 自动增量新增 recommendation_profiles 表：user_id（关联 users）、interests（JSON）、status、updated_at。数据库兼容原有版本 5／推荐版 6／密码登录版 7，增量升至 user_version 8，保留原有用户、密码、会话、兴趣、收藏和评论。回滚旧服务前注意旧代码会拒绝版本 8；应保留兼容迁移，不直接删除用户数据。
+
+favoriteWorks 保存在现有 interests JSON 内，不新增 IP、不改库表版本；原画像读取时缺省为空字符串，旧账号数据可继续使用。AI 分析结果只随本次推荐返回，不持久化为已确认兴趣。
 
 数据库同学后续接管时，保持上述接口形状，替换 loadRecommendationCatalog 和兴趣 store 实现即可。数据字典、标签表及 API 以这份说明和 src/api/contract.md 的引用为准。
 

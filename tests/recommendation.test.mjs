@@ -77,8 +77,8 @@ test('interest API authenticates identity, isolates profiles and records skip/sa
  try{
   assert.equal((await fetch(base)).status,401)
   assert.equal((await put({status:'saved',interests:{themes:['scifi']},userId:other.id},'https://evil.example')).status,403)
-  assert.equal((await put({status:'saved',interests:{themes:['scifi']},userId:other.id})).status,200)
-  const saved=await (await fetch(base,{headers:{Cookie:cookie}})).json();assert.deepEqual(saved.profile.interests.themes,['scifi'])
+  assert.equal((await put({status:'saved',interests:{themes:['scifi'],favoriteWorks:'星际穿越，喜欢宇宙探索'},userId:other.id})).status,200)
+  const saved=await (await fetch(base,{headers:{Cookie:cookie}})).json();assert.deepEqual(saved.profile.interests.themes,['scifi']);assert.equal(saved.profile.interests.favoriteWorks,'星际穿越，喜欢宇宙探索')
   assert.equal((await (await fetch(base,{headers:{Cookie:otherCookie}})).json()).profile,null)
   assert.equal((await put({status:'saved',interests:{themes:['invalid']}})).status,400)
   assert.equal((await put({status:'skipped',interests:emptyInterests()})).status,200)
@@ -96,4 +96,28 @@ test('valid extra reason keys are verified then trimmed, not treated as AI outag
  // Even an invalid key after the displayed first three must reject the response.
  const invalid=await recommend(request,catalog,{apiKey:'test',fetchImpl:async()=>mockResponse([{lineId:'kaiduan-xiamen',reasonKeys:[...keys,'invented']}])})
  assert.equal(invalid.source,'basic')
+})
+
+
+test('unlisted works are preserved as optional text, analyzed into known tags, never new routes',async()=>{
+ const request=input({interests:{favoriteWorks:'  星际穿越，喜欢宇宙探索  '}})
+ assert.equal(request.interests.favoriteWorks,'星际穿越，喜欢宇宙探索')
+ assert.equal(input({interests:{themes:['scifi']}}).interests.favoriteWorks,'')
+ for(const favoriteWorks of [[],42,'x'.repeat(501)])assert.throws(()=>input({interests:{favoriteWorks}}))
+ const untouched=structuredClone(request)
+ let sent
+ const analysis={kinds:['film'],themes:['scifi'],moods:['reflective'],needsClarification:false}
+ const response=(preferenceAnalysis,items=[{lineId:'santi-beijing',reasonKeys:['themes_fact']}])=>({ok:true,json:async()=>({choices:[{finish_reason:'stop',message:{content:JSON.stringify({preferenceAnalysis,items})}}]})})
+ const result=await recommend(request,catalog,{apiKey:'test',fetchImpl:async(url,options)=>{sent=JSON.parse(options.body);return response(analysis)}})
+ assert.equal(result.source,'ai');assert.deepEqual(result.preferenceAnalysis,analysis)
+ assert.ok(catalog.some(c=>c.lineId===result.items[0].lineId));assert.deepEqual(request,untouched)
+ assert.equal(JSON.parse(sent.messages[1].content).request.interests.favoriteWorks,request.interests.favoriteWorks)
+ assert.ok(JSON.parse(sent.messages[1].content).dictionaries.themes.some(t=>t.id==='scifi'))
+ for(const bad of [{...analysis,themes:['invented']},{...analysis,needsClarification:'false'},null]){
+  assert.equal((await recommend(request,catalog,{apiKey:'test',fetchImpl:async()=>response(bad)})).source,'basic')
+ }
+ assert.equal((await recommend(request,catalog,{apiKey:'test',fetchImpl:async()=>response(analysis,[{lineId:'interstellar-new-route',reasonKeys:['themes_fact']}])})).source,'basic')
+ const unknown=await recommend(input({text:'喜欢一部不知道作者的小众作品'}),catalog,{apiKey:'test',fetchImpl:async()=>response({kinds:[],themes:[],moods:[],needsClarification:true})})
+ assert.equal(unknown.source,'ai');assert.equal(unknown.preferenceAnalysis.needsClarification,true)
+ const basic=await recommend(request,catalog,{apiKey:''});assert.equal(basic.preferenceAnalysis,undefined);assert.match(basic.notice,/自行填写的作品尚未/)
 })

@@ -11,7 +11,7 @@ const questions=[
   {key:'kinds',title:'平时喜欢看些什么？',hint:'从熟悉的内容开始，可多选。',symbol:'01'},
   {key:'themes',title:'哪些故事题材会吸引你？',hint:'选出想走进的故事，也可以先不选。',symbol:'02'},
   {key:'moods',title:'喜欢故事带来怎样的感受？',hint:'找到与你此刻心情相近的故事氛围。',symbol:'03'},
-  {key:'ipIds',title:'有没有特别喜欢的作品？',hint:'点选已收录的作品，帮助我们更了解你。',symbol:'04'},
+  {key:'ipIds',title:'有没有特别喜欢的作品？',hint:'写下任何喜欢的作品，也可以说说喜欢它的原因。',symbol:'04'},
 ]
 const current=computed(()=>questions[step.value]),last=computed(()=>step.value===questions.length-1)
 async function load(){catalogError.value=false;try{works.value=(await getCatalog()).works}catch{catalogError.value=true}}
@@ -27,7 +27,7 @@ async function save(skipAll=false){
 async function moveTo(index){step.value=index;await nextTick();questionHeading.value?.focus({preventScroll:true});questionHeading.value?.scrollIntoView({block:'nearest'})}
 async function next(skip=false){
   if(busy.value)return
-  if(skip)interests.value={...interests.value,[current.value.key]:[]}
+  if(skip)interests.value={...interests.value,[current.value.key]:[],...(current.value.key==='ipIds'?{favoriteWorks:''}:{})}
   if(last.value)await save()
   else await moveTo(step.value+1)
 }
@@ -47,7 +47,7 @@ function close(){if(profileState.onboarding && !profileState.error)save(true);el
         <h3 :id="`interest-question-${current.key}`" ref="questionHeading" tabindex="-1">{{ current.title }}</h3>
         <p class="question-hint">{{ current.hint }}</p>
         <InterestFields :key="current.key" v-model="interests" :groups="current.key==='ipIds'?[]:[current.key]" :show-works="current.key==='ipIds'" :works="works" />
-        <p v-if="current.key==='ipIds' && catalogError" class="storage">作品列表暂不可用，可跳过本题或<button type="button" @click="load">重试加载</button>。</p>
+        <p v-if="current.key==='ipIds' && catalogError" class="storage">作品列表暂不可用，仍可自由填写，也可跳过本题或<button type="button" @click="load">重试加载</button>。</p>
       </fieldset>
     </template>
     <InterestFields v-else v-model="interests" :works="works" />

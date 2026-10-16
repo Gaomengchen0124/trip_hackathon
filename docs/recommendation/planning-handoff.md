@@ -59,6 +59,8 @@ ipId、路线标题、封面和候选景点可由 getLineDetail(lineId) 获取�
 
 标签字典、内容维护与用户画像存储属于数据库对接，不要求规划同学重做。
 
+画像新增可选字段 `interests.favoriteWorks: string`（最多 500 字，缺省空字符串），保存用户自填的任意作品／作者／版本和喜欢的原因；不要求在 IP 表中存在，不生成新 ipId。与原有 kinds/themes/moods/ipIds 一并通过 GET/PUT /api/me/interests 读写，当前存于 recommendation_profiles.interests JSON，无需新表。推荐响应的 preferenceAnalysis 为本次 AI 推测，不回写画像，也不交给规划模块。
+
 ## 4 直接复用哪些文档
 
 | 文件 | 用途与注意事项 |

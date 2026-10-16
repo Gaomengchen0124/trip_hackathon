@@ -9,7 +9,7 @@ const browser=await puppeteer.launch({executablePath:process.env.BROWSER_PATH ||
 const base=process.env.TEST_BASE_URL || 'http://127.0.0.1:5178'
 await mkdir('test-output',{recursive:true})
 const page=await browser.newPage(),errors=[],requests=[]
-let profile=null,user=null,failFavorite=false
+let profile=null,user=null,failFavorite=false,analyze=false
 const favorites=new Set(),favoriteWrites=[]
 page.on('pageerror',e=>errors.push(e.message))
 // Exercise real catalog/ranking with an explicitly empty key; never call the live model.
@@ -20,7 +20,9 @@ page.on('request',async req=>{
  if(path==='/api/recommendations/catalog')return respond(publicCatalog)
  if(path==='/api/recommendations'){
   const body=JSON.parse(req.postData());requests.push(body)
-  return respond(await recommend(validateRequest(body,catalog),catalog,{apiKey:''}))
+  const result=await recommend(validateRequest(body,catalog),catalog,{apiKey:''})
+  if(analyze){result.source='ai';result.notice='已结合本次作品描述与内容兴趣推荐。';result.preferenceAnalysis={kinds:['film'],themes:['scifi'],moods:['reflective'],needsClarification:true}}
+  return respond(result)
  }
  if(path==='/api/favorites'){
   if(!user)return req.respond({status:401,contentType:'application/json',body:JSON.stringify({error:'请先登录'})})
@@ -68,7 +70,7 @@ try{
  // Source badge opens useful details; opening/closing does not trigger a request.
  const sourceRequests=requests.length
  await page.click('.source-badge');await page.waitForSelector('dialog[aria-label="关于基础推荐"]')
- assert.match(await page.$eval('dialog',el=>el.innerText),/自由描述尚未经过 AI 理解/)
+ assert.match(await page.$eval('dialog',el=>el.innerText),/自由描述和自行填写的作品尚未经过 AI 理解/)
  assert.equal(requests.length,sourceRequests)
  await clickText('知道了','dialog button');await page.waitForFunction(()=>!document.querySelector('dialog[open]'))
  await page.click('.source-badge');await clickText('按当前条件重新推荐','dialog button');await waitResults()
@@ -151,7 +153,7 @@ try{
  user={id:'ui-test-user',nickname:'测试读者',avatar:''}
  await page.reload({waitUntil:'domcontentloaded'});await page.waitForSelector('dialog[aria-label="我的兴趣"]')
  await clickText('暂时跳过');await page.waitForFunction(()=>!document.querySelector('dialog[open]'));assert.equal(profile.status,'skipped')
- profile={status:'saved',interests:{...emptyInterests(),themes:['mystery'],ipIds:['kaiduan']}}
+ profile={status:'saved',interests:{...emptyInterests(),themes:['mystery'],ipIds:['kaiduan'],favoriteWorks:'星际穿越，喜欢宇宙探索'}}
  await page.reload({waitUntil:'domcontentloaded'});await page.waitForSelector('.toggle-filter');await openFilters()
  await clickText('清空条件');await clickText('我的兴趣');await page.click('.generate');await waitResults()
  assert.deepEqual(requests.at(-1).interests,profile.interests)
@@ -182,6 +184,14 @@ try{
  assert.ok(await page.$('[data-password-form] input[aria-label="登录密码"]'))
  await clickText('编辑我的内容兴趣');await page.waitForSelector('dialog[aria-label="我的兴趣"]')
  await clickText('取消','dialog button');await page.waitForFunction(()=>!document.querySelector('dialog[open]'))
+ await openFilters();assert.match(await page.$eval('.saved-works',el=>el.textContent),/星际穿越/)
+ analyze=true;await clickText('重新推荐','.generate');await waitResults()
+ await page.waitForSelector('.preference-analysis');assert.match(await page.$eval('.preference-analysis',el=>el.textContent),/科幻/)
+ assert.match(await page.$eval('.preference-analysis',el=>el.textContent),/补充作者/)
+ await page.screenshot({path:'test-output/ai-preference-analysis.png'})
+ await clickText('补充或调整偏好');assert.equal(await expanded(),'true')
+ await clickText('本次移除');assert.equal(await page.$('.saved-works'),null)
+ assert.equal(profile.interests.favoriteWorks,'星际穿越，喜欢宇宙探索')
  assert.deepEqual(errors,[])
  console.log('PASS: authenticated favorites without changing filters, source explanation/retry, homepage more scroll, optional unified preferences, inspiration only, whole summary/outside/keyboard collapse, preserved draft, mobile, route top/back restoration, legacy cache migration, matching login interests')
 }catch(error){await page.screenshot({path:'test-output/recommendation-failure.png'});console.log((await page.$eval('main',el=>el.innerText)).slice(-1600));throw error}finally{await browser.close()}
