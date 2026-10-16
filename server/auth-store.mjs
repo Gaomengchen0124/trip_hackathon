@@ -1,15 +1,16 @@
 import { DatabaseSync } from 'node:sqlite'
-import { randomBytes, randomUUID, createHash } from 'node:crypto'
+import { randomBytes, randomUUID, createHash, scryptSync, timingSafeEqual } from 'node:crypto'
 import { mkdirSync, chmodSync } from 'node:fs'
 import { dirname } from 'node:path'
 import { validateProfile } from '../src/auth/profile.mjs'
 const hash = value => createHash('sha256').update(value).digest('hex')
 const TTL = 7 * 86400000
-export function createAuthStore({ file = 'var/auth.sqlite', now = Date.now } = {}) {
+export function createAuthStore({ file = 'var/auth.sqlite', now = Date.now, adminEmails = process.env.ADMIN_EMAILS || '' } = {}) {
+  const bootstrapEmails = (Array.isArray(adminEmails) ? adminEmails : String(adminEmails).split(',')).map(s => s.trim().toLowerCase()).filter(Boolean)
   if (file !== ':memory:') mkdirSync(dirname(file), { recursive: true, mode: 0o700 })
   const db = new DatabaseSync(file)
   if (file !== ':memory:') chmodSync(file, 0o600)
-  if (db.prepare('PRAGMA user_version').get().user_version > 5) { db.close(); throw new Error('Unsupported database version') }
+  if (db.prepare('PRAGMA user_version').get().user_version > 7) { db.close(); throw new Error('Unsupported database version') }
   db.exec(`PRAGMA foreign_keys = ON;
     CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, nickname TEXT NOT NULL, avatar TEXT NOT NULL, created_at INTEGER NOT NULL);
     CREATE TABLE IF NOT EXISTS identities (provider TEXT NOT NULL, subject TEXT NOT NULL, user_id TEXT NOT NULL REFERENCES users(id), PRIMARY KEY(provider, subject));
@@ -26,10 +27,27 @@ export function createAuthStore({ file = 'var/auth.sqlite', now = Date.now } = {
   try {
     if (!db.prepare('PRAGMA table_info(comments)').all().some(column => column.name === 'deleted_at')) db.exec('ALTER TABLE comments ADD COLUMN deleted_at INTEGER')
     if (!db.prepare('PRAGMA table_info(comments)').all().some(column => column.name === 'moderated_at')) db.exec('ALTER TABLE comments ADD COLUMN moderated_at INTEGER')
-    db.exec('PRAGMA user_version = 5; COMMIT')
+    if (!db.prepare('PRAGMA table_info(users)').all().some(column => column.name === 'role')) db.exec("ALTER TABLE users ADD COLUMN role TEXT NOT NULL DEFAULT 'user'")
+    db.exec(`CREATE TABLE IF NOT EXISTS admin_audit (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      actor TEXT NOT NULL,
+      action TEXT NOT NULL,
+      target TEXT NOT NULL,
+      detail TEXT,
+      created_at INTEGER NOT NULL
+    )`)
+    db.exec(`CREATE TABLE IF NOT EXISTS passwords (
+      user_id TEXT PRIMARY KEY REFERENCES users(id),
+      digest TEXT NOT NULL,
+      updated_at INTEGER NOT NULL
+    )`)
+    // 首批管理员引导：ADMIN_EMAILS 中的邮箱对应账号直接获得 admin 角色（幂等，每次启动都执行以支持追加）
+    const promote = db.prepare("UPDATE users SET role='admin' WHERE id=(SELECT user_id FROM identities WHERE provider='email' AND subject=?)")
+    for (const email of bootstrapEmails) promote.run(email)
+    db.exec('PRAGMA user_version = 7; COMMIT')
   } catch (error) { db.exec('ROLLBACK'); db.close(); throw error }
   function getUser(id) {
-    const row = db.prepare('SELECT id,nickname,avatar FROM users WHERE id=?').get(id)
+    const row = db.prepare('SELECT id,nickname,avatar,role FROM users WHERE id=?').get(id)
     return row ? { ...row } : null
   }
   return {
@@ -43,7 +61,7 @@ export function createAuthStore({ file = 'var/auth.sqlite', now = Date.now } = {
         let id = existing?.user_id
         if (!id) {
           id = randomUUID()
-          db.prepare('INSERT INTO users VALUES(?,?,?,?)').run(id, '巡礼读者', '', now())
+          db.prepare('INSERT INTO users(id,nickname,avatar,created_at) VALUES(?,?,?,?)').run(id, '巡礼读者', '', now())
           db.prepare('INSERT INTO identities VALUES(?,?,?)').run(provider, normalized, id)
         }
         db.exec('COMMIT'); return getUser(id)
@@ -137,6 +155,113 @@ export function createAuthStore({ file = 'var/auth.sqlite', now = Date.now } = {
         db.prepare('UPDATE comment_reports SET status=? WHERE id=?').run(action,id)
         db.exec('COMMIT');return true
       } catch(error) { db.exec('ROLLBACK');throw error }
+    },
+    // ---- 管理后台：用户与角色 ----
+    isAdmin(user) { return !!user && user.role === 'admin' },
+    listUsers(before = Number.MAX_SAFE_INTEGER, limit = 50) {
+      const rows = db.prepare(`SELECT u.rowid AS rowid,u.id,u.nickname,u.role,u.created_at AS createdAt,
+          (SELECT subject FROM identities WHERE provider='email' AND user_id=u.id) AS email,
+          (SELECT COUNT(*) FROM comments c WHERE c.user_id=u.id) AS commentCount
+        FROM users u WHERE u.rowid<? ORDER BY u.rowid DESC LIMIT ?`).all(before, limit + 1)
+      const users = rows.slice(0, limit).map(({ rowid, ...row }) => row)
+      return { users, nextCursor: rows.length > limit ? rows[limit - 1].rowid : null }
+    },
+    setUserRole(adminId, userId, role) {
+      if (!['user', 'admin'].includes(role)) throw new Error('Invalid role')
+      if (userId === adminId) throw new Error('不能修改自己的角色')
+      db.exec('BEGIN IMMEDIATE')
+      try {
+        const target = db.prepare('SELECT role FROM users WHERE id=?').get(userId)
+        if (!target) throw new Error('用户不存在')
+        if (target.role === 'admin' && role === 'user') {
+          const admins = db.prepare("SELECT COUNT(*) AS n FROM users WHERE role='admin'").get().n
+          if (admins <= 1) throw new Error('至少保留一名管理员')
+        }
+        db.prepare('UPDATE users SET role=? WHERE id=?').run(role, userId)
+        db.exec('COMMIT')
+        return getUser(userId)
+      } catch (error) { db.exec('ROLLBACK'); throw error }
+    },
+    // ---- 管理后台：举报与评论管理 ----
+    listReports(status = 'pending', before = Number.MAX_SAFE_INTEGER, limit = 50) {
+      const where = status === 'all' ? 'r.id<?' : "r.status=? AND r.id<?"
+      const args = status === 'all' ? [before, limit + 1] : [status, before, limit + 1]
+      const rows = db.prepare(`SELECT r.id,r.comment_id AS commentId,r.reason,r.status,r.created_at AS createdAt,
+          c.content,c.entity_key AS entityKey,c.deleted_at AS deletedAt,u.nickname AS author
+        FROM comment_reports r JOIN comments c ON c.id=r.comment_id JOIN users u ON u.id=c.user_id
+        WHERE ${where} ORDER BY r.id LIMIT ?`).all(...args)
+      const reports = rows.slice(0, limit).map(row => ({ ...row }))
+      return { reports, nextCursor: rows.length > limit ? reports[reports.length - 1].id : null }
+    },
+    moderateComment(adminId, id, deleted) {
+      const row = db.prepare('SELECT id FROM comments WHERE id=?').get(id)
+      if (!row) return false
+      if (deleted) db.prepare('UPDATE comments SET deleted_at=COALESCE(deleted_at,?),moderated_at=? WHERE id=?').run(now(), now(), id)
+      else db.prepare('UPDATE comments SET deleted_at=NULL WHERE id=?').run(id)
+      return true
+    },
+    adminAudit(actor, action, target, detail = '') {
+      const nick = db.prepare('SELECT nickname FROM users WHERE id=?').get(actor)?.nickname ?? actor
+      db.prepare('INSERT INTO admin_audit(actor,action,target,detail,created_at) VALUES(?,?,?,?,?)').run(nick, action, target, typeof detail === 'string' ? detail : JSON.stringify(detail), now())
+    },
+    listAdminAudit(before = Number.MAX_SAFE_INTEGER, limit = 50) {
+      const rows = db.prepare('SELECT id,actor,action,target,detail,created_at AS createdAt FROM admin_audit WHERE id<? ORDER BY id DESC LIMIT ?').all(before, limit + 1)
+      const items = rows.slice(0, limit).map(row => ({ ...row }))
+      return { items, nextCursor: rows.length > limit ? items[items.length - 1].id : null }
+    },
+    // ---- 管理后台：用户偏好（队友的推荐服务定义 schema，此处防御式只读）----
+    preferencesAvailable() {
+      return !!db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='user_preferences'").get()
+    },
+    listUserPreferences(userIds) {
+      if (!this.preferencesAvailable() || !Array.isArray(userIds) || !userIds.length) return {}
+      const placeholders = userIds.map(() => '?').join(',')
+      const rows = db.prepare(`SELECT user_id AS userId, tags, updated_at AS updatedAt FROM user_preferences WHERE user_id IN (${placeholders})`).all(...userIds)
+      return Object.fromEntries(rows.map(row => { try { return [row.userId, { tags: JSON.parse(row.tags), updatedAt: row.updatedAt }] } catch { return [row.userId, { tags: [], updatedAt: row.updatedAt }] } }))
+    },
+    preferenceStats() {
+      if (!this.preferencesAvailable()) return null
+      const rows = db.prepare('SELECT tags FROM user_preferences').all()
+      const counts = new Map()
+      for (const row of rows) {
+        let tags = []
+        try { tags = JSON.parse(row.tags) } catch { /* 忽略坏行 */ }
+        for (const tag of Array.isArray(tags) ? tags : []) counts.set(tag, (counts.get(tag) || 0) + 1)
+      }
+      return { total: rows.length, tags: [...counts.entries()].map(([tag, count]) => ({ tag, count })).sort((a, b) => b.count - a.count) }
+    },
+    // ---- 账号密码登录（与邮箱验证码并行的第二种凭证，会话机制复用）----
+    setPassword(userId, password) {
+      if (typeof password !== 'string' || password.length < 8 || password.length > 128) throw new Error('密码长度需为 8-128 位')
+      if (!getUser(userId)) throw new Error('用户不存在')
+      const salt = randomBytes(16).toString('base64')
+      const hash = scryptSync(password, salt, 32).toString('base64')
+      db.prepare('INSERT INTO passwords(user_id,digest,updated_at) VALUES(?,?,?) ON CONFLICT(user_id) DO UPDATE SET digest=excluded.digest,updated_at=excluded.updated_at')
+        .run(userId, `scrypt$${salt}$${hash}`, now())
+    },
+    verifyPassword(email, password) {
+      if (typeof email !== 'string' || typeof password !== 'string') return null
+      const identity = db.prepare("SELECT user_id FROM identities WHERE provider='email' AND subject=?").get(email.trim().toLowerCase())
+      if (!identity) return null
+      const row = db.prepare('SELECT digest FROM passwords WHERE user_id=?').get(identity.user_id)
+      if (!row) return null
+      const parts = row.digest.split('$')
+      if (parts.length !== 3 || parts[0] !== 'scrypt') return null
+      const attempt = scryptSync(password, parts[1], 32)
+      const expected = Buffer.from(parts[2], 'base64')
+      if (attempt.length !== expected.length || !timingSafeEqual(attempt, expected)) return null
+      return getUser(identity.user_id)
+    },
+    hasPassword(userId) { return !!db.prepare('SELECT user_id FROM passwords WHERE user_id=?').get(userId) },
+    // ---- 管理后台：概览统计 ----
+    manageStats() {
+      return {
+        users: db.prepare('SELECT COUNT(*) AS n FROM users').get().n,
+        comments: db.prepare('SELECT COUNT(*) AS n FROM comments').get().n,
+        pendingReports: db.prepare("SELECT COUNT(*) AS n FROM comment_reports WHERE status='pending'").get().n,
+        preferencesAvailable: this.preferencesAvailable(),
+        preferenceStats: this.preferenceStats(),
+      }
     },
     close() { db.close() },
   }

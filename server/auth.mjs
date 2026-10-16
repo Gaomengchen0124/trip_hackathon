@@ -15,7 +15,7 @@ export function createAuthServer({ store, origin = 'http://127.0.0.1:8788', secu
   return createServer(async (req, res) => {
     const reply = (code, body, headers = {}) => { res.writeHead(code, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff', ...headers }); res.end(JSON.stringify(body)) }
     const path = new URL(req.url, expectedOrigin).pathname
-    if (!['/api/auth/session', '/api/auth/logout', '/api/auth/profile', '/api/auth/email/send', '/api/auth/email/verify', '/api/favorites', '/api/comments', '/api/me/comments', '/api/comment-reports'].includes(path)) return reply(404, { error: '接口不存在' })
+    if (!['/api/auth/session', '/api/auth/logout', '/api/auth/profile', '/api/auth/email/send', '/api/auth/email/verify', '/api/favorites', '/api/comments', '/api/me/comments', '/api/comment-reports', '/api/manage/users', '/api/manage/reports', '/api/manage/comments', '/api/manage/audit', '/api/manage/stats', '/api/manage/users/password', '/api/auth/password/login', '/api/auth/password/set'].includes(path)) return reply(404, { error: '接口不存在' })
     if (req.method !== 'GET' && req.headers.origin !== expectedOrigin) return reply(403, { error: '请求来源不允许' })
     const cookie = req.headers.cookie?.split(';').map(v => v.trim()).find(v => v.startsWith(`${COOKIE_NAME}=`))
     const token = cookie?.slice(COOKIE_NAME.length + 1)
@@ -39,6 +39,22 @@ export function createAuthServer({ store, origin = 'http://127.0.0.1:8788', secu
         } catch (error) { return reply(error.status || 500, { error: error.status ? error.message : '登录失败，请重试。' }) }
       }
       const user = store.sessionUser(token)
+      // ---- 账号密码登录（与邮箱验证码并行的第二种凭证）----
+      if (path === '/api/auth/password/login' && req.method === 'POST') {
+        const email = typeof body?.email === 'string' ? body.email.trim().toLowerCase() : ''
+        const password = typeof body?.password === 'string' ? body.password : ''
+        if (!email || !password) return reply(400, { error: '请输入邮箱和密码' })
+        if (!store.rateLimit(`pw-login:${req.socket.remoteAddress}`, 10, 600000) || !store.rateLimit(`pw-login:${email}`, 5, 600000)) return reply(429, { error: '尝试过于频繁，请稍后再试。' })
+        const loginUser = store.verifyPassword(email, password)
+        if (!loginUser) return reply(400, { error: '账号或密码不正确' })
+        const login = store.issueSession(loginUser.id)
+        return reply(200, { user: loginUser }, { 'Set-Cookie': sessionCookie(login.token, { secure, maxAge: login.maxAge }) })
+      }
+      if (path === '/api/auth/password/set' && req.method === 'POST') {
+        if (!user) return reply(401, { error: '请先登录' })
+        try { store.setPassword(user.id, body?.password); store.adminAudit(user.id, 'user.set-password', `user:${user.id}`); return reply(200, { ok: true }) }
+        catch (error) { return reply(400, { error: error.message }) }
+      }
       if (path === '/api/me/comments' && req.method==='GET') {
         if (!user) return reply(401,{error:'请先登录'})
         const raw=new URL(req.url,expectedOrigin).searchParams.get('before')
@@ -102,6 +118,67 @@ export function createAuthServer({ store, origin = 'http://127.0.0.1:8788', secu
         if (!profile || typeof profile !== 'object' || Array.isArray(profile)) return reply(400, { error: '资料格式错误' })
         try { return reply(200, { user: store.updateProfile(user.id, profile) }) }
         catch { return reply(400, { error: '昵称或头像格式不正确' }) }
+      }
+      // ---- 管理后台（仅 admin）----
+      if (path.startsWith('/api/manage/')) {
+        if (!user) return reply(401, { error: '请先登录' })
+        if (!store.isAdmin(user)) return reply(403, { error: '没有管理员权限' })
+        if (path === '/api/manage/users' && req.method === 'GET') {
+          const raw = new URL(req.url, expectedOrigin).searchParams.get('before')
+          const before = raw === null ? Number.MAX_SAFE_INTEGER : Number(raw)
+          if (!Number.isSafeInteger(before) || before < 1) return reply(400, { error: '分页参数不正确' })
+          const { users, nextCursor } = store.listUsers(before)
+          const prefs = store.listUserPreferences(users.map(u => u.id))
+          return reply(200, { users: users.map(u => ({ ...u, preferences: prefs[u.id]?.tags ?? null })), nextCursor, preferencesAvailable: store.preferencesAvailable() })
+        }
+        if (path === '/api/manage/users' && req.method === 'PATCH') {
+          if (typeof body?.id !== 'string' || !['user', 'admin'].includes(body?.role)) return reply(400, { error: '参数不正确' })
+          try { const updated = store.setUserRole(user.id, body.id, body.role); store.adminAudit(user.id, 'user.set-role', `user:${body.id}`, `role=${body.role}`); return reply(200, { user: updated }) }
+          catch (error) { return reply(400, { error: error.message }) }
+        }
+        if (path === '/api/manage/users/password' && req.method === 'POST') {
+          if (typeof body?.id !== 'string') return reply(400, { error: '参数不正确' })
+          try { store.setPassword(body.id, body?.password); store.adminAudit(user.id, 'user.reset-password', `user:${body.id}`); return reply(200, { ok: true }) }
+          catch (error) { return reply(400, { error: error.message }) }
+        }
+        if (path === '/api/manage/reports' && req.method === 'GET') {
+          const url = new URL(req.url, expectedOrigin)
+          const status = url.searchParams.get('status') === 'all' ? 'all' : 'pending'
+          const raw = url.searchParams.get('before')
+          const before = raw === null ? Number.MAX_SAFE_INTEGER : Number(raw)
+          if (!Number.isSafeInteger(before) || before < 1) return reply(400, { error: '分页参数不正确' })
+          return reply(200, store.listReports(status, before))
+        }
+        if (path === '/api/manage/reports' && req.method === 'PATCH') {
+          if (!Number.isSafeInteger(body?.id) || body.id < 1 || !['hide', 'dismiss'].includes(body?.action)) return reply(400, { error: '参数不正确' })
+          if (!store.resolveReport(body.id, body.action)) return reply(404, { error: '举报记录不存在或已处理' })
+          store.adminAudit(user.id, `report.${body.action}`, `report:${body.id}`)
+          return reply(200, { ok: true })
+        }
+        if (path === '/api/manage/comments') {
+          const id = Number(req.method === 'DELETE' ? new URL(req.url, expectedOrigin).searchParams.get('id') : body?.id)
+          if (!Number.isSafeInteger(id) || id < 1) return reply(400, { error: '评论编号不正确' })
+          if (req.method === 'DELETE') {
+            if (!store.moderateComment(user.id, id, true)) return reply(404, { error: '评论不存在' })
+            store.adminAudit(user.id, 'comment.hide', `comment:${id}`)
+            return reply(200, { ok: true })
+          }
+          if (req.method === 'PATCH') {
+            if (body?.action !== 'restore') return reply(400, { error: '操作不支持' })
+            if (!store.moderateComment(user.id, id, false)) return reply(404, { error: '评论不存在' })
+            store.adminAudit(user.id, 'comment.restore', `comment:${id}`)
+            return reply(200, { ok: true })
+          }
+          return reply(405, { error: '请求方法不支持' })
+        }
+        if (path === '/api/manage/stats' && req.method === 'GET') return reply(200, store.manageStats())
+        if (path === '/api/manage/audit' && req.method === 'GET') {
+          const raw = new URL(req.url, expectedOrigin).searchParams.get('before')
+          const before = raw === null ? Number.MAX_SAFE_INTEGER : Number(raw)
+          if (!Number.isSafeInteger(before) || before < 1) return reply(400, { error: '分页参数不正确' })
+          return reply(200, store.listAdminAudit(before))
+        }
+        return reply(405, { error: '请求方法不支持' })
       }
       return reply(405, { error: '请求方法不支持' })
     } catch { return reply(500, { error: '服务暂不可用' }) }

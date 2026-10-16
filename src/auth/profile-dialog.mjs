@@ -29,7 +29,15 @@ export function openProfileDialog() {
       <p class="login-feedback" id="profile-error" role="alert"></p>
       <p class="login-feedback" data-result role="status"></p>
       <button class="login-submit" type="submit">保存资料</button>
-    </form>`
+    </form>
+    <div class="profile-password" data-password hidden>
+      <p class="profile-avatar-title">登录密码</p>
+      <form data-password-form novalidate>
+        <input name="password" type="password" minlength="8" maxlength="128" placeholder="设置 8 位以上密码" autocomplete="new-password" aria-label="登录密码">
+        <button class="profile-upload-button" type="submit">设置密码</button>
+        <p class="login-feedback" data-password-result role="status"></p>
+      </form>
+    </div>`
   const form = dialog.querySelector('form')
   const input = form.elements.nickname
   const error = dialog.querySelector('#profile-error')
@@ -76,6 +84,24 @@ export function openProfileDialog() {
     else { input.setAttribute('aria-invalid', 'true'); input.focus() }
   }
   dialog.querySelector('[data-close]').onclick = () => dialog.close()
+  // 服务端模式：自助设置登录密码（设置后可用邮箱+密码登录）
+  if (auth.getSnapshot().mode === 'server' && typeof auth.setPassword === 'function') {
+    const pwBox = dialog.querySelector('[data-password]')
+    const pwForm = dialog.querySelector('[data-password-form]')
+    const pwInput = pwForm.elements.password
+    const pwResult = dialog.querySelector('[data-password-result]')
+    pwBox.hidden = false
+    pwForm.onsubmit = async event => {
+      event.preventDefault()
+      if (pwInput.value.length < 8) { pwResult.textContent = '密码长度需为 8-128 位。'; return }
+      pwResult.textContent = '保存中…'
+      try {
+        await auth.setPassword(pwInput.value)
+        pwResult.textContent = '密码已设置，下次可用邮箱 + 密码登录。'
+        pwInput.value = ''
+      } catch (failure) { pwResult.textContent = failure.message || '设置失败，请重试。' }
+    }
+  }
   dialog.onclick = event => {
     if (event.target !== dialog) return
     const box = dialog.getBoundingClientRect()

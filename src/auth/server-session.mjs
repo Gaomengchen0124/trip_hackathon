@@ -28,6 +28,8 @@ export function createServerSession() {
     destroy() { revision++; listeners.clear(); globalThis.window?.removeEventListener('focus', refresh); globalThis.window?.removeEventListener('travel-auth-expired', expired) },
     async sendCode(email) { await authRequest('/api/auth/email/send', { method: 'POST', body: { email } }) },
     async loginEmail(email, code) { revision++; const { user } = await authRequest('/api/auth/email/verify', { method: 'POST', body: { email, code } }); publish({ user, isLoggedIn: true, loading: false, notice: '' }) },
+    async loginPassword(email, password) { revision++; const { user } = await authRequest('/api/auth/password/login', { method: 'POST', body: { email, password } }); publish({ user, isLoggedIn: true, loading: false, notice: '' }) },
+    async setPassword(password) { await authRequest('/api/auth/password/set', { method: 'POST', body: { password } }) },
     async logout() {
       revision++
       try { await authRequest('/api/auth/logout', { method: 'POST' }); publish({ user: null, isLoggedIn: false, loading: false, notice: '' }) }
