@@ -83,6 +83,7 @@ function go(lineId) {
           </button>
         </div>
       </div>
+      <router-link class="recommend-entry" to="/recommend"><span class="recommend-symbol" aria-hidden="true">✧</span><span><small>智能推荐 · 灵感从这里开始</small><strong>让喜欢的故事，带你去下一站</strong><span>从心爱的作品出发，或发现意想不到的巡礼路线。</span></span><b aria-hidden="true">↗</b></router-link>
       <div class="wish-entry"><div><strong>巡礼许愿</strong><span>留下你期待的下一站</span></div><button @click="openWish()">去许愿 →</button></div>
     </section>
     <WishForm v-if="wishOpen" :initial-ip="wishIp" @close="wishOpen = false" />
@@ -110,6 +111,8 @@ function go(lineId) {
 </template>
 
 <style scoped>
+.recommend-entry{max-width:650px;margin:22px auto 0;padding:22px 24px;display:flex;gap:18px;align-items:center;text-align:left;border:1px solid #d6c5a7;border-radius:18px;background:linear-gradient(120deg,#f1e7d3,#fcf8ef);box-shadow:0 5px 20px #80633310}.recommend-symbol{font-size:38px;color:#9a7942}.recommend-entry>span:nth-child(2){flex:1;display:grid;gap:5px}.recommend-entry small{font-size:10px;color:#806333;letter-spacing:.08em}.recommend-entry strong{font-family:serif;font-size:21px;font-weight:600}.recommend-entry span span{font-size:12px;color:var(--ink-2)}.recommend-entry b{font-size:24px;font-weight:400;color:#806333}.recommend-entry:hover{border-color:#9a7942}.recommend-entry:focus-visible{outline:2px solid #806333;outline-offset:4px}@media(max-width:600px){.recommend-entry{padding:18px 16px;gap:12px}.recommend-entry strong{font-size:18px}.recommend-symbol{font-size:29px}.recommend-entry span span{font-size:11px}}
+
 .wish-entry{max-width:480px;margin:18px auto 0;padding:15px 20px;border:1px solid var(--line);border-radius:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(255,255,255,.76);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 3px 12px rgba(43,43,43,.025);transition:transform .2s ease,box-shadow .2s ease;text-align:left}
 @media(hover:hover){.wish-entry:hover{transform:translateY(-2px) scale(1.015);box-shadow:0 8px 24px rgba(43,43,43,.055)}}
 .wish-entry:focus-within{box-shadow:0 8px 24px rgba(43,43,43,.055)}

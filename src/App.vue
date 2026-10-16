@@ -1,7 +1,13 @@
 <script setup>
+import { onMounted, onUnmounted } from 'vue'
+import InterestDialog from './components/InterestDialog.vue'
+import { initInterests, profileState, openInterests } from './recommendation/profile.mjs'
 import AuthStatus from './components/AuthStatus.vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
+const editInterests = () => openInterests()
+onMounted(() => { initInterests(); window.addEventListener('travel-edit-interests', editInterests) })
+onUnmounted(() => window.removeEventListener('travel-edit-interests', editInterests))
 const masthead = `${import.meta.env.BASE_URL}img/story-pilgrim-masthead-v1.png`
 </script>
 
@@ -14,6 +20,7 @@ const masthead = `${import.meta.env.BASE_URL}img/story-pilgrim-masthead-v1.png`
   </header>
   <div class="account-dock"><AuthStatus /></div>
   <router-view />
+  <InterestDialog v-if="profileState.open" />
 </template>
 
 <style scoped>

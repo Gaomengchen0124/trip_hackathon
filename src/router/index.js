@@ -4,6 +4,7 @@ import { usePlanStore } from '../stores/plan'
 const router = createRouter({
   history: createWebHistory(),
   routes: [
+    { path: '/recommend', name: 'recommend', component: () => import('../views/RecommendationView.vue') },
     { path: '/line/:lineId', name: 'route-intro', component: () => import('../views/RouteIntroView.vue') },
     { path: '/review/points', name: 'submission-review', component: () => import('../views/SubmissionReviewView.vue') },
     { path: '/', name: 'home', component: () => import('../views/HomeView.vue') },

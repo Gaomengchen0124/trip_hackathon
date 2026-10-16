@@ -1,3 +1,4 @@
+import { validateInterests } from '../src/recommendation/options.mjs'
 import { DatabaseSync } from 'node:sqlite'
 import { randomBytes, randomUUID, createHash } from 'node:crypto'
 import { mkdirSync, chmodSync } from 'node:fs'
@@ -9,7 +10,7 @@ export function createAuthStore({ file = 'var/auth.sqlite', now = Date.now } = {
   if (file !== ':memory:') mkdirSync(dirname(file), { recursive: true, mode: 0o700 })
   const db = new DatabaseSync(file)
   if (file !== ':memory:') chmodSync(file, 0o600)
-  if (db.prepare('PRAGMA user_version').get().user_version > 5) { db.close(); throw new Error('Unsupported database version') }
+  if (db.prepare('PRAGMA user_version').get().user_version > 6) { db.close(); throw new Error('Unsupported database version') }
   db.exec(`PRAGMA foreign_keys = ON;
     CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, nickname TEXT NOT NULL, avatar TEXT NOT NULL, created_at INTEGER NOT NULL);
     CREATE TABLE IF NOT EXISTS identities (provider TEXT NOT NULL, subject TEXT NOT NULL, user_id TEXT NOT NULL REFERENCES users(id), PRIMARY KEY(provider, subject));
@@ -24,15 +25,26 @@ export function createAuthStore({ file = 'var/auth.sqlite', now = Date.now } = {
     `)
   db.exec('BEGIN IMMEDIATE')
   try {
+    db.exec('CREATE TABLE IF NOT EXISTS recommendation_profiles (user_id TEXT PRIMARY KEY REFERENCES users(id), interests TEXT NOT NULL, status TEXT NOT NULL, updated_at INTEGER NOT NULL)')
     if (!db.prepare('PRAGMA table_info(comments)').all().some(column => column.name === 'deleted_at')) db.exec('ALTER TABLE comments ADD COLUMN deleted_at INTEGER')
     if (!db.prepare('PRAGMA table_info(comments)').all().some(column => column.name === 'moderated_at')) db.exec('ALTER TABLE comments ADD COLUMN moderated_at INTEGER')
-    db.exec('PRAGMA user_version = 5; COMMIT')
+    db.exec('PRAGMA user_version = 6; COMMIT')
   } catch (error) { db.exec('ROLLBACK'); db.close(); throw error }
   function getUser(id) {
     const row = db.prepare('SELECT id,nickname,avatar FROM users WHERE id=?').get(id)
     return row ? { ...row } : null
   }
   return {
+    getInterests(userId) {
+      const row = db.prepare('SELECT interests,status,updated_at FROM recommendation_profiles WHERE user_id=?').get(userId)
+      return row ? {interests:JSON.parse(row.interests),status:row.status,updatedAt:row.updated_at} : null
+    },
+    setInterests(userId,input) {
+      if (!input || !['saved','skipped'].includes(input.status)) throw new Error('兴趣状态不正确')
+      const interests=validateInterests(input.interests)
+      db.prepare('INSERT INTO recommendation_profiles VALUES(?,?,?,?) ON CONFLICT(user_id) DO UPDATE SET interests=excluded.interests,status=excluded.status,updated_at=excluded.updated_at').run(userId,JSON.stringify(interests),input.status,now())
+      return this.getInterests(userId)
+    },
     // Internal only: call AFTER verifying a provider credential. No public registration bypass.
     verifiedIdentity(provider, subject) {
       if (!['email', 'phone'].includes(provider) || typeof subject !== 'string' || !subject.trim() || subject.length > 254) throw new Error('Invalid verified identity')

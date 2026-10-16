@@ -1,4 +1,5 @@
 import './env.mjs'
+import { createRecommendationHandler } from './recommendation.mjs'
 import { createPoiHandler } from './poi-submissions.mjs'
 import { createServer } from 'node:http'
 import { mkdir, readFile, appendFile } from 'node:fs/promises'
@@ -17,14 +18,16 @@ function validate(body) {
   if (body.notify === true && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw Error('邮箱格式错误')
   return { requestId, ip, city: body.uncertain === true ? '' : str('city',150), uncertain: body.uncertain === true, points: [...new Set(body.points.map(v => v.trim()))], scene: str('scene',1000), styles: [...new Set(body.styles)], clues: str('clues',2000), notify: body.notify === true, email }
 }
-export async function createWishServer({ file = resolve('var/wishes.jsonl'), adminToken = process.env.WISH_ADMIN_TOKEN, allowedOrigins = (process.env.WISH_ALLOWED_ORIGINS || 'http://localhost:5173,http://localhost:4173,http://localhost:5198').split(',') } = {}) {
+export async function createWishServer({ file = resolve('var/wishes.jsonl'), adminToken = process.env.WISH_ADMIN_TOKEN, allowedOrigins = (process.env.WISH_ALLOWED_ORIGINS || 'http://localhost:5178,http://127.0.0.1:5178,http://localhost:5173,http://localhost:4173,http://localhost:5198').split(',') } = {}) {
   await mkdir(dirname(file), { recursive: true, mode: 0o700 })
   const records = new Map()
   try { for (const line of (await readFile(file,'utf8')).split('\n').filter(Boolean)) { const row = JSON.parse(line); records.set(row.requestId,row) } } catch(e) { if (e.code !== 'ENOENT') throw e }
   let queue = Promise.resolve()
   const limits = new Map()
   const poiHandler = await createPoiHandler({ directory: resolve(dirname(file), 'poi-submissions'), adminToken, allowedOrigins })
+  const recommendationHandler = await createRecommendationHandler({ allowedOrigins })
   return createServer(async (req,res) => {
+    if (await recommendationHandler(req,res)) return
     if (await poiHandler(req,res)) return
     const reply = (code,body) => { res.writeHead(code, { 'Content-Type':'application/json; charset=utf-8', 'Cache-Control':'no-store', 'X-Content-Type-Options':'nosniff' }); res.end(JSON.stringify(body)) }
     const path = new URL(req.url,'http://localhost').pathname

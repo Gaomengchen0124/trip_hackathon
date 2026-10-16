@@ -30,6 +30,13 @@ export function openProfileDialog() {
       <p class="login-feedback" data-result role="status"></p>
       <button class="login-submit" type="submit">保存资料</button>
     </form>`
+  const interestButton = document.createElement('button')
+  interestButton.type = 'button'; interestButton.className = 'login-submit'; interestButton.textContent = '编辑我的内容兴趣'
+  interestButton.onclick = () => {
+    dialog.addEventListener('close', () => window.dispatchEvent(new Event('travel-edit-interests')), { once:true })
+    dialog.close()
+  }
+  dialog.append(interestButton)
   const form = dialog.querySelector('form')
   const input = form.elements.nickname
   const error = dialog.querySelector('#profile-error')
