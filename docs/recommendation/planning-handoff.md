@@ -12,7 +12,7 @@
 | timeRange | 不传 | 用户已确认统一在规划页填写 |
 | hoursPerDay | 不传 | 用户已确认统一在规划页填写 |
 
-首版跳转示例：`/line/kaiduan-xiamen`。不需要新增推荐专用规划接口或草稿系统。
+首版跳转示例：`/line/kaiduan-xiamen?from=recommend`。from 仅用于展示返回推荐筛选的导航，不进入 plan 请求；路线页刷新后也可返回已有推荐条件与结果。不需要新增推荐专用规划接口或草稿系统。
 
 ipId、路线标题、封面和候选景点可由 getLineDetail(lineId) 获取，无需重复传递。推荐方不生成 poiIds；Citywalk、购物等活动偏好和景点选择由规划方负责。长期内容兴趣留在推荐模块。
 

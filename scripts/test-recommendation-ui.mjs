@@ -52,6 +52,7 @@ try{
  const homePosition=await page.evaluate(()=>scrollY);assert.ok(homePosition>0)
  await page.click('.more');await page.waitForSelector('.group');assert.match(page.url(),/column\/city/)
  await page.waitForFunction(()=>scrollY===0)
+ assert.equal(await page.$('.back-to-recommend'),null)
  await page.goBack({waitUntil:'domcontentloaded'});await page.waitForSelector('.more')
  await page.waitForFunction(y=>Math.abs(scrollY-y)<3,{},homePosition)
  await page.waitForSelector('.recommend-entry');await page.click('.recommend-entry')
@@ -112,6 +113,18 @@ try{
  await page.goBack({waitUntil:'domcontentloaded'});await page.waitForSelector('.recommend-card')
  await page.waitForFunction(y=>Math.abs(scrollY-y)<3,{},beforeRoute)
  assert.equal(await page.$eval('#recommend-city',el=>el.value),'厦门')
+ // The explicit return entry survives refresh and restores filters/results without a new request.
+ const returnRequestCount=requests.length
+ await page.click('.route-link');await page.waitForSelector('.leaflet-container')
+ assert.match(page.url(),/from=recommend/)
+ await page.reload({waitUntil:'domcontentloaded'});await page.waitForSelector('.leaflet-container')
+ await page.click('.back-to-recommend');await page.waitForSelector('.recommend-card')
+ assert.equal(await expanded(),'true');assert.equal(await page.$eval('#recommend-city',el=>el.value),'厦门')
+ assert.equal(await page.$eval('#recommend-text',el=>el.value),'喜欢悬疑反转与探险故事')
+ assert.equal(requests.length,returnRequestCount)
+ assert.match(await page.$eval('#preference-help',el=>el.textContent),/作品、人物和兴趣均可填写/)
+ await page.click('.toggle-filter')
+
  // Empty results and the outside "adjust" action must remain open.
  await clickText('暂不感兴趣');await page.click('.compact-generate');await page.waitForSelector('.empty-state')
  await clickText('调整条件');assert.equal(await expanded(),'true')
@@ -145,7 +158,7 @@ try{
  // Saving, failed removal, retry and reload affect only favorites, never recommendation conditions/profile.
  const savedDraft=await page.evaluate(()=>JSON.parse(sessionStorage.getItem('pilgrimage.recommendation.v1:ui-test-user')).form)
  const savedProfile=JSON.stringify(profile),recommendationCount=requests.length
- const savedLine=await page.$eval('.route-link',el=>'line:'+el.getAttribute('href').split('/').pop())
+ const savedLine=await page.$eval('.route-link',el=>'line:'+new URL(el.href).pathname.split('/').pop())
  await page.click('.recommend-card .favorite-action button')
  await page.waitForFunction(()=>document.querySelector('.favorite-action button')?.getAttribute('aria-pressed')==='true')
  assert.ok(favorites.has(savedLine));assert.deepEqual(favoriteWrites.at(-1),{entityKey:savedLine,saved:true})

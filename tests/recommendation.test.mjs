@@ -86,3 +86,14 @@ test('interest API authenticates identity, isolates profiles and records skip/sa
   assert.equal(store.sessionUser(cookie.split('=')[1]).nickname,user.nickname)
  }finally{await new Promise(resolve=>server.close(resolve));store.close()}
 })
+
+
+test('valid extra reason keys are verified then trimmed, not treated as AI outage',async()=>{
+ const request=input({mode:'by_work',ipId:'kaiduan'})
+ const keys=['work','destination','themes_fact','moods_fact']
+ const result=await recommend(request,catalog,{apiKey:'test',fetchImpl:async()=>mockResponse([{lineId:'kaiduan-xiamen',reasonKeys:keys}])})
+ assert.equal(result.source,'ai');assert.equal(result.items.length,1);assert.equal(result.items[0].reasons.length,3)
+ // Even an invalid key after the displayed first three must reject the response.
+ const invalid=await recommend(request,catalog,{apiKey:'test',fetchImpl:async()=>mockResponse([{lineId:'kaiduan-xiamen',reasonKeys:[...keys,'invented']}])})
+ assert.equal(invalid.source,'basic')
+})

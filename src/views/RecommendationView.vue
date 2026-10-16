@@ -1,5 +1,6 @@
 <script setup>
 import { computed,ref,watch,onMounted,onBeforeUnmount,nextTick } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import InterestFields from '../components/InterestFields.vue'
 import PhotoFrame from '../components/ui/PhotoFrame.vue'
 import WishForm from '../components/WishForm.vue'
@@ -8,6 +9,8 @@ import DialogSheet from '../components/ui/DialogSheet.vue'
 import { dictionaries,emptyInterests,validateInterests } from '../recommendation/options.mjs'
 import { getCatalog,request } from '../recommendation/client.mjs'
 import { profileState,initInterests,reloadInterests } from '../recommendation/profile.mjs'
+const route=useRoute(),router=useRouter()
+const returnToFilters=route.query.edit==='1'
 const fresh=()=>({mode:'discover',ipId:'',city:'',text:'',interests:emptyInterests(),excludedIpIds:[]})
 const form=ref(fresh()),expanded=ref(true),catalog=ref(null),catalogError=ref(''),busy=ref(false),error=ref(''),result=ref(null),submitted=ref(''),feedback=ref(''),wishOpen=ref(false),sourceInfoOpen=ref(false),storageNotice=ref(''),filterBar=ref(null)
 let controller,requestVersion=0,cacheKey='',activeIdentity=null
@@ -45,7 +48,7 @@ function restore(id,previous){
     }
     form.value={...fresh(),...f,mode:'discover',ipId:'',interests}
     if(saved.result && Array.isArray(saved.result.items) && saved.result.items.every(x=>typeof x.lineId==='string' && x.ip && Array.isArray(x.reasons) && Array.isArray(x.highlights) && Array.isArray(x.themes)))result.value=saved.result
-    submitted.value=typeof saved.submitted==='string'?saved.submitted:'';expanded.value=!result.value || saved.expanded!==false
+    submitted.value=typeof saved.submitted==='string'?saved.submitted:'';expanded.value=returnToFilters || !result.value || saved.expanded!==false
   }catch{storageNotice.value='之前的推荐记录无法恢复，可以重新选择。'}
 }
 watch(()=>profileState.loading?null:(profileState.userId || 'guest'),id=>{if(id && id!==activeIdentity){const previous=activeIdentity;activeIdentity=id;restore(id,previous)}}, {immediate:true})
@@ -59,7 +62,7 @@ function collapseOnEscape(event){
     expanded.value=false;filterBar.value.querySelector('.toggle-filter')?.focus()
   }
 }
-onMounted(()=>{initInterests();loadCatalog();document.addEventListener('click',collapseOutside);document.addEventListener('keydown',collapseOnEscape)})
+onMounted(()=>{if(returnToFilters){const {edit,...query}=route.query;router.replace({query})}initInterests();loadCatalog();document.addEventListener('click',collapseOutside);document.addEventListener('keydown',collapseOnEscape)})
 onBeforeUnmount(()=>{requestVersion++;controller?.abort();document.removeEventListener('click',collapseOutside);document.removeEventListener('keydown',collapseOnEscape)})
 function useProfile(){form.value.interests=clone(profileState.interests);feedback.value='已带入保存的兴趣，点击推荐后生效。'}
 function reset(){form.value=fresh();feedback.value='';error.value=''}
@@ -110,7 +113,7 @@ function exclude(item){
           <section class="preference-extra" aria-labelledby="preference-title">
             <label id="preference-title" for="recommend-text" class="text-label">偏好补充 <small>可选</small></label>
             <textarea id="recommend-text" v-model="form.text" rows="2" maxlength="500" aria-describedby="preference-help" placeholder="喜欢哪些作品、人物或故事？例如：喜欢《盗墓笔记》的探险和悬念，也想发现类似的故事。"></textarea>
-            <div id="preference-help" class="hint text-help"><span>作品、人物和兴趣都可以写在这里。不填也能推荐；日期、活动与景点在规划页选择。</span><span>{{ form.text.length }}/500</span></div>
+            <div id="preference-help" class="hint text-help"><span>作品、人物和兴趣均可填写</span><span>{{ form.text.length }}/500</span></div>
             <p class="work-hint">也可以点选已收录作品 <small>可多选，仅作为偏好</small></p>
             <div class="preference-works" role="group" aria-label="偏好的作品"><button v-for="work in catalog.works" :key="work.ipId" type="button" :aria-pressed="form.interests.ipIds.includes(work.ipId)" @click="toggleWork(work.ipId)">{{ work.name }}</button></div>
           </section>
@@ -135,7 +138,7 @@ function exclude(item){
             <p v-if="item.caveat" class="caveat">{{ item.caveat }}</p>
             <div v-if="item.highlights.length" class="highlights"><strong>路线中的代表地点</strong><p>{{ item.highlights.map(p=>p.name).join(' · ') }}</p></div>
             <p class="data-note">{{ item.dataNotice }}</p>
-            <router-link class="btn route-link" :to="`/line/${item.lineId}`">查看路线 <span aria-hidden="true">↗</span></router-link>
+            <router-link class="btn route-link" :to="{name:'route-intro',params:{lineId:item.lineId},query:{from:'recommend'}}">查看路线 <span aria-hidden="true">↗</span></router-link>
             <div class="card-feedback"><FavoriteButton :entity-key="`line:${item.lineId}`" label="收藏路线" /><button :aria-pressed="form.excludedIpIds.includes(item.ipId)" :disabled="busy" @click="exclude(item)">{{ form.excludedIpIds.includes(item.ipId)?'撤销不感兴趣':'暂不感兴趣' }}</button></div>
           </div>
         </article>

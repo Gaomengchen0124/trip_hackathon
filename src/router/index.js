@@ -5,7 +5,7 @@ const router = createRouter({
   history: createWebHistory(),
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) return savedPosition
-    if (['route-intro', 'column'].includes(to.name)) return { left: 0, top: 0 }
+    if (['route-intro', 'column', 'recommend'].includes(to.name)) return { left: 0, top: 0 }
   },
   routes: [
     { path: '/recommend', name: 'recommend', component: () => import('../views/RecommendationView.vue') },
