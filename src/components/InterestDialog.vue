@@ -19,7 +19,7 @@ async function reload(){await reloadInterests();if(!profileState.error)interests
 function close(){if(profileState.onboarding)save(true);else dismissInterests()}
 </script>
 <template>
-  <DialogSheet title="你喜欢什么样的故事？" :busy="busy" @close="close">
+  <DialogSheet title="我的兴趣" :busy="busy" @close="close">
     <p class="intro">让下一次巡礼更懂你。选几项就好，也可以全部留空。</p>
     <p class="storage">{{ profileState.userId ? '兴趣将保存到你的账号，随时可以修改。' : '游客兴趣保存在当前浏览器，登录后可另行保存到账号。' }}</p>
     <p v-if="profileState.error" role="alert">此前的兴趣尚未载入，请先<button @click="reload">重试加载</button>。</p>

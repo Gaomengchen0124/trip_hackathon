@@ -83,7 +83,7 @@ function go(lineId) {
           </button>
         </div>
       </div>
-      <router-link class="recommend-entry" to="/recommend"><span class="recommend-symbol" aria-hidden="true">✧</span><span><small>智能推荐 · 灵感从这里开始</small><strong>让喜欢的故事，带你去下一站</strong><span>从心爱的作品出发，或发现意想不到的巡礼路线。</span></span><b aria-hidden="true">↗</b></router-link>
+      <router-link class="recommend-entry" to="/recommend"><span class="recommend-symbol" aria-hidden="true">✧</span><span><small>智能推荐 · 灵感从这里开始</small><strong>让喜欢的故事，带你去下一站</strong><span>从你的兴趣出发，发现意想不到的作品和巡礼路线。</span></span><b aria-hidden="true">↗</b></router-link>
       <div class="wish-entry"><div><strong>巡礼许愿</strong><span>留下你期待的下一站</span></div><button @click="openWish()">去许愿 →</button></div>
     </section>
     <WishForm v-if="wishOpen" :initial-ip="wishIp" @close="wishOpen = false" />
