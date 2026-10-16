@@ -38,7 +38,7 @@ function close(){if(profileState.onboarding && !profileState.error)save(true);el
   <DialogSheet title="我的兴趣" :busy="busy" @close="close">
     <p class="intro">让下一次巡礼更懂你。每题都可跳过，也可以稍后再选。</p>
     <p class="storage">{{ profileState.userId ? '选择将保存到你的账号，之后可在个人中心修改。' : '游客兴趣保存在当前浏览器，登录后可另行保存到账号。' }}</p>
-    <p v-if="profileState.error" role="alert">此前的兴趣尚未载入，请先<button @click="reload">重试加载</button>。</p>
+    <p v-if="profileState.error" role="alert">{{ profileState.error }} <button :disabled="profileState.loading" @click="reload">{{ profileState.loading?'加载中…':'重试加载' }}</button></p>
     <template v-if="profileState.onboarding">
       <div class="question-progress" role="status" aria-live="polite"><span>第 {{ step+1 }} / {{ questions.length }} 题</span><span>可多选 · 可跳过</span></div>
       <div class="progress-track" aria-hidden="true"><span v-for="(_,index) in questions" :key="index" :class="{done:index<=step}"></span></div>

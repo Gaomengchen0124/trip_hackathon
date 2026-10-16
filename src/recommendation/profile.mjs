@@ -44,7 +44,12 @@ export function initInterests(){
       profileState.revision++
       const hasInterests=Object.values(profileState.interests).some(values=>values.length>0)
       if(snapshot.isLoggedIn && (!profile || (signingIn && !hasInterests)) && !dismissed.has(id))queueOnboarding(version,id)
-    }catch(error){if(version===generation)profileState.error=error.message}
+    }catch(error){
+      if(version===generation){
+        profileState.error=error.status===404?'兴趣服务尚未就绪，请稍后重试。':error.message
+        if(snapshot.isLoggedIn && error.status!==401 && !dismissed.has(id))queueOnboarding(version,id)
+      }
+    }
     finally{if(version===generation)profileState.loading=false}
   })
 }
