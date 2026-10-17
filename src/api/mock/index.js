@@ -20,6 +20,19 @@ import { runPlan } from '../../engine/plan-result.mjs'
 const FILES = import.meta.glob('../../../data/lines/*.json', { eager: true, import: 'default' })
 
 const LOADED = Object.values(FILES)
+
+// 草稿预览：管理后台把内容库草稿拆成 line doc 写入 sessionStorage，
+// 仅在 URL 带 ?preview=1 时合并进数据层（iframe 预览用；正常访问生产无感）
+try {
+  const previewOn = globalThis.location?.search.includes('preview=1')
+  const raw = previewOn && globalThis.sessionStorage?.getItem('preview-docs')
+  if (raw) {
+    const docs = JSON.parse(raw)
+    for (const [lineId, doc] of Object.entries(docs)) {
+      if (doc?.line?.lineId === lineId) LOADED.push(doc)
+    }
+  }
+} catch { /* 预览注入失败不阻断正常数据 */ }
 const INDEX = LOADED.find((d) => d?._primary && Array.isArray(d?.lines))
 const DOCS = LOADED.filter((d) => d?.line?.lineId)
 const BY_ID = Object.fromEntries(DOCS.map((d) => [d.line.lineId, d]))

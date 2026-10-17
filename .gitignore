@@ -19,3 +19,4 @@ var/
 *.sqlite-journal
 
 !server/.env.auth.example
+!server/.env.ai.example

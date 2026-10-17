@@ -30,7 +30,7 @@ export function validateSubmission(body,lines){
  return { row:{requestId,lineId,type:body.type,place:{name,address,lat:place.lat,lng:place.lng,source:['manual','photon','geoapify'].includes(place.source)?place.source:'search',coordinateSystem:'WGS84',approximate:place.approximate===true,precision:text(place,'precision',30)},intro,locationDetail:text(body,'locationDetail',300),tips:text(body,'tips',500),alias:body.type==='ip'?text(body,'alias',100):'',scene,relation:body.type==='ip'?body.relation:'',edition:body.type==='ip'?body.edition:'',chapter:body.type==='ip'?text(body,'chapter',100):'',excerpt:body.type==='ip'?text(body,'excerpt',2000):'',source:body.type==='ip'?text(body,'source',500):'',photoConsent:true},images }
 }
 async function bodyJSON(req,max){let size=0;const chunks=[];for await(const chunk of req){size+=chunk.length;if(size>max)invalid('内容过大');chunks.push(chunk)}try{return JSON.parse(Buffer.concat(chunks).toString('utf8'))}catch{invalid('JSON 格式错误')}}
-export async function createPoiHandler({ directory=resolve('var/poi-submissions'),dataDirectory=resolve('data/lines'),adminToken=process.env.WISH_ADMIN_TOKEN,allowedOrigins=[],photonUrl=process.env.PHOTON_BASE_URL,fetchImpl=fetch }={}){
+export async function createPoiHandler({ directory=resolve('var/poi-submissions'),dataDirectory=resolve('data/lines'),adminToken=process.env.WISH_ADMIN_TOKEN,allowedOrigins=[],photonUrl=process.env.PHOTON_BASE_URL,fetchImpl=fetch,cookieAdmin=null }={}){
  await mkdir(directory,{recursive:true,mode:0o700})
  const lines=new Map()
  for(const f of await readdir(dataDirectory)){if(!f.endsWith('.json'))continue;const d=JSON.parse(await readFile(join(dataDirectory,f),'utf8'));if(d.line?.lineId)lines.set(d.line.lineId,d)}
@@ -40,6 +40,7 @@ export async function createPoiHandler({ directory=resolve('var/poi-submissions'
  const limits=new Map()
  const places=createPlaceSearch({photonUrl,fetchImpl})
  function admin(req){const token=req.headers.authorization||'',expected=`Bearer ${adminToken}`;return !!adminToken&&Buffer.byteLength(token)===Buffer.byteLength(expected)&&timingSafeEqual(Buffer.from(token),Buffer.from(expected))}
+ async function isAdmin(req){if(admin(req))return true;if(cookieAdmin)try{return !!await cookieAdmin(req)}catch{return false}return false}
  function rate(req){const now=Date.now(),ip=req.socket.remoteAddress;for(const [k,v]of limits)if(now-v.start>60000)limits.delete(k);const v=limits.get(ip)||{start:now,count:0};limits.set(ip,v);return ++v.count<=120}
  const save=async row=>{const file=join(directory,`${row.id}.json`);await writeFile(file+'.tmp',JSON.stringify(row),{mode:0o600,flush:true});await rename(file+'.tmp',file)}
  return async(req,res)=>{
@@ -83,7 +84,7 @@ export async function createPoiHandler({ directory=resolve('var/poi-submissions'
   records.set(record.requestId,record);return record
  });queue=task.catch(()=>{});const result=await task;return reply(201,{id:result.id,status:result.status})
  }
- if(!admin(req))return reply(401,{error:'请填写有效的团队审核密钥'})
+ if(!await isAdmin(req))return reply(401,{error:'请填写有效的团队审核密钥'})
  if(path==='/api/poi-submissions'&&req.method==='GET')return reply(200,[...records.values()].sort((a,b)=>b.createdAt.localeCompare(a.createdAt)))
  const match=path.match(/^\/api\/poi-submissions\/(P-[a-f0-9-]+)(?:\/photos\/(\d))?$/)
  if(!match)return reply(404,{error:'not found'})

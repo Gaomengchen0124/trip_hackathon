@@ -30,7 +30,11 @@ export function createEmailLogin({ store, sendEmail, secret = randomBytes(32).to
 export function configuredEmailSender(env = process.env, transport = fetch) {
   const apiKey = env.RESEND_API_KEY?.trim()
   const from = env.AUTH_EMAIL_FROM?.trim()
-  if (!apiKey || !from) return undefined
+  if (!apiKey || !from) {
+    // 本地开发兜底：AUTH_LOCAL_HTTP=1 时把验证码打到 auth 服务控制台，不接邮件服务
+    if (env.AUTH_LOCAL_HTTP === '1') return async (email, code) => { console.log(`[dev] 登录验证码 ${email}: ${code}`) }
+    return undefined
+  }
   return async (email, code) => {
     let response
     try { response = await transport('https://api.resend.com/emails', {
