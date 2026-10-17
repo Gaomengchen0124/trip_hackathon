@@ -24,6 +24,7 @@ function go(lineId) {
     <header class="bar">
       <button class="back" @click="router.push('/')">← 首页</button>
       <h1>{{ title }} · 全部</h1>
+      <router-link class="wish-btn" to="/wishes">巡礼许愿 ✨</router-link>
     </header>
 
     <section v-for="g in columns[key]" :key="g.label" class="group">
@@ -54,6 +55,17 @@ function go(lineId) {
 }
 h1 {
   font-size: 20px;
+}
+.wish-btn {
+  margin-left: auto;
+  padding: 7px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 13px;
+  color: var(--brand);
+  white-space: nowrap;
+  box-shadow: var(--shadow);
 }
 .group {
   margin-bottom: 24px;

@@ -44,7 +44,7 @@ function again() { form.value = fresh(); receipt.value = null; error.value = '' 
       <h3>许愿成功 ✨</h3>
       <p class="destination">《{{ receipt.ip }}》<template v-if="receipt.city"> · {{ receipt.city }}</template></p>
       <p class="hint">愿望编号：{{ receipt.id }}</p>
-      <div class="actions"><button class="btn" @click="emit('close')">继续逛逛</button><button class="btn-ghost" @click="again">再许一个愿</button></div>
+      <div class="actions"><router-link class="btn" to="/wishes" @click="emit('close')">去看看许愿墙</router-link><button class="btn-ghost" @click="again">再许一个愿</button></div>
     </div>
     <form v-else @submit.prevent="submit">
       <p class="intro">留下你期待的下一站</p>

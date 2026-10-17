@@ -83,7 +83,7 @@ function go(lineId) {
           </button>
         </div>
       </div>
-      <div class="wish-entry"><div><strong>巡礼许愿</strong><span>留下你期待的下一站</span></div><button @click="openWish()">去许愿 →</button></div>
+      <router-link class="wish-entry" to="/wishes"><div><strong>巡礼许愿</strong><span>看看大家期待的下一站，也可以留下你的</span></div><span class="go">去许愿墙 →</span></router-link>
     </section>
     <WishForm v-if="wishOpen" :initial-ip="wishIp" @close="wishOpen = false" />
 
@@ -114,7 +114,7 @@ function go(lineId) {
 @media(hover:hover){.wish-entry:hover{transform:translateY(-2px) scale(1.015);box-shadow:0 8px 24px rgba(43,43,43,.055)}}
 .wish-entry:focus-within{box-shadow:0 8px 24px rgba(43,43,43,.055)}
 @media(prefers-reduced-motion:reduce){.wish-entry{transition:none}.wish-entry:hover{transform:none}}
-.wish-entry strong{display:block;font-size:15px}.wish-entry span{font-size:12px;color:var(--ink-2)}.wish-entry button,.wish-link{color:var(--brand);font-size:14px;white-space:nowrap}.wish-link{margin-top:8px}
+.wish-entry strong{display:block;font-size:15px}.wish-entry span{font-size:12px;color:var(--ink-2)}.wish-entry .go,.wish-link{color:var(--brand);font-size:14px;white-space:nowrap}.wish-link{margin-top:8px}
 .hero {
   text-align: center;
   padding: 20px 0 24px;
