@@ -14,12 +14,13 @@ loadLocalEnv()
 const port = Number(process.env.PREVIEW_PORT || 8001)
 const root = resolve('.')
 const store = createAuthStore({ file: resolve(process.env.AUTH_DATA_FILE || 'var/auth.sqlite') })
-const api = createAuthServer({ store, origin: `http://127.0.0.1:${port}`, secure: false, sendEmail: configuredEmailSender(), secret: process.env.AUTH_CODE_SECRET })
+const publicOrigin = process.env.PLANNING_ORIGIN || process.env.AUTH_ORIGIN || `http://127.0.0.1:${port}`
+const api = createAuthServer({ store, origin: publicOrigin, secure: publicOrigin.startsWith('https:'), sendEmail: configuredEmailSender(), secret: process.env.AUTH_CODE_SECRET })
 const planningStore = createPlanningStore({file:process.env.PLANNING_DATA_FILE || 'var/planning.sqlite'})
 // Pass this same client to the IP recommendation service when that feature lands.
 const sharedLLM = createDeepSeekClient()
 const planningService = createPlanningService({store:planningStore,llm:sharedLLM,profileProvider:async owner=>({favoritePoiIds:owner.startsWith('user:')?store.listFavorites(owner.slice(5)).filter(key=>key.startsWith('poi:')).map(key=>key.slice(4)):[]})})
-const planning = createPlanningHandler({store:planningStore,service:planningService,origin:`http://127.0.0.1:${port}`,resolveUser:token=>store.sessionUser(token)})
+const planning = createPlanningHandler({store:planningStore,service:planningService,origin:publicOrigin,resolveUser:token=>store.sessionUser(token)})
 const types = { '.html':'text/html', '.mjs':'text/javascript', '.css':'text/css', '.json':'application/json', '.png':'image/png', '.jpg':'image/jpeg', '.jpeg':'image/jpeg', '.webp':'image/webp', '.svg':'image/svg+xml' }
 const server = createServer(async (req, res) => {
   const path = new URL(req.url, 'http://localhost').pathname
