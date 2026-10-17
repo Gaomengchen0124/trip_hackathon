@@ -15,6 +15,7 @@ try {
   for (const options of [
     { viewport: { width: 1280, height: 900 }, deviceScaleFactor: 1, theme: 'sky' },
     { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, theme: 'sky' },
+    { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, theme: 'gold' },
   ]) {
     const context = await browser.newContext(options)
     const page = await context.newPage(), errors = [], requests = []

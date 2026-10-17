@@ -2,7 +2,8 @@
 import PhotoFrame from './ui/PhotoFrame.vue'
 defineProps({
   line: { type: Object, required: true },
-  label: { type: String, default: '' }
+  label: { type: String, default: '' },
+  sizes: { type: String, default: '(max-width: 960px) 260px, 200px' }
 })
 const emit = defineEmits(['select'])
 </script>
@@ -10,10 +11,11 @@ const emit = defineEmits(['select'])
   <button
     type="button"
     class="route-card"
+    data-story-reveal
     :aria-label="`选择${line.title}`"
     @click="emit('select', line.lineId)"
   >
-    <PhotoFrame :src="line.cover" :alt="line.title" ratio="3 / 2" thumbnail sizes="(max-width: 960px) 260px, 200px" />
+    <PhotoFrame :src="line.cover" :alt="line.title" ratio="3 / 2" thumbnail :sizes="sizes" />
     <span class="body"
       ><span v-if="label" class="eyebrow">{{ label }}</span
       ><strong>{{ line.title }}</strong

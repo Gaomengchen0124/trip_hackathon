@@ -20,21 +20,23 @@ function go(lineId) {
 </script>
 
 <template>
-  <div class="page">
+  <div class="page atlas-directory">
     <header class="bar">
       <button class="back" @click="router.push('/')">← 首页</button>
       <h1>{{ title }} · 全部</h1>
-      <router-link class="wish-btn" to="/wishes">巡礼许愿 ✨</router-link>
+      <router-link class="wish-btn" to="/wishes">巡礼许愿 ↗</router-link>
     </header>
 
-    <section v-for="g in columns[key]" :key="g.label" class="group">
-      <h2>{{ g.label }}</h2>
+    <p class="atlas-directory-note">故事散落在不同的城市，选择一个坐标，翻开属于它的一页。</p>
+    <section v-for="(g, index) in columns[key]" :key="g.label" class="group">
+      <header class="atlas-city-index"><span class="atlas-index-number" aria-hidden="true">{{ String(index + 1).padStart(2, '0') }}</span><h2>{{ g.label }}</h2><span>{{ g.lines.length }} 段旅途 <i aria-hidden="true">↘</i></span></header>
       <div class="cards">
         <RouteCard
           v-for="l in g.lines"
           :key="l.lineId"
           :line="l"
           :label="g.label"
+          sizes="(max-width: 480px) calc(100vw - 40px), (max-width: 760px) calc(50vw - 30px), (max-width: 1000px) calc(50vw - 120px), 480px"
           @select="go"
         />
       </div>

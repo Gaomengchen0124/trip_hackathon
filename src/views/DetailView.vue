@@ -19,7 +19,7 @@ const poi = computed(() =>
 </script>
 
 <template>
-  <div class="page">
+  <div class="page atlas-place">
     <header class="bar">
       <button class="back" @click="router.back()">← 返回</button>
       <h1>{{ poi?.name || '未找到该景点' }}</h1>
