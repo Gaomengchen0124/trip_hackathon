@@ -1,3 +1,4 @@
+import {isTourist} from './tourist-schedules.mjs'
 import { randomUUID } from 'node:crypto'
 import { assert, active, pick, applicable, clock, datesBetween, timestamp, minutesBetween } from './core.mjs'
 import { roundUpSlot,mealWindows,mealStart } from './meal-policy.mjs'
@@ -14,7 +15,7 @@ function eventRows(reqs,date,points) {
 export async function scheduleItinerary({context,requirements=[],points,facts=[],tools,candidateOrder,policy={},signal,assignments={},frozenDays={}}) {
   const cfg={...POLICY,...policy};const dates=datesBetween(context.dateRange?.startDate,context.dateRange?.endDate);
   const requested=context.selectedPoiIds;
-  assert(requested.length>0,'NEEDS_CORE_CONTEXT','请至少选择一个景点');
+  assert(requested.length>0||requirements.some(isTourist),'NEEDS_CORE_CONTEXT','请至少选择一个景点或添加游客日程');
   const must=reqsIds(requirements,'mustVisit');
   const selected=[...new Set([...requested,...must])];
   assert(selected.every(id=>points[id]),'UNKNOWN_POI','已选点位数据缺失');
@@ -24,7 +25,8 @@ export async function scheduleItinerary({context,requirements=[],points,facts=[]
   let order=candidateOrder||selected;
   assert(Array.isArray(order)&&new Set(order).size===order.length&&order.length===selected.length&&order.every(id=>selected.includes(id)),'MODEL_PROTOCOL','模型必须保留全部已选点位且不可重复',502);
   if(!Object.keys(assignments).length&&!Object.keys(frozenDays).length)order=[...order.filter(id=>must.includes(id)),...order.filter(id=>!must.includes(id))];
-  const remaining=[...order],allFacts=[...facts],unresolved=[],assumptions=[{code:'POLICY_DEFAULTS',policy:cfg}];
+  const covered=new Set(requirements.filter(r=>isTourist(r)&&r.value.fulfillsVisit!==false&&r.value.date&&r.value.startTime&&r.value.endTime&&points[r.value.poiId]).map(r=>r.value.poiId));
+  const remaining=order.filter(id=>!covered.has(id)),allFacts=[...facts],unresolved=[],assumptions=[{code:'POLICY_DEFAULTS',policy:cfg}];
   const days=[];let reservedUnknownDay=false;
   const modelOnlyKeys=['party','shopping','budget','queue'];
   for(const r of requirements.filter(r=>active(r)&&modelOnlyKeys.includes(r.key)))assumptions.push({code:'PREFERENCE_NOT_FACT_VERIFIED',requirementId:r.id,message:'已提供给模型辅助排序；适龄、消费、排队及具体用餐体验尚无外部数据验证'});
@@ -127,11 +129,18 @@ export async function scheduleItinerary({context,requirements=[],points,facts=[]
       }
     };
     for(const event of events) {
-      await visitSegment(Math.min(targetEnd,event.start),event.point,true);
-      const t=await leg(last,event.point,cursor);cursor=appendTravel(items,t,last,event.point,cursor);
-      push(items,'wait',cursor,Math.max(cursor,event.start));cursor=Math.max(cursor,event.start);
-      const dur=Math.max(1,event.end-event.start);
-      push(items,'fixed_event',cursor,cursor+dur,{eventId:event.id,poiId:event.poiId,certainty:'observed',scheduledStart:timestamp(date,event.start,context.timeZone)});
+      await visitSegment(Math.min(targetEnd,event.start-(event.arrivalMinutes||0)),event.point,true);
+      const deadline=event.start-(event.arrivalMinutes||0);
+      for(const m of windowsForMeals.filter(m=>!placedMeals.has(m.id)&&event.end>m.latest)){
+        const mealAt=mealStart(m,Math.max(cursor,m.earliest)),trip=await leg(last,event.point,mealAt+m.duration);
+        if(mealAt<=m.latest&&mealAt+m.duration+(trip.minutes||0)<=deadline){push(items,'wait',cursor,mealAt);push(items,'meal',mealAt,mealAt+m.duration,{mealId:m.id,label:m.label,preserveClock:m.customWindow,nearPoiId:last?.poiId||null});cursor=mealAt+m.duration;placedMeals.add(m.id);sinceRest=0;}
+      }
+      const t=await leg(last,event.point,cursor);if(cursor+(t.minutes||0)>=1440){unresolved.push({code:'FIXED_EVENT_LATE',eventId:event.id});continue;}cursor=appendTravel(items,t,last,event.point,cursor);
+      const arrived=cursor;
+      push(items,'wait',cursor,Math.max(cursor,deadline));cursor=Math.max(cursor,deadline);
+      push(items,'event_checkin',cursor,Math.max(cursor,event.start),{eventId:event.id,poiId:event.poiId,label:'提前到场',arrivalDeadline:timestamp(date,deadline,context.timeZone)});cursor=Math.max(cursor,event.start);
+      const dur=Math.max(1,event.end-event.start);if(cursor+dur>=1440){unresolved.push({code:'FIXED_EVENT_LATE',eventId:event.id});continue;}
+      push(items,'fixed_event',cursor,cursor+dur,{eventId:event.id,poiId:event.poiId,label:event.title||'固定安排',touristSchedule:event.type==='tourist',fulfillsVisit:event.type==='tourist'&&event.fulfillsVisit!==false,locationName:event.point?.name||event.location||'',certainty:event.type==='tourist'?'user_confirmed':'observed',scheduledStart:timestamp(date,event.start,context.timeZone),arrivedAt:timestamp(date,arrived,context.timeZone),arrivalDeadline:timestamp(date,deadline,context.timeZone)});
       cursor+=dur;last=event.point;sinceRest=0;
     }
     await visitSegment(targetEnd,destination,true);
@@ -160,7 +169,8 @@ export function validateItinerary(draft,{preserve,baselineSnapshot}={}) {
   const fail=(code,relatedIds=[],message=code)=>{checks.push({code,status:'fail',relatedIds});violations.push({code,relatedIds,message})};
   const pass=(code,ids=[])=>checks.push({code,status:'pass',relatedIds:ids});
   const reqs=draft.requirements||[],visits=draft.days.flatMap(d=>d.items.filter(i=>i.type==='visit'));
-  const ids=visits.map(i=>i.poiId),facts=new Map((draft.facts||[]).map(f=>[f.id,f]));
+  const covered=draft.days.flatMap(d=>d.items.filter(i=>i.type==='fixed_event'&&i.touristSchedule&&i.fulfillsVisit).map(i=>i.poiId));
+  const ids=[...visits.map(i=>i.poiId),...[...new Set(covered)].filter(id=>(draft.selectedPoiIds||draft.context.selectedPoiIds).includes(id))],facts=new Map((draft.facts||[]).map(f=>[f.id,f]));
   for(const id of ids)if(!(draft.selectedPoiIds||draft.context.selectedPoiIds).includes(id))fail('UNEXPECTED_POI',[id]);
   for(const [id,date]of Object.entries(draft.assignedDates||{}))if(draft.days.some(d=>d.date!==date&&d.items.some(i=>i.type==='visit'&&i.poiId===id)))fail('ASSIGNED_DATE_CHANGED',[id,date]);
   const events=reqs.filter(r=>active(r)&&r.key==='fixedEvent');
@@ -172,10 +182,12 @@ export function validateItinerary(draft,{preserve,baselineSnapshot}={}) {
   for(const id of reqsIds(reqs,'mustVisit'))if(!ids.includes(id)&&!deferred(id))fail('MISSING_MUST_VISIT',[id]);
   for(const r of events) {
     const v=r.value;
+    if(v.type==='tourist'&&(!v.date||!v.startTime||!v.endTime||!v.poiId)){fail('TOURIST_SCHEDULE_INCOMPLETE',[r.id]);continue;}
     if(!v.date||!v.startTime||!v.endTime||!v.poiId||v.type==='flight'){unknown.push({code:'FIXED_EVENT_UNCONFIRMED',eventId:r.id});continue}
     const item=draft.days.flatMap(d=>d.items).find(i=>i.type==='fixed_event'&&i.eventId===r.id);
     if(!item)fail('MISSING_FIXED_EVENT',[r.id]);
     else if(item.startAt!==timestamp(v.date,clock(v.startTime),draft.context.timeZone)||item.endAt!==timestamp(v.date,clock(v.endTime),draft.context.timeZone)||item.poiId!==v.poiId)fail('FIXED_EVENT_MISMATCH',[r.id]);
+    if(item&&v.type==='tourist'){const deadline=timestamp(v.date,clock(v.startTime)-(v.arrivalMinutes||0),draft.context.timeZone);const day=draft.days.find(d=>d.date===v.date),position=day.items.indexOf(item),preceding=day.items.slice(0,position).filter(i=>i.type==='travel'||i.type==='visit'||i.type==='fixed_event').at(-1);if(preceding&&Date.parse(preceding.endAt)>Date.parse(deadline))fail('FIXED_EVENT_ARRIVAL_LATE',[r.id]);if(!item.arrivedAt||Date.parse(item.arrivedAt)>Date.parse(deadline)||item.arrivalDeadline!==deadline)fail('FIXED_EVENT_ARRIVAL_LATE',[r.id]);if(item.label!==v.title||item.touristSchedule!==true||item.fulfillsVisit!==(v.fulfillsVisit!==false))fail('FIXED_EVENT_MISMATCH',[r.id]);if(v.arrivalMinutes){const checkin=day.items.find(i=>i.type==='event_checkin'&&i.eventId===r.id);if(!checkin||checkin.startAt!==deadline||checkin.endAt!==item.startAt||checkin.poiId!==v.poiId)fail('FIXED_EVENT_ARRIVAL_LATE',[r.id]);}}
     if(item&&v.type==='activity') {
       const f=[...facts.values()].find(f=>f.kind==='opening'&&f.validFor.poiId===v.poiId&&f.validFor.date===v.date);
       if(f?.value.windows&&!f.value.windows.some(([a,b])=>clock(v.startTime)>=a&&clock(v.endTime)<=b))fail('EVENT_OUTSIDE_OPENING',[r.id]);
@@ -210,8 +222,9 @@ export function validateItinerary(draft,{preserve,baselineSnapshot}={}) {
         const tr=reqs.filter(r=>r.key==='transport'&&r.strength==='hard'&&applicable(r,d.date)).at(-1);
         if(tr&&tr.value.mode!=='mixed'&&i.transportMode!==tr.value.mode)fail('TRANSPORT_CONSTRAINT',[i.id]);
       }
-      if(['visit','fixed_event'].includes(i.type)) {
+      if(['visit','fixed_event','event_checkin'].includes(i.type)) {
         if(last&&last!==i.poiId)fail('MISSING_TRAVEL',[i.id]);last=i.poiId;
+        if(i.type==='event_checkin')continue;
         if(i.type==='fixed_event') {if(i.scheduledStart!==i.startAt)fail('FIXED_EVENT_LATE',[i.id]);continue}
         const f=facts.get(i.factIds[0]);
         if(!f||f.kind!=='opening'||f.validFor.date!==d.date||f.validFor.poiId!==i.poiId)fail('MISSING_OPENING_FACT',[i.id]);

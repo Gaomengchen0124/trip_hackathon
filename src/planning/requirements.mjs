@@ -13,9 +13,10 @@ export function validateValue(key,v) {
     case 'rest': assert(v&&(v.intervalMinutes!=null||v.durationMinutes!=null)&&(v.intervalMinutes==null||Number.isInteger(v.intervalMinutes)&&v.intervalMinutes>=20&&v.intervalMinutes<=300)&&(v.durationMinutes==null||Number.isInteger(v.durationMinutes)&&v.durationMinutes>=5&&v.durationMinutes<=120),'INVALID_REQUIREMENT','无效休息参数'); return;
     case 'mobility': assert(v&&['dailyStepsMin','dailyStepsMax'].every(k=>v[k]==null||Number.isInteger(v[k])&&v[k]>=0&&v[k]<=100000)&&['lessWalking','slowerWalking','frequentBreaks'].every(k=>v[k]===undefined||typeof v[k]==='boolean')&&(v.walkingLevel==null||oneOf(v.walkingLevel,['low','moderate','high']))&&['maxLegWalkMinutes','maxDailyWalkMinutes'].every(k=>v[k]==null||Number.isInteger(v[k])&&v[k]>0&&v[k]<=720),'INVALID_REQUIREMENT','无效步行偏好'); return;
     case 'fixedEvent':
-      assert(v&&typeof v.type==='string'&&(v.date==null||validDate(v.date))&&(v.startTime==null||typeof v.startTime==='string')&&(v.endTime==null||typeof v.endTime==='string'),'INVALID_REQUIREMENT','固定活动格式不正确');
+      assert(v&&typeof v.type==='string'&&(v.date==null||v.type==='tourist'&&v.date===''||validDate(v.date))&&(v.startTime==null||typeof v.startTime==='string')&&(v.endTime==null||typeof v.endTime==='string'),'INVALID_REQUIREMENT','固定活动格式不正确');
       if(v.startTime)clock(v.startTime); if(v.endTime)clock(v.endTime);
       if(v.startTime&&v.endTime)assert(clock(v.endTime)>clock(v.startTime),'INVALID_REQUIREMENT','固定活动结束时间须晚于开始时间');
+      if(v.type==='tourist'){assert(typeof v.title==='string'&&v.title.length<=120&&Number.isInteger(v.arrivalMinutes)&&v.arrivalMinutes>=0&&v.arrivalMinutes<=180,'INVALID_REQUIREMENT','游客日程字段不正确');}
       for(const k of ['poiId','location','bookingState','period'])assert(v[k]==null||typeof v[k]==='string'&&v[k].length<=200,'INVALID_REQUIREMENT','活动信息不正确');
       return;
     case 'scheduleLock': assert(v&&Array.isArray(v.lockedDates)&&v.lockedDates.every(validDate)&&Array.isArray(v.lockedItemIds)&&v.lockedItemIds.every(x=>typeof x==='string')&&Number.isInteger(v.baselineVersion),'INVALID_REQUIREMENT','无效锁定'); return;
