@@ -22,7 +22,7 @@ test('version 8 retains recommendation data, passwords, favorites and sessions w
     const { token } = store.issueSession(user.id)
     store.close(); store = null
     db = new DatabaseSync(file)
-    db.exec('CREATE TABLE recommendation_profiles (user_id TEXT PRIMARY KEY REFERENCES users(id), interests TEXT NOT NULL, status TEXT NOT NULL, updated_at INTEGER NOT NULL); PRAGMA user_version=8')
+    db.exec('CREATE TABLE IF NOT EXISTS recommendation_profiles (user_id TEXT PRIMARY KEY REFERENCES users(id), interests TEXT NOT NULL, status TEXT NOT NULL, updated_at INTEGER NOT NULL); PRAGMA user_version=8')
     db.prepare('INSERT INTO recommendation_profiles VALUES(?,?,?,?)').run(user.id, '["literature"]', 'ready', 1234)
     db.close(); db = null
     store = createAuthStore({ file, adminEmails: [] })

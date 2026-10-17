@@ -14,7 +14,7 @@
  * @property {string} ipId      如 'fanhua'
  * @property {string} name      作品名
  * @property {string} author    作者
- * @property {'novel'|'film'|'poetry'|'history'} kind
+ * @property {'novel'|'tv'|'film'|'anime'|'prose'|'poetry'|'history'} kind
  * @property {string} cover     封面图路径
  * @property {string[]} aliases 搜索别名（书名、人物、地名）
  */
@@ -204,3 +204,8 @@ POST /api/poi-submissions → {id,status}，请求含 requestId、lineId、type(
 团队 GET /api/poi-submissions、GET /api/poi-submissions/:id/photos/:index、PATCH /api/poi-submissions/:id 使用 Bearer 团队密钥。PATCH {status,reviewNote}，status 为待审核/待收录/需补充/不收录，待收录不等于正式发布。
 
 地址搜索默认使用 Photon 公共服务；服务不可用返回 503，空结果为 200 results:[]。GET /api/places/reverse?lat=...&lng=...&city=...&lineId=... 返回 {place,nearby,notice}；坐标统一为 WGS84。Photon 候选地址基于 OSM；门牌无精确结果时返回真实道路候选，并标记 approximate:true，提示用户地图确认与补充具体位置。
+
+
+## 智能推荐与内容兴趣
+
+新增 GET /api/recommendations/catalog、POST /api/recommendations、GET/PUT /api/me/interests，字段与维护方式见 [智能推荐开发说明](../../docs/recommendation/implementation.md)。推荐页只通过 lineId 跳转已有路线介绍页，不改变 plan 输入输出；日期与每天时长由规划页填写。

@@ -17,7 +17,7 @@ export function createAuthServer({ store, origin = 'http://127.0.0.1:8788', addi
   return createServer(async (req, res) => {
     const reply = (code, body, headers = {}) => { res.writeHead(code, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff', ...headers }); res.end(JSON.stringify(body)) }
     const path = new URL(req.url, expectedOrigin).pathname
-    if (!['/api/auth/session', '/api/auth/logout', '/api/auth/profile', '/api/auth/email/send', '/api/auth/email/verify', '/api/favorites', '/api/comments', '/api/me/comments', '/api/comment-reports', '/api/manage/users', '/api/manage/reports', '/api/manage/comments', '/api/manage/audit', '/api/manage/stats', '/api/manage/users/password', '/api/auth/password/login', '/api/auth/password/set'].includes(path)) return reply(404, { error: '接口不存在' })
+    if (!['/api/auth/session', '/api/auth/logout', '/api/auth/profile', '/api/auth/email/send', '/api/auth/email/verify', '/api/favorites', '/api/comments', '/api/me/comments', '/api/me/interests', '/api/comment-reports', '/api/manage/users', '/api/manage/reports', '/api/manage/comments', '/api/manage/audit', '/api/manage/stats', '/api/manage/users/password', '/api/auth/password/login', '/api/auth/password/set'].includes(path)) return reply(404, { error: '接口不存在' })
     if (req.method !== 'GET' && !allowedOrigins.has(req.headers.origin)) return reply(403, { error: '请求来源不允许' })
     const cookie = req.headers.cookie?.split(';').map(v => v.trim()).find(v => v.startsWith(`${COOKIE_NAME}=`))
     const token = cookie?.slice(COOKIE_NAME.length + 1)
@@ -41,6 +41,14 @@ export function createAuthServer({ store, origin = 'http://127.0.0.1:8788', addi
         } catch (error) { return reply(error.status || 500, { error: error.status ? error.message : '登录失败，请重试。' }) }
       }
       const user = store.sessionUser(token)
+      if (path === '/api/me/interests') {
+        if (!user) return reply(401,{error:'请先登录'})
+        if (req.method === 'GET') return reply(200,{profile:store.getInterests(user.id)})
+        if (req.method === 'PUT') {
+          try { return reply(200,{profile:store.setInterests(user.id,body)}) }
+          catch { return reply(400,{error:'兴趣标签格式不正确'}) }
+        }
+      }
       // ---- 账号密码登录（与邮箱验证码并行的第二种凭证）----
       if (path === '/api/auth/password/login' && req.method === 'POST') {
         const email = typeof body?.email === 'string' ? body.email.trim().toLowerCase() : ''

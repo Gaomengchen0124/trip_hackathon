@@ -1,8 +1,14 @@
 <script setup>
+import { onMounted, onUnmounted } from 'vue'
+import InterestDialog from './components/InterestDialog.vue'
+import { initInterests, profileState, openInterests } from './recommendation/profile.mjs'
 import AuthStatus from './components/AuthStatus.vue'
 import BrandMasthead from './components/BrandMasthead.vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
+const editInterests = () => openInterests()
+onMounted(() => { initInterests(); window.addEventListener('travel-edit-interests', editInterests) })
+onUnmounted(() => window.removeEventListener('travel-edit-interests', editInterests))
 </script>
 
 <template>
@@ -16,6 +22,7 @@ const route = useRoute()
       <component :is="Component" />
     </KeepAlive>
   </router-view>
+  <InterestDialog v-if="profileState.open" />
 </template>
 
 <style scoped>

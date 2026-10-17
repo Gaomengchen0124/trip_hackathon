@@ -1,3 +1,4 @@
+import { validateInterests } from '../src/recommendation/options.mjs'
 import { DatabaseSync } from 'node:sqlite'
 import { randomBytes, randomUUID, createHash, scryptSync, timingSafeEqual } from 'node:crypto'
 import { mkdirSync, chmodSync } from 'node:fs'
@@ -28,6 +29,7 @@ export function createAuthStore({ file = 'var/auth.sqlite', now = Date.now, admi
     `)
   db.exec('BEGIN IMMEDIATE')
   try {
+    db.exec('CREATE TABLE IF NOT EXISTS recommendation_profiles (user_id TEXT PRIMARY KEY REFERENCES users(id), interests TEXT NOT NULL, status TEXT NOT NULL, updated_at INTEGER NOT NULL)')
     if (!db.prepare('PRAGMA table_info(comments)').all().some(column => column.name === 'deleted_at')) db.exec('ALTER TABLE comments ADD COLUMN deleted_at INTEGER')
     if (!db.prepare('PRAGMA table_info(comments)').all().some(column => column.name === 'moderated_at')) db.exec('ALTER TABLE comments ADD COLUMN moderated_at INTEGER')
     if (!db.prepare('PRAGMA table_info(users)').all().some(column => column.name === 'role')) db.exec("ALTER TABLE users ADD COLUMN role TEXT NOT NULL DEFAULT 'user'")
@@ -47,13 +49,23 @@ export function createAuthStore({ file = 'var/auth.sqlite', now = Date.now, admi
     // 首批管理员引导：ADMIN_EMAILS 中的邮箱对应账号直接获得 admin 角色（幂等，每次启动都执行以支持追加）
     const promote = db.prepare("UPDATE users SET role='admin' WHERE id=(SELECT user_id FROM identities WHERE provider='email' AND subject=?)")
     for (const email of bootstrapEmails) promote.run(email)
-    db.exec(`PRAGMA user_version = ${Math.max(schemaVersion, 7)}; COMMIT`)
+    db.exec(`PRAGMA user_version = ${Math.max(schemaVersion, 8)}; COMMIT`)
   } catch (error) { db.exec('ROLLBACK'); db.close(); throw error }
   function getUser(id) {
     const row = db.prepare('SELECT id,nickname,avatar,role FROM users WHERE id=?').get(id)
     return row ? { ...row } : null
   }
   return {
+    getInterests(userId) {
+      const row = db.prepare('SELECT interests,status,updated_at FROM recommendation_profiles WHERE user_id=?').get(userId)
+      return row ? {interests:JSON.parse(row.interests),status:row.status,updatedAt:row.updated_at} : null
+    },
+    setInterests(userId,input) {
+      if (!input || !['saved','skipped'].includes(input.status)) throw new Error('兴趣状态不正确')
+      const interests=validateInterests(input.interests)
+      db.prepare('INSERT INTO recommendation_profiles VALUES(?,?,?,?) ON CONFLICT(user_id) DO UPDATE SET interests=excluded.interests,status=excluded.status,updated_at=excluded.updated_at').run(userId,JSON.stringify(interests),input.status,now())
+      return this.getInterests(userId)
+    },
     // Internal only: call AFTER verifying a provider credential. No public registration bypass.
     verifiedIdentity(provider, subject) {
       if (!['email', 'phone'].includes(provider) || typeof subject !== 'string' || !subject.trim() || subject.length > 254) throw new Error('Invalid verified identity')

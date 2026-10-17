@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "note": "Demo 编辑分类，只描述作品题材与故事氛围，不代表景点事实或旅行活动。新作品可补充，缺失保留未知。",
+  "ips": {
+    "fanhua": {
+      "themes": [
+        "urban",
+        "history"
+      ],
+      "moods": [
+        "nostalgic"
+      ]
+    },
+    "longzu": {
+      "themes": [
+        "fantasy",
+        "youth"
+      ],
+      "moods": [
+        "thrilling"
+      ]
+    },
+    "santi": {
+      "themes": [
+        "scifi",
+        "humanity"
+      ],
+      "moods": [
+        "reflective"
+      ]
+    },
+    "daomu": {
+      "themes": [
+        "mystery",
+        "fantasy"
+      ],
+      "moods": [
+        "thrilling"
+      ]
+    },
+    "harrypotter": {
+      "themes": [
+        "fantasy",
+        "youth"
+      ],
+      "moods": [
+        "thrilling"
+      ]
+    },
+    "kaiduan": {
+      "themes": [
+        "mystery",
+        "scifi"
+      ],
+      "moods": [
+        "thrilling"
+      ]
+    },
+    "qianfu": {
+      "themes": [
+        "mystery",
+        "history"
+      ],
+      "moods": [
+        "thrilling"
+      ]
+    },
+    "quyoufengdedifang": {
+      "themes": [
+        "urban",
+        "romance"
+      ],
+      "moods": [
+        "healing"
+      ]
+    },
+    "aiqingshenhua": {
+      "themes": [
+        "urban",
+        "romance"
+      ],
+      "moods": [
+        "romantic"
+      ]
+    },
+    "woyuditan": {
+      "themes": [
+        "humanity"
+      ],
+      "moods": [
+        "reflective",
+        "healing"
+      ]
+    }
+  }
+}
