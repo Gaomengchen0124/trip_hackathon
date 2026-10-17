@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的圣地巡礼 · 产品介绍</title>
+<style>
+  :root{
+    --bg:#14161f; --bg2:#191c27; --ink:#ece8de; --dim:#a9a497;
+    --red:#c8553d; --gold:#d9a441; --line:rgba(236,232,222,.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;}
+  body{background:var(--bg);color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei",sans-serif;
+    overflow:hidden;}
+  .serif{font-family:"Noto Serif SC","Songti SC","SimSun",serif;}
+  button{font-family:inherit;}
+
+  /* ---------- 幻灯片 ---------- */
+  .deck{position:fixed;inset:0;}
+  .slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    padding:7vh 7vw;opacity:0;visibility:hidden;transform:translateX(70px);
+    transition:opacity .55s ease,transform .55s ease,visibility 0s linear .55s;
+    user-select:none;}
+  .slide.on{opacity:1;visibility:visible;transform:none;transition-delay:0s;z-index:2;}
+  .slide .inner{width:100%;max-width:1160px;position:relative;}
+  .center{text-align:center;}
+  .center .inner{display:flex;flex-direction:column;align-items:center;}
+  .bg{position:absolute;inset:0;z-index:-1;background-size:cover;background-position:center;}
+  .bg::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(16,18,26,.55),rgba(16,18,26,.86));}
+  .panel{background:rgba(16,18,26,.58);backdrop-filter:blur(4px);border-radius:18px;
+    padding:44px 48px;max-width:820px;}
+  .panel p{color:var(--dim);margin-top:16px;line-height:1.95;font-size:clamp(14px,1.4vw,17px);}
+
+  .kicker{font-size:13px;letter-spacing:.35em;color:var(--gold);font-weight:600;text-transform:uppercase;}
+  h1{font-size:clamp(46px,7.5vw,92px);font-weight:700;line-height:1.12;margin:16px 0 20px;}
+  h2.sec{font-size:clamp(30px,4.2vw,54px);font-weight:700;margin:12px 0 8px;}
+  .rule{width:64px;height:3px;background:var(--red);margin:0 0 24px;}
+  .center .rule{margin:0 auto 24px;}
+  .sub{color:var(--dim);max-width:44em;line-height:1.9;margin-top:12px;font-size:clamp(14px,1.35vw,17px);}
+  .secrule{width:56px;height:3px;background:var(--red);margin:20px 0 0;}
+
+  /* ---------- 卡片 ---------- */
+  .grid{display:grid;gap:16px;margin-top:34px;}
+  .g4{grid-template-columns:repeat(4,1fr);}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .card{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:24px 22px;}
+  .card .num{font-size:12.5px;letter-spacing:.18em;color:var(--gold);margin-bottom:10px;}
+  .card h3{font-size:clamp(16px,1.6vw,20px);margin-bottom:8px;}
+  .card p{font-size:clamp(12.5px,1.15vw,14px);color:var(--dim);line-height:1.75;}
+  .card b{color:var(--ink);}
+  .card.new{border-color:rgba(217,164,65,.4);background:rgba(217,164,65,.05);}
+  .icon{font-size:clamp(26px,2.6vw,34px);margin-bottom:10px;}
+
+  .quote{border-left:3px solid var(--red);padding:2px 0 2px 20px;margin-top:32px;
+    font-size:clamp(16px,1.9vw,25px);line-height:1.65;max-width:44em;}
+  .quote small{display:block;font-size:12.5px;color:var(--dim);margin-top:8px;letter-spacing:.08em;}
+
+  /* ---------- 流程 ---------- */
+  .flow{display:flex;align-items:stretch;margin-top:34px;flex-wrap:wrap;}
+  .flow .step{flex:1;min-width:170px;background:rgba(255,255,255,.04);
+    border:1px solid var(--line);border-radius:14px;padding:20px 16px;text-align:center;}
+  .flow .step b{display:block;font-size:clamp(15px,1.5vw,18px);margin-bottom:8px;}
+  .flow .step span{font-size:clamp(12px,1.1vw,13px);color:var(--dim);line-height:1.7;}
+  .flow .arrow{align-self:center;color:var(--gold);font-size:22px;padding:8px;}
+  @media(max-width:900px){.flow{flex-direction:column;}.flow .arrow{transform:rotate(90deg);}}
+
+  /* ---------- 用户 ---------- */
+  .avatar{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.05);
+    border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
+    font-size:24px;margin-bottom:12px;}
+  .ucard{display:flex;flex-direction:column;align-items:center;text-align:center;}
+  .plat{display:flex;gap:18px;align-items:flex-start;margin-top:16px;
+    background:rgba(217,164,65,.06);border:1px solid rgba(217,164,65,.35);
+    border-radius:14px;padding:22px 24px;}
+  .plat .avatar{flex:none;margin:0;background:rgba(217,164,65,.1);border-color:rgba(217,164,65,.4);}
+  .plat .num{font-size:12.5px;letter-spacing:.18em;color:var(--gold);margin-bottom:6px;}
+  .plat h3{font-size:clamp(16px,1.6vw,19px);margin-bottom:6px;}
+  .plat p{font-size:clamp(12.5px,1.15vw,14px);color:var(--dim);line-height:1.75;}
+
+  /* ---------- 矩阵表 ---------- */
+  table.matrix{width:100%;border-collapse:collapse;margin-top:26px;font-size:clamp(12.5px,1.2vw,15px);}
+  table.matrix th,table.matrix td{border:1px solid var(--line);padding:11px 16px;text-align:left;line-height:1.6;}
+  table.matrix th{background:rgba(255,255,255,.05);color:var(--gold);white-space:nowrap;}
+  table.matrix td{color:var(--dim);}
+  table.matrix td:first-child{color:var(--ink);font-weight:600;white-space:nowrap;}
+
+  /* ---------- 链接 ---------- */
+  .sitelink{display:inline-flex;align-items:center;gap:8px;margin-top:30px;padding:12px 28px;
+    border:1px solid var(--gold);border-radius:999px;color:var(--gold);text-decoration:none;
+    font-size:clamp(14px,1.4vw,17px);letter-spacing:.08em;transition:all .3s;user-select:none;}
+  .sitelink:hover{background:var(--gold);color:#14161f;}
+  .demolink{display:inline-flex;align-items:center;gap:10px;margin-top:40px;padding:18px 46px;
+    border:1px solid var(--gold);border-radius:999px;color:var(--gold);text-decoration:none;
+    font-size:clamp(17px,2vw,24px);letter-spacing:.06em;transition:all .3s;user-select:none;}
+  .demolink:hover{background:var(--gold);color:#14161f;}
+
+  /* ---------- HUD ---------- */
+  .hud{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:center;
+    justify-content:space-between;padding:14px 22px;pointer-events:none;}
+  .hud>*{pointer-events:auto;}
+  .dots{display:flex;gap:7px;}
+  .dots i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;transition:all .3s;}
+  .dots i.on{background:var(--red);transform:scale(1.35);}
+  .counter{font-size:12px;color:var(--dim);letter-spacing:.25em;}
+  .navs{display:flex;gap:8px;}
+  .navs button{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);
+    background:rgba(255,255,255,.04);color:var(--dim);font-size:16px;cursor:pointer;transition:all .25s;}
+  .navs button:hover{border-color:var(--gold);color:var(--gold);}
+  .hint{position:fixed;top:14px;right:20px;z-index:60;font-size:11px;color:rgba(236,232,222,.35);
+    letter-spacing:.2em;pointer-events:none;}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- 1 · 封面 -->
+  <section class="slide center on">
+    <div class="bg" style="background-image:url('南京路.jpg')"></div>
+    <div class="inner">
+      <div class="kicker">Literary Pilgrimage · Trip Planner</div>
+      <h1 class="serif">我的圣地巡礼</h1>
+      <div class="rule"></div>
+      <p class="sub" style="max-width:36em">知道"这里曾是故事的发生地"，就想去走一走、拍一张照，<br>让虚构的故事在现实里落地 —— 一个从作品出发的巡礼行程规划工具</p>
+      <a class="sitelink" href="https://storyypilgrim.com" target="_blank" rel="noopener">storyypilgrim.com ↗</a>
+    </div>
+  </section>
+
+  <!-- 2 · 为什么做 -->
+  <section class="slide center">
+    <div class="bg" style="background-image:url('进贤路.jpg')"></div>
+    <div class="inner" style="display:flex;justify-content:center">
+      <div class="panel">
+        <div class="kicker">Why</div>
+        <h2 class="sec serif">为一个故事出发</h2>
+        <p>"圣地巡礼"是内容驱动型用户的自发行为——打卡取景地、参观主题展览、重游角色旅途，寻找与文艺作品的真实连接。《繁花》带火黄河路，《开端》让厦门成为"循环之城"……在日本它已是成熟文化，在国内，它正在成为IP与现实之间新的连接方式。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · 解决什么问题 -->
+  <section class="slide">
+    <div class="inner">
+      <div class="kicker">Pain Points</div>
+      <h2 class="sec serif">解决什么问题</h2>
+      <p class="sub">真正规划行程时，"我想去"和"我去得了"之间隔着四件事——用户缺的不是攻略信息，而是把情怀翻译成行程的那一步。</p>
+      <div class="grid g4">
+        <div class="card"><div class="num">01</div><h3>找点难</h3><p>书里的地点要从文字里寻找，影视取景地要逐条核对，互联网信息要多方比较才可信，人工找点费时费力。</p></div>
+        <div class="card"><div class="num">02</div><h3>串线难</h3><p>打卡点确定后，路线规划缺少高效工具，同时错过附近名胜也颇为可惜。</p></div>
+        <div class="card"><div class="num">03</div><h3>取舍难</h3><p>对游览时间缺少参考，计划与实际不符，不得不忍痛删减心仪的目的地。</p></div>
+        <div class="card"><div class="num">04</div><h3>断档难</h3><p>从攻略到出发之间，还有购票预约等关卡，过程琐碎耗时。</p></div>
+      </div>
+      <div class="quote serif">把"我想去"和"我去得了"之间的鸿沟填平。<small>我们要做一个从作品出发的巡礼行程规划工具</small></div>
+    </div>
+  </section>
+
+  <!-- 4 · 核心功能 -->
+  <section class="slide">
+    <div class="inner">
+      <div class="kicker">Solution</div>
+      <h2 class="sec serif">核心功能</h2>
+      <p class="sub">把圣地巡礼从"手工考古"变成"一键成行"：选作品 → 选巡礼点/景点 → 自动规划路线与时间 → 衔接携程预订酒店门票。</p>
+      <div class="flow">
+        <div class="step"><b>① 选作品</b><span>滚动 IP 墙<br>按城市 / 搜索<br>或选偏好，智能推荐</span></div>
+        <div class="arrow">→</div>
+        <div class="step"><b>② 选巡礼点</b><span>勾选打卡点<br>顺手加入附近名胜<br>点卡片看目的地详情</span></div>
+        <div class="arrow">→</div>
+        <div class="step"><b>③ 自动规划</b><span>设定日期与每日时长<br>引擎排出逐日<br>逐时刻路线</span></div>
+        <div class="arrow">→</div>
+        <div class="step"><b>④ 衔接预订</b><span>生成可分享行程单<br>跳转携程预订<br>酒店与门票</span></div>
+      </div>
+      <div class="quote serif">把一次巡礼旅行的前期准备，从平均数天的"信息考古"压缩到几分钟的"选择 + 确认"。<small>让"为一个故事出发"的决策成本趋近于零</small></div>
+    </div>
+  </section>
+
+  <!-- 5 · 大版本更新 -->
+  <section class="slide">
+    <div class="inner">
+      <div class="kicker">What's New · 大版本更新</div>
+      <h2 class="sec serif">这一版，新增了什么</h2>
+      <div class="grid g3">
+        <div class="card new"><div class="icon">🎯</div><h3>用户偏好 + 智能推荐</h3><p>新用户首次进入即选偏好，系统据此推荐 IP 与线路；偏好持续沉淀，推荐越用越准。</p></div>
+        <div class="card new"><div class="icon">🛠️</div><h3>管理员后台 · 一键生成路线</h3><p>内容团队在后台维护点位与线路，从考据、草稿到上线全流程管理，一键生成新路线。</p></div>
+        <div class="card new"><div class="icon">🔁</div><h3>规划升级 · 多轮协商</h3><p>取舍面板升级为多轮协商：系统一次性生成整套取舍方案，每步附理由；接受即出结果，不满意可继续协商，直到装得下。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · 面向哪类用户 -->
+  <section class="slide">
+    <div class="inner">
+      <div class="kicker">Users & Value</div>
+      <h2 class="sec serif">面向哪类用户</h2>
+      <div class="grid g2">
+        <div class="card ucard"><div class="avatar">🎬</div><div class="num">核心用户 · 专程巡礼</div><h3>内容驱动型旅行者</h3><p>二次元爱好者、影迷、剧迷、文学读者等爱好者，自发为一部作品奔赴一座城。</p></div>
+        <div class="card ucard"><div class="avatar">🧭</div><div class="num">次级用户 · 顺路拜访</div><h3>被"主题"吸引的泛旅行者</h3><p>现象级话题作品的舆论参与者、偏好历史人文主题游的文化旅行者，以及想给常规城市游"加一个主题"的轻度用户。</p></div>
+      </div>
+      <div class="plat">
+        <div class="avatar">🏢</div>
+        <div>
+          <div class="num">平台侧价值</div>
+          <h3>把模糊的 IP 热爱转化为明确的旅行需求</h3>
+          <p>打通"种草 → 规划 → 预订"链路，减少用户决策时间；一次考据长期复用，一部作品沉淀为一条可持续运营的巡礼产品线。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · 现场演示 -->
+  <section class="slide center">
+    <div class="inner" style="display:flex;flex-direction:column;align-items:center">
+      <div class="kicker">Live Demo</div>
+      <h2 class="sec serif">人员现场演示</h2>
+      <p class="sub" style="text-align:center">现场打开产品完整走一遍：<b style="color:var(--ink)">选偏好 → 智能推荐 → 勾选点位 → 多轮协商 → 生成行程单</b></p>
+      <a class="demolink" href="https://storyypilgrim.com" target="_blank" rel="noopener">打开产品 → storyypilgrim.com ↗</a>
+    </div>
+  </section>
+
+  <!-- 8 · 三处创新 -->
+  <section class="slide">
+    <div class="inner">
+      <div class="kicker">Why Us</div>
+      <h2 class="sec serif">三处创新</h2>
+      <div class="grid g3">
+        <div class="card"><div class="num">创新 ①</div><h3>考据驱动，绝不"AI 编故事"</h3><p>点位库逐点经过内容组成员考据，引文必须逐字来自原著/剧集并标注出处，保证巡礼内容的可信度。</p></div>
+        <div class="card"><div class="num">创新 ②</div><h3>规划引擎可复利</h3><p>引擎将巡礼规划建模为带时间硬约束的多日协同优化问题：片区聚类后以最近邻 + 2-opt 逼近路线最优，按每日可用时长做排程，复用性强。国内外影视 / 严肃文学 / 网文等作品通用。</p></div>
+        <div class="card"><div class="num">创新 ③</div><h3>智能取舍的可解释</h3><p>按地点重要度、片区距离、可用时间动态取舍，理由摊开给用户看；方案一次性给全，接受或继续协商，多轮直到装得下。</p></div>
+      </div>
+      <table class="matrix">
+        <tr><th>题材</th><th>代表线路</th></tr>
+        <tr><td>电视剧</td><td>繁花·上海 / 开端·厦门 / 去有风的地方·大理 / 潜伏·天津</td></tr>
+        <tr><td>网文 / 科幻</td><td>盗墓笔记·杭州 / 龙族·北京·日本 / 三体·北京</td></tr>
+        <tr><td>严肃文学</td><td>我与地坛·北京</td></tr>
+        <tr><td>海外 IP</td><td>哈利波特·伦敦</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 9 · 愿景 -->
+  <section class="slide center">
+    <div class="bg" style="background-image:url('故宫.jpg')"></div>
+    <div class="inner" style="display:flex;justify-content:center">
+      <div class="panel">
+        <div class="kicker">Vision</div>
+        <h2 class="sec serif">让虚构的故事，在现实里落地</h2>
+        <p>从《繁花》上海、《盗墓笔记》杭州、《三体》北京到《徐霞客游记》桂林——任何一部被热爱的作品，都值得一条通往现实的路线。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · 结尾 -->
+  <section class="slide center">
+    <div class="inner">
+      <div class="big serif" style="font-size:clamp(34px,5vw,64px);font-weight:700">我的圣地巡礼</div>
+      <p class="sub" style="margin-top:16px;letter-spacing:.14em">把热爱翻译成行程 · LITERARY PILGRIMAGE TRIP PLANNER</p>
+      <a class="sitelink" href="https://storyypilgrim.com" target="_blank" rel="noopener">线上体验 → storyypilgrim.com ↗</a>
+    </div>
+  </section>
+
+</div>
+
+<div class="hint">点击任意处翻页 · ← → 方向键</div>
+<div class="hud">
+  <div class="dots" id="dots"></div>
+  <div class="counter" id="counter">01 / 10</div>
+  <div class="navs">
+    <button id="prev" aria-label="上一页">‹</button>
+    <button id="next" aria-label="下一页">›</button>
+  </div>
+</div>
+
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  const dotsBox=document.getElementById('dots');
+  const counter=document.getElementById('counter');
+  const fmt=n=>String(n).padStart(2,'0');
+  let cur=0;
+
+  slides.forEach((s,i)=>{
+    const d=document.createElement('i');
+    d.onclick=(e)=>{e.stopPropagation();goto(i);};
+    dotsBox.appendChild(d);
+  });
+  const dots=[...dotsBox.children];
+
+  function goto(i){
+    i=Math.max(0,Math.min(slides.length-1,i));
+    if(i===cur&&slides[cur].classList.contains('on'))return;
+    slides[cur].classList.remove('on');
+    cur=i;
+    slides[cur].classList.add('on');
+    dots.forEach((d,j)=>d.classList.toggle('on',j===cur));
+    counter.textContent=fmt(cur+1)+' / '+fmt(slides.length);
+    history.replaceState(null,'','#'+(cur+1));
+  }
+  const next=()=>goto(cur+1);
+  const prev=()=>goto(cur-1);
+
+  /* 点击翻页（链接、按钮、圆点除外） */
+  document.getElementById('deck').addEventListener('click',(e)=>{
+    if(e.target.closest('a,button,.dots'))return;
+    next();
+  });
+  document.getElementById('next').onclick=(e)=>{e.stopPropagation();next();};
+  document.getElementById('prev').onclick=(e)=>{e.stopPropagation();prev();};
+
+  /* 键盘 */
+  document.addEventListener('keydown',(e)=>{
+    if(['ArrowRight','ArrowDown','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();next();}
+    else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(e.key)){e.preventDefault();prev();}
+    else if(e.key==='Home')goto(0);
+    else if(e.key==='End')goto(slides.length-1);
+  });
+
+  /* 滚轮（带冷却） */
+  let wheelLock=0;
+  document.addEventListener('wheel',(e)=>{
+    if(Math.abs(e.deltaY)<24)return;
+    const now=Date.now();
+    if(now-wheelLock<900)return;
+    wheelLock=now;
+    e.deltaY>0?next():prev();
+  },{passive:true});
+
+  /* 触摸滑动 */
+  let touchX=null;
+  document.addEventListener('touchstart',(e)=>{touchX=e.touches[0].clientX;},{passive:true});
+  document.addEventListener('touchend',(e)=>{
+    if(touchX===null)return;
+    const dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>60)(dx<0?next():prev());
+    touchX=null;
+  },{passive:true});
+
+  /* 初始：URL #n 直达 */
+  const n=parseInt(location.hash.slice(1),10);
+  slides[0].classList.remove('on');
+  cur=0;
+  goto(isNaN(n)?0:n-1);
+</script>
+</body>
+</html>
