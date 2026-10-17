@@ -49,15 +49,19 @@ watch(
       <p class="meta">
         {{ poi.cluster }} · 建议停留 {{ formatMinutes(poi.durationNormal) }}
       </p>
+      <p v-if="poi.address" class="meta">{{ poi.address }} <a v-if="poi.mapUrl" :href="poi.mapUrl" target="_blank" rel="noopener noreferrer">查看地图 ↗</a></p>
+      <p v-if="poi.tips" class="meta">到访提示 · {{ poi.tips }}</p>
+      <p v-if="poi.locationVerification" class="meta">{{ poi.locationVerification.note }}</p>
+      <p v-if="poi.photoCredit" class="meta">{{ poi.photoCredit }}</p>
       <p class="intro">{{ poi.intro || '景点介绍即将补充' }}</p>
       <section v-if="poi.type === 'ip'" class="quotes" aria-label="原著与台词">
-        <h3>重读这个瞬间</h3>
+        <h3>{{ poi.quotes?.length ? '重读这个瞬间' : '作品关联' }}</h3>
         <QuoteCard
           v-for="(quote, index) in poi.quotes || []"
           :key="index"
           :quote="quote"
         />
-        <p v-if="!poi.quotes?.length" class="empty">这个地点的故事即将补充</p>
+        <p v-if="poi.basis" class="intro">{{ poi.basis }}</p><p v-else-if="!poi.quotes?.length" class="empty">这个地点的故事即将补充</p>
       </section>
     </div>
   </article>

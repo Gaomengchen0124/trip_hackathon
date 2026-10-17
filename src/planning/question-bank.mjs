@@ -1,0 +1,33 @@
+const options=(values)=>values.map(([id,label,value])=>({id,label,value:value??id}));
+export const QUESTION_BANK={
+  conversation_party:{label:'同行信息',key:'party',category:'party',priority:'useful',options:[],fields:[{id:'count',type:'integer'},{id:'companions',type:'list',values:['solo','friends','couple','children','elders']}]},
+  conversation_steps:{label:'每日步数偏好',key:'mobility',category:'mobility',priority:'useful',options:[],fields:[{id:'dailyStepsMin',type:'integer'},{id:'dailyStepsMax',type:'integer'},{id:'walkingLevel',type:'enum',values:['low','moderate','high']},{id:'lessWalking',type:'boolean'}]},
+  conversation_interests:{label:'体验偏好',key:'interests',category:'interests',priority:'useful',options:[],fields:[{id:'tags',type:'list',values:['打卡出片','了解人文历史','欣赏自然风光','深度感受当地生活','体验当地美食']}]},
+  conversation_exclude:{label:'本次舍弃景点',category:'poiDepth',priority:'useful',options:[],fields:[{id:'poiIds',type:'list',values:[]}]},
+  conversation_must:{label:'必去景点',category:'poiDepth',priority:'useful',options:[],fields:[{id:'poiIds',type:'list',values:[]}]},
+  party:{label:'这次和谁一起旅行？',category:'party',priority:'useful',key:'party',options:options([['solo','独自旅行',{count:1,companions:['solo']}],['friends','和朋友',{companions:['friends']}],['children','亲子游',{companions:['children']}],['elders','带长辈',{companions:['elders']}]]),fields:[{id:'count',type:'integer',label:'随行人数',nullable:true}]},
+  pace:{label:'希望这次旅行是什么节奏？',category:'pace',priority:'useful',key:'pace',options:options([['more_places','尽量多逛'],['balanced','适中'],['fewer_deeper','少量慢游']]),fields:[]},
+  mobility:{label:'步行方面有什么偏好？',category:'mobility',priority:'useful',key:'mobility',options:options([['less_walking','尽量少走',{lessWalking:true}],['slower_walking','走慢一点',{slowerWalking:true}],['frequent_breaks','需要经常休息',{frequentBreaks:true}],['power_walking','暴走党',{walkingLevel:'high',lessWalking:false}]]),fields:[{id:'maxLegWalkMinutes',type:'integer',label:'单段最多步行分钟',nullable:true}]},
+  walking_budget:{label:'景点之间，你愿意走多少路？',category:'mobility',priority:'useful',key:'mobility',options:options([['low','少走，优先交通接驳',{walkingLevel:'low',lessWalking:true}],['moderate','适中，顺路可以走',{walkingLevel:'moderate',lessWalking:false}],['high','暴走党，愿意多走',{walkingLevel:'high',lessWalking:false}]]),fields:[{id:'maxLegWalkMinutes',type:'integer',label:'单段交通步行上限（分钟，可不填）',nullable:true},{id:'maxDailyWalkMinutes',type:'integer',label:'每日交通步行上限（分钟，景点内另计）',nullable:true}]},
+  wake_departure:{label:'通常几点起床、几点可以出门？',category:'wake',priority:'useful',options:[],fields:[{id:'wake',type:'time',label:'通常起床时间',nullable:true},{id:'departure',type:'time',label:'可出门时间',nullable:true},{id:'dayEnd',type:'time',label:'希望几点结束',nullable:true}]},
+  flight_details:{label:'请补充出发机场和航班起飞时间',category:'fixedEvent',priority:'critical',options:[],fields:[{id:'date',type:'date',label:'航班日期',nullable:true},{id:'location',type:'text',label:'出发机场',nullable:true},{id:'startTime',type:'time',label:'航班起飞时间',nullable:true}]},
+  fixed_event:{label:'有哪些固定安排？',category:'fixedEvent',priority:'critical',options:[],fields:[{id:'type',type:'text',label:'活动类型',nullable:true},{id:'date',type:'date',label:'日期',nullable:true},{id:'location',type:'text',label:'地点',nullable:true},{id:'startTime',type:'time',label:'开始时间',nullable:true},{id:'endTime',type:'time',label:'结束时间',nullable:true}]},
+  transport:{label:'更倾向哪种交通？',category:'transport',priority:'useful',key:'transport',options:options([['transit','公共交通优先',{mode:'transit'}],['taxi','打车省时',{mode:'taxi'}],['walk','步行探索',{mode:'walk'}],['bike','骑行',{mode:'bike'}],['mixed','混合安排',{mode:'mixed'}]]),fields:[]},
+  coverage_depth:{label:'更想少点深游，还是多点打卡？',category:'pace',priority:'useful',key:'pace',options:options([['fewer_deeper','少去几个慢慢玩'],['more_places','多去几个地方'],['balanced','先帮我安排']]),fields:[]},
+  poi_depth:{label:'这个景点想怎么玩？',category:'poiDepth',priority:'useful',options:[],fields:[{id:'poiId',type:'poi',label:'景点',nullable:true},{id:'depth',type:'enum',label:'游览深度',values:['deep','normal','quick'],nullable:true}]},
+  shopping:{label:'是否安排购物？',category:'shopping',priority:'optional',key:'shopping',options:options([['none','不专门安排'],['on_the_way','顺路逛逛'],['dedicated','专门留时间']]),fields:[]},
+  queue:{label:'对排队有什么偏好？',category:'queue',priority:'optional',key:'queue',options:options([['avoid','尽量避开'],['selected_highlights','喜欢的地方可以等'],['accept','可以接受']]),fields:[]},
+  free_time:{label:'希望留多少自由活动时间？',category:'freeTime',priority:'optional',key:'freeTime',options:options([['structured','安排充分'],['some_free','留一段空白'],['flexible','希望很灵活']]),fields:[]},
+  activity_details:{label:'想体验的活动是否已经预约？',category:'fixedEvent',priority:'useful',options:[],fields:[{id:'type',type:'text',label:'活动类型',nullable:true},{id:'date',type:'date',label:'日期',nullable:true},{id:'location',type:'text',label:'地点',nullable:true},{id:'startTime',type:'time',label:'开始时间',nullable:true},{id:'endTime',type:'time',label:'结束时间',nullable:true}]},
+  rest_detail:{label:'希望多久休息一次？',category:'rest',priority:'useful',key:'rest',options:[],fields:[{id:'intervalMinutes',type:'integer',label:'间隔分钟',nullable:true},{id:'durationMinutes',type:'integer',label:'休息分钟',nullable:true}]},
+  child_activity:{label:'孩子大致年龄、是否需要午休？',category:'party',priority:'useful',key:'party',options:[],fields:[{id:'ageBands',type:'list',label:'年龄段',values:['0_2','3_6','7_12','13_plus','unspecified'],nullable:true},{id:'nap',type:'enum',label:'是否午休',values:['yes','no','unsure'],nullable:true}]},
+  meals:{label:'吃饭也留一点从容的时间',category:'meals',priority:'optional',key:'meals',options:options([['simple','简单吃，约30分钟',{preference:'simple'}],['local','当地特色，约45分钟',{preference:'local'}],['dedicated','慢慢吃，约60分钟',{preference:'dedicated'}]]),fields:[{id:'lunchStart',type:'time',label:'午餐最早开始（默认11:30）',nullable:true},{id:'lunchEnd',type:'time',label:'午餐最晚开始（默认13:30）',nullable:true},{id:'durationMinutes',type:'integer',label:'用餐时长（分钟，可不填）',nullable:true}]},
+  budget:{label:'有希望控制的预算吗？',category:'budget',priority:'optional',key:'budget',options:[],fields:[{id:'currency',type:'text',label:'货币码，如CNY',nullable:true},{id:'amountMinor',type:'integer',label:'预算金额（最小货币单位）',nullable:true},{id:'scope',type:'enum',label:'预算范围',values:['per_person','trip'],nullable:true}]},
+};
+// Shared browser/server templates; option IDs have one definition.
+export function makeQuestion(templateId,revision) {
+  const t=Object.hasOwn(QUESTION_BANK,templateId)?QUESTION_BANK[templateId]:null;if(!t)return null;
+  const {key,...view}=t;return {id:`q:${templateId}:${revision}`,templateId,...view,reason:t.priority==='critical'?'这会影响固定安排是否来得及':'用于调整行程体验',skippable:true,relatedRequirementIds:[]}
+}
+
+export function bootstrapQuestions() {return Object.keys(QUESTION_BANK).map(id=>makeQuestion(id,0))}

@@ -1,0 +1,50 @@
+:root { --brand: #a88d58; --brand-light: #f3eddf; --brand-soft: #f3eddf; --brand-2: #d4bf96; }
+.login-dialog { --brand: #a88d58; --brand-soft: #f3eddf; box-sizing: border-box; width: min(440px, calc(100% - 32px)); max-height: calc(100dvh - 32px); overflow: auto; margin: auto; padding: 24px; border: 1px solid #e8e2da; border-radius: 20px; color: #1f1b16; background: #fffdf9; box-shadow: 0 20px 80px #1f1b1640; font: 14px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif; }
+.login-dialog::backdrop { background: #1f1b1680; }
+.login-dialog * { box-sizing: border-box; }
+.login-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.login-heading h2 { font-size: 21px; margin: 0; }
+.login-dialog button { font: inherit; cursor: pointer; border: 1px solid #e8e2da; border-radius: 10px; padding: 9px 12px; background: #fff; color: #6f5935; }
+.login-dialog [data-close] { font-size: 22px; line-height: 1; }
+.login-demo { font-size: 12px; color: #7a7168; }
+.login-methods { display: flex; gap: 8px; margin: 18px 0; }
+.login-methods button { flex: 1; }
+.login-methods [aria-pressed="true"] { background: #f3eddf; border-color: #a88d58; }
+.login-dialog label { display: block; margin: 14px 0 6px; }
+.login-dialog input { display: block; width: 100%; min-width: 0; border: 1px solid #d8cec4; border-radius: 10px; padding: 11px; background: #fff; font: inherit; color: #1f1b16; }
+.login-code-row { display: flex; gap: 8px; }
+.login-code-row input { flex: 1; }
+.login-code-row button { flex-shrink: 0; font-size: 12px; }
+.login-dialog .login-submit { width: 100%; margin-top: 12px; background: #e4d5b7; color: #493d29; border-color: #cbb78e; }
+.login-feedback { margin: 8px 0; font-size: 12px; color: #6f5935; }
+.login-feedback:empty { display: none; }
+.login-dialog button:disabled { cursor: default; opacity: .55; }
+.login-dialog :focus-visible { outline: 2px solid #a88d58; outline-offset: 3px; }
+.login-dialog [aria-invalid="true"] { border-color: #a88d58; }
+@media(max-width:360px) { .login-dialog { padding: 18px; } .login-code-row { flex-wrap: wrap; } .login-code-row input { flex-basis: 100%; } }
+.profile-avatars { border: 0; padding: 0; margin: 16px 0; display: flex; gap: 12px; flex-wrap: wrap; }
+.profile-avatars legend { margin-bottom: 8px; }
+.profile-avatars label { display: flex; align-items: center; gap: 6px; margin: 0; cursor: pointer; }
+.profile-avatars input { width: auto; accent-color: var(--brand, #a88d58); }
+.profile-avatars span { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--brand-soft, #f3eddf); }
+.profile-avatars input:checked + span { outline: 2px solid var(--brand, #a88d58); }
+.profile-preview, .account-avatar { display: inline-grid; place-items: center; overflow: hidden; border-radius: 50%; background: #f3eddf; color: #6f5935; vertical-align: middle; }
+.profile-preview { width: 72px; height: 72px; font-size: 28px; margin-top: 16px; }
+.account-avatar { width: 36px; height: 36px; margin-right: 10px; font-size: 17px; }
+.profile-preview img, .account-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.profile-upload input[type="file"] { font-size: 12px; }
+
+.profile-avatar-title { margin: 16px 0 8px; }
+.profile-avatar-row { display: flex; align-items: center; gap: 18px; position: relative; margin-bottom: 20px; }
+.profile-avatar-row .profile-preview { margin: 0; flex-shrink: 0; }
+.login-dialog .profile-upload-button { margin: 0; padding: 8px 14px; border: 1px solid #cbb78e; border-radius: 10px; background: #f3eddf; color: #6f5935; cursor: pointer; }
+.login-dialog .profile-file-input { position: absolute; width: 1px; height: 1px; padding: 0; border: 0; opacity: 0; overflow: hidden; }
+.profile-avatar-row:focus-within .profile-upload-button { outline: 2px solid #a88d58; outline-offset: 3px; }
+.login-methods[hidden] { display: none; }
+.profile-tabs { display:flex;gap:6px;margin:16px 0;flex-wrap:wrap; }
+.profile-tabs [aria-pressed="true"] { background:#e4d5b7;color:#493d29; }
+.profile-dialog form[hidden], .profile-library[hidden] { display:none; }
+.profile-library article { border-bottom:1px solid #e8e2da;padding:14px 0; }
+.profile-library article p { white-space:pre-wrap;overflow-wrap:anywhere; }
+.profile-library article strong,.profile-library article small { display:block;margin-bottom:8px; }
+.profile-library article button { margin-right:8px; }

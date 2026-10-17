@@ -1,0 +1,1340 @@
+{
+  "_说明": "BBC 剧版巡礼。坐标核对至地图实体，具体机位和入口另行核实；原创导览不作为台词。sourcePoiId 保留原文编号，poiId 使用全站唯一命名避免上海 sh 前缀冲突。",
+  "_版本": 1,
+  "_priority": 2.5,
+  "_bounds": {
+    "lng": [
+      -0.45,
+      0.1
+    ],
+    "lat": [
+      51.4,
+      51.75
+    ]
+  },
+  "_expected": {
+    "ipStops": [
+      7,
+      7
+    ],
+    "cityStops": [
+      15,
+      15
+    ],
+    "maxTierS": 3
+  },
+  "ip": {
+    "ipId": "sherlock",
+    "name": "神探夏洛克",
+    "author": "史蒂文·莫法特／马克·加蒂斯（主创）；柯南·道尔（原著）",
+    "kind": "tv",
+    "cover": "img/sherlock-cover.png",
+    "aliases": [
+      "神探夏洛克",
+      "Sherlock",
+      "夏洛克",
+      "新世纪福尔摩斯",
+      "福尔摩斯",
+      "卷福",
+      "华生"
+    ],
+    "tags": {
+      "城市": [
+        "伦敦",
+        "英国"
+      ],
+      "人物": [
+        "夏洛克·福尔摩斯",
+        "约翰·华生",
+        "莫里亚蒂",
+        "麦考夫",
+        "玛丽"
+      ],
+      "地名": [
+        "北高尔街",
+        "North Gower Street",
+        "Speedy’s",
+        "巴茨医院",
+        "贝克街",
+        "Leinster Gardens",
+        "罗素广场",
+        "博罗市场"
+      ]
+    },
+    "coverCredit": "用户指定的福尔摩斯博物馆实景封面；非 BBC 剧版公寓外景。"
+  },
+  "line": {
+    "lineId": "sherlock-london",
+    "ipId": "sherlock",
+    "title": "神探夏洛克·伦敦",
+    "city": "伦敦",
+    "cover": "img/sherlock-cover.png",
+    "recommendDays": 2,
+    "coverCredit": "用户指定的福尔摩斯博物馆实景封面；非 BBC 剧版公寓外景。"
+  },
+  "clusters": [
+    "布卢姆茨伯里·尤斯顿",
+    "伦敦金融城",
+    "布卢姆茨伯里",
+    "西区",
+    "贝斯沃特",
+    "威斯敏斯特",
+    "南华克",
+    "贝克街",
+    "南岸",
+    "南岸·金融城",
+    "伦敦塔周边",
+    "塔桥周边",
+    "科文特花园",
+    "摄政公园",
+    "巴特西"
+  ],
+  "ipStops": [
+    {
+      "poiId": "sherlock-ip-01",
+      "sourcePoiId": "sh-ip-01",
+      "lineId": "sherlock-london",
+      "type": "ip",
+      "name": "221B 贝克街公寓外景（Baker Street 221B） & Speedy's 咖啡馆",
+      "alias": "187 North Gower Street / 221B Baker Street exterior / Speedy's Cafe",
+      "cluster": "布卢姆茨伯里·尤斯顿",
+      "tier": "S",
+      "lng": -0.1369,
+      "lat": 51.52623,
+      "durationNormal": 75,
+      "durationRush": 30,
+      "intro": "同一栋建筑的两种巡礼体验：楼上是 BBC 剧版贝克街 221B 公寓外景，楼下是 Speedy's 咖啡馆。实际地址为北高尔街 187 号，可一起拍摄门面并进店休息。",
+      "quotes": [],
+      "basis": "S1E1《粉色的研究》及多集中的公寓外景与楼下咖啡馆；原创导览，非剧集逐字台词。",
+      "tips": "仅在公共道路拍摄公寓门面，不打扰住户；咖啡馆到访前核对营业时间，消费遵守店家规则。",
+      "skipNote": "公寓外景与楼下咖啡馆合并游览；核心必去点，不建议删除。",
+      "address": "187 North Gower Street, London NW1 2NJ",
+      "mapUrl": "https://www.openstreetmap.org/?mlat=51.52623&mlon=-0.1369#map=18/51.52623/-0.1369",
+      "locationVerification": {
+        "status": "entity-matched",
+        "checkedAt": "2026-10-16",
+        "sourceUrl": "https://www.latlong.net/location/sherlock-locations-13",
+        "precision": "building",
+        "note": "地图实体定位；中心坐标不代表游客入口或剧集具体机位。",
+        "supportingSourceUrl": "https://ratings.food.gov.uk/business/426250/speedy-cafe"
+      },
+      "realPhoto": "img/sherlock-ip-01-manual-1.jpg",
+      "photos": [
+        "img/sherlock-ip-01-manual-1.jpg",
+        "img/sherlock-ip-01-manual-2.jpg"
+      ],
+      "photoCredit": "用户手动补充照片；原始来源及授权信息尚未补充。",
+      "relationStatus": "documented-location",
+      "basisSources": [
+        "https://www.virginmedia.com/the-edit/tv/where-was-sherlock-filmed"
+      ],
+      "visitGroup": "north-gower-187",
+      "photoPending": false,
+      "nameEn": "221B Baker Street filming exterior & Speedy's Sandwich Bar & Cafe",
+      "sourcePoiIds": [
+        "sh-ip-01",
+        "sh-ip-02"
+      ],
+      "mergedPoiIds": [
+        "sherlock-ip-02"
+      ],
+      "photoSources": [
+        {
+          "file": "img/sherlock-ip-01-manual-1.jpg",
+          "source": "用户手动补充",
+          "originalFilename": "1_vpPGFC1x9FPOqIfepjPbqw.jpg",
+          "dimensions": [
+            1400,
+            1050
+          ],
+          "note": "用户提供图片；原始来源及授权信息未补充。"
+        },
+        {
+          "file": "img/sherlock-ip-01-manual-2.jpg",
+          "source": "用户手动补充",
+          "originalFilename": "images.jpg",
+          "dimensions": [
+            480,
+            640
+          ],
+          "note": "用户提供图片；原始来源及授权信息未补充。"
+        }
+      ],
+      "clusterEn": "Bloomsbury·Euston"
+    },
+    {
+      "poiId": "sherlock-ip-03",
+      "sourcePoiId": "sh-ip-03",
+      "lineId": "sherlock-london",
+      "type": "ip",
+      "name": "圣巴塞洛缪医院",
+      "alias": "St Bart’s / 巴茨医院",
+      "cluster": "伦敦金融城",
+      "tier": "S",
+      "lng": -0.10008,
+      "lat": 51.51753,
+      "durationNormal": 45,
+      "durationRush": 20,
+      "intro": "圣巴塞洛缪医院，又称巴茨医院，是第二季结尾《莱辛巴赫瀑布》中夏洛克坠楼事件的核心取景地。",
+      "quotes": [],
+      "basis": "S2E3《莱辛巴赫瀑布》；类别：真实取景地；核验等级：A",
+      "tips": "只在允许的公共区域拍摄，勿影响医院运作；地图标记为院区中心，外景请沿公共街道辨认，具体机位未核实，不进入临床区域。",
+      "skipNote": "若时间紧可缩短停留，但不建议舍弃",
+      "address": "West Smithfield, London EC1A 7BE",
+      "mapUrl": "https://www.openstreetmap.org/?mlat=51.51753&mlon=-0.10008#map=18/51.51753/-0.10008",
+      "locationVerification": {
+        "status": "entity-matched",
+        "checkedAt": "2026-10-16",
+        "sourceUrl": "https://mapcarta.com/W170732745",
+        "precision": "hospital-centre",
+        "note": "地图实体定位；中心坐标不代表游客入口或剧集具体机位。"
+      },
+      "realPhoto": "img/sherlock-ip-03-manual-1.jpg",
+      "photos": [
+        "img/sherlock-ip-03-manual-1.jpg",
+        "img/sherlock-ip-03-manual-2.jpg",
+        "img/sherlock-ip-03-manual-3.jpg"
+      ],
+      "photoCredit": "用户手动补充照片；原始来源及授权信息尚未补充。",
+      "relationStatus": "documented-location",
+      "basisSources": [
+        "https://www.virginmedia.com/the-edit/tv/where-was-sherlock-filmed"
+      ],
+      "photoPending": false,
+      "nameEn": "St Bartholomew’s Hospital",
+      "clusterEn": "City of London",
+      "photoSources": [
+        {
+          "file": "img/sherlock-ip-03-manual-1.jpg",
+          "source": "用户手动补充",
+          "originalFilename": "8489153662_80afb71dc6_b.jpg",
+          "dimensions": [
+            1024,
+            765
+          ],
+          "note": "用户提供图片；原始来源及授权信息未补充。"
+        },
+        {
+          "file": "img/sherlock-ip-03-manual-2.jpg",
+          "source": "用户手动补充",
+          "originalFilename": "images-1.jpg",
+          "dimensions": [
+            640,
+            480
+          ],
+          "note": "用户提供图片；原始来源及授权信息未补充。"
+        },
+        {
+          "file": "img/sherlock-ip-03-manual-3.jpg",
+          "source": "用户手动补充",
+          "originalFilename": "images.jpg",
+          "dimensions": [
+            554,
+            554
+          ],
+          "note": "用户提供图片；原始来源及授权信息未补充。"
+        }
+      ]
+    },
+    {
+      "poiId": "sherlock-ip-04",
+      "sourcePoiId": "sh-ip-04",
+      "lineId": "sherlock-london",
+      "type": "ip",
+      "name": "罗素广场",
+      "alias": "罗素广场",
+      "cluster": "布卢姆茨伯里",
+      "tier": "A",
+      "lng": -0.12607,
+      "lat": 51.52169,
+      "durationNormal": 45,
+      "durationRush": 20,
+      "intro": "剧情关联待核实：约翰与斯坦福重逢、推动福华初遇的相关场景巡礼点。",
+      "quotes": [],
+      "basis": "用户内容稿提及：具体镜头尚未逐集核实。S1E1《粉色的研究》（地点关联建议复核具体镜头）；类别：粉丝巡礼点／待逐镜核实；核验等级：C",
+      "tips": "长椅可能变化，不保证与画面一致",
+      "skipNote": "场景设施可能已改变",
+      "address": "Russell Square Gardens, Bloomsbury, London",
+      "mapUrl": "https://www.openstreetmap.org/?mlat=51.52169&mlon=-0.12607#map=18/51.52169/-0.12607",
+      "locationVerification": {
+        "status": "entity-matched",
+        "checkedAt": "2026-10-16",
+        "sourceUrl": "https://mapcarta.com/W3241371/Map",
+        "precision": "park-centre",
+        "note": "地图实体定位；中心坐标不代表游客入口或剧集具体机位。"
+      },
+      "realPhoto": "img/sherlock-ip-04-manual-1.jpg",
+      "photos": [
+        "img/sherlock-ip-04-manual-1.jpg",
+        "img/sherlock-ip-04-manual-2.jpg",
+        "img/sherlock-ip-04-manual-3.jpg"
+      ],
+      "photoCredit": "用户手动补充照片；原始来源及授权信息尚未补充。",
+      "relationStatus": "pending-scene-review",
+      "basisSources": [],
+      "photoPending": false,
+      "nameEn": "Russell Square",
+      "clusterEn": "Bloomsbury",
+      "photoSources": [
+        {
+          "file": "img/sherlock-ip-04-manual-1.jpg",
+          "source": "用户手动补充",
+          "originalFilename": "Russell_Square_1.max-1920x1080.jpg",
+          "dimensions": [
+            1440,
+            1080
+          ],
+          "note": "用户提供图片；原始来源及授权信息未补充。"
+        },
+        {
+          "file": "img/sherlock-ip-04-manual-2.jpg",
+          "source": "用户手动补充",
+          "originalFilename": "caption.jpg",
+          "dimensions": [
+            1100,
+            1100
+          ],
+          "note": "用户提供图片；原始来源及授权信息未补充。"
+        },
+        {
+          "file": "img/sherlock-ip-04-manual-3.jpg",
+          "source": "用户手动补充",
+          "originalFilename": "Russell-square-hotel.jpg",
+          "dimensions": [
+            1024,
+            768
+          ],
+          "note": "用户提供图片；原始来源及授权信息未补充。"
+        }
+      ]
+    },
+    {
+      "poiId": "sherlock-ip-05",
+      "sourcePoiId": "sh-ip-05",
+      "lineId": "sherlock-london",
+      "type": "ip",
+      "name": "特拉法加广场",
+      "alias": "特拉法加广场",
+      "cluster": "西区",
+      "tier": "A",
+      "lng": -0.128069,
+      "lat": 51.508039,
+      "durationNormal": 45,
+      "durationRush": 20,
+      "intro": "剧情关联待核实：市中心广场，适合追寻剧集里穿行伦敦的侦探足迹。",
+      "quotes": [],
+      "basis": "用户内容稿提及：具体镜头尚未逐集核实。S1E2《盲眼银行家》（场景关联待逐镜核实）；类别：粉丝巡礼点／待逐镜核实；核验等级：C",
+      "tips": "可与国家美术馆和皮卡迪利圆环同游",
+      "skipNote": "关联镜头仍待逐帧核验",
+      "address": "Trafalgar Square, London",
+      "mapUrl": "https://www.openstreetmap.org/?mlat=51.508039&mlon=-0.128069#map=18/51.508039/-0.128069",
+      "locationVerification": {
+        "status": "entity-matched",
+        "checkedAt": "2026-10-16",
+        "sourceUrl": "https://www.parksandgardens.org/places/trafalgar-square-westminster",
+        "precision": "square-centre",
+        "note": "地图实体定位；中心坐标不代表游客入口或剧集具体机位。"
+      },
+      "realPhoto": "img/sherlock-ip-05-unsplash-u-iXtWNbxgE.jpg",
+      "photos": [
+        "img/sherlock-ip-05-unsplash-u-iXtWNbxgE.jpg",
+        "img/hp-sp-06-2.jpg",
+        "img/hp-sp-06.jpg"
+      ],
+      "photoCredit": "Unsplash · Josh Mills（Unsplash License；https://unsplash.com/photos/u-iXtWNbxgE）；既有伦敦图库：项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "relationStatus": "pending-scene-review",
+      "basisSources": [],
+      "photoPending": false,
+      "photoSources": [
+        {
+          "file": "img/sherlock-ip-05-unsplash-u-iXtWNbxgE.jpg",
+          "author": "Josh Mills",
+          "sourceUrl": "https://unsplash.com/photos/u-iXtWNbxgE",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            1600,
+            900
+          ]
+        }
+      ],
+      "nameEn": "Trafalgar Square",
+      "clusterEn": "West End"
+    },
+    {
+      "poiId": "sherlock-ip-06",
+      "sourcePoiId": "sh-ip-06",
+      "lineId": "sherlock-london",
+      "type": "ip",
+      "name": "伦斯特花园 23–24 号假门面",
+      "alias": "Leinster Gardens 假门面",
+      "cluster": "贝斯沃特",
+      "tier": "S",
+      "lng": -0.1837,
+      "lat": 51.51327,
+      "durationNormal": 45,
+      "durationRush": 20,
+      "intro": "第三季中玛丽身影投射到的假建筑立面，是剧情机关的真实城市原型。",
+      "quotes": [],
+      "basis": "S3E3《最后的誓言》；类别：真实取景地；核验等级：B；公开取景资料支持该地点关联，未核对逐字字幕。",
+      "tips": "街道外部拍摄，尊重周边居民",
+      "skipNote": "与市中心核心点相距较远",
+      "address": "23–24 Leinster Gardens, London W2 3AN",
+      "mapUrl": "https://www.openstreetmap.org/?mlat=51.51327&mlon=-0.1837#map=18/51.51327/-0.1837",
+      "locationVerification": {
+        "status": "entity-matched",
+        "checkedAt": "2026-10-16",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:23-24_Leinster_Gardens,_London-geograph-4123124-by-Dave-Pickersgill.jpg",
+        "precision": "facade",
+        "note": "地图实体定位；中心坐标不代表游客入口或剧集具体机位。"
+      },
+      "realPhoto": "img/sherlock-ip-06-manual-1.jpg",
+      "photos": [
+        "img/sherlock-ip-06-manual-1.jpg",
+        "img/sherlock-ip-06-manual-2.jpg",
+        "img/sherlock-ip-06-manual-3.jpg"
+      ],
+      "photoCredit": "用户手动补充照片；原始来源及授权信息尚未补充。",
+      "relationStatus": "documented-location",
+      "basisSources": [
+        "https://findthatlocation.com/television-show/sherlock/location/657"
+      ],
+      "photoPending": false,
+      "nameEn": "Leinster Gardens 23–24",
+      "clusterEn": "Bayswater",
+      "photoSources": [
+        {
+          "file": "img/sherlock-ip-06-manual-1.jpg",
+          "source": "用户手动补充",
+          "originalFilename": "k39-cd5bc83513c3cb2324294d46cc976da0twgzp.jpg",
+          "dimensions": [
+            1792,
+            2520
+          ],
+          "note": "用户提供图片；原始来源及授权信息未补充。"
+        },
+        {
+          "file": "img/sherlock-ip-06-manual-2.jpg",
+          "source": "用户手动补充",
+          "originalFilename": "497c7f06f47f5908c9d1369f4dcd76ba11e4927c.jpg",
+          "dimensions": [
+            645,
+            430
+          ],
+          "note": "用户提供图片；原始来源及授权信息未补充。"
+        },
+        {
+          "file": "img/sherlock-ip-06-manual-3.jpg",
+          "source": "用户手动补充",
+          "originalFilename": "images.jpg",
+          "dimensions": [
+            515,
+            388
+          ],
+          "note": "用户提供图片；原始来源及授权信息未补充。"
+        }
+      ]
+    },
+    {
+      "poiId": "sherlock-ip-07",
+      "sourcePoiId": "sh-ip-07",
+      "lineId": "sherlock-london",
+      "type": "ip",
+      "name": "威斯敏斯特地铁站",
+      "alias": "威斯敏斯特地铁站",
+      "cluster": "威斯敏斯特",
+      "tier": "A",
+      "lng": -0.12493,
+      "lat": 51.50136,
+      "durationNormal": 30,
+      "durationRush": 15,
+      "intro": "第三季《空灵柩》中地铁调查线相关地点。",
+      "quotes": [],
+      "basis": "S3E1《空灵柩》；类别：真实取景地；核验等级：B；公开取景资料支持该地点关联，未核对逐字字幕。",
+      "tips": "勿在闸机与通道停留妨碍通行",
+      "skipNote": "可与大本钟、议会大厦合并",
+      "address": "Westminster Station, Bridge Street, London",
+      "mapUrl": "https://www.openstreetmap.org/?mlat=51.50136&mlon=-0.12493#map=18/51.50136/-0.12493",
+      "locationVerification": {
+        "status": "entity-matched",
+        "checkedAt": "2026-10-16",
+        "sourceUrl": "https://mapcarta.com/26255384",
+        "precision": "station-centre",
+        "note": "地图实体定位；中心坐标不代表游客入口或剧集具体机位。"
+      },
+      "realPhoto": "img/sherlock-ip-07-unsplash-tdp57QsFt3o.jpg",
+      "photos": [
+        "img/sherlock-ip-07-unsplash-tdp57QsFt3o.jpg",
+        "img/sherlock-ip-07-unsplash-h5-RN8aLOiM.jpg",
+        "img/hp-ip-08.jpg"
+      ],
+      "photoCredit": "Unsplash · Connor Gan（Unsplash License；https://unsplash.com/photos/tdp57QsFt3o）；Unsplash · Chloe Christine（Unsplash License；https://unsplash.com/photos/h5-RN8aLOiM）；既有伦敦图库：项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "relationStatus": "documented-location",
+      "basisSources": [
+        "https://findthatlocation.com/television-show/sherlock/location/632"
+      ],
+      "photoPending": false,
+      "photoSources": [
+        {
+          "file": "img/sherlock-ip-07-unsplash-tdp57QsFt3o.jpg",
+          "author": "Connor Gan",
+          "sourceUrl": "https://unsplash.com/photos/tdp57QsFt3o",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            2400,
+            3514
+          ]
+        },
+        {
+          "file": "img/sherlock-ip-07-unsplash-h5-RN8aLOiM.jpg",
+          "author": "Chloe Christine",
+          "sourceUrl": "https://unsplash.com/photos/h5-RN8aLOiM",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            2400,
+            1600
+          ]
+        }
+      ],
+      "nameEn": "Westminster Underground Station",
+      "clusterEn": "Westminster"
+    },
+    {
+      "poiId": "sherlock-ip-08",
+      "sourcePoiId": "sh-ip-08",
+      "lineId": "sherlock-london",
+      "type": "ip",
+      "name": "博罗市场",
+      "alias": "博罗市场",
+      "cluster": "南华克",
+      "tier": "B",
+      "lng": -0.09031,
+      "lat": 51.50559,
+      "durationNormal": 75,
+      "durationRush": 35,
+      "intro": "第四季《六座撒切尔夫人像》与寻犬桥段相关的伦敦取景区域。",
+      "quotes": [],
+      "basis": "S4E1《六座撒切尔夫人像》；类别：真实取景区域；核验等级：B；公开取景资料支持该地点关联，未核对逐字字幕。",
+      "tips": "市场营业时体验最佳，注意拥挤",
+      "skipNote": "与主要福华场景相比优先级稍低",
+      "address": "Borough Market, London SE1 9AL",
+      "mapUrl": "https://www.openstreetmap.org/?mlat=51.50559&mlon=-0.09031#map=18/51.50559/-0.09031",
+      "locationVerification": {
+        "status": "entity-matched",
+        "checkedAt": "2026-10-16",
+        "sourceUrl": "https://mapcarta.com/es/25583248",
+        "precision": "market-centre",
+        "note": "地图实体定位；中心坐标不代表游客入口或剧集具体机位。"
+      },
+      "realPhoto": "img/sherlock-ip-08-unsplash-pqcBBLyBZ6A.jpg",
+      "photos": [
+        "img/sherlock-ip-08-unsplash-pqcBBLyBZ6A.jpg",
+        "img/sherlock-ip-08-unsplash-kRLUAL1EQrA.jpg",
+        "img/hp-ip-06.jpg"
+      ],
+      "photoCredit": "Unsplash · Max van den Oetelaar（Unsplash License；https://unsplash.com/photos/pqcBBLyBZ6A）；Unsplash · Bruno Martins（Unsplash License；https://unsplash.com/photos/kRLUAL1EQrA）；既有伦敦图库：项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "relationStatus": "documented-location",
+      "basisSources": [
+        "https://www.imdb.com/title/tt3538760/locations/"
+      ],
+      "photoPending": false,
+      "photoSources": [
+        {
+          "file": "img/sherlock-ip-08-unsplash-pqcBBLyBZ6A.jpg",
+          "author": "Max van den Oetelaar",
+          "sourceUrl": "https://unsplash.com/photos/pqcBBLyBZ6A",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            1600,
+            2400
+          ]
+        },
+        {
+          "file": "img/sherlock-ip-08-unsplash-kRLUAL1EQrA.jpg",
+          "author": "Bruno Martins",
+          "sourceUrl": "https://unsplash.com/photos/kRLUAL1EQrA",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            1600,
+            1067
+          ]
+        }
+      ],
+      "nameEn": "Borough Market",
+      "clusterEn": "Southwark"
+    }
+  ],
+  "cityStops": [
+    {
+      "poiId": "sherlock-sp-01",
+      "sourcePoiId": "sh-sp-01",
+      "lineId": "sherlock-london",
+      "type": "classic",
+      "name": "福尔摩斯博物馆",
+      "cluster": "贝克街",
+      "popularity": 5,
+      "durationNormal": 75,
+      "durationRush": 37,
+      "lng": -0.15847,
+      "lat": 51.52376,
+      "intro": "经典原著主题博物馆；非 BBC 221B 外景",
+      "ticket": "收费",
+      "openHours": "官网时段",
+      "address": "221B Baker Street, London NW1 6XE",
+      "mapUrl": "https://www.openstreetmap.org/?mlat=51.52376&mlon=-0.15847#map=18/51.52376/-0.15847",
+      "locationVerification": {
+        "status": "entity-matched",
+        "checkedAt": "2026-10-16",
+        "sourceUrl": "https://mapcarta.com/32693502",
+        "precision": "museum",
+        "note": "地图实体定位；中心坐标不代表游客入口或剧集具体机位。"
+      },
+      "realPhoto": "img/sherlock-sp-01-manual-1.avif",
+      "photos": [
+        "img/sherlock-sp-01-manual-1.avif",
+        "img/sherlock-sp-01-manual-2.jpg"
+      ],
+      "photoCredit": "用户手动补充照片；原始来源及授权信息尚未补充。",
+      "photoPending": false,
+      "clusterEn": "Baker Street",
+      "photoSources": [
+        {
+          "file": "img/sherlock-sp-01-manual-1.avif",
+          "source": "用户手动补充",
+          "originalFilename": "1.avif",
+          "dimensions": [
+            1373,
+            1031
+          ],
+          "note": "用户提供图片；原始来源及授权信息未补充。"
+        },
+        {
+          "file": "img/sherlock-sp-01-manual-2.jpg",
+          "source": "用户手动补充",
+          "originalFilename": "images.jpg",
+          "dimensions": [
+            640,
+            480
+          ],
+          "note": "用户提供图片；原始来源及授权信息未补充。"
+        }
+      ]
+    },
+    {
+      "poiId": "sherlock-sp-02",
+      "sourcePoiId": "sh-sp-02",
+      "lineId": "sherlock-london",
+      "type": "classic",
+      "name": "贝克街地铁站与福尔摩斯铜像",
+      "cluster": "贝克街",
+      "popularity": 5,
+      "durationNormal": 45,
+      "durationRush": 22,
+      "lng": -0.15659,
+      "lat": 51.5225,
+      "intro": "站外雕像与站内侦探侧影瓷砖",
+      "ticket": "站外免费",
+      "openHours": "公共空间全天",
+      "address": "Marylebone Road, outside Baker Street Station, London",
+      "mapUrl": "https://www.openstreetmap.org/?mlat=51.5225&mlon=-0.15659#map=18/51.5225/-0.15659",
+      "locationVerification": {
+        "status": "entity-matched",
+        "checkedAt": "2026-10-16",
+        "sourceUrl": "https://en.wikipedia.org/wiki/Statue_of_Sherlock_Holmes,_London",
+        "precision": "statue",
+        "note": "地图实体定位；中心坐标不代表游客入口或剧集具体机位。"
+      },
+      "realPhoto": "img/sherlock-sp-02-unsplash-paJffHJljII.jpg",
+      "photos": [
+        "img/sherlock-sp-02-unsplash-paJffHJljII.jpg"
+      ],
+      "photoCredit": "Unsplash · huan yu（Unsplash License；https://unsplash.com/photos/paJffHJljII）",
+      "photoPending": false,
+      "photoSources": [
+        {
+          "file": "img/sherlock-sp-02-unsplash-paJffHJljII.jpg",
+          "author": "huan yu",
+          "sourceUrl": "https://unsplash.com/photos/paJffHJljII",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            2400,
+            3197
+          ]
+        }
+      ],
+      "clusterEn": "Baker Street"
+    },
+    {
+      "poiId": "sherlock-sp-03",
+      "sourcePoiId": "sh-sp-03",
+      "lineId": "sherlock-london",
+      "type": "classic",
+      "name": "皮卡迪利圆环",
+      "cluster": "西区",
+      "popularity": 5,
+      "durationNormal": 45,
+      "durationRush": 22,
+      "lng": -0.133869,
+      "lat": 51.510067,
+      "intro": "伦敦繁华街景；剧版关联镜头需逐集核验",
+      "ticket": "免费",
+      "openHours": "全天",
+      "address": "Piccadilly Circus, London",
+      "mapUrl": "https://www.openstreetmap.org/?mlat=51.510067&mlon=-0.133869#map=18/51.510067/-0.133869",
+      "locationVerification": {
+        "status": "entity-matched",
+        "checkedAt": "2026-10-16",
+        "sourceUrl": "https://www.latlong.net/place/piccadilly-circus-london-uk-5696.html",
+        "precision": "square-centre",
+        "note": "地图实体定位；中心坐标不代表游客入口或剧集具体机位。"
+      },
+      "realPhoto": "img/sherlock-sp-03-unsplash-Ujjc8TG2uqo.jpg",
+      "photos": [
+        "img/sherlock-sp-03-unsplash-Ujjc8TG2uqo.jpg",
+        "img/hp-ip-07.jpg",
+        "img/hp-ip-07-2.jpg",
+        "img/hp-ip-07-3.jpg"
+      ],
+      "photoCredit": "Unsplash · Barney Goodman（Unsplash License；https://unsplash.com/photos/Ujjc8TG2uqo）；原有图片：图片署名：①Wikimedia Commons · H.C. White and Co, NY（Public domain）；②Wikimedia Commons · Chalmers Butterfield（CC BY 2.5）；③Wikimedia Commons · Lily.Smith（CC BY 2.0）。；既有伦敦图库：项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "photoPending": false,
+      "photoSources": [
+        {
+          "file": "img/sherlock-sp-03-unsplash-Ujjc8TG2uqo.jpg",
+          "author": "Barney Goodman",
+          "sourceUrl": "https://unsplash.com/photos/Ujjc8TG2uqo",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            2400,
+            1591
+          ]
+        }
+      ],
+      "clusterEn": "West End"
+    },
+    {
+      "poiId": "sherlock-sp-04",
+      "sourcePoiId": "sh-sp-04",
+      "lineId": "sherlock-london",
+      "type": "classic",
+      "name": "国家美术馆",
+      "cluster": "西区",
+      "popularity": 5,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "lng": -0.12875,
+      "lat": 51.50889,
+      "intro": "位于特拉法加广场北侧的著名艺术馆",
+      "ticket": "常设展免费",
+      "openHours": "官网时段",
+      "address": "Trafalgar Square, London",
+      "mapUrl": "https://www.openstreetmap.org/?mlat=51.50889&mlon=-0.12875#map=18/51.50889/-0.12875",
+      "locationVerification": {
+        "status": "entity-matched",
+        "checkedAt": "2026-10-16",
+        "sourceUrl": "https://mapcarta.com/W4372002",
+        "precision": "building-centre",
+        "note": "地图实体定位；中心坐标不代表游客入口或剧集具体机位。"
+      },
+      "realPhoto": "img/sherlock-sp-04-unsplash-jyTcQ0l9M5U.jpg",
+      "photos": [
+        "img/sherlock-sp-04-unsplash-jyTcQ0l9M5U.jpg"
+      ],
+      "photoCredit": "Unsplash · Nicolas Lysandrou（Unsplash License；https://unsplash.com/photos/jyTcQ0l9M5U）",
+      "photoPending": false,
+      "photoSources": [
+        {
+          "file": "img/sherlock-sp-04-unsplash-jyTcQ0l9M5U.jpg",
+          "author": "Nicolas Lysandrou",
+          "sourceUrl": "https://unsplash.com/photos/jyTcQ0l9M5U",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            1600,
+            1067
+          ]
+        }
+      ],
+      "clusterEn": "West End"
+    },
+    {
+      "poiId": "sherlock-sp-05",
+      "sourcePoiId": "sh-sp-05",
+      "lineId": "sherlock-london",
+      "type": "classic",
+      "name": "大英博物馆",
+      "cluster": "布卢姆茨伯里",
+      "popularity": 5,
+      "durationNormal": 150,
+      "durationRush": 75,
+      "lng": -0.12708,
+      "lat": 51.51945,
+      "intro": "世界级博物馆，适合文学与城市文化补充",
+      "ticket": "常设展免费",
+      "openHours": "官网时段",
+      "address": "Great Russell Street, London",
+      "mapUrl": "https://www.openstreetmap.org/?mlat=51.51945&mlon=-0.12708#map=18/51.51945/-0.12708",
+      "locationVerification": {
+        "status": "entity-matched",
+        "checkedAt": "2026-10-16",
+        "sourceUrl": "https://mapcarta.com/25741402/Map",
+        "precision": "museum-centre",
+        "note": "地图实体定位；中心坐标不代表游客入口或剧集具体机位。"
+      },
+      "realPhoto": "img/sherlock-sp-05-unsplash-kDRYBXWFRTI.jpg",
+      "photos": [
+        "img/sherlock-sp-05-unsplash-kDRYBXWFRTI.jpg",
+        "img/sherlock-sp-05-unsplash-6BGYD07BhNA.jpg",
+        "img/hp-sp-01.jpg",
+        "img/hp-sp-01-2.jpg",
+        "img/hp-sp-01-3.jpg"
+      ],
+      "photoCredit": "Unsplash · Nicolas Lysandrou（Unsplash License；https://unsplash.com/photos/kDRYBXWFRTI）；Unsplash · Christian Lendl（Unsplash License；https://unsplash.com/photos/6BGYD07BhNA）；原有图片：图片署名：①Wikimedia Commons · Diliff（CC BY 2.5）；②人工整理 · 来源待核实；③人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。；既有伦敦图库：项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "photoPending": false,
+      "photoSources": [
+        {
+          "file": "img/sherlock-sp-05-unsplash-kDRYBXWFRTI.jpg",
+          "author": "Nicolas Lysandrou",
+          "sourceUrl": "https://unsplash.com/photos/kDRYBXWFRTI",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            1600,
+            1068
+          ]
+        },
+        {
+          "file": "img/sherlock-sp-05-unsplash-6BGYD07BhNA.jpg",
+          "author": "Christian Lendl",
+          "sourceUrl": "https://unsplash.com/photos/6BGYD07BhNA",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            1600,
+            871
+          ]
+        }
+      ],
+      "clusterEn": "Bloomsbury"
+    },
+    {
+      "poiId": "sherlock-sp-06",
+      "sourcePoiId": "sh-sp-06",
+      "lineId": "sherlock-london",
+      "type": "classic",
+      "name": "大本钟与英国议会大厦",
+      "cluster": "威斯敏斯特",
+      "popularity": 5,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "lng": -0.124475,
+      "lat": 51.500691,
+      "intro": "伦敦政治中心地标",
+      "ticket": "外观免费",
+      "openHours": "外观全天",
+      "address": "Elizabeth Tower, Westminster, London",
+      "mapUrl": "https://www.openstreetmap.org/?mlat=51.500691&mlon=-0.124475#map=18/51.500691/-0.124475",
+      "locationVerification": {
+        "status": "entity-matched",
+        "checkedAt": "2026-10-16",
+        "sourceUrl": "https://fr.wikipedia.org/wiki/Big_Ben",
+        "precision": "landmark",
+        "note": "地图实体定位；中心坐标不代表游客入口或剧集具体机位。"
+      },
+      "realPhoto": "img/sherlock-sp-06-unsplash-uKJkcRjb2es.jpg",
+      "photos": [
+        "img/sherlock-sp-06-unsplash-uKJkcRjb2es.jpg",
+        "img/sherlock-sp-06-unsplash-3_lc6Rt8WCI.jpg",
+        "img/hp-sp-05.jpg",
+        "img/hp-sp-05-2.jpg"
+      ],
+      "photoCredit": "Unsplash · Dan Keavey（Unsplash License；https://unsplash.com/photos/uKJkcRjb2es）；Unsplash · Eduard Pretsi（Unsplash License；https://unsplash.com/photos/3_lc6Rt8WCI）；原有图片：图片署名：①人工整理 · 来源待核实；②人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。；既有伦敦图库：项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "photoPending": false,
+      "photoSources": [
+        {
+          "file": "img/sherlock-sp-06-unsplash-uKJkcRjb2es.jpg",
+          "author": "Dan Keavey",
+          "sourceUrl": "https://unsplash.com/photos/uKJkcRjb2es",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            2400,
+            1600
+          ]
+        },
+        {
+          "file": "img/sherlock-sp-06-unsplash-3_lc6Rt8WCI.jpg",
+          "author": "Eduard Pretsi",
+          "sourceUrl": "https://unsplash.com/photos/3_lc6Rt8WCI",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            2400,
+            3600
+          ]
+        }
+      ],
+      "clusterEn": "Westminster"
+    },
+    {
+      "poiId": "sherlock-sp-07",
+      "sourcePoiId": "sh-sp-07",
+      "lineId": "sherlock-london",
+      "type": "classic",
+      "name": "威斯敏斯特教堂",
+      "cluster": "威斯敏斯特",
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "lng": -0.127465,
+      "lat": 51.49939,
+      "intro": "英国历史文化与王室仪式建筑",
+      "ticket": "收费",
+      "openHours": "官网时段",
+      "address": "Westminster Abbey, London",
+      "mapUrl": "https://www.openstreetmap.org/?mlat=51.49939&mlon=-0.127465#map=18/51.49939/-0.127465",
+      "locationVerification": {
+        "status": "entity-matched",
+        "checkedAt": "2026-10-16",
+        "sourceUrl": "https://www.latlong.net/place/westminster-abbey-london-uk-32596.html",
+        "precision": "building-centre",
+        "note": "地图实体定位；中心坐标不代表游客入口或剧集具体机位。"
+      },
+      "realPhoto": "img/sherlock-sp-07-unsplash-FLgZIZArcHg.jpg",
+      "photos": [
+        "img/sherlock-sp-07-unsplash-FLgZIZArcHg.jpg",
+        "img/hp-sp-04.jpg",
+        "img/hp-sp-04-2.jpg",
+        "img/hp-sp-04-3.jpg"
+      ],
+      "photoCredit": "Unsplash · Charles Postiaux（Unsplash License；https://unsplash.com/photos/FLgZIZArcHg）；原有图片：图片署名：①Wikimedia Commons · Carlos Delgado（CC BY-SA 3.0）；②Wikimedia Commons · Diego Delso（CC BY-SA 4.0）；③人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。；既有伦敦图库：项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "photoPending": false,
+      "photoSources": [
+        {
+          "file": "img/sherlock-sp-07-unsplash-FLgZIZArcHg.jpg",
+          "author": "Charles Postiaux",
+          "sourceUrl": "https://unsplash.com/photos/FLgZIZArcHg",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            2400,
+            3600
+          ]
+        }
+      ],
+      "clusterEn": "Westminster"
+    },
+    {
+      "poiId": "sherlock-sp-08",
+      "sourcePoiId": "sh-sp-08",
+      "lineId": "sherlock-london",
+      "type": "classic",
+      "name": "伦敦眼",
+      "cluster": "南岸",
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "lng": -0.119729,
+      "lat": 51.503509,
+      "intro": "俯瞰泰晤士河与城市中心",
+      "ticket": "收费",
+      "openHours": "官网时段",
+      "address": "London Eye, South Bank, London",
+      "mapUrl": "https://www.openstreetmap.org/?mlat=51.503509&mlon=-0.119729#map=18/51.503509/-0.119729",
+      "locationVerification": {
+        "status": "entity-matched",
+        "checkedAt": "2026-10-16",
+        "sourceUrl": "https://airspacechange.caa.co.uk/documents/download/1758",
+        "precision": "landmark",
+        "note": "地图实体定位；中心坐标不代表游客入口或剧集具体机位。"
+      },
+      "realPhoto": "img/sherlock-sp-08-unsplash-8Qqq7mlO1Vo.jpg",
+      "photos": [
+        "img/sherlock-sp-08-unsplash-8Qqq7mlO1Vo.jpg",
+        "img/hp-sp-07.jpg",
+        "img/hp-sp-07-3.jpg",
+        "img/hp-sp-07-2.jpg"
+      ],
+      "photoCredit": "Unsplash · John Cameron（Unsplash License；https://unsplash.com/photos/8Qqq7mlO1Vo）；原有图片：图片署名：①Wikimedia Commons · Perituss（CC0）；②Wikimedia Commons · User:Diliff（CC BY 2.5）；③Wikimedia Commons · Kim Hansen（CC BY-SA 4.0）。；既有伦敦图库：项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "photoPending": false,
+      "photoSources": [
+        {
+          "file": "img/sherlock-sp-08-unsplash-8Qqq7mlO1Vo.jpg",
+          "author": "John Cameron",
+          "sourceUrl": "https://unsplash.com/photos/8Qqq7mlO1Vo",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            1600,
+            1200
+          ]
+        }
+      ],
+      "clusterEn": "South Bank"
+    },
+    {
+      "poiId": "sherlock-sp-09",
+      "sourcePoiId": "sh-sp-09",
+      "lineId": "sherlock-london",
+      "type": "classic",
+      "name": "圣保罗大教堂",
+      "cluster": "伦敦金融城",
+      "popularity": 5,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "lng": -0.09844,
+      "lat": 51.51379,
+      "intro": "可与巴茨医院、千禧桥串联",
+      "ticket": "收费",
+      "openHours": "官网时段",
+      "address": "St Paul’s Churchyard, London",
+      "mapUrl": "https://www.openstreetmap.org/?mlat=51.51379&mlon=-0.09844#map=18/51.51379/-0.09844",
+      "locationVerification": {
+        "status": "entity-matched",
+        "checkedAt": "2026-10-16",
+        "sourceUrl": "https://mapcarta.com/25581686",
+        "precision": "building-centre",
+        "note": "地图实体定位；中心坐标不代表游客入口或剧集具体机位。"
+      },
+      "realPhoto": "img/sherlock-sp-09-unsplash-7_WyzplsaSE.jpg",
+      "photos": [
+        "img/sherlock-sp-09-unsplash-7_WyzplsaSE.jpg",
+        "img/sherlock-sp-09-unsplash-CbwSJ86QUWQ.jpg",
+        "img/hp-sp-03.jpg",
+        "img/hp-sp-03-2.jpg",
+        "img/hp-sp-03-3.jpg"
+      ],
+      "photoCredit": "Unsplash · Jonathan Chng（Unsplash License；https://unsplash.com/photos/7_WyzplsaSE）；Unsplash · Alex Tai（Unsplash License；https://unsplash.com/photos/CbwSJ86QUWQ）；原有图片：图片署名：①Wikimedia Commons · Fagairolles 34（CC BY-SA 4.0）；②Wikimedia Commons · Colin（CC BY-SA 4.0）；③人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。；既有伦敦图库：项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "photoPending": false,
+      "photoSources": [
+        {
+          "file": "img/sherlock-sp-09-unsplash-7_WyzplsaSE.jpg",
+          "author": "Jonathan Chng",
+          "sourceUrl": "https://unsplash.com/photos/7_WyzplsaSE",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            1600,
+            1067
+          ]
+        },
+        {
+          "file": "img/sherlock-sp-09-unsplash-CbwSJ86QUWQ.jpg",
+          "author": "Alex Tai",
+          "sourceUrl": "https://unsplash.com/photos/CbwSJ86QUWQ",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            1600,
+            1133
+          ]
+        }
+      ],
+      "clusterEn": "City of London"
+    },
+    {
+      "poiId": "sherlock-sp-10",
+      "sourcePoiId": "sh-sp-10",
+      "lineId": "sherlock-london",
+      "type": "classic",
+      "name": "千禧桥",
+      "cluster": "南岸·金融城",
+      "popularity": 5,
+      "durationNormal": 35,
+      "durationRush": 17,
+      "lng": -0.09852,
+      "lat": 51.50977,
+      "intro": "跨越泰晤士河的现代步行桥",
+      "ticket": "免费",
+      "openHours": "全天",
+      "address": "Millennium Bridge, River Thames, London",
+      "mapUrl": "https://www.openstreetmap.org/?mlat=51.50977&mlon=-0.09852#map=18/51.50977/-0.09852",
+      "locationVerification": {
+        "status": "entity-matched",
+        "checkedAt": "2026-10-16",
+        "sourceUrl": "https://mapcarta.com/fr/25585452",
+        "precision": "bridge-centre",
+        "note": "地图实体定位；中心坐标不代表游客入口或剧集具体机位。"
+      },
+      "realPhoto": "img/sherlock-sp-10-unsplash-jj8I51KfrBo.jpg",
+      "photos": [
+        "img/sherlock-sp-10-unsplash-jj8I51KfrBo.jpg",
+        "img/sherlock-sp-10-unsplash-oPUxx023Y9M.jpg",
+        "img/hp-ip-04.jpg"
+      ],
+      "photoCredit": "Unsplash · Eduard Pretsi（Unsplash License；https://unsplash.com/photos/jj8I51KfrBo）；Unsplash · Dorin Seremet（Unsplash License；https://unsplash.com/photos/oPUxx023Y9M）；原有图片：图片署名：①Wikimedia Commons · Tellyaddict at en.wikipedia（Public domain）。；既有伦敦图库：项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "photoPending": false,
+      "photoSources": [
+        {
+          "file": "img/sherlock-sp-10-unsplash-jj8I51KfrBo.jpg",
+          "author": "Eduard Pretsi",
+          "sourceUrl": "https://unsplash.com/photos/jj8I51KfrBo",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            2400,
+            1600
+          ]
+        },
+        {
+          "file": "img/sherlock-sp-10-unsplash-oPUxx023Y9M.jpg",
+          "author": "Dorin Seremet",
+          "sourceUrl": "https://unsplash.com/photos/oPUxx023Y9M",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            2400,
+            1600
+          ]
+        }
+      ],
+      "clusterEn": "South Bank·City"
+    },
+    {
+      "poiId": "sherlock-sp-11",
+      "sourcePoiId": "sh-sp-11",
+      "lineId": "sherlock-london",
+      "type": "classic",
+      "name": "伦敦塔",
+      "cluster": "伦敦塔周边",
+      "popularity": 5,
+      "durationNormal": 150,
+      "durationRush": 75,
+      "lng": -0.07629,
+      "lat": 51.50813,
+      "intro": "伦敦著名中世纪堡垒",
+      "ticket": "收费",
+      "openHours": "官网时段",
+      "address": "Tower of London, London",
+      "mapUrl": "https://www.openstreetmap.org/?mlat=51.50813&mlon=-0.07629#map=18/51.50813/-0.07629",
+      "locationVerification": {
+        "status": "entity-matched",
+        "checkedAt": "2026-10-16",
+        "sourceUrl": "https://mapcarta.com/24919250",
+        "precision": "site-centre",
+        "note": "地图实体定位；中心坐标不代表游客入口或剧集具体机位。"
+      },
+      "realPhoto": "img/sherlock-sp-11-unsplash-j-ovTqjskRc.jpg",
+      "photos": [
+        "img/sherlock-sp-11-unsplash-j-ovTqjskRc.jpg",
+        "img/hp-sp-02.jpg"
+      ],
+      "photoCredit": "Unsplash · Henry Ren（Unsplash License；https://unsplash.com/photos/j-ovTqjskRc）；原有图片：图片署名：①人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。；既有伦敦图库：项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "photoPending": false,
+      "photoSources": [
+        {
+          "file": "img/sherlock-sp-11-unsplash-j-ovTqjskRc.jpg",
+          "author": "Henry Ren",
+          "sourceUrl": "https://unsplash.com/photos/j-ovTqjskRc",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            2400,
+            3200
+          ]
+        }
+      ],
+      "clusterEn": "Tower"
+    },
+    {
+      "poiId": "sherlock-sp-12",
+      "sourcePoiId": "sh-sp-12",
+      "lineId": "sherlock-london",
+      "type": "classic",
+      "name": "塔桥",
+      "cluster": "塔桥周边",
+      "popularity": 5,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "lng": -0.07534,
+      "lat": 51.50554,
+      "intro": "最具辨识度的伦敦桥梁",
+      "ticket": "外观免费；展馆收费",
+      "openHours": "官网时段",
+      "address": "Tower Bridge, London",
+      "mapUrl": "https://www.openstreetmap.org/?mlat=51.50554&mlon=-0.07534#map=18/51.50554/-0.07534",
+      "locationVerification": {
+        "status": "entity-matched",
+        "checkedAt": "2026-10-16",
+        "sourceUrl": "https://mapcarta.com/17616868",
+        "precision": "bridge-centre",
+        "note": "地图实体定位；中心坐标不代表游客入口或剧集具体机位。"
+      },
+      "realPhoto": "img/hp-sp-13-2.jpg",
+      "photos": [
+        "img/hp-sp-13-2.jpg",
+        "img/hp-sp-13-3.jpg",
+        "img/hp-sp-13.jpg"
+      ],
+      "photoCredit": "项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "photoPending": false,
+      "clusterEn": "Tower Bridge"
+    },
+    {
+      "poiId": "sherlock-sp-13",
+      "sourcePoiId": "sh-sp-13",
+      "lineId": "sherlock-london",
+      "type": "classic",
+      "name": "科文特花园",
+      "cluster": "科文特花园",
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "lng": -0.12281,
+      "lat": 51.51199,
+      "intro": "历史市场与剧院文化街区",
+      "ticket": "免费",
+      "openHours": "公共区域全天",
+      "address": "Covent Garden Market, London",
+      "mapUrl": "https://www.openstreetmap.org/?mlat=51.51199&mlon=-0.12281#map=18/51.51199/-0.12281",
+      "locationVerification": {
+        "status": "entity-matched",
+        "checkedAt": "2026-10-16",
+        "sourceUrl": "https://mapcarta.com/25585472",
+        "precision": "market-centre",
+        "note": "地图实体定位；中心坐标不代表游客入口或剧集具体机位。"
+      },
+      "realPhoto": "img/sherlock-sp-13-unsplash-1z_kYKN3eDw.jpg",
+      "photos": [
+        "img/sherlock-sp-13-unsplash-1z_kYKN3eDw.jpg"
+      ],
+      "photoCredit": "Unsplash · Bruno Martins（Unsplash License；https://unsplash.com/photos/1z_kYKN3eDw）",
+      "photoPending": false,
+      "photoSources": [
+        {
+          "file": "img/sherlock-sp-13-unsplash-1z_kYKN3eDw.jpg",
+          "author": "Bruno Martins",
+          "sourceUrl": "https://unsplash.com/photos/1z_kYKN3eDw",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            1600,
+            1067
+          ]
+        }
+      ],
+      "clusterEn": "Covent Garden"
+    },
+    {
+      "poiId": "sherlock-sp-14",
+      "sourcePoiId": "sh-sp-14",
+      "lineId": "sherlock-london",
+      "type": "classic",
+      "name": "摄政公园",
+      "cluster": "摄政公园",
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "lng": -0.15415,
+      "lat": 51.53075,
+      "intro": "可与贝克街主题点组合",
+      "ticket": "免费",
+      "openHours": "公园开放时间",
+      "address": "The Regent’s Park, London",
+      "mapUrl": "https://www.openstreetmap.org/?mlat=51.53075&mlon=-0.15415#map=18/51.53075/-0.15415",
+      "locationVerification": {
+        "status": "entity-matched",
+        "checkedAt": "2026-10-16",
+        "sourceUrl": "https://mapcarta.com/25584626",
+        "precision": "park-centre",
+        "note": "地图实体定位；中心坐标不代表游客入口或剧集具体机位。"
+      },
+      "realPhoto": "img/sherlock-sp-14-unsplash-7wvymFDnv70.jpg",
+      "photos": [
+        "img/sherlock-sp-14-unsplash-7wvymFDnv70.jpg",
+        "img/sherlock-sp-14-unsplash-X6_LOxtFsfU.jpg",
+        "img/hp-sp-12.jpg",
+        "img/hp-sp-12-2.jpg"
+      ],
+      "photoCredit": "Unsplash · Kabir Ahmed（Unsplash License；https://unsplash.com/photos/7wvymFDnv70）；Unsplash · Jacob Pretorius（Unsplash License；https://unsplash.com/photos/X6_LOxtFsfU）；原有图片：图片署名：①Wikimedia Commons · Tom Page from London, UK（CC BY-SA 2.0）；②Wikimedia Commons · TCHOUBIDOUWA（CC BY-SA 4.0）。；既有伦敦图库：项目组实拍优先；官方媒体包或明确授权素材（网络图片须逐图核实授权）。",
+      "photoPending": false,
+      "photoSources": [
+        {
+          "file": "img/sherlock-sp-14-unsplash-7wvymFDnv70.jpg",
+          "author": "Kabir Ahmed",
+          "sourceUrl": "https://unsplash.com/photos/7wvymFDnv70",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            2400,
+            3600
+          ]
+        },
+        {
+          "file": "img/sherlock-sp-14-unsplash-X6_LOxtFsfU.jpg",
+          "author": "Jacob Pretorius",
+          "sourceUrl": "https://unsplash.com/photos/X6_LOxtFsfU",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            2400,
+            1353
+          ]
+        }
+      ],
+      "clusterEn": "Regent’s Park"
+    },
+    {
+      "poiId": "sherlock-sp-15",
+      "sourcePoiId": "sh-sp-15",
+      "lineId": "sherlock-london",
+      "type": "classic",
+      "name": "巴特西发电站",
+      "cluster": "巴特西",
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "lng": -0.14441,
+      "lat": 51.48176,
+      "intro": "第二季艾琳与夏洛克相关取景地；也可作 IP 扩展",
+      "ticket": "公共区域免费",
+      "openHours": "商场官网时段",
+      "address": "Battersea Power Station, London",
+      "mapUrl": "https://www.openstreetmap.org/?mlat=51.48176&mlon=-0.14441#map=18/51.48176/-0.14441",
+      "locationVerification": {
+        "status": "entity-matched",
+        "checkedAt": "2026-10-16",
+        "sourceUrl": "https://mapcarta.com/26206978",
+        "precision": "building-centre",
+        "note": "地图实体定位；中心坐标不代表游客入口或剧集具体机位。"
+      },
+      "realPhoto": "img/sherlock-sp-15-unsplash-dZi1XjHlC9w.jpg",
+      "photos": [
+        "img/sherlock-sp-15-unsplash-dZi1XjHlC9w.jpg",
+        "img/sherlock-sp-15-unsplash-pEv6X-3ckZw.jpg"
+      ],
+      "photoCredit": "Unsplash · Eduard Pretsi（Unsplash License；https://unsplash.com/photos/dZi1XjHlC9w）；Unsplash · Dorin Seremet（Unsplash License；https://unsplash.com/photos/pEv6X-3ckZw）",
+      "photoPending": false,
+      "photoSources": [
+        {
+          "file": "img/sherlock-sp-15-unsplash-dZi1XjHlC9w.jpg",
+          "author": "Eduard Pretsi",
+          "sourceUrl": "https://unsplash.com/photos/dZi1XjHlC9w",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            1600,
+            1999
+          ]
+        },
+        {
+          "file": "img/sherlock-sp-15-unsplash-pEv6X-3ckZw.jpg",
+          "author": "Dorin Seremet",
+          "sourceUrl": "https://unsplash.com/photos/pEv6X-3ckZw",
+          "license": "Unsplash License",
+          "licenseUrl": "https://unsplash.com/license",
+          "dimensions": [
+            1600,
+            1067
+          ]
+        }
+      ],
+      "clusterEn": "Battersea"
+    }
+  ]
+}

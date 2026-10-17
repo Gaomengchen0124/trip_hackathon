@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import {ticketReferenceText} from '../planning/ticket-policy.mjs'
 import PhotoFrame from './ui/PhotoFrame.vue'
 import { poiCover, formatMinutes } from '../utils/travel-ui'
 const props = defineProps({
@@ -23,7 +24,7 @@ const cover = computed(() => poiCover(props.poi))
     <span class="photo"><PhotoFrame :src="cover" :alt="poi.name" ratio="4 / 3" /></span>
     <span class="content">
       <strong>{{ poi.name }}</strong>
-      <span class="meta">{{ poi.cluster }} · {{ formatMinutes(poi.durationNormal) }}</span>
+      <span class="meta">{{ poi.cluster }} · {{ formatMinutes(poi.durationNormal) }}<template v-if="ticketReferenceText(poi)"> · 票价：{{ ticketReferenceText(poi) }}</template></span>
     </span>
   </label>
 </template>

@@ -32,6 +32,9 @@ interface PoiBase {
   durationRush: number
   intro: string
   realPhoto: string
+  /** 详情页图集，realPhoto 是其中第一张；多于一张时详情页显示缩略图切换 */
+  photos?: string[]
+  photoCredit?: string
   skipNote?: string
 }
 export type POI = PoiBase &

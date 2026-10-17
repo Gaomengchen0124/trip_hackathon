@@ -91,11 +91,6 @@
       "type": "ip",
       "alias": "剧里叫「天津站」（保密局天津站）；站内电台代号「码头」",
       "realPhoto": "img/qf-ip-01.jpg",
-      "photos": [
-        "img/qf-ip-01.jpg",
-        "img/qf-ip-01-2.jpg",
-        "img/qf-ip-01-3.jpg"
-      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "poiId": "qf-ip-01",
       "name": "天津站",
@@ -339,11 +334,6 @@
       "durationRush": 45,
       "intro": "天津老城厢的民俗主轴，天后宫是天津城市信仰的起点，适合看市井与手作。",
       "realPhoto": "img/qf-sp-04.jpg",
-      "photos": [
-        "img/qf-sp-04.jpg",
-        "img/qf-sp-04-2.jpg",
-        "img/qf-sp-04-3.jpg"
-      ],
       "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "免费",
       "openHours": "09:00-17:00"

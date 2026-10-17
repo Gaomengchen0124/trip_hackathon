@@ -15,10 +15,11 @@ const router = createRouter({
       const editor = usePlanStore().editorView
       return { left: 0, top: editor.lineId === to.params.lineId ? editor.scrollTop : 0 }
     }
-    if (['route-intro', 'column', 'result', 'poi-detail', 'recommend'].includes(to.name)) return { left: 0, top: 0 }
+    if (['route-intro', 'column', 'result', 'itinerary', 'poi-detail', 'recommend'].includes(to.name)) return { left: 0, top: 0 }
   },
   routes: [
     { path: '/recommend', name: 'recommend', component: () => import('../views/RecommendationView.vue') },
+    { path: '/itinerary/:id', name: 'itinerary', component: () => import('../views/ItineraryView.vue') },
     { path: '/line/:lineId', name: 'route-intro', component: () => import('../views/RouteIntroView.vue') },
     // 旧投稿审核入口：统一后台接管（/review/points 保持可达，防止旧链接失效）
     { path: '/review/points', redirect: '/manage/submissions' },
