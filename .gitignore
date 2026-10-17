@@ -5,6 +5,10 @@ dist
 
 # 测试截图产物 / 临时图片账本
 test-output/
+public/optimized/
+src/data/home-catalog.json
+src/data/thumbnail-images.json
+src/data/banner-images.json
 public/img/credits.tsv
 
 # Private wish submissions

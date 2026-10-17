@@ -13,7 +13,7 @@ const emit = defineEmits(['select'])
     :aria-label="`选择${line.title}`"
     @click="emit('select', line.lineId)"
   >
-    <PhotoFrame :src="line.cover" :alt="line.title" ratio="3 / 2" />
+    <PhotoFrame :src="line.cover" :alt="line.title" ratio="3 / 2" thumbnail sizes="(max-width: 960px) 260px, 200px" />
     <span class="body"
       ><span v-if="label" class="eyebrow">{{ label }}</span
       ><strong>{{ line.title }}</strong

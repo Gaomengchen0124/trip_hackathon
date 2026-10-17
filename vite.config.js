@@ -1,5 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { prepareSite } from './scripts/prepare-site.mjs'
+import { bannerPreloadScript } from './scripts/banner-preload.mjs'
 
 // 代理注意：'/api/manage/content' → 8789 必须排在 '/api/manage' → 8788 前面（前缀匹配顺序敏感）
 const target = (name, fallback) => `http://127.0.0.1:${process.env[name] || fallback}`
@@ -20,16 +22,28 @@ const PROXY = {
   '/api/content': target('CONTENT_PORT', 8789),
 }
 
-export default defineConfig({
-  plugins: [vue()],
-  server: {
-    port: 5173,
-    proxy: PROXY,
-    host: true, // 局域网可访问，方便真机调试
-  },
-  preview: {
-    port: 4173,
-    proxy: PROXY,
-    host: true, // 预览打包产物时同样允许局域网访问
-  },
+export default defineConfig(async () => {
+  // Also prepare when Vite is invoked directly by tests or deployment scripts.
+  const { banners } = await prepareSite()
+  let base = '/'
+  return {
+    plugins: [vue(), {
+      name: 'storypilgrim-banner-preload',
+      configResolved(config) { base = config.base },
+      transformIndexHtml(html) {
+        // The viewport meta must be parsed before choosing the mobile banner.
+        return html.replace('</title>', `</title>\n    <script>${bannerPreloadScript(banners, base)}</script>`)
+      },
+    }],
+    server: {
+      port: 5173,
+      proxy: PROXY,
+      host: true, // 局域网可访问，方便真机调试
+    },
+    preview: {
+      port: 4173,
+      proxy: PROXY,
+      host: true, // 预览打包产物时同样允许局域网访问
+    },
+  }
 })

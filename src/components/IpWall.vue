@@ -121,7 +121,7 @@ function onRowClick(e) {
             :to="`/line/${tile.lineId}`"
             :tabindex="copy === 'b' ? -1 : undefined"
           >
-            <PhotoFrame v-if="loadedSources.has(tile.src)" :src="tile.src" :alt="tile.ipName" ratio="4 / 3" eager />
+            <PhotoFrame v-if="loadedSources.has(tile.src)" :src="tile.src" :alt="tile.ipName" ratio="4 / 3" thumbnail sizes="220px" eager />
             <div v-else class="photo-frame deferred-photo" aria-hidden="true" />
             <span class="tile-caption">
               <strong>{{ tile.ipName }}</strong>

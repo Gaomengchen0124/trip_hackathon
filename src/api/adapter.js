@@ -6,26 +6,26 @@
  * 契约细节见同目录 contract.md；改契约必须先改 contract.md 再改实现。
  */
 import { httpGet, httpPost } from './client'
-import * as mock from './mock/index.js'
+import * as catalog from './mock/catalog.js'
 
 const USE_MOCK = import.meta.env.VITE_USE_MOCK !== 'false'
 
 export async function search(keyword) {
-  if (USE_MOCK) return mock.search(keyword)
+  if (USE_MOCK) return catalog.search(keyword)
   return httpGet(`/search?keyword=${encodeURIComponent(keyword)}`)
 }
 
 export async function listColumns() {
-  if (USE_MOCK) return mock.listColumns()
+  if (USE_MOCK) return catalog.listColumns()
   return httpGet('/columns')
 }
 
 export async function getLineDetail(lineId) {
-  if (USE_MOCK) return mock.getLineDetail(lineId)
+  if (USE_MOCK) return (await import('./mock/index.js')).getLineDetail(lineId)
   return httpGet(`/lines/${lineId}`)
 }
 
 export async function plan(params) {
-  if (USE_MOCK) return mock.plan(params)
+  if (USE_MOCK) return (await import('./mock/index.js')).plan(params)
   return httpPost('/plan', params)
 }

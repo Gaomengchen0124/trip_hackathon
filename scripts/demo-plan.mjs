@@ -1,7 +1,7 @@
 import { createServer } from 'vite'
 const server = await createServer({ server: { middlewareMode: true, hmr: false }, appType: 'custom', logLevel: 'silent' })
 const mock = await server.ssrLoadModule('/src/api/mock/index.js')
-const { pois } = mock.getLineDetail('fanhua-shanghai')
+const { pois } = await mock.getLineDetail('fanhua-shanghai')
 const name = (id) => pois.find((p) => p.poiId === id)?.name || id
 
 const show = (title, r) => {
@@ -26,15 +26,15 @@ const TR2 = { startDate: '2026-11-01', startSlot: '上午', endDate: '2026-11-02
 const ONE = { startDate: '2026-11-01', startSlot: '上午', endDate: '2026-11-01', endSlot: '晚上' }
 
 show('场景 A：2 天 · 选 6 个点（3 个原著点 + 3 个城市景点）',
-  mock.plan({ lineId: 'fanhua-shanghai', timeRange: TR2, hoursPerDay: 8,
+  await mock.plan({ lineId: 'fanhua-shanghai', timeRange: TR2, hoursPerDay: 8,
     poiIds: ['sh-ip-01','sh-ip-06','sh-ip-07','sh-sp-01','sh-sp-04','sh-sp-07'] }))
 
 show('场景 B：3 天 · 全选 23 个点',
-  mock.plan({ lineId: 'fanhua-shanghai', timeRange: { ...TR2, endDate: '2026-11-03' }, hoursPerDay: 8,
+  await mock.plan({ lineId: 'fanhua-shanghai', timeRange: { ...TR2, endDate: '2026-11-03' }, hoursPerDay: 8,
     poiIds: pois.map((p) => p.poiId) }))
 
 show('场景 C：1 天 · 全选 23 个点（触发取舍）',
-  mock.plan({ lineId: 'fanhua-shanghai', timeRange: ONE, hoursPerDay: 8,
+  await mock.plan({ lineId: 'fanhua-shanghai', timeRange: ONE, hoursPerDay: 8,
     poiIds: pois.map((p) => p.poiId) }))
 
 await server.close()

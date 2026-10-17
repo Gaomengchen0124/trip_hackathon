@@ -2,15 +2,16 @@
 import assert from 'node:assert/strict'
 import { preview } from 'vite'
 import { chromium } from 'playwright'
+import sharp from 'sharp'
 
 const server = await preview({
-  build: { outDir: 'test-output/wall-build' },
+  build: { outDir: process.env.TEST_BUILD_DIR || 'test-output/wall-build' },
   // Isolated preview: let the OS reserve a free test port without touching dev servers.
   preview: { host: '127.0.0.1', port: 0, strictPort: true },
 })
 const base = `http://127.0.0.1:${server.httpServer.address().port}`
 let browser
-const image = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRZkAAAAASUVORK5CYII=', 'base64')
+const image = await sharp({ create: { width: 4, height: 3, channels: 3, background: '#dddddd' } }).webp().toBuffer()
 try {
   browser = await chromium.launch({
     executablePath: process.env.BROWSER_PATH || 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
@@ -22,9 +23,9 @@ try {
     const requests = new Set()
     page.on('pageerror', error => errors.push(error.message))
     await page.route('**/api/**', route => route.fulfill({ json: { user: null } }))
-    await page.route(/\/(img|brand)\//, route => {
+    await page.route(/\/(img|brand|optimized)\//, route => {
       requests.add(new URL(route.request().url()).pathname)
-      return route.fulfill({ contentType: 'image/png', body: image })
+      return route.fulfill({ contentType: 'image/webp', body: image })
     })
     // Keep the wall below the viewport on first paint to test vertical deferral.
     await page.addInitScript(() => {

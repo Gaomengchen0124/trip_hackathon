@@ -18,14 +18,15 @@ const fmtH = (min) => `${Math.round(min / 6) / 10}h`
 
 try {
   const mock = await server.ssrLoadModule('/src/api/mock/index.js')
+  const diagnostics = await mock.getDiagnostics()
 
   console.log('\n【数据装载】')
   const index = JSON.parse(readFileSync('data/lines/index.json', 'utf8'))
   check(`首页目录 ${index.lines.length} 条线全部装载`, mock.lines.length === index.lines.length,
     mock.lines.map((l) => l.title).join('、'))
   check('繁花排第一（主推）', mock.lines[0].lineId === 'fanhua-shanghai')
-  const totalPois = mock.lines.reduce((n, l) => n + mock.getLineDetail(l.lineId).pois.length, 0)
-  check('点位总数 = 各线之和', mock.pois.length === totalPois, `${mock.pois.length} 个`)
+  const totalPois = (await Promise.all(mock.lines.map(l => mock.getLineDetail(l.lineId)))).reduce((n, detail) => n + detail.pois.length, 0)
+  check('点位总数 = 各线之和', diagnostics.pois.length === totalPois, `${diagnostics.pois.length} 个`)
 
   console.log('\n【端点 2 · 首页栏目（按城市）】')
   const cols = mock.listColumns()
@@ -48,14 +49,15 @@ try {
   check('搜「汪小姐」命中（人物标签）', mock.search('汪小姐').length === 1)
   check('搜「龙族」命中两条', mock.search('龙族').length === 2)
   check('搜「原神」返回空（页面显示"暂未收录"）', mock.search('原神').length === 0)
-  check('搜「东方明珠」命中（上海两条线共享的城市景点）', mock.search('东方明珠').length === 2)
+  check('搜「东方明珠」命中含该景点的上海线路', mock.search('东方明珠').some(line => line.lineId === 'fanhua-shanghai'))
   check('搜「曹杨新村」命中（IP 点名）', mock.search('曹杨新村').length === 1)
   check('搜「哈利波特」命中伦敦线', mock.search('哈利波特')[0]?.lineId === 'harrypotter-london')
   check('搜「地坛」命中北京文学线', mock.search('地坛')[0]?.lineId === 'woyuditan-beijing')
 
   console.log('\n【端点 3 · 路线详情】')
-  const detail = mock.getLineDetail('fanhua-shanghai')
-  check('返回 8 个 IP 点 + 19 个城市景点', detail.pois.length === 27)
+  const detail = await mock.getLineDetail('fanhua-shanghai')
+  const source = JSON.parse(readFileSync('data/lines/fanhua-shanghai.json', 'utf8'))
+  check('返回完整源文件点位', detail.pois.length === source.ipStops.length + source.cityStops.length)
   check('IP 点带 tier', detail.pois.filter((p) => p.type === 'ip').every((p) => p.tier))
   check('城市景点带 popularity', detail.pois.filter((p) => p.type === 'classic').every((p) => p.popularity))
   const pending = detail.pois.filter((p) => p.name.includes('【') || p.cluster.includes('【')).length

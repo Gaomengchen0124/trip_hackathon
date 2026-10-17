@@ -16,6 +16,19 @@ npm run preview  # 预览打包结果：http://localhost:4173
 > 浏览器会以跨域为由拦截 `<script type="module">`，控制台报 CORS。
 > 想让别人看，用 `npm run preview`（或 `npx vite preview --host` 给局域网地址）。
 
+## 图片与首页数据构建
+
+安装依赖后，`npm run dev`、`npm run build` 和直接运行 Vite 都会准备资源：
+
+- 原图保存在 `public/img/`、`public/brand/`。构建用 Sharp 生成 320／480／640 像素 WebP 缩略图以及独立横幅尺寸；不放大较小原图，输出文件名带内容哈希。照片墙和路线卡片使用 `srcset`，详情页继续使用原图。
+- `public/optimized/` 和 `src/data/{home-catalog,thumbnail-images,banner-images}.json` 为忽略提交的生成物，部署必须运行构建并发布完整 `dist/`。生成器按源文件与参数缓存，重复构建不重复压图。也可运行 `npm run assets:prepare` 单独刷新这些产物。
+- 首页只加载路线摘要和景点名称搜索索引，完整路线 JSON 按路线加载，本地规划引擎仅在调用规划时加载。公开 API 仍返回 Promise，接口字段不变；调试脚本通过 `await mock.getDiagnostics()` 显式加载全部资料。
+- 横幅在 HTML 中按视口预加载，与页面的响应式图片一致；缺少缩略图时回退到原图。
+
+内容或图片改动后重新构建；开发中可重启 Vite 刷新生成的目录和缩略图。
+
+验证：`npm run smoke`、`node --test tests/home-catalog.test.mjs`；浏览器验证先运行 `npm run build -- --outDir test-output/performance-build`，再运行 `node tests/home-performance-browser.mjs`。浏览器脚本默认使用 Windows Edge，可通过 `BROWSER_PATH` 指定浏览器；账号接口使用测试替身，图片和路线数据使用实际构建产物。
+
 ## 环境开关（.env）
 
 | 变量 | 默认 | 说明 |

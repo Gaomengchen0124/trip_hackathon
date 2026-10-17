@@ -1,28 +1,36 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
 import { assetUrl } from '../../utils/travel-ui'
+import { thumbnailImage } from '../../utils/responsive-images'
 const props = defineProps({
   src: { type: String, default: '' },
   alt: { type: String, default: '' },
   ratio: { type: String, default: '16 / 9' },
   // 首屏关键视觉(如首页 IP 墙)设 eager:滚入视口才加载会在滚动中露出空白块
-  eager: { type: Boolean, default: false }
+  eager: { type: Boolean, default: false },
+  thumbnail: { type: Boolean, default: false },
+  sizes: { type: String, default: '320px' }
 })
 const failed = ref(false)
+const originalFallback = ref(false)
 const url = computed(() => assetUrl(props.src, import.meta.env.BASE_URL))
+const thumbnail = computed(() => props.thumbnail && !originalFallback.value ? thumbnailImage(props.src, import.meta.env.BASE_URL) : null)
 watch(url, () => {
   failed.value = false
+  originalFallback.value = false
 })
 </script>
 <template>
   <div class="photo-frame" :style="{ aspectRatio: ratio }">
     <img
       v-if="url && !failed"
-      :src="url"
+      :src="thumbnail?.src || url"
+      :srcset="thumbnail?.srcset"
+      :sizes="thumbnail ? sizes : undefined"
       :alt="alt"
       :loading="eager ? 'eager' : 'lazy'"
       decoding="async"
-      @error="failed = true"
+      @error="thumbnail ? originalFallback = true : failed = true"
     />
     <div v-else class="placeholder" role="img" :aria-label="`${alt}，暂无图片`">
       <svg viewBox="0 0 80 60" aria-hidden="true">
