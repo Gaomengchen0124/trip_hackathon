@@ -2,20 +2,27 @@ export function createPlanningAPI({fetchImpl=fetch}={}) {
   return async(path,body,{signal,idempotencyKey=crypto.randomUUID()}={})=>{
     const response=await fetchImpl(path,{method:body?'POST':'GET',credentials:'same-origin',cache:'no-store',headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify({...body,idempotencyKey}):undefined,signal});
     let envelope;try{envelope=await response.json()}catch{throw new Error('当前地址没有可用的规划后端，请使用 scripts/start-preview.sh 启动后重试。')}
-    if(!response.ok){const e=new Error(envelope.error?.message||'规划请求失败，请重试');e.code=envelope.error?.code;throw e}
+    if(!response.ok){const e=new Error(envelope.error?.message||'规划请求失败，请重试');e.code=envelope.error?.code;if(response.status===429)e.retryAfterSeconds=Math.max(1,Number(envelope.error?.retryAfterSeconds||response.headers?.get?.('Retry-After'))||60);throw e}
     if(envelope.schemaVersion!=='planning.v1')throw new Error('规划接口版本不匹配，请重启服务');return envelope.data
   }
 }
 export async function waitForPlanningJob(api,job,{signal,onPhase=()=>{},delayMs=800,maxWaitMs=90000}={}) {
-  const started=Date.now();
-  while(['queued','running'].includes(job.state)) {
-    signal?.throwIfAborted();if(Date.now()-started>maxWaitMs)throw new Error('等待超时，已保留输入；可以稍后重试。');onPhase(job.phase);
-    await new Promise((resolve,reject)=>{const done=()=>{signal?.removeEventListener('abort',abort);resolve()};const timer=setTimeout(done,delayMs);const abort=()=>{clearTimeout(timer);signal.removeEventListener('abort',abort);reject(signal.reason)};signal?.addEventListener('abort',abort,{once:true})});
-    job=await api('/api/planning/jobs/'+encodeURIComponent(job.id),undefined,{signal})
-  }
-  if(job.state!=='succeeded'){const e=new Error(job.error?.message||'规划未完成，请重试');e.code=job.error?.code;throw e}
-  return job.result
+  const started=Date.now(),jobId=job.id;
+  const cancel=()=>{if(job.cancellable&&['queued','running'].includes(job.state))api('/api/planning/jobs/'+encodeURIComponent(jobId)+'/cancel',{}).catch(()=>{});};
+  signal?.addEventListener('abort',cancel,{once:true});
+  try{
+    if(signal?.aborted){cancel();signal.throwIfAborted();}
+    while(['queued','running'].includes(job.state)) {
+      signal?.throwIfAborted();if(Date.now()-started>maxWaitMs){cancel();throw new Error('等待超时，已保留输入；可以稍后重试。');}onPhase(job.phase,job);
+      const pollDelay=job.state==='queued'?Math.max(800,delayMs):Math.max(300,delayMs);
+      await new Promise((resolve,reject)=>{const done=()=>{signal?.removeEventListener('abort',abort);resolve()};const timer=setTimeout(done,pollDelay);const abort=()=>{clearTimeout(timer);signal.removeEventListener('abort',abort);reject(signal.reason)};signal?.addEventListener('abort',abort,{once:true})});
+      job=await api('/api/planning/jobs/'+encodeURIComponent(job.id),undefined,{signal})
+    }
+    if(job.state!=='succeeded'){const e=new Error(job.error?.message||'规划未完成，请重试');e.code=job.error?.code;throw e}
+    return job.result;
+  }finally{signal?.removeEventListener('abort',cancel);}
 }
+
 export function insertKeyword(text,keyword) {
   if(text.split(/[\n；;]/).some(s=>s.trim()===keyword.trim()))return text;
   return text.trim()?text.replace(/\s+$/,'')+'；'+keyword:keyword
@@ -25,7 +32,7 @@ export function approximateDuration(minutes) {
   return n>=60?`${Math.floor(n/60)}小时${n%60?`${n%60}分钟`:''}`:`${n}分钟`
 }
 export function displayTimeRange(item) {
-  const exact=item.type==='fixed_event';
+  const exact=['fixed_event','event_checkin'].includes(item.type);
   const format=s=>{const t=s.length>5?s.slice(11,16):s;if(exact||item.preserveClock)return t;const minute=Number(t.slice(0,2))*60+Number(t.slice(3));const rounded=Math.round(minute/5)*5;return `${String(Math.floor(rounded/60)).padStart(2,'0')}:${String(rounded%60).padStart(2,'0')}`};
   return `${exact?'':'约 '}${format(item.startAt||item.arrive)}–${format(item.endAt||item.leave)}`
 }
@@ -42,6 +49,7 @@ export function readableRequirement(r,poiName=id=>id) {
   if(r.key==='meals')return `用餐${v.durationMinutes||({simple:30,local:45,dedicated:60}[v.preference]||45)}分钟${v.lunchStart||v.lunchEnd?` · 午餐${v.lunchStart||'11:30'}–${v.lunchEnd||'13:30'}间开始`:''}`;
   if(r.key==='poiDepth')return `${poiName(v.poiId)} · ${ {deep:'深度体验',normal:'正常游览',quick:'快速打卡'}[v.depth]}`;
   if(['mustVisit','exclude'].includes(r.key))return `${r.key==='mustVisit'?'必去':'不去'}：${v.map(poiName).join('、')}`;
+  if(r.key==='fixedEvent'&&v.type==='tourist')return `游客日程：${v.title} · ${v.date||'日期待补充'} ${v.startTime||'时间待补充'}${v.endTime?'–'+v.endTime:''} · ${v.location||'地点待补充'}${v.arrivalMinutes?' · 提前'+v.arrivalMinutes+'分钟到场':''}`;
   if(r.key==='fixedEvent')return `${v.date||'日期待确认'} · ${v.type==='flight'?'航班':v.type==='activity'?'活动':'固定安排'}${v.startTime?' '+v.startTime:''}`;
   if(r.key==='budget')return v.amountMinor!=null?`预算${v.amountMinor/(v.currency==='JPY'?1:100)} ${v.currency||'币种待确认'}`:'预算偏好已记录';
   return '其他偏好已记录'

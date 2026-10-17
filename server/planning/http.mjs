@@ -30,7 +30,7 @@ export function createPlanningHandler({service,store,origin='http://127.0.0.1:80
       if(req.method==='GET'&&(match=/^\/api\/planning\/sessions\/([a-zA-Z0-9-]+)$/.exec(route)))return reply(200,service.getSession(owner,match[1]));
       if(req.method==='GET'&&(match=/^\/api\/planning\/jobs\/([a-zA-Z0-9-]+)$/.exec(route)))return reply(200,service.getJob(owner,match[1]));
       if(req.method==='GET'&&(match=/^\/api\/itineraries\/([a-zA-Z0-9-]+)$/.exec(route)))return reply(200,service.getItinerary(owner,match[1]));
-      assert(req.method==='POST'&&(route==='/api/planning/sessions'||route==='/api/itineraries'||/^\/api\/planning\/sessions\/[a-zA-Z0-9-]+\/intake$/.test(route)||/^\/api\/itineraries\/[a-zA-Z0-9-]+\/(revisions|commits|undo)$/.test(route)),'NOT_FOUND','规划接口不存在或尚未实现',404);
+      assert(req.method==='POST'&&(route==='/api/planning/sessions'||route==='/api/itineraries'||/^\/api\/planning\/jobs\/[a-zA-Z0-9-]+\/cancel$/.test(route)||/^\/api\/planning\/sessions\/[a-zA-Z0-9-]+\/intake$/.test(route)||/^\/api\/itineraries\/[a-zA-Z0-9-]+\/(revisions|commits|undo)$/.test(route)),'NOT_FOUND','规划接口不存在或尚未实现',404);
       assert(req.headers['content-type']?.startsWith('application/json'),'JSON_REQUIRED','请使用 JSON 请求',415);
       let bytes=0,chunks=[];
       for await(const chunk of req){bytes+=chunk.length;assert(bytes<=50000,'BODY_TOO_LARGE','请求内容过长',413);chunks.push(chunk)}
@@ -40,17 +40,27 @@ export function createPlanningHandler({service,store,origin='http://127.0.0.1:80
       const cached=store.idempotentStart(owner,route,key,body);
       if(cached)return reply(cached.status,cached.data,cached.error);
       reserved=true;
-      assert(store.rateLimit(owner,20,60000),'RATE_LIMITED','规划请求太频繁，请稍后重试',429);
-      assert(store.rateLimit('ip:'+digest(req.socket.remoteAddress||'local'),60,60000),'RATE_LIMITED','本机来源请求太频繁，请稍后重试',429);
+      const cancelRequest=/^\/api\/planning\/jobs\/[a-zA-Z0-9-]+\/cancel$/.test(route);
+      const trialRequest=cancelRequest||(route==='/api/itineraries'&&body.dryRun===true)||(route==='/api/planning/sessions'&&body.selectionNegotiation===true&&body.engineMode==='rules');
+      let budget='write';
+      if(trialRequest)budget='trial';
+      else if(route==='/api/planning/sessions')budget=body.engineMode==='rules'?'rules':'model';
+      else if(route==='/api/itineraries')budget=service.getSession(owner,body.planningSessionId).engineMode==='rules'?'rules':'model';
+      else if(route.endsWith('/revisions')&&body.text?.trim())budget='model';
+      else if(route.endsWith('/intake'))budget=service.getSession(owner,route.split('/')[4]).engineMode==='rules'?'rules':'model';
+      const limits={trial:[180,360],rules:[60,180],model:[20,60],write:[120,240]};
+      assert(store.rateLimit(budget+':'+owner,limits[budget][0],60000),'RATE_LIMITED','请求较多，请稍后重试',429);
+      assert(store.rateLimit(budget+'-ip:'+digest(req.socket.remoteAddress||'local'),limits[budget][1],60000),'RATE_LIMITED','请求较多，请稍后重试',429);
       let data,status=200;
-      if(route==='/api/planning/sessions'){data=await service.intake(owner,body);status=201}
+      if(cancelRequest){data=service.cancelJob(owner,route.split('/')[4]);}
+      else if(route==='/api/planning/sessions'){data=await service.intake(owner,body);status=201}
       else if(route==='/api/itineraries'){data=service.generate(owner,body);status=202}
       else if((match=/^\/api\/itineraries\/([a-zA-Z0-9-]+)\/(revisions|commits|undo)$/.exec(route))){if(match[2]==='revisions'){data=service.revise(owner,match[1],body);status=202}else data=await service[match[2]==='commits'?'commit':'undo'](owner,match[1],body)}
       else {const id=route.split('/')[4];data=await service.intake(owner,body,id)}
       store.idempotentFinish(owner,route,key,{status,data});reply(status,data);
     } catch(e) {
       const error={code:e.code||'INTERNAL_ERROR',message:e.code?e.message:'服务暂时不可用，请重试',retryable:e.retryable||false};
-      const status=e.status||500;
+      const status=e.status||500;if(status===429){headers['Retry-After']='60';error.retryAfterSeconds=60;}
       if(reserved)store.idempotentFinish(owner,route,key,{status,error});reply(status,null,error);
     }
   }

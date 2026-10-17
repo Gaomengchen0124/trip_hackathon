@@ -1,3 +1,4 @@
+import {isTourist} from '../../src/planning/tourist-schedules.mjs'
 import {haversineKm} from '../../src/planner.mjs'
 import {normalizeRequest,computeBudget} from '../../client(1)/itinerary-planner/src/itinerary.js'
 import {scheduleItinerary,validateItinerary} from '../../src/planning/scheduler.mjs'
@@ -10,7 +11,8 @@ export function preflightBudget({context,requirements=[],points}) {
  const windows=dates.map(date=>{const start=pick(requirements,'departure',date);const wake=pick(requirements,'wake',date);return clock(pick(requirements,'dayEnd',date)||'17:00')-(start?clock(start):wake?clock(wake)+60:600)});
  const window=Math.max(...windows);if(window<=0||window>=1440)return {status:'unknown',reason:'INVALID_DAY_WINDOW'};
  const attractions=[];
- for(const id of context.selectedPoiIds){const p=points[id];if(!p)return {status:'unknown',reason:'MISSING_POI'};const durations=dates.map(date=>{const depth=requirements.filter(r=>r.key==='poiDepth'&&applicable(r,date,id)).at(-1)?.value.depth||'normal';return depth==='quick'?p.durationRush:depth==='deep'?p.durationDeep:p.durationNormal});if(durations.some(v=>!Number.isInteger(v)||v<=0||v>1440))return {status:'unknown',reason:'MISSING_DURATION'};attractions.push({name:id,durationMinutes:Math.min(...durations)})}
+ for(const id of context.selectedPoiIds.filter(id=>!requirements.some(r=>isTourist(r)&&r.value.fulfillsVisit!==false&&r.value.poiId===id))){const p=points[id];if(!p)return {status:'unknown',reason:'MISSING_POI'};const durations=dates.map(date=>{const depth=requirements.filter(r=>r.key==='poiDepth'&&applicable(r,date,id)).at(-1)?.value.depth||'normal';return depth==='quick'?p.durationRush:depth==='deep'?p.durationDeep:p.durationNormal});if(durations.some(v=>!Number.isInteger(v)||v<=0||v>1440))return {status:'unknown',reason:'MISSING_DURATION'};attractions.push({name:id,durationMinutes:Math.min(...durations)})}
+ if(!attractions.length)return {status:'possible',visitMinutes:0,message:'已选地点由固定游客日程覆盖，仍需核算活动与交通约束'};
  const request=normalizeRequest({city:'当前目的地',days:dates.length,dailyStart:'00:00',dailyEnd:`${String(Math.floor(window/60)).padStart(2,'0')}:${String(window%60).padStart(2,'0')}`,transferMinutes:0,attractions});
  const budget=computeBudget(request);return {status:budget.fits?'possible':'over_capacity',source:'mentor_itinerary_planner',exact:budget.exact,minimumDays:budget.minimumDays===Infinity?null:budget.minimumDays,visitMinutes:budget.totalVisitMinutes,optimisticCapacityMinutes:budget.capacityMinutes,actualWindowMinutes:windows.reduce((n,v)=>n+Math.max(0,v),0),assumptions:['使用最长单日窗口作为乐观上限','转场按0分钟作下界，不含用餐休息','不同日期的游览深度取最短有效时长'],message:budget.fits?'基础游览预算未排除可行性，仍需核算开放时间、交通和用餐休息。':'即使不计交通和用餐休息，基础游览预算仍不足；需调整时间或自主取舍。'}
 }
@@ -19,8 +21,9 @@ function alternatives(ids,points,requirements){const variants=[];const add=a=>va
  // model to do arithmetic. Larger cases use deterministic local swaps.
  if(ids.length<=7){const walk=(prefix,rest)=>{if(variants.length>=120)return;if(!rest.length){add(prefix);return}for(let i=0;i<rest.length;i++)walk([...prefix,rest[i]],[...rest.slice(0,i),...rest.slice(i+1)])};walk([],ids)}else for(let i=0;i<ids.length&&variants.length<120;i++)for(let j=i+1;j<ids.length&&variants.length<120;j++){const v=[...ids];[v[i],v[j]]=[v[j],v[i]];add(v)}return variants}
 export async function scheduleHybrid(options,{validator=validateItinerary,maxTrials=48,maxSearchMs=2500}={}){
+ const anchored=(options.requirements||[]).some(isTourist);
  const started=Date.now();let attempts=0,successes=0;const seen=new Set();const budget=preflightBudget(options);let best;
- const score=(draft,validation)=>{const loads=draft.days.map(d=>d.items.filter(i=>['visit','travel','buffer','rest'].includes(i.type)).reduce((n,i)=>n+i.durationMinutes,0));const mean=loads.reduce((a,b)=>a+b,0)/Math.max(1,loads.length);const imbalance=Math.sqrt(loads.reduce((n,v)=>n+(v-mean)**2,0)/Math.max(1,loads.length));const transit=draft.days.flatMap(d=>d.items).filter(i=>['travel','wait'].includes(i.type)).reduce((n,i)=>n+i.durationMinutes,0);return [validation.status==='failed'?1:0,draft.unscheduledPoiIds.length,validation.violations.length,Math.round(imbalance/30),transit]};
+ const score=(draft,validation)=>{const loads=draft.days.map(d=>d.items.filter(i=>(anchored?['visit','travel','buffer','rest','fixed_event','event_checkin']:['visit','travel','buffer','rest']).includes(i.type)).reduce((n,i)=>n+i.durationMinutes,0));const mean=loads.reduce((a,b)=>a+b,0)/Math.max(1,loads.length);const imbalance=Math.sqrt(loads.reduce((n,v)=>n+(v-mean)**2,0)/Math.max(1,loads.length));const transit=draft.days.flatMap(d=>d.items).filter(i=>['travel','wait'].includes(i.type)).reduce((n,i)=>n+i.durationMinutes,0);return [validation.status==='failed'?1:0,draft.unscheduledPoiIds.length,validation.violations.length,...(anchored?[draft.days.filter(d=>!d.items.some(i=>['visit','fixed_event'].includes(i.type))).length,draft.days.flatMap(d=>d.items).filter(i=>i.type==='travel').reduce((n,i)=>n+i.durationMinutes,0),Math.round(imbalance/30),transit]:[Math.round(imbalance/30),transit])]};
  const better=(a,b)=>{for(let i=0;i<a.length;i++){if(a[i]!==b[i])return a[i]<b[i]}return false};
  const consider=draft=>{const validation=validator(draft),value=score(draft,validation);if(!best||better(value,best.score))best={draft,validation,score:value};if(validation.status!=='failed')successes++;return validation};
  const ids=options.candidateOrder||options.context.selectedPoiIds;
@@ -29,8 +32,14 @@ export async function scheduleHybrid(options,{validator=validateItinerary,maxTri
  const deadline=id=>availability(id).at(-1)||'';
  const deadlineOrder=[...ids].sort((a,b)=>deadline(a).localeCompare(deadline(b))||availability(a).length-availability(b).length||(options.points[b].durationNormal||0)-(options.points[a].durationNormal||0));
  const explicitPlacement=Object.keys(options.assignments||{}).length||Object.keys(options.frozenDays||{}).length;
+ if(anchored&&!explicitPlacement){
+  const events=(options.requirements||[]).filter(r=>isTourist(r)&&options.points[r.value.poiId]);
+  for(const event of events){const near=ids.filter(id=>id!==event.value.poiId&&availability(id).includes(event.value.date)).sort((a,b)=>haversineKm(options.points[a],options.points[event.value.poiId])-haversineKm(options.points[b],options.points[event.value.poiId])).slice(0,3);
+   for(let n=1;n<=near.length;n++){if(attempts>=Math.min(8,maxTrials/3)||Date.now()-started>=maxSearchMs*.35)break;options.signal?.throwIfAborted();await new Promise(resolve=>setImmediate(resolve));attempts++;const assignments=Object.fromEntries(near.slice(0,n).map(id=>[id,event.value.date]));const draft=await scheduleItinerary({...options,candidateOrder:ids,assignments,policy:{...options.policy,balanceWorkload:true}});consider(draft);}
+  }
+ }
  const orders=explicitPlacement?[ids]:[deadlineOrder,ids,...alternatives(ids,options.points,options.requirements||[])];
- for(const order of orders){options.signal?.throwIfAborted();const key=JSON.stringify(order);if(seen.has(key))continue;if(attempts&&(attempts>=Math.max(1,maxTrials-Math.min(12,Math.floor(maxTrials/3)))||Date.now()-started>=maxSearchMs*.7||successes>=6))break;seen.add(key);attempts++;
+ for(const order of orders){await new Promise(resolve=>setImmediate(resolve));options.signal?.throwIfAborted();const key=JSON.stringify(order);if(seen.has(key))continue;if(attempts&&(attempts>=Math.max(1,maxTrials-Math.min(12,Math.floor(maxTrials/3)))||Date.now()-started>=maxSearchMs*.7||successes>=6))break;seen.add(key);attempts++;
    const draft=await scheduleItinerary({...options,policy:{...options.policy,balanceWorkload:true},candidateOrder:order});const validation=consider(draft);
    if(validation.status==='failed')consider(await scheduleItinerary({...options,candidateOrder:order}));
    if(budget.status==='over_capacity')break;

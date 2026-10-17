@@ -1,3 +1,4 @@
+import {withTouristVenues,isTourist} from '../../src/planning/tourist-schedules.mjs'
 import {scheduleHybrid} from './hybrid-planner.mjs'
 import {preferenceFit} from '../../src/planning/preference-ranking.mjs'
 import { randomUUID,createHash } from 'node:crypto'
@@ -10,9 +11,9 @@ const visits=it=>it.days.flatMap(d=>d.items.filter(i=>i.type==='visit').map(i=>(
 const total=it=>it.days.reduce((n,d)=>n+(d.totals.occupied||0),0);
 const walking=it=>it.days.reduce((n,d)=>n+(d.totals.walkMinutes||0),0);
 const signature=it=>createHash('sha256').update(JSON.stringify(it.days.map(d=>({date:d.date,items:d.items.map(({id,factIds,...i})=>i)})))).digest('hex');
-function changeSummary(old,next) {
+function changeSummary(old,next,operations=[]) {
   const before=new Map(visits(old).map(v=>[v.poiId,v])),after=new Map(visits(next).map(v=>[v.poiId,v]));
-  return {added:[...after.keys()].filter(id=>!before.has(id)),removed:[...before.keys()].filter(id=>!after.has(id)),moved:[...after].filter(([id,v])=>before.has(id)&&v.date!==before.get(id).date).map(([poiId,v])=>({poiId,fromDate:before.get(poiId).date,toDate:v.date})),depthChanged:[...after].filter(([id,v])=>before.has(id)&&v.depth!==before.get(id).depth).map(([poiId,v])=>({poiId,from:before.get(poiId).depth,to:v.depth})),timeChanged:[...after].filter(([id,v])=>before.has(id)&&(v.startAt!==before.get(id).startAt||v.endAt!==before.get(id).endAt)).map(([poiId,v])=>({poiId,before:before.get(poiId),after:v})),incrementalMinutes:total(next)-total(old),incrementalWalkMinutes:walking(next)-walking(old),days:next.days.map(d=>({date:d.date,incrementalMinutes:d.totals.occupied-(old.days.find(x=>x.date===d.date)?.totals.occupied||0)}))}
+  return {added:[...after.keys()].filter(id=>!before.has(id)),removed:[...before.keys()].filter(id=>!after.has(id)&&operations.some(op=>op.type==='remove_poi'&&op.poiId===id)),unscheduled:[...before.keys()].filter(id=>!after.has(id)&&!operations.some(op=>op.type==='remove_poi'&&op.poiId===id)),reordered:operations.filter(op=>op.type==='move_poi').map(op=>({poiId:op.poiId,date:op.date})),moved:[...after].filter(([id,v])=>before.has(id)&&v.date!==before.get(id).date).map(([poiId,v])=>({poiId,fromDate:before.get(poiId).date,toDate:v.date})),depthChanged:[...after].filter(([id,v])=>before.has(id)&&v.depth!==before.get(id).depth).map(([poiId,v])=>({poiId,from:before.get(poiId).depth,to:v.depth})),timeChanged:[...after].filter(([id,v])=>before.has(id)&&(v.startAt!==before.get(id).startAt||v.endAt!==before.get(id).endAt)).map(([poiId,v])=>({poiId,before:before.get(poiId),after:v})),incrementalMinutes:total(next)-total(old),incrementalWalkMinutes:walking(next)-walking(old),days:next.days.map(d=>({date:d.date,incrementalMinutes:d.totals.occupied-(old.days.find(x=>x.date===d.date)?.totals.occupied||0)}))}
 }
 function applyOperations(old,operations,line,source,text) {
   assert(Array.isArray(operations)&&operations.length>0&&operations.length<=40,'INVALID_OPERATIONS','请提供1至40个明确修改');
@@ -36,6 +37,7 @@ function applyOperations(old,operations,line,source,text) {
       else {const first=order.findIndex(id=>assignments[id]===date);index=first<0?order.length:first}
       order.splice(index,0,op.poiId);assignments[op.poiId]=date;
     } else if(op.type==='remove_poi') {
+      assert(!requirements.some(r=>isTourist(r)&&r.value.poiId===op.poiId&&r.value.fulfillsVisit!==false),'PROTECTED_POI','此地点关联游客日程，请先修改或删除对应日程');
       assert(context.selectedPoiIds.includes(op.poiId),'INVALID_OPERATIONS','景点已不在当前行程');touch(op.poiId);context.selectedPoiIds=context.selectedPoiIds.filter(id=>id!==op.poiId);order.splice(order.indexOf(op.poiId),1);delete assignments[op.poiId];removed.push(op.poiId);
     } else if(op.type==='set_depth'||op.type==='set_requirement') {
       const key=op.type==='set_depth'?'poiDepth':op.key,value=op.type==='set_depth'?{poiId:op.poiId,depth:op.depth}:op.value;
@@ -58,7 +60,7 @@ function applyOperations(old,operations,line,source,text) {
       if(op.type==='lock_day')requirements.push({id:randomUUID(),key:'scheduleLock',value:{lockedDates:[op.date],lockedItemIds:[],baselineVersion:old.version},strength:'hard',scope:{type:'trip',targetId:null},source:source==='model'?'user_text':'user_option',evidence,state:'confirmed'});
     } else assert(false,'INVALID_OPERATIONS','不支持的修改操作');
   }
-  assert(context.selectedPoiIds.length>0,'EMPTY_ITINERARY','至少保留一个景点；也可以返回首页重新选择');
+  assert(context.selectedPoiIds.length>0||requirements.some(isTourist),'EMPTY_ITINERARY','至少保留一个景点；也可以返回首页重新选择');
   assert(context.selectedPoiIds.length<=30,'TOO_MANY_POIS','行程最多30个景点');
   const protectedRemoved=removed.filter(id=>reqsIds(requirements,'mustVisit').includes(id));
   const lockedDates=[...new Set(requirements.filter(r=>active(r)&&r.key==='scheduleLock').flatMap(r=>r.value.lockedDates))];
@@ -92,7 +94,7 @@ export function createRevisionService({store,llm,tools,catalogue,model,profilePr
     return {snapshot,facts}
   }
   async function build(old,operations,{source='manual',text='',signal}={}) {
-    const line=await catalogue(old.context.lineId),edit=applyOperations(old,operations,line,source,text),dates=old.days.map(d=>d.date);
+    const line=withTouristVenues(await catalogue(old.context.lineId),old.requirements),edit=applyOperations(old,operations,line,source,text),dates=old.days.map(d=>d.date);
     const pf=await tools.poiFacts(line.pois,dates,{signal});const refreshed=await refreshFacts(old,pf.points,signal);
     const frozenDays=Object.fromEntries(refreshed.snapshot.days.filter(d=>!edit.touched.has(d.date)||edit.preserve.lockedDates.includes(d.date)).map(d=>[d.date,d]));
     const fullOrder=[...new Set([...edit.order,...reqsIds(edit.requirements,'mustVisit')])];
@@ -103,8 +105,8 @@ export function createRevisionService({store,llm,tools,catalogue,model,profilePr
     const validation=validateItinerary(draft,{preserve:edit.preserve,baselineSnapshot:old});
     for(const poiId of edit.protectedRemoved)validation.violations.push({code:'PROTECTED_POI',relatedIds:[poiId],message:'这是必去景点，请先明确取消必去再删除'});
     if(validation.violations.length)validation.status='failed';
-    const proposedItinerary={...draft,engineMode:source==='model'?'ai':old.engineMode||'ai',initialEngineMode:old.initialEngineMode||old.engineMode||'ai',id:old.id,version:old.version+1,planningSessionId:old.planningSessionId,intakeRevision:old.intakeRevision+1,validation,conflicts:validation.violations,createdAt:old.createdAt,updatedAt:new Date(now()).toISOString()};
-    return {proposedItinerary,validation,preserve:edit.preserve,diff:changeSummary(old,proposedItinerary)}
+    const proposedItinerary={...draft,touristSchedules:old.touristSchedules||[],eventVenues:line.pois.filter(p=>p.isEventVenue),customRequests:old.customRequests||[],engineMode:source==='model'?'ai':old.engineMode||'ai',initialEngineMode:old.initialEngineMode||old.engineMode||'ai',id:old.id,version:old.version+1,planningSessionId:old.planningSessionId,intakeRevision:old.intakeRevision+1,validation,conflicts:validation.violations,createdAt:old.createdAt,updatedAt:new Date(now()).toISOString()};
+    return {proposedItinerary,validation,preserve:edit.preserve,diff:changeSummary(old,proposedItinerary,operations)}
   }
   function revise(owner,id,input) {
     const {it}=base(owner,id,input);
@@ -114,7 +116,7 @@ export function createRevisionService({store,llm,tools,catalogue,model,profilePr
     assert(modes===1||timedAddition,'INVALID_OPERATIONS','每次请使用文字、手动操作或推荐勾选中的一种');
     return job(owner,async(signal,phase)=>{
       let operations=input.operations,source='manual';
-      if(input.text?.trim()) {assert(llm.configured,'LLM_NOT_CONFIGURED','智能修改尚未配置模型，可以先使用手动调整',503);phase('analyzing');const line=await catalogue(it.context.lineId);const p=await model('revise',{currentText:input.text,itinerary:it,pois:line.pois.map(p=>({poiId:p.poiId,name:p.name}))},signal);operations=p.operationProposals;source='model';if(!operations.length)return {kind:'clarification',questions:p.questions?.slice(0,3)||['请明确想调整的景点、日期或时间'],message:'这次修改还不够明确，原行程未变。'}}
+      if(input.text?.trim()) {assert(llm.configured,'LLM_NOT_CONFIGURED','智能修改尚未配置模型，可以先使用手动调整',503);phase('analyzing');const line=withTouristVenues(await catalogue(it.context.lineId),it.requirements);const p=await model('revise',{currentText:input.text,itinerary:it,pois:line.pois.map(p=>({poiId:p.poiId,name:p.name}))},signal);operations=p.operationProposals;source='model';if(!operations.length)return {kind:'clarification',questions:p.questions?.slice(0,3)||['请明确想调整的景点、日期或时间'],message:'这次修改还不够明确，原行程未变。'}}
       if(input.selectedCandidateIds?.length){assert(Array.isArray(input.selectedCandidateIds)&&input.selectedCandidateIds.length<=8,'INVALID_OPERATIONS','一次最多勾选8个推荐');operations=[...(input.operations||[]),...input.selectedCandidateIds.map(cid=>{const c=store.get(owner,cid,'candidate');assert(c.itineraryId===id&&c.baseVersion===it.version&&c.baseIntakeRevision===it.intakeRevision&&Date.parse(c.expiresAt)>now(),'STALE_PREVIEW','推荐已过期，请重新获取',409);return {type:'add_poi',poiId:c.poiId,date:c.suggestedDate,afterItemId:c.afterItemId}})]}
       phase('scheduling');const result=await build(it,operations,{source,text:input.text||'',signal});signal.throwIfAborted();base(owner,id,input);
       const preview={id:randomUUID(),itineraryId:id,baseVersion:it.version,baseIntakeRevision:it.intakeRevision,expiresAt:new Date(now()+TTL).toISOString(),operations,...result,factSnapshotId:result.validation.factSnapshotId,signature:signature(result.proposedItinerary),requiresChoices:result.validation.violations};
@@ -125,9 +127,9 @@ export function createRevisionService({store,llm,tools,catalogue,model,profilePr
     const {it}=base(owner,id,{baseVersion});
     const cacheId=`additions:${id}:${it.version}:${it.intakeRevision}`;
     if(!refresh)try{const c=store.get(owner,cacheId,'additions');if(Date.parse(c.expiresAt)>now()+5000&&c.candidates.every(p=>Date.parse(p.expiresAt)>now()+5000))return c}catch(e){if(e.code!=='NOT_FOUND')throw e}
-    const signal=AbortSignal.timeout(Math.min(totalTimeoutMs,20000)),line=await catalogue(it.context.lineId),profile=await profileProvider(owner);
+    const signal=AbortSignal.timeout(Math.min(totalTimeoutMs,20000)),line=withTouristVenues(await catalogue(it.context.lineId),it.requirements),profile=await profileProvider(owner);
     const selected=new Set(it.context.selectedPoiIds),excluded=new Set(reqsIds(it.requirements,'exclude')),rows=visits(it),favorites=new Set(profile.favoritePoiIds||[]);
-    const pool=line.pois.filter(p=>!selected.has(p.poiId)&&!excluded.has(p.poiId)&&Number.isFinite(p.lat)&&Number.isFinite(p.lng)&&p.durationNormal>0);
+    const pool=line.pois.filter(p=>!p.isEventVenue&&!selected.has(p.poiId)&&!excluded.has(p.poiId)&&Number.isFinite(p.lat)&&Number.isFinite(p.lng)&&p.durationNormal>0);
     const distance=p=>Math.min(...rows.map(r=>{const point=line.pois.find(p=>p.poiId===r.poiId);return point?haversineKm(p,point):Infinity}));
     pool.sort((a,b)=>preferenceFit(b,it.requirements).score-preferenceFit(a,it.requirements).score||Number(favorites.has(b.poiId))-Number(favorites.has(a.poiId))||distance(a)-distance(b));
     const candidates=[];
@@ -155,7 +157,7 @@ export function createRevisionService({store,llm,tools,catalogue,model,profilePr
     const {it,s}=base(owner,id,input),p=store.get(owner,input.previewId,'preview');
     assert(p.itineraryId===id&&p.baseVersion===it.version&&p.baseIntakeRevision===s.intakeRevision&&Date.parse(p.expiresAt)>now(),'STALE_PREVIEW','预览已失效，请重新试排',409);
     assert(p.validation.status!=='failed','PLAN_CONFLICT','存在冲突，不能应用这份预览');
-    const signal=AbortSignal.timeout(totalTimeoutMs),line=await catalogue(it.context.lineId),pf=await tools.poiFacts(line.pois,it.days.map(d=>d.date),{signal});
+    const signal=AbortSignal.timeout(totalTimeoutMs),line=withTouristVenues(await catalogue(it.context.lineId),it.requirements),pf=await tools.poiFacts(line.pois,it.days.map(d=>d.date),{signal});
     const refreshed=await refreshFacts(p.proposedItinerary,pf.points,signal),candidate=refreshed.snapshot;candidate.facts=[...pf.facts,...refreshed.facts];
     const validation=validateItinerary(candidate,{preserve:p.preserve,baselineSnapshot:it});
     assert(validation.status!=='failed'&&validation.status===p.validation.status&&signature(candidate)===p.signature&&Date.parse(p.expiresAt)>now(),'STALE_PREVIEW','事实或安排发生变化，请重新预览',409);signal.throwIfAborted();
@@ -165,7 +167,7 @@ export function createRevisionService({store,llm,tools,catalogue,model,profilePr
   }
   async function undo(owner,id,input) {
     const {it}=base(owner,id,input);assert(Number.isInteger(input.targetVersion)&&input.targetVersion>=1&&input.targetVersion<it.version,'INVALID_VERSION','请选择更早的历史版本');
-    const target=store.version(owner,id,input.targetVersion),signal=AbortSignal.timeout(totalTimeoutMs),line=await catalogue(it.context.lineId),pf=await tools.poiFacts(line.pois,it.days.map(d=>d.date),{signal});
+    const target=store.version(owner,id,input.targetVersion),signal=AbortSignal.timeout(totalTimeoutMs),line=withTouristVenues(await catalogue(it.context.lineId),it.requirements),pf=await tools.poiFacts(line.pois,it.days.map(d=>d.date),{signal});
     assert(JSON.stringify(target.context.dateRange)===JSON.stringify(it.context.dateRange),'INVALID_VERSION','日期范围不同，无法直接撤销');
     const fresh=await refreshFacts(target,pf.points,signal),draft=fresh.snapshot;draft.facts=[...pf.facts,...fresh.facts];
     const validation=validateItinerary(draft,{baselineSnapshot:target});assert(validation.status!=='failed','PLAN_CONFLICT','历史安排已不满足当前事实，不能直接恢复');signal.throwIfAborted();

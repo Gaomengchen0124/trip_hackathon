@@ -73,7 +73,7 @@ function render() {
     button.setAttribute('aria-label', `${p.name}${labels.value[p.poiId] ? ' '+labels.value[p.poiId] : ''}${selected ? '，已选' : '，未选'}`)
     button.disabled = !props.interactive
     const tooltip = document.createElement('span')
-    tooltip.textContent = `${p.name} · ${p.type === 'ip' ? props.ipName || '圣地巡礼' : '其他知名景点'}`
+    tooltip.textContent = `${p.name} · ${p.isEventVenue ? '游客日程场地' : p.type === 'ip' ? props.ipName || '圣地巡礼' : '其他知名景点'}`
     const marker = L.marker([p.lat, p.lng], { icon: L.divIcon({ html: button, className: 'travel-icon', iconSize: [40, 32], iconAnchor: [20, 16] }), keyboard: false, interactive: props.interactive, zIndexOffset: p.poiId === props.activePoiId ? 1000 : selected ? 100 : 0 }).addTo(pins)
     marker.bindTooltip(tooltip, { direction: 'top', offset: [0, -14] })
     button.addEventListener('click', () => focus(p.poiId, true))
