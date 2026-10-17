@@ -4,7 +4,7 @@
 // 两份拷贝都必须可点:滚动中视口里出现的常常是第二份。inert 会连指针事件一起屏蔽,
 // 曾导致"有的图点不动";无障碍改由 aria-hidden + tabindex=-1 负责 ——
 // 读屏与 Tab 序只走第一份,鼠标点哪一份都能跳转。
-import { computed } from 'vue'
+import { computed, onActivated, onBeforeUnmount, onDeactivated, reactive, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import PhotoFrame from './ui/PhotoFrame.vue'
 import { buildWallRows } from '../utils/ip-wall'
@@ -19,6 +19,60 @@ const ROW_COUNT = 3
 const SECS_PER_TILE = 6
 
 const rows = computed(() => buildWallRows(props.lines, ROW_COUNT))
+
+const wall = ref(null)
+const active = ref(true)
+const loadedSources = reactive(new Set())
+let stopLoading = () => {}
+
+// 外层观察纵向位置，内层以每行裁剪区域为根，提前约两张卡片加载。
+// 只给真正接近视口的照片创建 img，避免原生 lazy 对横向动画的预取范围过大。
+watch([wall, rows, active], () => {
+  stopLoading()
+  stopLoading = () => {}
+  if (!wall.value || !active.value) return
+  const rowElements = [...wall.value.querySelectorAll('.wall-row')]
+  if (typeof IntersectionObserver === 'undefined') {
+    for (const row of rows.value) for (const tile of row) loadedSources.add(tile.src)
+    return
+  }
+  const photoObservers = new Map()
+  let stopped = false
+  const viewportObserver = new IntersectionObserver(entries => {
+    if (stopped) return
+    for (const entry of entries) {
+      const row = entry.target
+      if (!entry.isIntersecting) {
+        photoObservers.get(row)?.disconnect()
+        photoObservers.delete(row)
+        continue
+      }
+      if (photoObservers.has(row)) continue
+      const photos = new IntersectionObserver(photoEntries => {
+        if (stopped || !photoObservers.has(row)) return
+        for (const photo of photoEntries) {
+          if (!photo.isIntersecting) continue
+          loadedSources.add(photo.target.dataset.photoSrc)
+          photos.unobserve(photo.target)
+        }
+      }, { root: row, rootMargin: '0px 464px', threshold: 0 })
+      photoObservers.set(row, photos)
+      for (const tile of row.querySelectorAll('[data-photo-src]')) {
+        if (!loadedSources.has(tile.dataset.photoSrc)) photos.observe(tile)
+      }
+    }
+  }, { rootMargin: '240px 0px', threshold: 0 })
+  rowElements.forEach(row => viewportObserver.observe(row))
+  stopLoading = () => {
+    stopped = true
+    viewportObserver.disconnect()
+    photoObservers.forEach(observer => observer.disconnect())
+  }
+}, { flush: 'post' })
+
+onActivated(() => { active.value = true })
+onDeactivated(() => { active.value = false; stopLoading() })
+onBeforeUnmount(() => stopLoading())
 
 const router = useRouter()
 
@@ -40,7 +94,7 @@ function onRowClick(e) {
 </script>
 
 <template>
-  <section v-if="rows.some((r) => r.length)" class="ip-wall" aria-label="IP 照片墙">
+  <section v-if="rows.some((r) => r.length)" ref="wall" class="ip-wall" aria-label="IP 照片墙">
     <div
       v-for="(row, i) in rows"
       :key="i"
@@ -62,11 +116,13 @@ function onRowClick(e) {
             v-for="tile in row"
             :key="`${tile.key}-${copy}`"
             class="wall-tile"
+            :data-photo-src="tile.src"
             :aria-label="`${tile.ipName} · ${tile.city}`"
             :to="`/line/${tile.lineId}`"
             :tabindex="copy === 'b' ? -1 : undefined"
           >
-            <PhotoFrame :src="tile.src" :alt="tile.ipName" ratio="4 / 3" eager />
+            <PhotoFrame v-if="loadedSources.has(tile.src)" :src="tile.src" :alt="tile.ipName" ratio="4 / 3" eager />
+            <div v-else class="photo-frame deferred-photo" aria-hidden="true" />
             <span class="tile-caption">
               <strong>{{ tile.ipName }}</strong>
               <small v-if="tile.city">{{ tile.city }}</small>
@@ -126,6 +182,10 @@ function onRowClick(e) {
   overflow: hidden;
   box-shadow: var(--shadow);
   background: #fff;
+}
+.deferred-photo {
+  aspect-ratio: 4 / 3;
+  background: var(--photo-placeholder);
 }
 .wall-tile :deep(.photo-frame img) {
   transition: transform 0.4s ease;

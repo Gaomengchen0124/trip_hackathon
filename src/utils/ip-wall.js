@@ -21,6 +21,15 @@ export const IP_PREFIX = {
 
 // 单行最少 tile 数:低于视口宽度会让无缝循环露出空白,太少时自我重复补齐。
 export const MIN_PER_ROW = 8
+// 首页展示代表照片，完整图库留给路线与景点详情。
+export const MAX_PHOTOS_PER_IP = 3
+
+function representativePhotos(photos, limit) {
+  if (photos.length <= limit) return photos
+  return Array.from({ length: limit }, (_, i) =>
+    photos[Math.floor(i * (photos.length - 1) / Math.max(1, limit - 1))]
+  )
+}
 
 // lines: Line[] 按 priority 排序传入;按 ipId 去重(龙族保留首个 = 主线路)。
 // 返回 [{ ipId, ipName, title, lineId, tiles: [{ key, kind, src, ipName, title, lineId }] }]
@@ -31,14 +40,18 @@ export function buildIpGroups(lines) {
     if (!line?.ipId || seen.has(line.ipId)) continue
     seen.add(line.ipId)
     const prefix = IP_PREFIX[line.ipId]
-    const photos = prefix ? (manifest[prefix] ?? []) : []
+    const hasCoverTile = line.ipId === 'sherlock' && !!line.cover
+    const photos = representativePhotos(
+      prefix ? (manifest[prefix] ?? []) : [],
+      MAX_PHOTOS_PER_IP - (hasCoverTile ? 1 : 0)
+    )
     // Line 契约没有 ipName 字段;标题约定是「IP·城市」,据此拆出 IP 名
     const ipName =
       line.city && line.title?.includes(`·${line.city}`)
         ? line.title.split('·')[0]
         : (line.title ?? line.ipId)
     const base = { ipId: line.ipId, ipName, title: line.title, city: line.city || '', lineId: line.lineId }
-    if (line.ipId === 'sherlock' && line.cover) {
+    if (hasCoverTile) {
       groups.push({ ...base, tiles: [{key: 'sherlock-cover',kind: 'cover',src: line.cover,...base}, ...photos.map((name,i)=>({key: `sherlock-${i}`,kind:'photo',src:`img/${name}`,...base}))] })
       continue
     }
