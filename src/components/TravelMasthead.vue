@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+defineEmits(['replay-opening'])
 const base = import.meta.env.BASE_URL
 const paused = ref(false)
 let preference
@@ -13,6 +14,7 @@ onUnmounted(() => preference?.removeEventListener('change', updatePreference))
 </script>
 <template>
   <header class="travel-masthead" :class="{ paused }">
+    <div class="masthead-edition" aria-hidden="true"><span>一本关于故事与远方的图鉴</span><span>THE ATLAS OF STORIES <i>·</i> VOL. I</span></div>
     <div class="landscape" aria-hidden="true">
       <div class="track">
         <div v-for="copy in 2" :key="copy" class="segment">
@@ -21,9 +23,10 @@ onUnmounted(() => preference?.removeEventListener('change', updatePreference))
       </div>
     </div>
     <div class="titles">
-      <h1 class="english"><img :src="`${base}img/story-pilgrim-wordmark-v1.png`" alt="Story Pilgrim" fetchpriority="high" /></h1>
+      <h1 class="english" tabindex="-1"><img :src="`${base}img/story-pilgrim-wordmark-v1.png`" alt="Story Pilgrim" fetchpriority="high" /></h1>
       <p class="chinese">我的圣地巡礼</p>
     </div>
+    <button class="intro-replay" type="button" @click="$emit('replay-opening')"><span aria-hidden="true">↺</span> 重温序章</button>
     <button class="motion-toggle" type="button" :aria-label="paused ? '播放建筑滚动动画' : '暂停建筑滚动动画'" :aria-pressed="paused" @click="paused = !paused">{{ paused ? '▷' : 'Ⅱ' }}</button>
   </header>
 </template>
@@ -41,7 +44,17 @@ onUnmounted(() => preference?.removeEventListener('change', updatePreference))
 .paused .track{animation-play-state:paused}
 .motion-toggle{position:absolute;right:10px;bottom:8px;z-index:2;width:26px;height:26px;border:1px solid #d8cbb0;border-radius:50%;background:#fcfaf6c9;color:#998359;font-size:12px;cursor:pointer}
 .motion-toggle:focus-visible{outline:2px solid #a88d58;outline-offset:3px}
+.intro-replay{position:absolute;bottom:8px;left:12px;z-index:2;padding:3px 9px;background:#fcfaf6de;color:#796139;font-size:11px;border:1px solid #d8cbb0;border-radius:20px}
+.intro-replay:focus-visible{outline:2px solid #a88d58;outline-offset:3px}
+.english:focus{outline:none}
+.masthead-edition{position:absolute;top:11px;left:3.6%;right:3.6%;z-index:2;display:flex;justify-content:space-between;gap:20px;font:8px/1.5 Georgia,'Songti SC',serif;letter-spacing:.17em;color:#a88e5a;pointer-events:none}
+.masthead-edition i{font-style:normal;margin:0 12px}
+.travel-masthead::after{content:'';position:absolute;left:3.6%;right:3.6%;bottom:0;height:4px;border-top:1px solid #bb9f6360;border-bottom:1px solid #bb9f6328;pointer-events:none}
+.intro-replay{font-family:Georgia,'Songti SC',serif;letter-spacing:.04em;bottom:9px}
+.chinese{transition:opacity .24s ease-out}
+@media(prefers-reduced-motion:reduce){.chinese{transition:none}}
 @keyframes world-travel{to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.track{animation-play-state:paused}.travel-masthead:not(.paused) .track{animation-play-state:running}}
 @media(max-width:600px){.travel-masthead{height:160px}.track{width:1000vw}.segment{flex-basis:500vw}.english{width:94vw;height:75px}.chinese{font-size:6vw}.titles{padding-bottom:8px}}
+@media(max-width:760px){.masthead-edition{font-size:6px;top:9px;letter-spacing:.07em}.masthead-edition i{margin:0 5px}.masthead-edition>span:first-child{max-width:43%}.intro-replay{font-size:9px;padding:3px 6px;left:8px;bottom:6px}}
 </style>

@@ -27,11 +27,10 @@ const isActive = link => link.names.includes(route.name)
       </router-link>
 
       <nav class="navigation-links" aria-label="主导航">
-        <router-link v-for="link in links" :key="link.to" :to="link.to"
+        <router-link v-for="(link, index) in links" :key="link.to" :to="link.to"
           class="navigation-link" :class="{ 'is-active': isActive(link) }"
           :aria-current="isActive(link) ? 'page' : undefined">
-          <svg v-if="link.to === '/recommend'" class="recommend-spark" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m8 1.5 1.8 4.7L14.5 8l-4.7 1.8L8 14.5l-1.8-4.7L1.5 8l4.7-1.8L8 1.5Z" /></svg>
-          {{ link.label }}
+          <span class="navigation-index" aria-hidden="true">0{{ index + 1 }}</span><span>{{ link.label }}</span>
         </router-link>
       </nav>
 

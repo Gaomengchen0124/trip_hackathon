@@ -6,6 +6,8 @@ const props = defineProps({
   pois: { type: Array, required: true },
   checkedIds: { type: Array, required: true },
   activeId: { type: String, default: '' },
+  buddySide: { type: String, default: 'left' },
+  buddyReaction: { type: Number, default: 0 },
   disabled: Boolean
 })
 const emit = defineEmits(['toggle', 'locate'])
@@ -52,6 +54,8 @@ function bulk(select) {
         :poi="poi"
         :checked="checkedIds.includes(poi.poiId)"
         :active="activeId === poi.poiId"
+        :buddy-side="buddySide"
+        :buddy-reaction="buddyReaction"
         :disabled="disabled"
         @toggle="toggleCard"
       />

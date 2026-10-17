@@ -1,0 +1,38 @@
+.opening-chapter{height:210svh;margin-bottom:-100svh;position:relative;z-index:60;flex:none;pointer-events:none;overflow-anchor:none;outline:none}
+.opening-sequence{position:sticky;top:0;height:100svh;width:100%;color:#6c5735;--unfold:0;--veil:1;--copy:1}
+.opening-paper{position:absolute;inset:0;opacity:var(--veil);overflow:hidden}
+.opening-paper>.sketch-world{transform:translateY(calc(var(--unfold)*-13vh)) scale(calc(1 + var(--unfold)*.24));transform-origin:50% 62%;bottom:-10vh}
+.intro-copy{opacity:var(--copy)}
+.intro-tools{position:absolute;right:42px;top:36px;display:flex;gap:24px;font-size:11px;pointer-events:auto}
+.has-arrived .intro-tools{visibility:hidden;pointer-events:none}
+.intro-tools button{padding:6px 0;border-bottom:1px solid #bfa87670}
+.intro-tools button:focus-visible{outline:2px solid #a88d58;outline-offset:6px}
+.intro-tools button:disabled{opacity:.6;cursor:default}
+.intro-preface{position:absolute;top:23%;width:100%;text-align:center;font:12px/1.8 Georgia,'Songti SC',serif;letter-spacing:.25em}
+.intro-wordmark{position:absolute;left:7%;top:30%;width:86%;height:12vw;overflow:hidden;margin:0;font-size:clamp(40px,9vw,140px);line-height:1;color:#c29d43;font-weight:400;white-space:nowrap}
+.intro-wordmark img{position:absolute;width:100%;height:181%;top:-43%;left:0;object-fit:fill}
+.intro-invitation{position:absolute;top:53%;width:100%;text-align:center;transform:translateY(calc(var(--unfold)*-50px))}
+.intro-chinese{font:clamp(24px,3.1vw,43px)/1.5 'Songti SC',STSong,serif;letter-spacing:.23em;padding-left:.23em;color:#59492f;text-shadow:0 0 18px #fdfcf9}
+.intro-description{margin-top:18px;font:13px/1.9 'Songti SC',STSong,serif;letter-spacing:.12em;color:#8b7c66}
+.intro-scroll{position:absolute;bottom:12%;left:50%;translate:-50% 0;text-align:center;width:280px}
+.intro-scroll svg{width:140px;height:80px;stroke:#ad9156;stroke-width:1}
+.scroll-path{stroke-dasharray:.16 .04;animation:scroll-pencil 6s linear infinite}
+.intro-scroll p{font:12px/1.9 'Songti SC',STSong,serif;letter-spacing:.12em}.intro-scroll small{font:8px/2 Georgia,serif;letter-spacing:.21em;color:#9d8e75}
+.opening-folio-footer{position:absolute;bottom:28px;left:42px;right:42px;display:flex;justify-content:space-between;font:10px Georgia,'Songti SC',serif;letter-spacing:.12em}
+.intro-margin{position:absolute;left:34px;top:34%;display:flex;align-items:center;gap:17px;writing-mode:vertical-rl;font:8px/1 Georgia,serif;letter-spacing:.2em;color:#8b754d}
+.intro-margin i{height:35px;width:1px;background:#ad905750}
+.intro-folio{position:absolute;bottom:18%;right:5%;display:flex;align-items:center;gap:18px;color:#917446;rotate:-7deg}
+.intro-folio>span{width:74px;height:74px;display:grid;place-items:center;border:1px solid #a98d5866;outline:1px solid #a98d582b;outline-offset:5px;border-radius:50%;font:27px 'Songti SC',STSong,serif}
+.intro-folio i{font:italic 10px/1.8 Georgia,serif;letter-spacing:.1em}
+.is-opening-story .travel-masthead .english{visibility:hidden}
+.is-opening-story .travel-masthead .chinese{opacity:var(--intro-navigation,0)}
+.is-opening-story .travel-masthead .track{animation-play-state:paused}
+.is-opening-story .site-navigation{translate:0 calc(-1 * var(--intro-offset,0px));opacity:var(--intro-navigation,0)}
+.opening-sequence.is-still .scroll-path{animation-play-state:paused}
+@keyframes scroll-pencil{to{stroke-dashoffset:-1}}
+@media(max-width:760px){.intro-tools{right:22px;top:28px;gap:14px;font-size:10px}.intro-preface{top:26%;font-size:10px}.intro-invitation{top:47%}.intro-chinese{font-size:26px}.intro-description{font-size:11px;letter-spacing:.05em}.intro-scroll{bottom:16%}.opening-folio-footer{left:22px;right:22px;font-size:8px;bottom:24px}.opening-folio-footer span:first-child{max-width:70%}}
+@media(max-width:400px){.intro-tools{top:85px}.intro-invitation{top:48%}.intro-chinese{font-size:23px}}
+@media(max-width:760px){.intro-margin{left:13px;top:34%;font-size:6px;gap:10px}.intro-margin i{height:20px}.intro-folio{display:none}.intro-wordmark{font-size:9vw}.intro-tools{background:#faf7ed80}}
+@media(max-height:530px){.intro-tools{top:18px}.intro-preface{top:23%;font-size:10px}.intro-invitation{top:54%}.intro-chinese{font-size:22px}.intro-description{margin-top:3px;font-size:11px}.intro-scroll{bottom:9%}.intro-scroll svg{height:32px;width:70px}.intro-scroll p{font-size:10px}.intro-scroll small{display:none}.opening-folio-footer{bottom:12px}}
+@media(prefers-reduced-motion:reduce){.scroll-path{animation:none}.opening-paper>.sketch-world,.intro-invitation{transform:none}.is-opening-story .site-navigation{opacity:0;translate:none}}
+@media print{.opening-chapter{display:none}.is-opening-story .travel-masthead .english{visibility:visible}.is-opening-story .travel-masthead .chinese{opacity:1}}

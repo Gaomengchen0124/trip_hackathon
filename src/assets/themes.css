@@ -44,3 +44,17 @@
   box-shadow: 0 0 12px rgb(var(--brand-rgb) / .3);
 }
 :root .flight-plane { color: var(--brand-strong); filter: drop-shadow(0 3px 4px rgb(var(--brand-rgb) / .2)); }
+
+/* Paper and drifting gold wash also cover the sidebar's animated layers. */
+:root #planning-panel.conversation-shell {
+  background: var(--paper-grain), var(--planning-gradient);
+  border: 1px solid var(--brand-border);
+  border-radius: 24px;
+  box-shadow: 0 12px 32px #705b300c;
+}
+:root #planning-panel.conversation-shell::before {
+  background: radial-gradient(ellipse at 20% 22%, #e5c98d75, transparent 55%), radial-gradient(ellipse at 82% 80%, #c7a96b38, transparent 58%);
+}
+:root #planning-panel.conversation-shell::after {
+  background: radial-gradient(ellipse at 67% 50%, #fffdf3ab, transparent 52%);
+}

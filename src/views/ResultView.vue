@@ -77,7 +77,7 @@ async function exportImage() {
 </script>
 
 <template>
-  <div class="page">
+  <div class="page atlas-result">
     <header class="bar">
       <button class="back" @click="router.back()">← 返回</button>
       <h1>

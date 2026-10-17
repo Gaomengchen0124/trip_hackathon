@@ -1,6 +1,6 @@
 import { nextTick } from 'vue'
 
-// Keep link/history navigation intact; only coordinate the two image snapshots.
+// Keep link/history navigation intact; turn the paper and carry a clicked photo across it.
 export function installPhotoTransitions(router) {
   if (typeof document === 'undefined') return () => {}
   let candidate = null
@@ -81,22 +81,24 @@ export function installPhotoTransitions(router) {
       releaseHomeTrack()
       homeOrigin = null
     }
-    if ((!returningHome && !openingDetail) || !document.startViewTransition || reduced()) return
-    const source = returningHome ? document.querySelector('.route-intro .hero-photo') : clicked.photo
-    if (!source?.querySelector('img')) return
-    if (openingDetail && from.name === 'home') rememberHomePhoto(source, to.fullPath)
+    const publicTurn = from.name && !to.meta.admin && !from.meta.admin && to.path !== from.path
+    if (!publicTurn || !document.startViewTransition || reduced()) return
+    const source = returningHome ? document.querySelector('.route-intro .hero-photo') : openingDetail ? clicked.photo : null
+    const carriesPhoto = !!source?.querySelector('img')
+    if (carriesPhoto && openingDetail && from.name === 'home') rememberHomePhoto(source, to.fullPath)
 
     return new Promise(allowNavigation => {
       const current = { source, target: null, complete: null, transition: null }
       active = current
-      source.style.viewTransitionName = 'route-photo'
+      if (carriesPhoto) source.style.viewTransitionName = 'route-photo'
+      document.documentElement.dataset.atlasTurn = to.name === 'home' ? 'back' : 'forward'
       const committed = new Promise(resolve => { current.complete = resolve })
       const releaseTimer = setTimeout(() => { allowNavigation(); current.complete(false); current.transition?.skipTransition() }, 1600)
       const cleanup = () => {
         clearTimeout(releaseTimer)
-        source.style.removeProperty('view-transition-name')
+        source?.style.removeProperty('view-transition-name')
         current.target?.style.removeProperty('view-transition-name')
-        if (active === current) active = null
+        if (active === current) { active = null; delete document.documentElement.dataset.atlasTurn }
         if (router.currentRoute.value.name === 'home' || router.currentRoute.value.fullPath !== homeOrigin?.detailPath) releaseHomeTrack()
       }
       try {
@@ -104,6 +106,7 @@ export function installPhotoTransitions(router) {
           allowNavigation()
           if (!await committed) return
           await nextTick()
+          if (!carriesPhoto) { await settleLayout(); return }
           if (returningHome) {
             await settleLayout()
             current.target = homePhoto()

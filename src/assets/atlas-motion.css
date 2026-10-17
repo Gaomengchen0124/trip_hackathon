@@ -1,0 +1,15 @@
+/* Animate browser snapshots, never a live map, fixed dialog or form ancestor. */
+:root{--motion-route:560ms}
+html[data-atlas-turn]::view-transition-old(root){animation:atlas-leaf-out 440ms cubic-bezier(.2,.7,.2,1) both;mix-blend-mode:normal}
+html[data-atlas-turn]::view-transition-new(root){animation:atlas-leaf-in 560ms cubic-bezier(.16,.8,.2,1) both;mix-blend-mode:normal}
+html[data-atlas-turn='back']::view-transition-new(root){animation-name:atlas-leaf-back}
+::view-transition-group(route-photo){border-radius:2px;animation-duration:560ms}
+.public-story .site-navigation{view-transition-name:atlas-navigation}
+::view-transition-group(atlas-navigation){z-index:10;animation-duration:380ms}
+::view-transition-old(atlas-navigation),::view-transition-new(atlas-navigation){animation-duration:250ms}
+@keyframes atlas-leaf-out{to{opacity:0;transform:translateX(-22px)}}
+@keyframes atlas-leaf-in{from{opacity:0;clip-path:inset(0 0 0 18%);transform:translateX(36px)}to{opacity:1;clip-path:inset(0);transform:none}}
+@keyframes atlas-leaf-back{from{opacity:0;clip-path:inset(0 18% 0 0);transform:translateX(-36px)}to{opacity:1;clip-path:inset(0);transform:none}}
+@media(prefers-reduced-motion:reduce){
+  html[data-atlas-turn]::view-transition-old(root),html[data-atlas-turn]::view-transition-new(root),::view-transition-group(route-photo){animation:none!important}
+}

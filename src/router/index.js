@@ -2,20 +2,34 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { usePlanStore } from '../stores/plan'
 import { getAuthSession } from '../auth/session.mjs'
 import { openLoginDialog } from '../auth/login-dialog.mjs'
+import { shouldShowOpening } from '../utils/opening-sequence.mjs'
 
 // Browser back uses savedPosition; explicit Home links also restore the last visit.
-let homePosition = { left: 0, top: 0 }
+let homePosition = null
 
 const router = createRouter({
   history: createWebHistory(),
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) return savedPosition
-    if (to.name === 'home') return homePosition
+    if (to.name === 'home') {
+      if (to.hash) return { el: to.hash }
+      if (homePosition) return homePosition
+      let startAtOpening = false
+      if (!from.name) {
+        try { startAtOpening = shouldShowOpening(window.location, window.sessionStorage) }
+        catch { startAtOpening = shouldShowOpening(window.location, null) }
+      }
+      // The opening remains above the home. Restore the reader's page without removing it.
+      const chapter = document.querySelector('.opening-chapter')
+      const scene = document.querySelector('.opening-sequence')
+      const homeTop = chapter && scene ? chapter.offsetHeight - scene.offsetHeight : 0
+      return { left: 0, top: startAtOpening ? 0 : homeTop }
+    }
     if (to.name === 'customize') {
       const editor = usePlanStore().editorView
       return { left: 0, top: editor.lineId === to.params.lineId ? editor.scrollTop : 0 }
     }
-    if (['route-intro', 'column', 'result', 'itinerary', 'poi-detail', 'recommend'].includes(to.name)) return { left: 0, top: 0 }
+    if (['route-intro', 'column', 'result', 'itinerary', 'poi-detail', 'recommend', 'wishes'].includes(to.name)) return { left: 0, top: 0 }
   },
   routes: [
     { path: '/recommend', name: 'recommend', component: () => import('../views/RecommendationView.vue') },

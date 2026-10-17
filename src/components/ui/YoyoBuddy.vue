@@ -1,5 +1,5 @@
 <script setup>
-import { onBeforeUnmount, ref, useId, watch } from 'vue'
+import { onBeforeUnmount, onMounted, ref, useId, watch } from 'vue'
 import DolphinGuide from './DolphinGuide.vue'
 
 const props = defineProps({
@@ -9,6 +9,8 @@ const props = defineProps({
   reactTo: { type: [Number, String], default: undefined },
   disabled: Boolean,
   centered: Boolean,
+  appear: Boolean,
+  label: { type: String, default: '和 YOYO 打个招呼' },
 })
 const messageId = useId()
 const playing = ref(false)
@@ -43,8 +45,9 @@ function escapeMessage(event) {
 function hover() {
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) react()
 }
-watch(() => props.reactTo, (value, previous) => { if (value !== previous) react() })
+watch(() => props.reactTo, (value, previous) => { if (value !== previous) react(props.appear) })
 watch(() => props.disabled, disabled => { if (disabled) hideMessage() })
+onMounted(() => { if (props.appear) react(true) })
 onBeforeUnmount(() => { clearTimeout(motionTimer); clearTimeout(messageTimer) })
 </script>
 
@@ -54,7 +57,7 @@ onBeforeUnmount(() => { clearTimeout(motionTimer); clearTimeout(messageTimer) })
       class="yoyo-touch"
       type="button"
       :disabled="disabled"
-      aria-label="和 YOYO 打个招呼"
+      :aria-label="label"
       :aria-describedby="showMessage ? messageId : undefined"
       @click.stop="greet"
       @pointerenter="hover"
@@ -63,7 +66,7 @@ onBeforeUnmount(() => { clearTimeout(motionTimer); clearTimeout(messageTimer) })
       @keydown.esc="escapeMessage"
     >
       <span :key="sequence" class="buddy-motion"><DolphinGuide :state="state" :size="size" /></span>
-      <span :key="`bubbles-${sequence}`" class="yoyo-bubbles" aria-hidden="true"><i></i><i></i><i></i></span>
+      <svg :key="`pencil-${sequence}`" class="yoyo-pencil" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M10 68c8-15 17 17 28 11s37-8 50-26"/><path d="m79 23 2 6 6 2-6 2-2 6-2-6-6-2 6-2Z"/></svg>
     </button>
     <span :id="messageId" class="yoyo-speech" role="status">{{ showMessage ? message : '' }}</span>
   </span>
@@ -78,17 +81,14 @@ onBeforeUnmount(() => { clearTimeout(motionTimer); clearTimeout(messageTimer) })
 .buddy-motion { display: inline-flex; transform-origin: 55% 75%; pointer-events: none; }
 .buddy-motion :deep(.dolphin-guide:not(.planning)) { animation: none; }
 .is-playing .buddy-motion { animation: yoyo-leap 720ms var(--ease-out); }
-.yoyo-bubbles { position: absolute; inset: 0; pointer-events: none; }
-.yoyo-bubbles i { position: absolute; top: 45%; left: 50%; width: 6px; height: 6px; border: 1.5px solid #65b8ff; border-radius: 50%; opacity: 0; --drift: -23px; --lift: -29px; }
-.yoyo-bubbles i:nth-child(2) { --drift: 25px; --lift: -37px; width: 8px; height: 8px; }
-.yoyo-bubbles i:nth-child(3) { --drift: 16px; --lift: -13px; width: 4px; height: 4px; background: #a1d6ff; }
-.is-playing .yoyo-bubbles i { animation: yoyo-bubble 700ms ease-out both; }
+.yoyo-pencil { position: absolute; inset: -10%; width: 120%; height: 120%; pointer-events: none; stroke: var(--brand); stroke-width: 1; stroke-dasharray: 3 4; opacity: 0; }
+.is-playing .yoyo-pencil { animation: yoyo-pencil 750ms ease-out both; }
 .yoyo-speech { position: absolute; bottom: calc(100% + 10px); left: 0; width: max-content; max-width: min(240px, calc(100vw - 64px)); padding: 10px 14px; border: 1px solid var(--brand-border); border-radius: 14px 14px 14px 4px; background: #fff; color: var(--brand-strong); box-shadow: 0 6px 24px #205e9c14; font: 12px/1.7 -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif; white-space: normal; text-align: left; pointer-events: none; }
 .yoyo-speech:empty { display: none; }
 .has-message .yoyo-speech { animation: yoyo-say 180ms var(--ease-out); }
 .centered .yoyo-speech { left: 50%; translate: -50% 0; border-radius: 14px; }
 @keyframes yoyo-leap { 0%, 100% { transform: none; } 25% { transform: translateY(2px) rotate(-8deg); } 52% { transform: translateY(-9px) rotate(7deg); } 76% { transform: translateY(1px) rotate(-3deg); } }
-@keyframes yoyo-bubble { 10% { opacity: .8; } 100% { opacity: 0; transform: translate(var(--drift), var(--lift)) scale(.5); } }
+@keyframes yoyo-pencil { 0% { opacity: 0; stroke-dashoffset: 40; } 25% { opacity: .8; } 100% { opacity: 0; stroke-dashoffset: 0; } }
 @keyframes yoyo-say { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
-@media(prefers-reduced-motion:reduce) { .is-playing .buddy-motion, .has-message .yoyo-speech { animation: none; } .yoyo-bubbles { display: none; } }
+@media(prefers-reduced-motion:reduce) { .is-playing .buddy-motion, .has-message .yoyo-speech { animation: none; } .yoyo-pencil { display: none; } }
 </style>

@@ -2,18 +2,22 @@
 import { computed } from 'vue'
 import {ticketReferenceText} from '../planning/ticket-policy.mjs'
 import PhotoFrame from './ui/PhotoFrame.vue'
+import YoyoBuddy from './ui/YoyoBuddy.vue'
 import { poiCover, formatMinutes } from '../utils/travel-ui'
 const props = defineProps({
   poi: { type: Object, required: true },
   checked: Boolean,
   active: Boolean,
-  disabled: Boolean
+  disabled: Boolean,
+  buddySide: { type: String, default: 'left' },
+  buddyReaction: { type: Number, default: 0 }
 })
 const emit = defineEmits(['toggle'])
 const cover = computed(() => poiCover(props.poi))
 </script>
 <template>
-  <label :id="`planner-poi-${poi.poiId}`" class="poi-option" :class="{ selected: checked, active, disabled }">
+  <div :id="`planner-poi-${poi.poiId}`" class="poi-option-wrap" :class="{ 'has-buddy': active }">
+  <label class="poi-option" :class="{ selected: checked, active, disabled }">
     <input
       type="checkbox"
       :checked="checked"
@@ -27,8 +31,27 @@ const cover = computed(() => poiCover(props.poi))
       <span class="meta">{{ poi.cluster }} · {{ formatMinutes(poi.durationNormal) }}<template v-if="ticketReferenceText(poi)"> · 票价：{{ ticketReferenceText(poi) }}</template></span>
     </span>
   </label>
+  <span v-if="active" class="poi-buddy-anchor" :class="`buddy-${buddySide}`">
+    <YoyoBuddy
+      :state="disabled ? 'planning' : checked ? 'success' : 'welcome'"
+      :size="48"
+      :react-to="buddyReaction"
+      :disabled="disabled"
+      :label="`和 YOYO 打个招呼：${poi.name}`"
+      :message="checked ? `记下了，一起去${poi.name}看看吧。` : '想去就点一下景点，我会陪着你选。'"
+      appear
+    />
+  </span>
+  </div>
 </template>
 <style scoped>
+.poi-option-wrap { position: relative; min-width: 0; --poi-photo-width: 88px; scroll-margin: 50px 0 100px; }
+.poi-option-wrap.has-buddy { z-index: 2; }
+/* Reserve an interior margin for YOYO: the card, speech and leap stay in the viewport. */
+.poi-buddy-anchor { position: absolute; z-index: 3; right: 16px; top: 50%; translate: 0 -50%; animation: buddy-arrive 280ms var(--ease-out); }
+.poi-option-wrap.has-buddy .poi-option { padding-right: 76px; }
+.poi-buddy-anchor :deep(.yoyo-speech) { left: auto; right: 0; max-width: min(220px, calc(100vw - 96px)); border-radius: 14px 14px 4px 14px; }
+@keyframes buddy-arrive { from { opacity: 0; transform: translateY(9px) scale(.85); } to { opacity: 1; transform: none; } }
 .poi-option {
   display: flex;
   gap: 12px;
@@ -85,7 +108,7 @@ strong {
   color: var(--brand);
   padding: 1px 6px;
   border-radius: 5px;
-  border: 1px solid #8b1e2d26;
+  border: 1px solid var(--brand-border);
   white-space: nowrap;
 }
 .meta {
@@ -94,9 +117,9 @@ strong {
   color: var(--ink-2);
   font-size: 13px;
 }
-.photo {display:block;width:88px;flex-shrink:0;border-radius:10px;overflow:hidden;}
+.photo {display:block;width:var(--poi-photo-width);flex-shrink:0;border-radius:10px;overflow:hidden;}
 .content {text-align:center;}
 .meta {line-height:1.7;overflow-wrap:anywhere;}
-@media(max-width:380px){.photo{width:72px;}.poi-option{gap:10px;}strong{font-size:15px;}}
-@media(prefers-reduced-motion:reduce){.poi-option{transition:none;}}
+@media(max-width:380px){.poi-option-wrap{--poi-photo-width:72px;}.poi-option{gap:10px;}strong{font-size:15px;}}
+@media(prefers-reduced-motion:reduce){.poi-option{transition:none;}.poi-buddy-anchor{animation:none;}}
 </style>

@@ -7,7 +7,7 @@ const props = defineProps({
 const positions = { welcome: '0%', planning: '33.333333%', success: '66.666667%', empty: '100%' }
 const spriteStyle = computed(() => ({
   '--guide-size': `${props.size}px`,
-  backgroundImage: `url("${import.meta.env.BASE_URL}brand/dolphin-states.png")`,
+  backgroundImage: `url("${import.meta.env.BASE_URL}brand/dolphin-sketch-v1.webp")`,
   backgroundPosition: `${positions[props.state] || '0%'} center`
 }))
 </script>
