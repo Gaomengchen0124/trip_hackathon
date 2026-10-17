@@ -5,7 +5,12 @@ import { openLoginDialog } from '../auth/login-dialog.mjs'
 
 const router = createRouter({
   history: createWebHistory(),
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) return savedPosition
+    if (['route-intro', 'column', 'recommend'].includes(to.name)) return { left: 0, top: 0 }
+  },
   routes: [
+    { path: '/recommend', name: 'recommend', component: () => import('../views/RecommendationView.vue') },
     { path: '/line/:lineId', name: 'route-intro', component: () => import('../views/RouteIntroView.vue') },
     // 旧投稿审核入口：统一后台接管（/review/points 保持可达，防止旧链接失效）
     { path: '/review/points', redirect: '/manage/submissions' },

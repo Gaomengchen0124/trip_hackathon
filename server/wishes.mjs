@@ -1,4 +1,5 @@
 import './env.mjs'
+import { createRecommendationHandler } from './recommendation.mjs'
 import { createPoiHandler } from './poi-submissions.mjs'
 import { createServer } from 'node:http'
 import { mkdir, readFile, appendFile, writeFile, rename } from 'node:fs/promises'
@@ -27,7 +28,7 @@ function clientIp(req) {
 }
 const likeSalt = process.env.WISH_LIKE_SALT || 'pilgrimage-wish-like-v1'
 const ipHash = ip => createHash('sha256').update(ip + '\0' + likeSalt).digest('hex')
-export async function createWishServer({ file = resolve('var/wishes.jsonl'), adminToken = process.env.WISH_ADMIN_TOKEN, allowedOrigins = (process.env.WISH_ALLOWED_ORIGINS || 'http://localhost:5173,http://localhost:4173,http://localhost:5198').split(','), authBaseUrl = process.env.AUTH_BASE_URL || 'http://127.0.0.1:8788', fetchImpl = fetch } = {}) {
+export async function createWishServer({ file = resolve('var/wishes.jsonl'), adminToken = process.env.WISH_ADMIN_TOKEN, allowedOrigins = (process.env.WISH_ALLOWED_ORIGINS || 'http://localhost:5178,http://127.0.0.1:5178,http://localhost:5173,http://localhost:4173,http://localhost:5198').split(','), authBaseUrl = process.env.AUTH_BASE_URL || 'http://127.0.0.1:8788', fetchImpl = fetch } = {}) {
   await mkdir(dirname(file), { recursive: true, mode: 0o700 })
   const records = new Map()
   try { for (const line of (await readFile(file,'utf8')).split('\n').filter(Boolean)) { const row = JSON.parse(line); row.likes = row.likes || 0; row.likedBy = Array.isArray(row.likedBy) ? row.likedBy : []; records.set(row.requestId,row) } } catch(e) { if (e.code !== 'ENOENT') throw e }
@@ -53,6 +54,7 @@ export async function createWishServer({ file = resolve('var/wishes.jsonl'), adm
     return [...groups.values()].map(g => ({ ip: g.ip, city: g.city, count: g.count, likes: g.likes, lastAt: g.lastAt, topPoints: [...g.topPoints.entries()].sort((a,b) => b[1]-a[1]).slice(0,3).map(([name]) => name), wishes: g.wishes.sort((a,b) => b.likes - a.likes) }))
   }
   const poiHandler = await createPoiHandler({ directory: resolve(dirname(file), 'poi-submissions'), adminToken, allowedOrigins, cookieAdmin: (req) => cookieRoleAdmin(req) })
+  const recommendationHandler = await createRecommendationHandler({ allowedOrigins })
   // admin 会话缓存：cookie → 是否 admin，5 秒 TTL（转发给 auth 服务校验）
   const sessionCache = new Map()
   async function cookieRoleAdmin(req) {
@@ -70,6 +72,7 @@ export async function createWishServer({ file = resolve('var/wishes.jsonl'), adm
     return ok
   }
   return createServer(async (req,res) => {
+    if (await recommendationHandler(req,res)) return
     if (await poiHandler(req,res)) return
     const reply = (code,body) => { res.writeHead(code, { 'Content-Type':'application/json; charset=utf-8', 'Cache-Control':'no-store', 'X-Content-Type-Options':'nosniff' }); res.end(JSON.stringify(body)) }
     const path = new URL(req.url,'http://localhost').pathname

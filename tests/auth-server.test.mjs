@@ -60,3 +60,17 @@ test('HTTP rejects anonymous writes, cross-origin requests and forged cookies; l
     assert.equal((await fetch(base + '/api/auth/login', { method: 'POST', headers: { Origin: 'http://localhost:5173' } })).status, 404)
   } finally { await new Promise(resolve => server.close(resolve)); store.close() }
 })
+
+test('explicit additional frontend origin is accepted while other origins remain blocked', async () => {
+  const store = createAuthStore({file: ':memory:'})
+  const server = createAuthServer({store, origin:'http://127.0.0.1:5178', additionalOrigins:['http://localhost:5178'], secure:false})
+  server.listen(0,'127.0.0.1'); await once(server,'listening')
+  try {
+    const user=store.verifiedIdentity('email','origin-test@example.com')
+    const cookie=`travel_session=${store.issueSession(user.id).token}`
+    const put=origin=>fetch(`http://127.0.0.1:${server.address().port}/api/me/interests`,{method:'PUT',headers:{...(origin ? {Origin:origin}:{}),Cookie:cookie,'Content-Type':'application/json'},body:JSON.stringify({status:'saved',interests:{themes:['scifi']}})})
+    for(const origin of ['http://127.0.0.1:5178','http://localhost:5178'])assert.equal((await put(origin)).status,200)
+    for(const origin of ['http://localhost:5179','http://localhost.evil.example:5178','https://evil.example','null',''])assert.equal((await put(origin)).status,403)
+    assert.deepEqual(store.getInterests(user.id).interests.themes,['scifi'])
+  } finally { await new Promise(resolve=>server.close(resolve)); store.close() }
+})
