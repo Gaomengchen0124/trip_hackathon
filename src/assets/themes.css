@@ -1,0 +1,46 @@
+/* Shared gold palette for every route. */
+:root {
+  --brand: #a88d58;
+  --brand-strong: #795f32;
+  --brand-light: #f3eddf;
+  --brand-border: #d6c5a7;
+  --brand-rgb: 168 141 88;
+  --ink: #302b24;
+  --ink-2: #786f62;
+  --line: #e5e0d8;
+  --bg: #faf8f4;
+  --surface: #fff;
+  --paper: var(--surface);
+  --surface-soft: #faf7f0;
+  --surface-glass: #ffffffc9;
+  --accent: #987341;
+  --button-bg: #e4d5b7;
+  --button-hover: #d9c59e;
+  --button-ink: #493d29;
+  --disabled-bg: #e5dfd3;
+  --disabled-ink: #8b806f;
+  --shadow: 0 3px 14px rgb(80 62 34 / .06);
+  --shadow-hover: 0 8px 24px rgb(80 62 34 / .1);
+  --entry-gradient: linear-gradient(120deg, #f1e7d3, #fcf8ef);
+  --planning-gradient: radial-gradient(ellipse at 8% 0%, #fffaf0, transparent 62%), linear-gradient(120deg, #f6ecd8, #fbf7ef 65%, #f0e6d3);
+  --planning-light: radial-gradient(ellipse at 25% 40%, #ead0a080, transparent 42%), radial-gradient(ellipse at 70% 50%, #f5e5b9a6, transparent 45%), radial-gradient(ellipse at 50% 70%, #fffaf0b3, transparent 40%);
+  --selection-bg: #eee5d4;
+  --backdrop: #30271bcc;
+  --photo-placeholder: linear-gradient(145deg, #f4efdf, #e7dfcf);
+  --brand-soft: var(--brand-light);
+  --brand-2: var(--brand-border);
+}
+
+#app { position: relative; isolation: isolate; }
+:root .recommend-entry { background: var(--entry-gradient); }
+:root .planning-panel { background: var(--planning-gradient); }
+:root #planning-panel.conversation-shell,
+:root .conversation-followup { background: var(--planning-gradient); box-shadow: var(--shadow); }
+:root .conversation-shell.is-generating::before { background: var(--planning-light); }
+:root .conversation-choice[aria-pressed=true],
+:root .conversation-confirm { background: var(--button-bg); color: var(--button-ink); }
+:root .flight-trail {
+  background: linear-gradient(90deg, transparent, var(--brand-border) 65%, var(--brand));
+  box-shadow: 0 0 12px rgb(var(--brand-rgb) / .3);
+}
+:root .flight-plane { color: var(--brand-strong); filter: drop-shadow(0 3px 4px rgb(var(--brand-rgb) / .2)); }

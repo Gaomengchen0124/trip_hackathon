@@ -145,7 +145,7 @@ onBeforeUnmount(() => { clearTimeout(timer); observer?.disconnect(); tiles?.off(
 
 <style>
 .map-box { position: relative; width: 100%; height: 100%; isolation: isolate; overflow: hidden; border-radius: 14px; border: 1px solid var(--line); }
-.map-canvas { width: 100%; height: 100%; background: #edf3f8; }
+.map-canvas { width: 100%; height: 100%; background: var(--surface-soft); }
 .map-toolbar { position: absolute; top: 10px; left: 52px; right: 10px; z-index: 800; display: flex; flex-wrap: wrap; gap: 5px; align-items: center; pointer-events: none; }
 .map-toolbar > * { background: #fff; border-radius: 6px; padding: 5px 9px; font-size: 11px; box-shadow: 0 2px 8px #0002; pointer-events: auto; }
 .map-toolbar button { color: var(--brand-strong); cursor: pointer; }
@@ -159,7 +159,7 @@ onBeforeUnmount(() => { clearTimeout(timer); observer?.disconnect(); tiles?.off(
 .map-legend { position: absolute; left: 10px; bottom: 12px; z-index: 800; background: #fffffff2; padding: 3px 6px; border-radius: 5px; font-size: 10px; display: flex; align-items: center; gap: 5px; }
 .map-legend i { width: 8px; height: 8px; background: #89909a; border-radius: 50%; }.map-legend .gold { background: var(--brand); }.map-legend .red { background: var(--accent); }
 .travel-pin { width: 40px; height: 32px; padding: 0; border: 2px solid white; border-radius: 16px; color: white; background: #89909a; font: bold 10px system-ui,sans-serif; box-shadow: 0 2px 7px #0005; cursor: pointer; }
-.travel-pin.ip { background: var(--brand); }.travel-pin.classic { background: var(--accent); }.travel-pin.active,.travel-pin:focus-visible { outline: 3px solid #242e42; outline-offset: 2px; }
+.travel-pin.ip { background: var(--brand); }.travel-pin.classic { background: var(--accent); }.travel-pin.active,.travel-pin:focus-visible { outline: 3px solid var(--brand-strong); outline-offset: 2px; }
 .map-empty { position: absolute; top: 45%; left: 35%; z-index: 700; background: white; padding: 10px; border-radius: 8px; }
 .leaflet-container { font-family: inherit; }.leaflet-control-attribution { font-size: 9px !important; }
 </style>

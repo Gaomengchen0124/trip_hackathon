@@ -3,6 +3,7 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import './assets/base.css'
+import './assets/themes.css'
 import { installPhotoTransitions } from './utils/photo-transition'
 import { installCursorBubbles } from './utils/cursor-bubbles'
 

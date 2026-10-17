@@ -47,7 +47,7 @@ watch(url, () => {
 .photo-frame {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(145deg, #eef5ff, #e0eaf4);
+  background: var(--photo-placeholder);
   width: 100%;
   min-width: 0;
 }

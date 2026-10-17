@@ -13,6 +13,7 @@ export function installCursorBubbles(router) {
   let frame = 0, lastInput = 0, lastEmission = 0
   let activeControl = null, trailAnchor = null, goal = null
   let width = 0, height = 0, pixelRatio = 1
+  let bubbleColor = '168,141,88'
   const enabled = () => finePointer.matches && !reducedMotion.matches && !document.hidden
   const clamp = value => Math.max(0, Math.min(1, value))
 
@@ -53,12 +54,13 @@ export function installCursorBubbles(router) {
     context.beginPath()
     context.arc(x, y, radius, 0, Math.PI * 2)
     context.lineWidth = 1
-    context.strokeStyle = `rgba(0,157,201,${alpha})`
+    context.strokeStyle = `rgba(${bubbleColor},${alpha})`
     context.stroke()
   }
   function paint(now) {
     frame = 0
     if (!enabled() || !canvas.isConnected) { clear(); return }
+    bubbleColor = activeControl?.closest('.yoyo-buddy') ? '65,150,220' : getComputedStyle(document.documentElement).getPropertyValue('--brand-rgb').trim().replace(/\s+/g, ',')
     context.setTransform(1, 0, 0, 1, 0, 0)
     context.clearRect(0, 0, canvas.width, canvas.height)
     const rect = canvas.getBoundingClientRect()

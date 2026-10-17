@@ -39,13 +39,13 @@ onUnmounted(() => { unsubscribe(); closeLogin?.(); closeProfile?.() })
 <style scoped>
 .auth-status { padding: 14px 18px; border: 1px solid var(--line); border-radius: 14px; background: #fff; }
 .account-trigger { display: flex; align-items: center; gap: 10px; min-height: 48px; max-width: 100%; padding: 3px 10px 3px 4px; border: 1px solid transparent; border-radius: 999px; background: transparent; color: var(--ink); font: inherit; cursor: pointer; transition: background var(--motion-fast) var(--ease-out), border-color var(--motion-fast) var(--ease-out); }
-.account-trigger:hover { background: #eaf4ff; border-color: #d6e9ff; }
+.account-trigger:hover { background: var(--brand-light); border-color: var(--brand-border); }
 .avatar-frame { position: relative; display: grid; place-items: center; width: 42px; height: 42px; flex: none; border-radius: 50%; }
-.avatar-frame::before { content: ''; position: absolute; inset: 0; border: 1px solid #98d6ff; border-top-color: #2377ed; border-right-color: #37c6dc; border-radius: inherit; transform: rotate(-24deg); transition: transform var(--motion-normal) var(--ease-out); }
+.avatar-frame::before { content: ''; position: absolute; inset: 0; border: 1px solid var(--brand-border); border-top-color: var(--brand); border-right-color: var(--accent); border-radius: inherit; transform: rotate(-24deg); transition: transform var(--motion-normal) var(--ease-out); }
 .account-trigger:hover .avatar-frame::before, .account-trigger:focus-visible .avatar-frame::before { transform: rotate(24deg); }
-.avatar { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid #d5eaff; border-radius: 50%; color: var(--brand); background: linear-gradient(145deg, #e8f7ff, #dceaff); }
+.avatar { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--brand-border); border-radius: 50%; color: var(--brand-strong); background: var(--entry-gradient); }
 .avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-.frame-spark { position: absolute; top: -1px; right: -1px; width: 10px; height: 10px; color: #21b7d3; filter: drop-shadow(0 0 2px #fff); }
+.frame-spark { position: absolute; top: -1px; right: -1px; width: 10px; height: 10px; color: var(--brand); filter: drop-shadow(0 0 2px #fff); }
 .identity { display: block; min-width: 0; }
 .identity strong { display: block; max-width: 22ch; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 button:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }

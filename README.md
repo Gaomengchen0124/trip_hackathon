@@ -23,7 +23,7 @@ npm run preview  # 预览打包结果：http://localhost:4173
 - 原图保存在 `public/img/`、`public/brand/`。构建用 Sharp 生成 320／480／640 像素 WebP 缩略图以及独立横幅尺寸；不放大较小原图，输出文件名带内容哈希。照片墙和路线卡片使用 `srcset`，详情页继续使用原图。
 - `public/optimized/` 和 `src/data/{home-catalog,thumbnail-images,banner-images}.json` 为忽略提交的生成物，部署必须运行构建并发布完整 `dist/`。生成器按源文件与参数缓存，重复构建不重复压图。也可运行 `npm run assets:prepare` 单独刷新这些产物。
 - 首页只加载路线摘要和景点名称搜索索引，完整路线 JSON 按路线加载，本地规划引擎仅在调用规划时加载。公开 API 仍返回 Promise，接口字段不变；调试脚本通过 `await mock.getDiagnostics()` 显式加载全部资料。
-- 横幅在 HTML 中按视口预加载，与页面的响应式图片一致；缺少缩略图时回退到原图。
+- 全站使用统一的暖金色配色；顶部导航提供首页、巡礼路线、智能推荐、巡礼许愿和账号入口，手机采用双行布局。首页保留滚动建筑横幅，标题位置与中文雾化底衬独立于背景。
 
 内容或图片改动后重新构建；开发中可重启 Vite 刷新生成的目录和缩略图。
 

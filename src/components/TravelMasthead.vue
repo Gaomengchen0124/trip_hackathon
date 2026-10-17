@@ -34,9 +34,10 @@ onUnmounted(() => preference?.removeEventListener('change', updatePreference))
 .segment{flex:0 0 300vw;position:relative;overflow:hidden;height:100%}
 .segment img{position:absolute;width:100%;height:auto;left:0;bottom:0;transform:translateY(14%);opacity:.82;mix-blend-mode:multiply}
 .titles{position:absolute;inset:0;z-index:1;pointer-events:none;display:flex;justify-content:flex-end;align-items:center;flex-direction:column;padding-bottom:10px}
-.english{width:86vw;height:clamp(100px,12.5vw,200px);font-size:0;line-height:0;position:relative;overflow:hidden;flex-shrink:0;margin:0}
+.english{width:86vw;height:clamp(100px,12.5vw,200px);font-size:0;line-height:0;position:relative;overflow:hidden;flex-shrink:0;margin:0;transform:translateY(clamp(8px,1vw,16px))}
 .english img{position:absolute;width:100%;height:181%;left:0;top:-43%;object-fit:fill}
-.chinese{font-family:"Songti SC",STSong,"Noto Serif SC",serif;font-size:clamp(23px,3.35vw,52px);font-weight:500;letter-spacing:.17em;margin:-3px 0 0;line-height:1.2;color:#51442e;transform:scaleX(.88) scaleY(1.12);text-shadow:0 0 8px #fcfaf6,0 0 14px #fcfaf6}
+.chinese{position:relative;z-index:1;isolation:isolate;font-family:"Songti SC",STSong,"Noto Serif SC",serif;font-size:clamp(23px,3.35vw,52px);font-weight:500;letter-spacing:.17em;padding-left:.17em;margin:-3px 0 0;line-height:1.2;color:#51442e;transform:scaleX(.88) scaleY(1.12);text-shadow:0 0 8px #fdfcf9,0 0 14px #fdfcf9}
+.chinese::before{content:"";position:absolute;z-index:-1;inset:-35% -14%;pointer-events:none;background:radial-gradient(ellipse at center,#fdfcf9 0%,#fdfcf9f5 44%,#fdfcf9b3 60%,#fdfcf900 78%);filter:blur(6px)}
 .paused .track{animation-play-state:paused}
 .motion-toggle{position:absolute;right:10px;bottom:8px;z-index:2;width:26px;height:26px;border:1px solid #d8cbb0;border-radius:50%;background:#fcfaf6c9;color:#998359;font-size:12px;cursor:pointer}
 .motion-toggle:focus-visible{outline:2px solid #a88d58;outline-offset:3px}

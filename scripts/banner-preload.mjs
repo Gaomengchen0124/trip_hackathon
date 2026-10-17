@@ -4,7 +4,7 @@ export function bannerPreloadScript(banners, base) {
     var base=${JSON.stringify(base)}, banners=${JSON.stringify(banners)};
     var home=new URL(base,location.href).pathname;
     if(location.pathname!==home)return;
-    var image=banners[matchMedia('(max-width: 600px)').matches?'skyMobile':'sky'];
+    var image=banners.gold;
     if(!image)return;
     var link=document.createElement('link');
     link.rel='preload';link.as='image';link.type='image/webp';link.fetchPriority='high';

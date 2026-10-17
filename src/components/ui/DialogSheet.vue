@@ -95,7 +95,7 @@ function backdrop(event) {
 .sheet.is-closing { animation: surface-exit var(--motion-exit) var(--ease-in) both; pointer-events: none; }
 .sheet.is-side { margin: 0 0 0 auto; height: 100dvh; max-height: 100dvh; width: min(620px, 100%); border-radius: 22px 0 0 22px; }
 .sheet::backdrop {
-  background: #18324acc;
+  background: var(--backdrop);
   opacity: 0.65;
   animation: surface-backdrop-enter var(--motion-normal) var(--ease-out);
 }
