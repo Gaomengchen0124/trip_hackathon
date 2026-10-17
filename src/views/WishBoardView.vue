@@ -136,9 +136,9 @@ async function focus(g) {
           :class="{ dim: (focusedKey || hoverKey) && focusedKey !== keyOf(g) && hoverKey !== keyOf(g), lit: focusedKey === keyOf(g) || hoverKey === keyOf(g) }"
         >
           <button class="card-head" @click="focus(g)">
-            <span class="cover" aria-hidden="true">《{{ g.ip.slice(0, 1) }}》</span>
+            <span class="cover" aria-hidden="true">{{ g.ip.slice(0, 1) }}</span>
             <span class="body">
-              <strong>《{{ g.ip }}》</strong>
+              <strong>{{ g.ip }}</strong>
               <span class="meta">{{ g.city }} · {{ g.count }} 人许愿 · ❤️ {{ g.likes }}</span>
               <span v-if="g.topPoints.length" class="points">{{ g.topPoints.join(' · ') }}</span>
             </span>
@@ -226,9 +226,9 @@ async function focus(g) {
 .wish-card.dim{opacity:.32}
 .wish-card.lit{transform:translateY(-3px);box-shadow:0 8px 24px #40272620;outline:2px solid var(--brand);outline-offset:-2px}
 .card-head{display:flex;width:100%;text-align:left;gap:12px;padding:14px;align-items:center}
-.cover{flex:none;width:56px;height:56px;border-radius:10px;background:var(--brand-light);color:var(--brand);display:grid;place-items:center;font-family:serif;font-size:20px}
+.cover{flex:none;width:56px;height:56px;border-radius:10px;background:var(--brand-light);color:var(--brand);display:grid;place-items:center;font-family:serif;font-size:20px;line-height:1}
 .body{display:grid;gap:4px;min-width:0}
-.body strong{font-family:serif;font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.body strong{font-family:serif;font-size:16px;line-height:1.5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .meta{font-size:12px;color:var(--ink-2)}
 .points{font-size:12px;color:var(--brand);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .detail{border-top:1px solid var(--line);padding:10px 14px 12px;animation:detail-in .3s cubic-bezier(.2,.8,.2,1) both}
