@@ -1,13 +1,18 @@
 <script setup>
 // IP 分步向导：① 作品信息 → ② IP 点位卡 → ③ 城市线与共享景点 → ④ 图片总览 → ⑤ 检查与上架
 // 对应内容组真实流程：《填写模板》→ 找图/补漏 → 生成（上架）这个 IP。AI 填充本期留接口位。
-import { ref, reactive, computed, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { ref, reactive, computed, onMounted, watch, onBeforeUnmount } from 'vue'
+import { useRoute, useRouter, onBeforeRouteLeave } from 'vue-router'
 import { manage, uploadImage, ManageError } from '../../api/manage.js'
 import { lineReadiness } from '../../engine/catalog.mjs'
 import { assetUrl } from '../../utils/travel-ui.js'
 import PoiEditForm from '../../components/admin/PoiEditForm.vue'
 import { poiMissingFields } from '../../components/admin/poi-check.mjs'
+import DialogSheet from '../../components/ui/DialogSheet.vue'
+import WishImportDialog from '../../components/admin/WishImportDialog.vue'
+import WishSourcesDialog from '../../components/admin/WishSourcesDialog.vue'
+import { newCityLine } from '../../utils/wish-import.mjs'
+import { publicationIssues,publicationIssueText } from '../../utils/publication.mjs'
 
 const route = useRoute()
 const router = useRouter()
@@ -24,6 +29,15 @@ const error = ref('')
 const notice = ref('')
 const busy = ref(true)
 const saving = ref(false)
+const sourcesOpen = ref(false), importOpen = ref(false), sourceCount = ref(0)
+const cityOpen = ref(false), cityName = ref(''), cityError = ref('')
+const clusterOpen = ref(false), clusterName = ref('')
+const checking = ref(false), checks = ref({}), checkedDoc = ref(''), returnCheck = ref(false)
+const savedDoc = ref(''), leaveOpen = ref(false), recovery = ref(null)
+let leaveResolve
+const returnTo = computed(()=> /^\/manage\/wishes(?:\?|$)/.test(String(route.query.returnTo??''))?String(route.query.returnTo):'')
+const dirty = computed(()=>!!savedDoc.value&&JSON.stringify(doc)!==savedDoc.value)
+const draftKey=`ip-unsaved:${ipId}`
 
 // 第②步
 const activeCity = ref('')
@@ -50,6 +64,31 @@ const cityStopsHint = ref(null)   // { kind: 'sibling'|'pool'|'none', count, sto
 const fetchingPhotos = ref(false)
 // 图片检查大图
 const lightbox = ref('')
+watch([doc,step,activeCity,activePoi],()=>{
+ if(busy.value||!savedDoc.value)return
+ try{sessionStorage.setItem(`wizard:${ipId}`,JSON.stringify({step:step.value,city:activeCity.value,poiId:activePoi.value?.poiId,scrollY:window.scrollY}));if(dirty.value)sessionStorage.setItem(draftKey,JSON.stringify({doc:payload(),version:meta.value?.updatedAt}));else sessionStorage.removeItem(draftKey)}catch{}
+},{deep:true})
+function beforeUnload(event){if(dirty.value){event.preventDefault();event.returnValue=''}}
+onMounted(()=>window.addEventListener('beforeunload',beforeUnload))
+onBeforeUnmount(()=>{window.removeEventListener('beforeunload',beforeUnload);clearTimeout(flashTimer);leaveResolve?.(false)})
+onBeforeRouteLeave(()=>dirty.value?new Promise(resolve=>{leaveResolve=resolve;leaveOpen.value=true}):true)
+async function resolveLeave(action){
+ if(action==='save'&&!await save())return
+ if(action==='discard'){sessionStorage.removeItem(draftKey);savedDoc.value=JSON.stringify(doc)}
+ leaveOpen.value=false;leaveResolve?.(action!=='stay');leaveResolve=null
+}
+async function readSources(){try{const data=await manage(`/api/manage/content/wish-links?ipId=${ipId}`);sourceCount.value=data.links.length}catch(e){error.value=e.message}}
+async function openImport(){if(dirty.value&&!await save())return;importOpen.value=true}
+async function imported(){importOpen.value=false;await load();sourcesOpen.value=true;step.value=1;maxVisited.value=Math.max(maxVisited.value,1)}
+async function checkPublish(){checking.value=true;const current=payload();try{const result=await manage('/api/manage/content/validate',{method:'POST',body:{doc:current}});checks.value=result.lines;checkedDoc.value=JSON.stringify(current)}catch(e){checkedDoc.value='';error.value=e.message}finally{checking.value=false}}
+function restoreLocal(){if(recovery.value){Object.assign(doc,recovery.value.doc);recovery.value=null;notice.value='已恢复本地未保存内容，请核对后保存。'}}
+function discardRecovery(){recovery.value=null;sessionStorage.removeItem(draftKey)}
+function fixIssue(city,issue){
+ activeCity.value=city;const line=activeLine();const poi=[...(line?.ipStops??[]),...(line?.cityStops??[])].find(p=>issue.where?.includes(p.poiId));returnCheck.value=true
+ if(poi){activePoi.value=poi;go(1)}else go(issue.ruleId==='IP05'?1:issue.ruleId==='IP01'||(issue.ruleId==='IP03'&&!issue.where)?0:2)
+}
+async function backToCheck(){await go(4);if(step.value===4)returnCheck.value=false}
+function issuePlace(city,issue){const line=doc.lines[city];const poi=[...(line?.ipStops??[]),...(line?.cityStops??[])].find(p=>issue.where?.includes(p.poiId));return poi?.name||city}
 
 async function checkCityStops() {
   cityStopsHint.value = null
@@ -107,6 +146,7 @@ async function autoFetchPhotos(poi) {
       method: 'POST',
       body: { ipId, cityKey: activeCity.value, poiId: poi?.poiId },
     })
+    meta.value=(await manage(`/api/manage/content/ips/${ipId}`)).ip
     // 直接把结果合并进当前内存文档：不 reload，未保存的手工填写不受影响
     let count = 0
     for (const line of Object.values(doc.lines)) {
@@ -148,6 +188,7 @@ async function locateAll() {
     notice.value = '已自动保存草稿 → 开始定位…'
     if (!await save(true)) return
     const { located, missing } = await manage('/api/manage/content/geocode', { method: 'POST', body: { ipId, cityKey: activeCity.value } })
+    meta.value=(await manage(`/api/manage/content/ips/${ipId}`)).ip
     // 本地合并坐标，不 reload
     let count = 0
     for (const line of Object.values(doc.lines)) {
@@ -174,7 +215,7 @@ function fileToBase64(file) {
   })
 }
 
-const KINDS = [['novel', '小说'], ['film', '影视'], ['poetry', '诗词'], ['history', '史传']]
+const KINDS = [['novel', '小说'], ['film', '电影'], ['tv', '电视剧'], ['prose', '散文'], ['poetry', '诗词'], ['history', '史传']]
 const STATUS_TEXT = { draft: '草稿', online: '已上线', offline: '已下架', bundled: '打包数据（未导入）' }
 
 function lineEntries() { return Object.entries(doc.lines) }
@@ -188,19 +229,29 @@ async function load() {
     meta.value = ip
     const fresh = { ip: { ipId, name: '', author: '', kind: 'novel', cover: '', aliases: [] }, lines: {} }
     Object.assign(doc, JSON.parse(JSON.stringify({ ...fresh, ...ip.doc, ip: { ...fresh.ip, ...(ip.doc?.ip ?? {}) } })))
-    publishSelected.value = Object.keys(doc.lines)
+    savedDoc.value=JSON.stringify(doc)
+    try{const cached=JSON.parse(sessionStorage.getItem(draftKey)||'null');if(cached?.doc){if(cached.version===ip.updatedAt){Object.assign(doc,cached.doc);notice.value='已恢复本地未保存内容，请核对后保存。'}else recovery.value=cached}}catch{}
+    publishSelected.value = []
     // 从预览返回：先恢复离开时的城市线，再设置 activeCity/activePoi（顺序不能反，否则点位串线）
     activeCity.value = Object.keys(doc.lines)[0] ?? ''
+    let restorePosition=null
     try {
       const pos = JSON.parse(sessionStorage.getItem(`wizard:${ipId}`) || 'null')
       if (pos) {
         if (doc.lines[pos.city]) activeCity.value = pos.city
         if (Number.isInteger(pos.step) && pos.step >= 0 && pos.step <= 4) { step.value = pos.step; maxVisited.value = Math.max(maxVisited.value, pos.step) }
-        sessionStorage.removeItem(`wizard:${ipId}`)
+        restorePosition=pos
       }
     } catch { /* 忽略坏数据 */ }
-    activePoi.value = doc.lines[activeCity.value]?.ipStops?.[0] ?? doc.lines[activeCity.value]?.cityStops?.[0] ?? null
+    if(route.query.city&&doc.lines[route.query.city])activeCity.value=String(route.query.city)
+    if(route.query.step!==undefined){const requested=Number(route.query.step);if(Number.isInteger(requested)&&requested>=0&&requested<=4){step.value=requested;maxVisited.value=Math.max(maxVisited.value,requested)}}
+    const pois=[...(doc.lines[activeCity.value]?.ipStops??[]),...(doc.lines[activeCity.value]?.cityStops??[])]
+    activePoi.value = pois.find(p=>p.poiId===restorePosition?.poiId)??pois[0]??null
     checkCityStops()
+    await readSources()
+    if(route.query.sources)sourcesOpen.value=true
+    if(step.value===4)await checkPublish()
+    if(Number.isFinite(restorePosition?.scrollY))requestAnimationFrame(()=>window.scrollTo(0,restorePosition.scrollY))
   } catch (e) { error.value = e.message } finally { busy.value = false }
 }
 
@@ -261,7 +312,8 @@ function switchCity(city) {
 }
 function nextPoiId(line, type) {
   const prefix = `${line.line.lineId}-${type === 'ip' ? 'ip' : 'sp'}-`
-  const n = [...(line.ipStops ?? []), ...(line.cityStops ?? [])].filter((p) => p.poiId?.startsWith(prefix)).length + 1
+  const used=new Set([...(line.ipStops??[]),...(line.cityStops??[])].map(p=>p.poiId))
+  let n=1;while(used.has(`${prefix}${String(n).padStart(2,'0')}`))n++
   return `${prefix}${String(n).padStart(2, '0')}`
 }
 function addPoi(type) {
@@ -301,7 +353,7 @@ function imageGapCount(line) {
     .filter((p) => !(p.realPhoto ?? '').trim() || !(p.photoCredit ?? '').trim() || PLACEHOLDER_CREDIT.test(p.photoCredit)).length
 }
 function publishReady(r) {
-  return !!r.readiness?.ready && imageGapCount(r.line) === 0
+  return !!r && !checking.value && checkedDoc.value===JSON.stringify(doc) && (checks.value[r.city]?.length===0)
 }
 
 // ---------- 第③步 ----------
@@ -320,11 +372,14 @@ function syncCityStops() {
   const line = activeLine()
   if (!line) return
   const existing = new Map((line.cityStops ?? []).map((p) => [p.name, p]))
-  const stops = []
+  const poolNames = new Set(pool.value.spots.map(p=>p.name))
+  const stops = (line.cityStops??[]).filter(p=>!poolNames.has(p.name))
+  const usedIds = new Set((line.cityStops??[]).map(p=>p.poiId))
   let seq = 0
   for (const spot of pool.value.spots) {
     if (!poolChecked.value[spot.key]) continue
     seq++
+    while(usedIds.has(`${line.line.lineId}-sp-${String(seq).padStart(2,'0')}`))seq++
     const prev = existing.get(spot.name)
     stops.push(prev ?? {
       poiId: `${line.line.lineId}-sp-${String(seq).padStart(2, '0')}`, lineId: line.line.lineId, type: 'classic',
@@ -344,17 +399,17 @@ function checkAllPool(v) {
   poolChecked.value = next
 }
 function addCityLine() {
-  const city = prompt('新城市线的城市名（如：杭州）')?.trim()
-  if (!city || doc.lines[city]) return
-  doc.lines[city] = {
-    _bounds: { lng: [73, 135], lat: [18, 54] },
-    _expected: { ipStops: [6, 12], cityStops: [10, 20], maxTierS: 3 },
-    line: { lineId: `${ipId}-${city}`, ipId, title: `${doc.ip.name || ipId}·${city}`, city, cover: '', recommendDays: 2 },
-    clusters: [], ipStops: [], cityStops: [],
-  }
-  switchCity(city)
-  step.value = 2
+  cityName.value='';cityError.value='';cityOpen.value=true
 }
+function confirmCity(){
+  const city=cityName.value.trim()
+  if(!/^[\p{L}\p{N}· -]{1,30}$/u.test(city)||['__proto__','constructor','prototype'].includes(city)){cityError.value='请填写单个城市或地区名称';return}
+  if(doc.lines[city]){cityError.value='该城市线已存在，可直接切换';return}
+  doc.lines[city] = newCityLine(ipId,doc.ip.name,city)
+  switchCity(city)
+  step.value = 2;maxVisited.value=Math.max(maxVisited.value,2);cityOpen.value=false;ensurePool()
+}
+function confirmCluster(){const name=clusterName.value.trim();if(!name)return;const line=activeLine();line.clusters=[...new Set([...line.clusters,name])];if(activePoi.value)activePoi.value.cluster=name;clusterOpen.value=false;clusterName.value=''}
 function removeCityLine() {
   const city = activeCity.value
   if (!city || !confirm(`删除「${city}」城市线及其全部点位？`)) return
@@ -381,8 +436,10 @@ const missingImages = computed(() => {
 
 // ---------- 第⑤步 ----------
 const readinessList = computed(() => lineEntries().map(([city, line]) => ({
-  city, line, readiness: lineReadiness({ ...line, ip: doc.ip }),
+  city, line, readiness: lineReadiness({ ...line, ip: doc.ip }),issues:checkedDoc.value===JSON.stringify(doc)?(checks.value[city]??[]):publicationIssues(doc,city),
 })))
+const selectedReady=computed(()=>publishSelected.value.filter(city=>publishReady(readinessList.value.find(r=>r.city===city))))
+const selectedOnline=computed(()=>publishSelected.value.filter(city=>meta.value?.publishedCities?.includes(city)))
 function fmtIssues(list) { return list.slice(0, 8).map((i) => `[${i.ruleId}] ${i.msg}${i.where ? `（${i.where}）` : ''}`).join('；') + (list.length > 8 ? ` 等 ${list.length} 条` : '') }
 
 // ---------- 保存/上架 ----------
@@ -391,8 +448,11 @@ async function save(silent) {
   saving.value = true; error.value = ''
   if (!silent) notice.value = ''
   try {
-    const { ip } = await manage(`/api/manage/content/ips/${ipId}`, { method: 'PUT', body: { doc: payload() } })
+    const sent=payload()
+    const { ip } = await manage(`/api/manage/content/ips/${ipId}`, { method: 'PUT', body: { doc: sent,expectedUpdatedAt:meta.value?.updatedAt } })
     meta.value = ip
+    savedDoc.value=JSON.stringify(sent)
+    if(!dirty.value)sessionStorage.removeItem(draftKey)
     if (!silent) notice.value = '已保存草稿'
     else flashSaved()
     return true
@@ -410,43 +470,52 @@ async function publish() {
   try {
     const { ip } = await manage(`/api/manage/content/ips/${ipId}/status`, { method: 'PATCH', body: { status: 'online', cityKeys } })
     meta.value = ip
-    notice.value = `已上架 ${cityKeys.length} 条城市线（公开接口 /api/content/lines 已可见）。`
+    Object.assign(doc,ip.doc);savedDoc.value=JSON.stringify(doc);await checkPublish()
+    notice.value = `已上架 ${cityKeys.length} 条城市线。请核对来源心愿的收录进度。`
+    if(sourceCount.value)sourcesOpen.value=true
   } catch (e) {
     error.value = e instanceof ManageError && e.issues ? `${e.message}：${fmtIssues(e.issues)}` : e.message
   }
 }
 async function unpublish() {
   error.value = ''
-  const cityKeys = publishSelected.value.length ? publishSelected.value : Object.keys(doc.lines)
+  const cityKeys = selectedOnline.value
+  if(!cityKeys.length)return
+  if(dirty.value&&!await save())return
   try {
     const { ip } = await manage(`/api/manage/content/ips/${ipId}/status`, { method: 'PATCH', body: { status: 'offline', cityKeys } })
     meta.value = ip
+    Object.assign(doc,ip.doc);savedDoc.value=JSON.stringify(doc);await checkPublish()
     notice.value = `已下架 ${cityKeys.length} 条城市线。`
   } catch (e) { error.value = e.message }
 }
 
-function go(next) {
+async function go(next) {
   error.value = ''
+  if(next>step.value&&dirty.value&&!await save(true))return
   if (next === 2) ensurePool()
   step.value = next
   maxVisited.value = Math.max(maxVisited.value, next)
+  if(next===4)await checkPublish()
   window.scrollTo(0, 0)
 }
 
 async function goPreview() {
   if (!await save(true)) return
-  sessionStorage.setItem(`wizard:${ipId}`, JSON.stringify({ step: step.value, city: activeCity.value }))
-  router.push(`/manage/ips/${ipId}/preview`)
+  sessionStorage.setItem(`wizard:${ipId}`, JSON.stringify({ step: step.value, city: activeCity.value,poiId:activePoi.value?.poiId,scrollY:window.scrollY }))
+  router.push({path:`/manage/ips/${ipId}/preview`,query:returnTo.value?{returnTo:returnTo.value}:{}})
 }
 </script>
 
 <template>
   <div>
-    <p><router-link class="mini" to="/manage/ips">← 返回 IP 管理</router-link></p>
+    <p><router-link class="mini" :to="returnTo || '/manage/ips'">← {{ returnTo ? '返回来源心愿列表' : '返回 IP 管理' }}</router-link></p>
     <div class="head">
       <h2 class="title">{{ doc.ip.name || ipId }}</h2>
       <span class="status" :data-s="meta?.status">{{ STATUS_TEXT[meta?.status] ?? '加载中' }}</span>
       <span class="spacer" />
+      <button class="btn-ghost" :disabled="busy || saving" @click="openImport">导入心愿单</button>
+      <button class="btn-ghost" :disabled="busy" @click="sourcesOpen=true">来源心愿（{{ sourceCount }}）</button>
       <button v-if="step === 4" class="btn-ghost" :disabled="saving" @click="goPreview">👁 预览效果</button>
     </div>
     <ol class="steps">
@@ -455,6 +524,9 @@ async function goPreview() {
     <p v-if="error" class="error" role="alert">{{ error }}</p>
     <p v-if="notice" class="notice">{{ notice }}</p>
     <p v-if="busy" class="hint">加载中…</p>
+    <p v-if="meta?.publishedCities?.length" class="hint-banner">已上线：{{ meta.publishedCities.join('、') }}。保存草稿后，线上仍展示上次发布的内容；检查通过并重新上架后才更新。</p>
+    <p v-if="dirty" class="hint">有未保存的修改；已暂存于本标签页，保存后才写入内容库。</p>
+    <div v-if="recovery" class="hint-banner">发现较早版本的本地未保存内容。恢复会覆盖当前编辑表单，请核对后保存。<button class="mini" @click="restoreLocal">恢复内容</button><button class="mini" @click="discardRecovery">忽略</button></div>
 
     <template v-if="!busy && meta">
       <!-- ① 作品信息 -->
@@ -538,6 +610,7 @@ async function goPreview() {
             <p v-if="!pendingPois.length && !ipLocatedPois.length && !spLocatedPois.length" class="hint">还没有点位。IP 点对照原著/剧集逐点核对填写；城市景点可在第③步从共享池勾选。</p>
           </aside>
           <div v-if="activePoiInLine" class="poi-edit">
+            <button class="mini" @click="clusterOpen=true">＋ 添加片区并用于当前点位</button>
             <PoiEditForm :poi="activePoi" :clusters="activeLine().clusters ?? []" :line-id="activeLine().line.lineId" :city="activeLine().line.city" :max-tier-s="activeLine()._expected?.maxTierS ?? 3" :locating="locating" @remove="removePoi(activePoi)" @locate="locatePoi(activePoi)" />
           </div>
           <div v-else class="poi-edit"><p class="hint">点左侧点位开始编辑；还没有点位就点「＋」新增。</p></div>
@@ -615,7 +688,7 @@ async function goPreview() {
             <figure v-for="poi in [...(activeLine().ipStops ?? []), ...(activeLine().cityStops ?? [])]" :key="poi.poiId" :class="{ cover: true }">
               <img v-if="poi.realPhoto" :src="assetUrl(poi.realPhoto)" :alt="poi.name" class="zoom" @click="lightbox = assetUrl(poi.realPhoto)" />
               <div v-else class="no-img">缺图</div>
-              <figcaption>{{ poi.name || poi.poiId }}</figcaption>
+              <figcaption>{{ poi.name || poi.poiId }} <button class="mini" @click="activePoi=poi;go(1)">补充资料</button></figcaption>
             </figure>
           </div>
         </div>
@@ -625,20 +698,21 @@ async function goPreview() {
       <!-- ⑤ 检查与上架 -->
       <section v-else class="panel">
         <h3>上架前检查（按城市线勾选，可只上架部分线路）</h3>
+        <button class="btn-ghost" :disabled="checking" @click="checkPublish">{{ checking ? '正在检查…' : '重新检查' }}</button>
         <div class="table-wrap">
           <table>
             <thead><tr><th></th><th>城市线</th><th>当前状态</th><th>IP 点位</th><th>城市景点</th><th>就绪</th></tr></thead>
             <tbody>
               <tr v-for="r in readinessList" :key="r.city">
-                <td><input v-model="publishSelected" type="checkbox" :value="r.city" :disabled="!publishReady(r)" :title="publishReady(r) ? '' : '数据未就绪（含图片检查），不能上架'" /></td>
+                <td><input v-model="publishSelected" type="checkbox" :value="r.city" :aria-label="`选择${r.city}线路`" :disabled="!publishReady(r) && !meta?.publishedCities?.includes(r.city)" /></td>
                 <td>{{ r.line.line.title }}</td>
                 <td><span class="status" :data-s="r.line.status ?? meta?.status">{{ { draft: '草稿', online: '已上线', offline: '已下架' }[r.line.status ?? meta?.status] ?? '草稿' }}</span></td>
                 <td>{{ r.readiness.ipDone }}/{{ r.readiness.ipTotal }}</td>
                 <td>{{ r.readiness.spDone }}/{{ r.readiness.spTotal }}</td>
                 <td>
                   <span v-if="publishReady(r)" class="ok-line">✓ 可上架</span>
-                  <span v-else-if="r.readiness.ready" class="miss">缺图/占位 {{ imageGapCount(r.line) }} 处</span>
-                  <span v-else class="miss">{{ r.readiness.missing.join(' · ') }}</span>
+                  <span v-else class="miss">{{ checking ? '检查中' : `${r.issues.length} 项待补充` }}</span>
+                  <ul class="issue-list"><li v-for="(issue,index) in r.issues" :key="index"><button class="mini" @click="fixIssue(r.city,issue)">{{ issuePlace(r.city,issue) }} · {{ publicationIssueText(issue) }} →</button></li></ul>
                 </td>
               </tr>
             </tbody>
@@ -651,17 +725,27 @@ async function goPreview() {
         <button class="btn-ghost" :disabled="saving" :class="{ saved: savedFlash }" @click="save()">{{ saving ? '保存中…' : savedFlash ? '✓ 已自动保存' : '保存草稿' }}</button>
         <span class="spacer" />
         <button v-if="step > 0" class="btn-ghost" @click="go(step - 1)">上一步</button>
-        <button v-if="step < 4" class="btn" @click="go(step + 1)">下一步</button>
+        <button v-if="returnCheck && step < 4" class="btn-ghost" :disabled="saving" @click="backToCheck">保存并返回检查</button>
+        <button v-if="step < 4" class="btn" :disabled="saving" @click="go(step + 1)">保存并继续</button>
         <template v-else>
-          <button class="btn" :disabled="!publishSelected.length" @click="publish">上架所选线路（{{ publishSelected.length }}）</button>
-          <button class="btn-ghost" :disabled="!publishSelected.length" @click="unpublish">下架所选线路</button>
+          <button class="btn" :disabled="saving || !selectedReady.length" @click="publish">上架所选线路（{{ selectedReady.length }}）</button>
+          <button class="btn-ghost" :disabled="saving || !selectedOnline.length" @click="unpublish">下架所选线路（{{ selectedOnline.length }}）</button>
         </template>
       </footer>
     </template>
+    <WishSourcesDialog v-if="sourcesOpen" :ip-id="ipId" :return-to="returnTo" @close="sourcesOpen=false;readSources()" />
+    <WishImportDialog v-if="importOpen" mode="existing" :target-id="ipId" @close="importOpen=false" @imported="imported" />
+    <DialogSheet v-if="cityOpen" title="添加城市线" @close="cityOpen=false"><label>城市名称<input v-model="cityName" placeholder="例如：上海" @keyup.enter="confirmCity" /></label><p v-if="cityError" class="error">{{ cityError }}</p><button class="btn" @click="confirmCity">创建并编辑城市线</button></DialogSheet>
+    <DialogSheet v-if="clusterOpen" title="添加片区" @close="clusterOpen=false"><label>片区名称<input v-model="clusterName" placeholder="例如：黄浦·外滩" @keyup.enter="confirmCluster" /></label><button class="btn" :disabled="!clusterName.trim()" @click="confirmCluster">添加并用于当前点位</button></DialogSheet>
+    <DialogSheet v-if="leaveOpen" title="离开前保存修改" :busy="saving" @close="resolveLeave('stay')"><p>当前有未保存的修改，请选择如何继续。</p><div class="leave-actions"><button class="btn" :disabled="saving" @click="resolveLeave('save')">保存并离开</button><button class="btn-ghost" :disabled="saving" @click="resolveLeave('discard')">放弃修改并离开</button><button class="btn-ghost" @click="resolveLeave('stay')">继续编辑</button></div></DialogSheet>
   </div>
 </template>
 
 <style scoped>
+.head { flex-wrap: wrap; }
+.issue-list { max-width: 520px; padding-left: 16px; }
+.issue-list button { text-align: left; }
+.leave-actions { display:flex; gap:10px; margin-top:16px; flex-wrap:wrap; }
 .mini { font-size: 13px; color: var(--brand); text-decoration: underline; }
 .head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
 .head .spacer { flex: 1; }

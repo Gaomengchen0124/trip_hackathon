@@ -20,6 +20,7 @@
     "demo:plan": "node scripts/demo-plan.mjs",
     "e2e": "node scripts/e2e-ssr.mjs",
     "dev:api": "node scripts/start-api.mjs",
+    "auth:create-admin": "node --env-file-if-exists=server/.env.auth.local scripts/create-local-admin.mjs",
     "dev:content": "node scripts/start-content.sh"
   },
   "dependencies": {

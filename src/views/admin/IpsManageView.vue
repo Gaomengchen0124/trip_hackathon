@@ -1,21 +1,48 @@
 <script setup>
 // IP 管理：列表（内容库 + 打包）+ 草稿箱筛选 + 状态流转 + 新建 IP
 // 「上架」把 IP 的所有城市线提供给公开接口 /api/content/lines（本期公网首页仍用打包数据）
-import { ref, computed, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed, onMounted, watch, nextTick } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { manage, ManageError } from '../../api/manage.js'
 import { lineReadiness } from '../../engine/catalog.mjs'
+import WishImportDialog from '../../components/admin/WishImportDialog.vue'
+import { newCityLine, workKey, wishSnapshot } from '../../utils/wish-import.mjs'
+import { publicationIssues } from '../../utils/publication.mjs'
 
 const router = useRouter()
+const route = useRoute()
 const ips = ref([])
 const filter = ref('all')   // all | draft | online | offline | bundled
 const error = ref('')
 const busy = ref(true)
 const creating = ref(false)
-const newIp = ref({ ipId: '', name: '', author: '', kind: 'novel', city: '' })
+const newIp = ref({ ipId: '', name: '', author: '', kind: '', city: '' })
 const actionError = ref('')
+const importOpen = ref(false), imported = ref(null), submitting = ref(false)
+const confirmedMismatch=ref(false)
+const operationId = ref(crypto.randomUUID())
+const initialIds = computed(() => String(route.query.wishes??'').split(',').filter(Boolean))
+const returnTo = computed(() => /^\/manage\/wishes(?:\?|$)/.test(String(route.query.returnTo??'')) ? String(route.query.returnTo) : '')
+const matching = computed(() => ips.value.filter(ip => workKey(ip.doc?.ip?.name)===workKey(newIp.value.name) && newIp.value.name))
+const workMismatch=computed(()=>!!imported.value?.wishes?.length&&!!newIp.value.name.trim()&&workKey(newIp.value.name)!==workKey(imported.value.wishes[0].ip))
+try { const cached=JSON.parse(sessionStorage.getItem('admin-new-ip')||'null'); if(cached){newIp.value=cached.newIp;imported.value=cached.imported;operationId.value=cached.operationId||operationId.value} } catch {}
+watch([newIp,imported,operationId],()=>{try{sessionStorage.setItem('admin-new-ip',JSON.stringify({newIp:newIp.value,imported:imported.value,operationId:operationId.value}))}catch{}},{deep:true})
+function applyImport(value){
+ imported.value={plans:value.plans,wishes:value.wishes.map(wishSnapshot)}
+ if(!newIp.value.name)newIp.value.name=value.wishes[0].ip
+ if(!newIp.value.ipId)newIp.value.ipId=`wish-${crypto.randomUUID().slice(0,8)}`
+ if(!newIp.value.city)newIp.value.city=value.plans[0].cityKey
+ operationId.value=crypto.randomUUID();importOpen.value=false
+ confirmedMismatch.value=false
+}
+async function cancelCreate(){
+ creating.value=false;imported.value=null;newIp.value={ipId:'',name:'',author:'',kind:'',city:''};operationId.value=crypto.randomUUID()
+ await nextTick()
+ sessionStorage.removeItem('admin-new-ip')
+ if(returnTo.value)router.push(returnTo.value)
+}
 
-const KINDS = [['novel', '小说'], ['film', '影视'], ['poetry', '诗词'], ['history', '史传']]
+const KINDS = [['novel', '小说'], ['film', '电影'], ['tv', '电视剧'], ['prose', '散文'], ['poetry', '诗词'], ['history', '史传']]
 const STATUS_TEXT = { draft: '草稿', online: '已上线', offline: '已下架', bundled: '线上·打包' }
 const TABS = [['all', '全部'], ['draft', '草稿箱'], ['online', '已上线'], ['offline', '已下架'], ['bundled', '线上·打包']]
 
@@ -24,14 +51,14 @@ async function load() {
   try { ips.value = (await manage('/api/manage/content/ips')).ips }
   catch (e) { error.value = e.message } finally { busy.value = false }
 }
-onMounted(load)
+onMounted(async()=>{await load();if(route.query.create){creating.value=true;if(initialIds.value.length&&!imported.value)importOpen.value=true}})
 
 const rows = computed(() => ips.value
   .filter((ip) => filter.value === 'all' || ip.status === filter.value)
   .map((ip) => {
     const lines = Object.entries(ip.doc?.lines ?? {})
     const readinessList = lines.map(([city, line]) => lineReadiness({ ...line, ip: ip.doc.ip }))
-    const onlineCount = lines.filter(([, l]) => (l.status ?? (ip.status === 'online' ? 'online' : 'draft')) === 'online').length
+    const onlineCount = ip.publishedCities?.length ?? (ip.status==='bundled'?lines.length:0)
     return {
       ...ip,
       name: ip.doc?.ip?.name ?? ip.ipId,
@@ -40,7 +67,7 @@ const rows = computed(() => ips.value
       onlineCount,
       poiTotal: readinessList.reduce((n, r) => n + r.ipTotal, 0),
       poiDone: readinessList.reduce((n, r) => n + r.ipDone, 0),
-      ready: readinessList.length > 0 && readinessList.every((r) => r.ready),
+      ready: lines.length > 0 && lines.every(([city]) => publicationIssues(ip.doc,city).length===0),
     }
   }))
 
@@ -64,10 +91,13 @@ async function removeIp(ip) {
 }
 
 async function createIp() {
+  if(submitting.value)return
   actionError.value = ''
   const ipId = newIp.value.ipId.trim()
   if (!/^[a-z0-9][a-z0-9-]{0,99}$/.test(ipId)) { actionError.value = 'IP ID 只能含小写字母、数字、连字符'; return }
-  const city = newIp.value.city.trim() || '主城市'
+  const city = newIp.value.city.trim()
+  if(!newIp.value.kind || (!imported.value&&!city)){actionError.value='请选择作品类型并填写首个城市线；目的地未定可返回心愿详情稍后处理。';return}
+ if(workMismatch.value&&!confirmedMismatch.value){actionError.value='新作品名与心愿不一致，请核对并明确确认';return}
   const doc = {
     _schema: 'ip-v1',
     ip: { ipId, name: newIp.value.name.trim(), author: newIp.value.author.trim(), kind: newIp.value.kind, cover: '', aliases: [] },
@@ -82,15 +112,19 @@ async function createIp() {
       },
     },
   }
+  doc.lines = imported.value ? {} : { [city]: newCityLine(ipId,doc.ip.name,city) }
+  submitting.value=true
   try {
-    await manage('/api/manage/content/ips', { method: 'POST', body: { doc } })
+    if(imported.value) await manage('/api/manage/content/wish-imports',{method:'POST',body:{operationId:operationId.value,doc,plans:imported.value.plans,confirmDifferentWork:workMismatch.value&&confirmedMismatch.value}})
+    else await manage('/api/manage/content/ips', { method: 'POST', body: { doc } })
     creating.value = false
-    router.push(`/manage/ips/${ipId}/edit`)
+    sessionStorage.removeItem('admin-new-ip')
+    router.push({path:`/manage/ips/${ipId}/edit`,query:{...(returnTo.value?{returnTo:returnTo.value}:{}),...(imported.value?{sources:'1'}:{})}})
   } catch (e) {
     actionError.value = e instanceof ManageError && e.issues
       ? `${e.message}：${e.issues.slice(0, 6).map(i => `[${i.ruleId}] ${i.msg}${i.where ? `（${i.where}）` : ''}`).join('；')}${e.issues.length > 6 ? ` 等 ${e.issues.length} 条` : ''}`
       : e.message
-  }
+  } finally {submitting.value=false}
 }
 </script>
 
@@ -100,7 +134,7 @@ async function createIp() {
       <h2 class="title">IP 管理</h2>
       <button class="btn" @click="creating = true">＋ 新建 IP</button>
     </div>
-    <p class="hint">管理单位是 IP（作品）：一个 IP 可含多条城市线。「上架」后该 IP 的所有城市线进入公开接口 <code>/api/content/lines</code>；本期公网首页仍用打包数据，接入后上架即生效。</p>
+    <p class="hint">一个作品可包含多条城市线。保存草稿不改变已发布版本；检查后可选择城市线上架。心愿可直接导入并保留原始线索。</p>
     <p v-if="error" class="error" role="alert">{{ error }}</p>
     <p v-if="actionError" class="error" role="alert">{{ actionError }}</p>
     <p v-if="busy" class="hint">加载中…</p>
@@ -110,15 +144,18 @@ async function createIp() {
     </div>
 
     <form v-if="creating" class="create panel" @submit.prevent="createIp">
-      <h3>新建 IP（创建后进入分步向导继续填写）</h3>
+      <div class="create-head"><h3>新建 IP</h3><button class="btn-ghost" type="button" :disabled="submitting" @click="importOpen=true">导入心愿单</button></div>
+      <p v-if="imported" class="hint">已选 {{ imported.wishes.length }} 条心愿 · 城市线：{{ [...new Set(imported.plans.map(p=>p.cityKey))].join('、') }} · {{ imported.plans.reduce((n,p)=>n+p.points.length,0) }} 个候选点位。创建后在向导中核实。</p>
+      <p v-if="matching.length" class="hint">已有同名作品：<router-link v-for="ip in matching" :key="ip.ipId" :to="`/manage/ips/${ip.ipId}/edit`">{{ ip.doc.ip.name }}（{{ ip.ipId }}）</router-link>。可进入编辑后关联心愿，避免重复建库。</p>
       <label>IP ID（小写字母/数字/连字符，如 daomu）<input v-model="newIp.ipId" required pattern="[a-z0-9][a-z0-9-]*" /></label>
       <label>作品名 *<input v-model="newIp.name" required placeholder="如：盗墓笔记" /></label>
+      <label v-if="workMismatch" class="mismatch"><input v-model="confirmedMismatch" type="checkbox" />作品名与来源心愿不同，我已核对这是同一作品或别名。</label>
       <label>作者<input v-model="newIp.author" /></label>
-      <label>作品类型<select v-model="newIp.kind"><option v-for="[v, t] in KINDS" :key="v" :value="v">{{ t }}</option></select></label>
-      <label>首个城市线（城市名）<input v-model="newIp.city" placeholder="如：杭州" /></label>
+      <label>作品类型<select v-model="newIp.kind" required><option value="" disabled>请选择类型</option><option v-for="[v, t] in KINDS" :key="v" :value="v">{{ t }}</option></select></label>
+      <label v-if="!imported">首个城市线（城市名）<input v-model="newIp.city" required placeholder="如：杭州" /></label>
       <div class="row">
-        <button class="btn" type="submit">创建草稿</button>
-        <button class="btn-ghost" type="button" @click="creating = false">取消</button>
+        <button class="btn" type="submit" :disabled="submitting">{{ submitting?'正在创建…':imported?`创建草稿并关联 ${imported.wishes.length} 条心愿`:'创建草稿' }}</button>
+        <button class="btn-ghost" type="button" :disabled="submitting" @click="cancelCreate">{{ returnTo?'返回来源心愿':'取消' }}</button>
       </div>
     </form>
 
@@ -128,15 +165,15 @@ async function createIp() {
         <tbody>
           <tr v-for="ip in rows" :key="ip.ipId">
             <td><b>{{ ip.name }}</b><small>{{ ip.ipId }}{{ ip.author ? ' · ' + ip.author : '' }}</small></td>
-            <td>{{ { novel: '小说', film: '影视', poetry: '诗词', history: '史传' }[ip.doc?.ip?.kind] ?? '—' }}</td>
+            <td>{{ Object.fromEntries(KINDS)[ip.doc?.ip?.kind] ?? ip.doc?.ip?.kind ?? '—' }}</td>
             <td>{{ ip.lineCount }} 条</td>
             <td>
               <span v-if="ip.status === 'bundled'" class="status" data-s="bundled" title="内容来自构建打包数据，正在公网运行；编辑或下架会先导入内容库">线上·打包</span>
-              <span v-else class="status" :data-s="onlineCount ? 'online' : 'draft'" :title="ip.status === 'draft' && onlineCount ? '部分线路上架中' : ''">{{ ip.lineCount ? `${onlineCount}/${ip.lineCount} 线上` : STATUS_TEXT[ip.status] }}</span>
+              <span v-else class="status" :data-s="ip.onlineCount ? 'online' : ip.status">{{ ip.onlineCount ? `${ip.onlineCount}/${ip.lineCount} 条已上线` : STATUS_TEXT[ip.status] }}</span>
             </td>
             <td>
-              <span v-if="ip.ready" class="ok">✓ 完整</span>
-              <span v-else class="miss">{{ ip.poiDone }}/{{ ip.poiTotal }} 点位就绪</span>
+              <span v-if="ip.ready" class="ok">✓ 可提交上架检查</span>
+              <span v-else class="miss">{{ ip.poiDone }}/{{ ip.poiTotal }} 点位基础信息齐全 · 待完善</span>
             </td>
             <td class="time">{{ ip.updatedAt ? new Date(ip.updatedAt).toLocaleString('zh-CN') : '—' }}</td>
             <td class="ops">
@@ -150,6 +187,7 @@ async function createIp() {
         </tbody>
       </table>
     </div>
+    <WishImportDialog v-if="importOpen" :initial-ids="imported?.wishes.map(w=>w.id)??initialIds" @close="importOpen=false" @select="applyImport" />
   </div>
 </template>
 
@@ -164,9 +202,11 @@ code { background: var(--brand-light, #f7f3ee); padding: 1px 5px; border-radius:
 .tabs button.on { border-color: var(--brand); color: var(--brand); font-weight: 600; }
 .panel { background: #fff; border: 1px solid var(--line); border-radius: var(--card-radius); padding: 18px 20px; margin-bottom: 16px; display: grid; gap: 10px; max-width: 520px; }
 .panel h3 { font-size: 15px; }
+.create-head {display:flex;justify-content:space-between;align-items:center;gap:12px}
 label { display: grid; gap: 4px; font-size: 13px; color: var(--ink-2); }
 input, select { padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px; font: inherit; font-size: 14px; background: #fff; }
 .row { display: flex; gap: 10px; }
+.mismatch { display:flex;align-items:center;gap:8px;color:#a73521; }
 .table-wrap { overflow-x: auto; background: #fff; border: 1px solid var(--line); border-radius: var(--card-radius); box-shadow: var(--shadow); }
 table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 720px; }
 th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }

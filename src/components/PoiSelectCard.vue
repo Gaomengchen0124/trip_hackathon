@@ -5,13 +5,14 @@ import { poiCover, formatMinutes } from '../utils/travel-ui'
 const props = defineProps({
   poi: { type: Object, required: true },
   checked: Boolean,
+  active: Boolean,
   disabled: Boolean
 })
 const emit = defineEmits(['toggle'])
 const cover = computed(() => poiCover(props.poi))
 </script>
 <template>
-  <label class="poi-option" :class="{ selected: checked, disabled }">
+  <label :id="`planner-poi-${poi.poiId}`" class="poi-option" :class="{ selected: checked, active, disabled }">
     <input
       type="checkbox"
       :checked="checked"
@@ -38,7 +39,10 @@ const cover = computed(() => poiCover(props.poi))
   border-radius: 16px;
   background: #fff;
   cursor: pointer;
+  scroll-margin: 24px 0 100px;
+  transition: border-color var(--motion-normal) var(--ease-out), background-color var(--motion-normal) var(--ease-out), box-shadow var(--motion-normal) var(--ease-out);
 }
+.poi-option.active { outline: 2px solid var(--brand-strong); outline-offset: 3px; }
 .poi-option.selected {
   border-color: var(--brand);
   background: var(--brand-light);
@@ -93,4 +97,5 @@ strong {
 .content {text-align:center;}
 .meta {line-height:1.7;overflow-wrap:anywhere;}
 @media(max-width:380px){.photo{width:72px;}.poi-option{gap:10px;}strong{font-size:15px;}}
+@media(prefers-reduced-motion:reduce){.poi-option{transition:none;}}
 </style>

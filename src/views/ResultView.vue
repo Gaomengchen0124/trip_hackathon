@@ -11,6 +11,7 @@ import { usePlanStore } from '../stores/plan'
 import MapContainer from '../components/MapContainer.vue'
 import DayTimeline from '../components/DayTimeline.vue'
 import PoiCardOverlay from '../components/PoiCardOverlay.vue'
+import YoyoBuddy from '../components/ui/YoyoBuddy.vue'
 import { formatMinutes } from '../utils/travel-ui'
 import { itineraryText as makeItineraryText, downloadItinerary } from '../utils/itinerary-export.mjs'
 
@@ -38,7 +39,7 @@ const pct = computed(() => Math.round((store.result?.usage ?? 0) * 100))
 /** 时间轴点某站：弹出该点卡片，并把地图滚回视野。 */
 function locatePoi(poiId) {
   activePoi.value = poiOf(poiId)
-  mapBox.value?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  mapBox.value?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' })
 }
 
 function restartPlan() {
@@ -107,7 +108,7 @@ async function exportImage() {
     </section>
 
     <section class="plan-summary card-block" aria-label="行程概览">
-      <h2>{{ statusTitle }}</h2>
+      <div class="summary-heading"><YoyoBuddy :state="statusBadge ? 'empty' : 'success'" :size="64" :message="statusBadge ? '可以减少几个地点，或多留一点时间。' : '行程已整理好，带着喜欢的故事出发吧！'" /><div><span class="yoyo-note">{{ statusBadge ? 'YOYO · 一起调整行程节奏' : 'YOYO · 行程已整理' }}</span><h2>{{ statusTitle }}</h2></div></div>
       <p v-if="statusBadge">{{ statusBadge }}</p>
       <p v-if="store.result?.message">{{ store.result.message }}</p>
       <p v-if="store.result?.compressed">已按重要度压缩部分点位停留时间。</p>
@@ -165,6 +166,8 @@ async function exportImage() {
 </template>
 
 <style scoped>
+.summary-heading{display:flex;align-items:center;gap:14px;margin-bottom:12px}.summary-heading h2{margin:3px 0 0}.yoyo-note{font-size:12px;color:var(--ink-2)}
+
 .bar {
   display: flex;
   align-items: center;

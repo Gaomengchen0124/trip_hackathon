@@ -27,7 +27,7 @@ function clientIp(req) {
 }
 const likeSalt = process.env.WISH_LIKE_SALT || 'pilgrimage-wish-like-v1'
 const ipHash = ip => createHash('sha256').update(ip + '\0' + likeSalt).digest('hex')
-export async function createWishServer({ file = resolve('var/wishes.jsonl'), adminToken = process.env.WISH_ADMIN_TOKEN, allowedOrigins = (process.env.WISH_ALLOWED_ORIGINS || 'http://localhost:5173,http://localhost:4173,http://localhost:5198').split(','), authBaseUrl = process.env.AUTH_BASE_URL || 'http://127.0.0.1:8788', fetchImpl = fetch } = {}) {
+export async function createWishServer({ file = resolve('var/wishes.jsonl'), adminToken = process.env.WISH_ADMIN_TOKEN, allowedOrigins = (process.env.WISH_ALLOWED_ORIGINS || 'http://localhost:5173,http://localhost:5178,http://localhost:4173,http://localhost:5198').split(','), authBaseUrl = process.env.AUTH_BASE_URL || 'http://127.0.0.1:8788', fetchImpl = fetch } = {}) {
   await mkdir(dirname(file), { recursive: true, mode: 0o700 })
   const records = new Map()
   try { for (const line of (await readFile(file,'utf8')).split('\n').filter(Boolean)) { const row = JSON.parse(line); row.likes = row.likes || 0; row.likedBy = Array.isArray(row.likedBy) ? row.likedBy : []; records.set(row.requestId,row) } } catch(e) { if (e.code !== 'ENOENT') throw e }
@@ -39,7 +39,7 @@ export async function createWishServer({ file = resolve('var/wishes.jsonl'), adm
   const byId = id => { for (const row of records.values()) if (row.id === id) return row; return null }
   const groupKey = row => `${row.ip.trim().toLowerCase()}\0${row.city.trim().toLowerCase()}`
   // 公开榜单：脱敏（无 email/requestId/notify/likedBy/status），按 ip+city 分组
-  const board = () => {
+  const board = (viewerHash) => {
     const groups = new Map()
     for (const row of records.values()) {
       const key = groupKey(row)
@@ -47,7 +47,7 @@ export async function createWishServer({ file = resolve('var/wishes.jsonl'), adm
       group.count++; group.likes += row.likes
       if (row.createdAt > group.lastAt) group.lastAt = row.createdAt
       for (const p of row.points) group.topPoints.set(p, (group.topPoints.get(p) || 0) + 1)
-      group.wishes.push({ id: row.id, points: row.points, scene: row.scene, styles: row.styles, likes: row.likes, createdAt: row.createdAt })
+      group.wishes.push({ id: row.id, points: row.points, scene: row.scene, styles: row.styles, likes: row.likes, liked: row.likedBy.includes(viewerHash), createdAt: row.createdAt })
       groups.set(key, group)
     }
     return [...groups.values()].map(g => ({ ip: g.ip, city: g.city, count: g.count, likes: g.likes, lastAt: g.lastAt, topPoints: [...g.topPoints.entries()].sort((a,b) => b[1]-a[1]).slice(0,3).map(([name]) => name), wishes: g.wishes.sort((a,b) => b.likes - a.likes) }))
@@ -103,22 +103,33 @@ export async function createWishServer({ file = resolve('var/wishes.jsonl'), adm
         return reply(201,{id:row.id})
       } catch(e) { return reply(e instanceof SyntaxError || e.message.includes('格式') || /无效/.test(e.message) ? 400 : 500,{error:'保存失败'}) }
     }
-    if (path === '/api/wishes/board' && req.method === 'GET') return reply(200, board())
+    if (path === '/api/wishes/board' && req.method === 'GET') return reply(200, board(ipHash(ip)))
     if (path === '/api/wishes/like' && req.method === 'POST') {
       if (throttle()) return reply(429,{error:'请稍后重试'})
       let data = '', length = 0
       try {
         for await (const chunk of req) { length += chunk.length; if (length > 4096) { reply(413,{error:'内容过长'}); req.resume(); return } data += chunk }
-        const { id } = JSON.parse(data)
+        // 明确目标状态，重复请求不会将点赞反向切换；旧客户端默认点赞。
+        const { id, liked = true } = JSON.parse(data)
+        if (typeof liked !== 'boolean') return reply(400,{error:'点赞状态无效'})
         const row = typeof id === 'string' ? byId(id) : null
         if (!row) return reply(404,{error:'not found'})
         const hash = ipHash(ip)
         const task = queue.then(async () => {
-          if (!row.likedBy.includes(hash)) { row.likedBy.push(hash); row.likes++ ; await writeAll() }
-          return row.likes
+          const wasLiked = row.likedBy.includes(hash)
+          if (wasLiked !== liked) {
+            const previousLikes = row.likes, previousLikedBy = row.likedBy
+            row.likedBy = liked ? [...row.likedBy, hash] : row.likedBy.filter(value => value !== hash)
+            row.likes = Math.max(0, row.likes + (liked ? 1 : -1))
+            try { await writeAll() } catch (error) {
+              row.likes = previousLikes; row.likedBy = previousLikedBy
+              throw error
+            }
+          }
+          return { likes: row.likes, liked }
         })
         queue = task.catch(() => {})
-        return reply(200,{ likes: await task })
+        return reply(200,await task)
       } catch(e) { return reply(e instanceof SyntaxError ? 400 : 500, {error:'操作失败'}) }
     }
     const statusMatch = path.match(/^\/api\/wishes\/(W-[a-f0-9-]+)\/status$/)
@@ -127,14 +138,24 @@ export async function createWishServer({ file = resolve('var/wishes.jsonl'), adm
       let data = '', length = 0
       try {
         for await (const chunk of req) { length += chunk.length; if (length > 4096) { reply(413,{error:'内容过长'}); req.resume(); return } data += chunk }
-        const { status } = JSON.parse(data)
+        const { status, note, expectedStatus } = JSON.parse(data)
         if (!STATUSES.has(status)) return reply(400,{error:'状态无效'})
+        if (note !== undefined && (typeof note!=='string'||note.length>1000)) return reply(400,{error:'备注格式错误'})
         const row = byId(statusMatch[1])
         if (!row) return reply(404,{error:'not found'})
-        const task = queue.then(async () => { row.status = status; await writeAll(); return row.status })
+        const task = queue.then(async () => {
+          if (expectedStatus && row.status !== expectedStatus && row.status !== status) throw Object.assign(new Error('状态已改变'),{status:409})
+          if(row.status===status && (note===undefined || row.reviewNote===note))return row.status
+          const previous={...row}
+          row.history=[...(row.history??[]),{from:row.status,to:status,note:note??'',at:new Date().toISOString()}].slice(-100)
+          row.status = status
+          if(note!==undefined)row.reviewNote=note
+          try{await writeAll()}catch(error){Object.assign(row,previous);row.history=previous.history;row.reviewNote=previous.reviewNote;throw error}
+          return row.status
+        })
         queue = task.catch(() => {})
         return reply(200,{ id: row.id, status: await task })
-      } catch(e) { return reply(e instanceof SyntaxError ? 400 : 500, {error:'操作失败'}) }
+      } catch(e) { return reply(e.status || (e instanceof SyntaxError ? 400 : 500), {error:e.status===409?'状态已改变，请刷新后重试':'操作失败'}) }
     }
     if ((path === '/api/wishes/export' || path === '/api/wishes/summary') && req.method === 'GET') {
       if (!await admin()) return reply(401,{error:"unauthorized"})

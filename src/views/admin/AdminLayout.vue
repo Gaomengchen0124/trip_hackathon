@@ -1,11 +1,14 @@
 <script setup>
 // 管理后台布局：左侧导航 + 当前管理员 + 退出。
 // ⚠️ 路由全部挂在 /manage/* —— /admin 被 Artalk 的 nginx 反代占用。
-import { computed } from 'vue'
+import { computed, onUnmounted, shallowRef } from 'vue'
 import { getAuthSession } from '../../auth/session.mjs'
 
 const session = getAuthSession()
-const user = computed(() => session.getSnapshot().user)
+const state = shallowRef(session.getSnapshot())
+const unsubscribe = session.subscribe(next => { state.value = next })
+onUnmounted(unsubscribe)
+const user = computed(() => state.value.user)
 const isAdmin = computed(() => user.value?.role === 'admin')
 const NAV = [
   { to: '/manage/dashboard', label: '仪表盘' },

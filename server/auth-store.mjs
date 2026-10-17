@@ -10,8 +10,11 @@ export function createAuthStore({ file = 'var/auth.sqlite', now = Date.now, admi
   if (file !== ':memory:') mkdirSync(dirname(file), { recursive: true, mode: 0o700 })
   const db = new DatabaseSync(file)
   if (file !== ':memory:') chmodSync(file, 0o600)
-  if (db.prepare('PRAGMA user_version').get().user_version > 7) { db.close(); throw new Error('Unsupported database version') }
-  db.exec(`PRAGMA foreign_keys = ON;
+  const schemaVersion = db.prepare('PRAGMA user_version').get().user_version
+  // Version 8 adds recommendation_profiles; preserve that additive schema and its data.
+  if (schemaVersion > 8) { db.close(); throw new Error('Unsupported database version') }
+  db.exec(`PRAGMA busy_timeout = 5000;
+    PRAGMA foreign_keys = ON;
     CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, nickname TEXT NOT NULL, avatar TEXT NOT NULL, created_at INTEGER NOT NULL);
     CREATE TABLE IF NOT EXISTS identities (provider TEXT NOT NULL, subject TEXT NOT NULL, user_id TEXT NOT NULL REFERENCES users(id), PRIMARY KEY(provider, subject));
     CREATE TABLE IF NOT EXISTS sessions (token_hash TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id), expires_at INTEGER NOT NULL);
@@ -44,7 +47,7 @@ export function createAuthStore({ file = 'var/auth.sqlite', now = Date.now, admi
     // 首批管理员引导：ADMIN_EMAILS 中的邮箱对应账号直接获得 admin 角色（幂等，每次启动都执行以支持追加）
     const promote = db.prepare("UPDATE users SET role='admin' WHERE id=(SELECT user_id FROM identities WHERE provider='email' AND subject=?)")
     for (const email of bootstrapEmails) promote.run(email)
-    db.exec('PRAGMA user_version = 7; COMMIT')
+    db.exec(`PRAGMA user_version = ${Math.max(schemaVersion, 7)}; COMMIT`)
   } catch (error) { db.exec('ROLLBACK'); db.close(); throw error }
   function getUser(id) {
     const row = db.prepare('SELECT id,nickname,avatar,role FROM users WHERE id=?').get(id)
@@ -63,6 +66,9 @@ export function createAuthStore({ file = 'var/auth.sqlite', now = Date.now, admi
           id = randomUUID()
           db.prepare('INSERT INTO users(id,nickname,avatar,created_at) VALUES(?,?,?,?)').run(id, '巡礼读者', '', now())
           db.prepare('INSERT INTO identities VALUES(?,?,?)').run(provider, normalized, id)
+        }
+        if (provider === 'email' && bootstrapEmails.includes(normalized)) {
+          db.prepare("UPDATE users SET role='admin' WHERE id=?").run(id)
         }
         db.exec('COMMIT'); return getUser(id)
       } catch (error) { db.exec('ROLLBACK'); throw error }
@@ -229,6 +235,24 @@ export function createAuthStore({ file = 'var/auth.sqlite', now = Date.now, admi
         for (const tag of Array.isArray(tags) ? tags : []) counts.set(tag, (counts.get(tag) || 0) + 1)
       }
       return { total: rows.length, tags: [...counts.entries()].map(([tag, count]) => ({ tag, count })).sort((a, b) => b.count - a.count) }
+    },
+    // Local operator bootstrap only; never exposed through an HTTP registration route.
+    createLocalAdmin(email, password) {
+      const normalized = typeof email === 'string' ? email.trim().toLowerCase() : ''
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized) || normalized.length > 254) throw new Error('请输入正确的管理员邮箱')
+      db.exec('BEGIN IMMEDIATE')
+      try {
+        if (db.prepare("SELECT 1 FROM identities WHERE provider='email' AND subject=?").get(normalized)) {
+          throw new Error('账号已存在；不会覆盖密码或修改现有角色')
+        }
+        const id = randomUUID()
+        db.prepare('INSERT INTO users(id,nickname,avatar,created_at,role) VALUES(?,?,?,?,?)').run(id, '本地管理员', '', now(), 'admin')
+        db.prepare('INSERT INTO identities VALUES(?,?,?)').run('email', normalized, id)
+        this.setPassword(id, password)
+        this.adminAudit(id, 'user.bootstrap-admin', 'user:' + id)
+        db.exec('COMMIT')
+        return getUser(id)
+      } catch (error) { db.exec('ROLLBACK'); throw error }
     },
     // ---- 账号密码登录（与邮箱验证码并行的第二种凭证，会话机制复用）----
     setPassword(userId, password) {

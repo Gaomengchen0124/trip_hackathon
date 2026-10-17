@@ -66,7 +66,7 @@ function openTab() { window.open(frameSrc.value, '_blank') }
   <div class="preview-page">
     <div class="banner">
       <div class="left">
-        <button class="mini" @click="router.push(`/manage/ips/${ipId}/edit`)">← 返回编辑</button>
+        <button class="mini" @click="router.push({path:`/manage/ips/${ipId}/edit`,query:route.query.returnTo?{returnTo:route.query.returnTo}:{}})">← 返回编辑</button>
         <b>草稿预览</b>
         <span class="tip">数据未上线 · 以下为「{{ ipName }}」草稿在真实页面上的效果，可完整试用定制 / 规划 / 导出</span>
       </div>

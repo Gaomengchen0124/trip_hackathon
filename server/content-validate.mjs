@@ -26,6 +26,8 @@ export function createContentValidator({ uploadsDir = 'var/content-uploads', pub
     if (!Object.keys(lines).length) push({ level: 'error', ruleId: 'IP02', msg: '至少需要一条城市线' })
     for (const [cityKey, line] of Object.entries(lines)) {
       if (cityKeys && !cityKeys.has(cityKey)) continue   // 分线上架：只校验选中的线
+      if(!draft && !(line.ipStops??[]).length)push({level:'error',ruleId:'IP05',msg:'请至少添加一个与作品相关的 IP 点位',where:`[${cityKey}]`})
+      if(!draft)for(const p of line.ipStops??[])if(!(p.quotes??[]).some(q=>q.full?.trim()&&q.source?.trim()))push({level:'error',ruleId:'IP06',msg:'请补充经核实的引文原文和出处',where:`[${cityKey}] ${p.poiId}`})
       if (scanPlaceholder(line?.line?.title) || (line?.clusters ?? []).some(scanPlaceholder)) {
         push({ level: 'error', ruleId: 'IP03', msg: '线路信息残留【】占位符', where: `[${cityKey}]` })
       }

@@ -26,7 +26,7 @@ const picked = ref([])
 
 const removing = computed(() => props.status === 'overload')
 const title = computed(() =>
-  removing.value ? '时间装不下，咱们得舍几个' : '时间还有富余，建议追加'
+  removing.value ? '行程超出可用时间' : '时间还有富余，建议追加'
 )
 const suggestions = computed(() => store.result?.suggestions || [])
 
@@ -83,8 +83,8 @@ function allowOverload() {
       {{
         removing
           ? canApply
-            ? '砍够了，可以出结果了。'
-            : `还差 ${fmtH(stillShortMin)}，再勾几个；都不舍得就选「允许超载」。`
+            ? '已腾出足够时间，可以重新生成行程。'
+            : `还差 ${fmtH(stillShortMin)}，请选择愿意移除的地点；也可以选择「允许超载」。`
           : '勾上想追加的，行程会自动重新排；不想加就直接确认。'
       }}
     </p>
@@ -110,7 +110,7 @@ function allowOverload() {
           <strong>{{ row.name }}</strong>
           <small>
             {{ removing ? `放弃省 ${fmtH(row.savesMinutes)}` : `多花 ${fmtH(row.addsMinutes)}` }}
-            <template v-if="row.mustDrop"> · 必须砍</template>
+            <template v-if="row.mustDrop"> · 需移除</template>
           </small>
           <p>{{ row.reason || '可根据自己的偏好调整' }}</p>
         </span>

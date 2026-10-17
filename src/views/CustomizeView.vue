@@ -6,18 +6,25 @@
  *   submit()/applyTradeoff() → PlanResult{ status: ok | overload | under70 }
  *   ok / under70 都能进结果页，只有 overload 必须先在抽屉里砍够（或允许超载）。
  */
-import { ref, computed, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { ref, computed, watch, nextTick } from 'vue'
+import { useRoute, useRouter, onBeforeRouteLeave } from 'vue-router'
 import { usePlanStore } from '../stores/plan'
 import MapContainer from '../components/MapContainer.vue'
 import TimeBar from '../components/TimeBar.vue'
 import PoiCheckList from '../components/PoiCheckList.vue'
 import TradeoffDrawer from '../components/TradeoffDrawer.vue'
+import YoyoBuddy from '../components/ui/YoyoBuddy.vue'
 import { validateTimeRange, validateSelection } from '../utils/travel-ui'
 
 const route = useRoute()
 const router = useRouter()
 const store = usePlanStore()
+const activePoiId = ref(store.editorView.lineId === route.params.lineId ? store.editorView.activePoiId : '')
+onBeforeRouteLeave(() => {
+  if (store.lineId === route.params.lineId) {
+    store.editorView = { lineId: store.lineId, scrollTop: window.scrollY, activePoiId: activePoiId.value }
+  }
+})
 
 const drawerStatus = ref(null) // 'overload' | 'under70' | null
 const hoverInfo = ref('')
@@ -32,6 +39,7 @@ watch(
   async (id) => {
     if (!id || (store.lineId === id && store.line)) return
     loading.value = true
+    activePoiId.value = ''
     error.value = ''
     try {
       await store.loadLine(id)
@@ -113,6 +121,23 @@ function onMarkerHover(poiId) {
     : ''
 }
 
+function onCardLocate(poiId) {
+  if (planning.value || loading.value) return
+  activePoiId.value = poiId
+  onMarkerHover(poiId)
+}
+
+async function onMarkerSelect(poiId) {
+  onCardLocate(poiId)
+  await nextTick()
+  const card = document.getElementById(`planner-poi-${poiId}`)
+  if (!card) return
+  const box = card.getBoundingClientRect()
+  if (box.top < 20 || box.bottom > window.innerHeight - 90) {
+    card.scrollIntoView({ block: 'center', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
+  }
+}
+
 /**
  * S4 抽屉协商完 → 按"最终保留"的点重算一次。
  * force = 不重算，直接带着当前结果出结果页（overload 的"允许超载"）。
@@ -169,11 +194,12 @@ async function onConfirmed({ poiIds, force = false } = {}) {
       <MapContainer
         :pois="store.pois"
         :selected-ids="store.checkedIds"
+        :active-poi-id="activePoiId"
         :city="store.line?.city"
         :ip-name="store.ip?.name || ''"
         :interactive="!planning && !loading"
         @marker-hover="onMarkerHover"
-        @marker-click="onMarkerHover"
+        @marker-click="onMarkerSelect"
       />
     </div>
 
@@ -187,20 +213,25 @@ async function onConfirmed({ poiIds, force = false } = {}) {
       <PoiCheckList
         title="IP 打卡点"
         :pois="sortedIp"
+        :active-id="activePoiId"
         :checked-ids="store.checkedIds"
         :disabled="planning || loading"
         @toggle="store.togglePoi"
+        @locate="onCardLocate"
       />
       <PoiCheckList
         title="其他景点"
         :pois="store.classicPois"
+        :active-id="activePoiId"
         :checked-ids="store.checkedIds"
         :disabled="planning || loading"
         @toggle="store.togglePoi"
+        @locate="onCardLocate"
       />
     </div>
 
     <footer class="submit-bar">
+      <YoyoBuddy :state="planning ? 'planning' : store.checkedIds.length ? 'success' : 'welcome'" :size="44" :react-to="store.checkedIds.length" :disabled="planning || loading" :message="store.checkedIds.length ? '喜欢的地点已选好，记得留一点时间慢慢逛。' : '先选想去的地点，再一起安排这趟巡礼。'" />
       <span class="stat" aria-live="polite">
         已选 {{ store.checkedIds.length }} 个点 · 每天 {{ store.hoursPerDay }} 小时
       </span>
@@ -262,6 +293,7 @@ h1 {
 .submit-bar {
   position: sticky;
   bottom: 0;
+  z-index: 20;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -272,6 +304,7 @@ h1 {
   border-top: 1px solid var(--line);
 }
 .stat {
+  flex: 1;
   font-size: 13px;
   color: var(--ink-2);
 }
@@ -296,6 +329,11 @@ h1 {
   .cols {
     grid-template-columns: 1fr;
   }
+}
+@media (max-width: 380px) {
+  .submit-bar { gap: 8px; }
+  .submit-bar .btn { padding: 10px 14px; font-size: 14px; }
+  .stat { font-size: 12px; }
 }
 button:focus-visible {
   outline: 2px solid var(--brand);

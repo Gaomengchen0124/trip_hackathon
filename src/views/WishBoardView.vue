@@ -17,10 +17,6 @@ const failed = ref(false)
 // 注意必须在数据渲染后触发——onMounted 时行还不存在。
 const turned = ref(false)
 
-const likedKey = 'pilgrimage-liked-v1'
-let liked = new Set()
-try { liked = new Set(JSON.parse(localStorage.getItem(likedKey) || '[]')) } catch {}
-
 async function load() {
   failed.value = false
   try {
@@ -54,18 +50,17 @@ function timeText(iso) {
 async function like(wish, group) {
   if (wish._busy) return
   wish._busy = true
+  wish._error = ''
   try {
-    const res = await fetch('/api/wishes/like', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: wish.id }) })
+    const res = await fetch('/api/wishes/like', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: wish.id, liked: !wish.liked }) })
     if (!res.ok) throw new Error()
-    const { likes } = await res.json()
-    const first = !liked.has(wish.id)
-    liked.add(wish.id)
-    try { localStorage.setItem(likedKey, JSON.stringify([...liked])) } catch {}
+    const { likes, liked } = await res.json()
+    group.likes += likes - wish.likes
     wish.likes = likes
-    group.likes += first ? 1 : 0
-    wish._pop = true
+    wish.liked = liked
+    wish._pop = liked
     setTimeout(() => (wish._pop = false), 400)
-  } catch { /* 静默失败，下回再点 */ } finally { wish._busy = false }
+  } catch { wish._error = '操作失败，请重试' } finally { wish._busy = false }
 }
 
 async function focus(g) {
@@ -155,8 +150,9 @@ async function focus(g) {
                   <p v-if="w.scene" class="scene">“{{ w.scene }}”</p>
                   <p v-if="w.points.length" class="pts">{{ w.points.join(' · ') }}</p>
                   <p class="foot">{{ w.styles.join(' / ') }}<template v-if="w.styles.length"> · </template>{{ timeText(w.createdAt) }}</p>
+                  <p v-if="w._error" class="foot" role="alert">{{ w._error }}</p>
                 </div>
-                <button class="like" :class="{ on: liked.has(w.id), pop: w._pop }" :aria-label="`点赞（${w.likes}）`" @click="like(w, g)">
+                <button class="like" :class="{ on: w.liked, pop: w._pop }" :disabled="w._busy" :aria-pressed="!!w.liked" :aria-label="`${w.liked ? '取消点赞' : '点赞'}（${w.likes}）`" :title="w.liked ? '取消点赞' : '点赞'" @click="like(w, g)">
                   <span aria-hidden="true">❤</span><b>{{ w.likes }}</b>
                 </button>
               </li>

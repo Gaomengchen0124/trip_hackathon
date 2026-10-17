@@ -1,13 +1,18 @@
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, onDeactivated, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import RouteCard from '../components/RouteCard.vue'
 import IpWall from '../components/IpWall.vue'
 import WishForm from '../components/WishForm.vue'
+import YoyoBuddy from '../components/ui/YoyoBuddy.vue'
 import * as api from '../api/adapter'
+
+defineOptions({ name: 'HomeView' })
 
 const router = useRouter()
 const wishOpen = ref(false)
+// A cached home must not leave its teleported dialog open on another route.
+onDeactivated(() => { wishOpen.value = false })
 const wishIp = ref('')
 function openWish(ip = '') { wishIp.value = ip; wishOpen.value = true }
 const searching = ref(false)
@@ -54,7 +59,7 @@ function go(lineId) {
 </script>
 
 <template>
-  <div class="page">
+  <div class="page home-page">
     <section class="hero">
       <p class="slogan">循着文字与光影的足迹，赴一场现实的朝圣。</p>
 
@@ -83,7 +88,7 @@ function go(lineId) {
           </button>
         </div>
       </div>
-      <router-link class="wish-entry" to="/wishes"><div><strong>巡礼许愿</strong><span>看看大家期待的下一站，也可以留下你的</span></div><span class="go">去许愿墙 →</span></router-link>
+      <div class="wish-entry"><YoyoBuddy :size="64" message="想去的故事还没上线？把愿望告诉我吧。" /><div class="wish-copy"><strong>巡礼许愿</strong><span>和 YOYO 留下期待的下一站</span></div><router-link class="go" to="/wishes">去许愿墙 <span aria-hidden="true">→</span></router-link></div>
     </section>
     <WishForm v-if="wishOpen" :initial-ip="wishIp" @close="wishOpen = false" />
 
@@ -95,14 +100,14 @@ function go(lineId) {
         <div
           v-for="g in columns[colKey]
             .filter((g) => g.lines?.length)
-            .slice(0, 3)"
+            .slice(0, 5)"
           :key="g.label"
           class="card-wrap"
         >
           <RouteCard :line="g.lines[0]" :label="g.label" @select="go" />
         </div>
         <router-link class="card more" :to="`/column/${meta.key}`"
-          >···</router-link
+          ><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg></router-link
         >
       </div>
     </section>
@@ -110,14 +115,18 @@ function go(lineId) {
 </template>
 
 <style scoped>
-.wish-entry{max-width:480px;margin:18px auto 0;padding:15px 20px;border:1px solid var(--line);border-radius:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(255,255,255,.76);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 3px 12px rgba(43,43,43,.025);transition:transform .2s ease,box-shadow .2s ease;text-align:left}
-@media(hover:hover){.wish-entry:hover{transform:translateY(-2px) scale(1.015);box-shadow:0 8px 24px rgba(43,43,43,.055)}}
+.home-page{padding-top:0}
+.wish-entry{max-width:420px;margin:30px auto 0;padding:10px 18px;border:1px solid var(--line);border-radius:18px;display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.78);box-shadow:var(--shadow);transition:transform var(--motion-normal) var(--ease-out),box-shadow var(--motion-normal) var(--ease-out);text-align:left}
+.wish-copy{flex:1;min-width:0}
+.wish-entry .go{padding:10px 0 10px 8px}
+.wish-entry .go span{color:inherit;font-size:16px;margin-left:4px}
+@media(hover:hover){.wish-entry:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(34,76,115,.08)}}
 .wish-entry:focus-within{box-shadow:0 8px 24px rgba(43,43,43,.055)}
 @media(prefers-reduced-motion:reduce){.wish-entry{transition:none}.wish-entry:hover{transform:none}}
 .wish-entry strong{display:block;font-size:15px}.wish-entry span{font-size:12px;color:var(--ink-2)}.wish-entry .go,.wish-link{color:var(--brand);font-size:14px;white-space:nowrap}.wish-link{margin-top:8px}
 .hero {
   text-align: center;
-  padding: 20px 0 24px;
+  padding: 24px 0 48px;
 }
 h1 {
   font-size: 30px;
@@ -127,21 +136,22 @@ h1 {
   font-family: Georgia, "Songti SC", "STSong", serif;
   font-size: 16px;
   font-weight: 400;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.06em;
   line-height: 1.9;
   color: var(--ink-2);
-  margin: 8px 0 24px;
+  margin: 0 0 32px;
+  text-wrap: balance;
 }
 .searchbox {
   position: relative;
-  max-width: 480px;
+  max-width: 520px;
   margin: 0 auto;
 }
 .searchbox input {
   width: 100%;
-  padding: 14px 20px;
+  padding: 16px 24px;
   border-radius: 999px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--brand-border);
   box-shadow: var(--shadow);
   outline: none;
 }
@@ -177,23 +187,23 @@ h1 {
   font-size: 14px;
 }
 .wall {
-  margin-top: 24px;
+  margin-top: 36px;
 }
 .wall h2 {
   font-size: 17px;
   margin-bottom: 12px;
 }
-/* 栏目收缩为一行可横滑的小卡片 */
+/* 桌面五张路线卡与“更多”均匀铺满；小屏保留横向浏览。 */
 .cards {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) 48px;
   gap: 12px;
-  overflow-x: auto;
+  align-items: stretch;
   padding-bottom: 4px;
 }
-.card-wrap {
-  flex: none;
-  width: 190px;
-}
+.card-wrap { min-width: 0; }
+.card-wrap :deep(.route-card) { height: 100%; }
+.card-wrap :deep(.route-card .body) { flex: 1; grid-template-rows: auto 1fr auto; }
 .card {
   background: #fff;
   border-radius: var(--card-radius);
@@ -207,10 +217,27 @@ h1 {
 }
 .more {
   flex: none;
-  width: 64px;
+  width: auto;
+  padding: 0;
   align-items: center;
   justify-content: center;
   font-size: 24px;
   color: var(--ink-2);
+}
+@media(max-width:960px){
+  .cards{display:flex;overflow-x:auto;padding:4px 0 8px}
+  .card-wrap{flex:0 0 calc((100% - 24px) / 3)}
+  .more{flex:0 0 48px}
+}
+@media(max-width:600px){
+  .card-wrap{flex-basis:76%;max-width:260px}
+  .hero{padding:22px 0 36px}
+  .slogan{font-size:14px;letter-spacing:.04em;line-height:1.9;max-width:28em;margin:0 auto 24px}
+  .wish-entry{margin-top:24px;padding:8px 14px;gap:12px}
+  .wish-entry :deep(.dolphin-guide){--guide-size:56px!important}
+  .wish-entry :deep(.yoyo-buddy){--buddy-size:56px!important}
+  .wish-entry strong{font-size:14px}
+  .wish-entry .go{font-size:13px}
+  .searchbox input{padding:15px 20px;font-size:14px}
 }
 </style>

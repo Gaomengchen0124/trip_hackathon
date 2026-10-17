@@ -12,6 +12,7 @@ import { aggregateBundledIps } from './content-store.mjs'
 import { createContentValidator } from './content-validate.mjs'
 import { generateDraft, hasAiConfig, findContextLineId } from './ai-draft.mjs'
 import { fetchCandidates } from './fetch-photos.mjs'
+import { createWishWorkflow } from './wish-workflow.mjs'
 
 const JPEG_RE = /^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/
 const checkJpeg = (buffer) => buffer.length >= 100 && buffer.length <= 3 * 1024 * 1024 && buffer[0] === 255 && buffer[1] === 216 && buffer[buffer.length - 2] === 255 && buffer[buffer.length - 1] === 217
@@ -28,6 +29,7 @@ export function createContentServer({
   cityPoolDir = resolve(process.env.CITY_POOL_DIR || 'data/cities'),
   wishAdminToken = process.env.WISH_ADMIN_TOKEN || '',
   fetchImpl = fetch,
+  wishesBase = process.env.WISH_BASE_URL || 'http://127.0.0.1:8787',
 } = {}) {
   if (!store) throw new Error('Content store required')
   const expectedOrigin = new URL(origin).origin
@@ -37,7 +39,7 @@ export function createContentServer({
     const cookie = req.headers.cookie
     if (!cookie) return null
     const cached = sessionCache.get(cookie)
-    if (cached && Date.now() - cached.at < SESSION_TTL) return cached.user.role === 'admin' ? cached.user : null
+    if (cached && Date.now() - cached.at < SESSION_TTL) return cached.user?.role === 'admin' ? cached.user : null
     let user = null
     try {
       const res = await fetchImpl(`${authBase}/api/auth/session`, { headers: { cookie }, signal: AbortSignal.timeout(5000) })
@@ -62,7 +64,7 @@ export function createContentServer({
     if (ip) return ip
     const bundled = bundledIps()
     if (!bundled.has(ipId)) throw Object.assign(new Error('IP 不存在'), { status: 404 })
-    return store.createIp({ ipId, doc: bundled.get(ipId).doc, status: 'draft', actor })
+    return store.createIp({ ipId, doc: bundled.get(ipId).doc, status: 'online', actor })
   }
   /** 在 IP doc 内按 lineId 找到城市线 */
   function findLine(doc, lineId) {
@@ -132,6 +134,7 @@ export function createContentServer({
     throw Object.assign(new Error('无法确定投稿所属 IP'), { status: 400 })
   }
 
+  const workflow = createWishWorkflow({store,validator,fetchImpl,wishesBase,ensureIp})
   return createServer(async (req, res) => {
     const reply = (code, body, headers = {}) => { res.writeHead(code, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff', ...headers }); res.end(JSON.stringify(body)) }
     try {
@@ -159,6 +162,21 @@ export function createContentServer({
           if (!req.headers['content-type']?.startsWith('application/json') && req.method !== 'DELETE') return reply(415, { error: '需要 JSON 格式' })
         }
         const actor = user.id
+
+        if (path === '/api/manage/content/wish-links' && req.method === 'GET') return reply(200,{links:workflow.links(url.searchParams.get('ipId')||undefined),pending:store.pendingWishOperations().map(op=>({id:op.id,ipId:op.ipId,count:op.pending.length}))})
+        if (path === '/api/manage/content/wish-links' && req.method === 'DELETE') {
+          const {wishId,ipId,cityKey}=await bodyJSON(req)
+          store.unlinkWish(wishId,ipId,cityKey,actor)
+          return reply(200,{ok:true})
+        }
+        if(path === '/api/manage/content/wish-imports' && req.method === 'POST') return reply(200,await workflow.import(req,await bodyJSON(req),actor))
+        if(path === '/api/manage/content/wish-completions' && req.method === 'POST') return reply(200,await workflow.complete(req,await bodyJSON(req),actor))
+        const retryWish=path.match(/^\/api\/manage\/content\/wish-imports\/([a-zA-Z0-9-]{16,80})\/retry$/)
+        if(retryWish && req.method === 'POST')return reply(200,await workflow.retry(req,retryWish[1]))
+        if(path === '/api/manage/content/validate' && req.method === 'POST') {
+          const {doc}=await bodyJSON(req)
+          return reply(200,{lines:Object.fromEntries(Object.keys(doc?.lines??{}).map(key=>[key,validator.validatePublish(doc,[key])]))})
+        }
 
         // 图片上传（不变）
         if (path === '/api/manage/content/img' && req.method === 'POST') {
@@ -340,7 +358,7 @@ export function createContentServer({
             if (!doc || typeof doc !== 'object' || !ID_RE.test(ipId ?? '')) return reply(400, { error: 'doc 格式不正确（缺少 ip.ipId）' })
             const errors = validator.validateDraft(doc)
             if (errors.length) return reply(422, { error: 'IP 数据未通过校验', issues: errors })
-            try { return reply(201, { ip: store.createIp({ ipId, doc, status: body.status === 'online' ? 'online' : 'draft', actor }) }) }
+            try { return reply(201, { ip: store.createIp({ ipId, doc, status: 'draft', actor }) }) }
             catch (error) { return reply(400, { error: error.message }) }
           }
           return reply(405, { error: '请求方法不支持' })
@@ -363,8 +381,9 @@ export function createContentServer({
             const errors = validator.validateDraft(doc)
             if (errors.length) return reply(422, { error: 'IP 数据未通过校验', issues: errors })
             try {
+              const before = store.getIp(ipId)
               await ensureIp(ipId, actor)
-              return reply(200, { ip: store.saveIp(ipId, doc, actor) })
+              return reply(200, { ip: store.saveIp(ipId, doc, actor, !before&&body.expectedUpdatedAt===0?undefined:body.expectedUpdatedAt) })
             } catch (error) { return reply(error.status || 400, { error: error.message }) }
           }
           if (sub === 'status' && req.method === 'PATCH') {
@@ -390,7 +409,7 @@ export function createContentServer({
       }
       return reply(404, { error: '接口不存在' })
     } catch (error) {
-      return reply(error.status || 500, { error: error.status ? error.message : '服务暂不可用' })
+      return reply(error.status || 500, { error: error.status ? error.message : '服务暂不可用', ...(error.issues?{issues:error.issues}:{}) })
     }
   })
 }

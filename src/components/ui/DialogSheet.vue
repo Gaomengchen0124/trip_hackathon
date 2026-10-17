@@ -2,10 +2,13 @@
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 const props = defineProps({
   title: { type: String, required: true },
-  busy: Boolean
+  busy: Boolean,
+  side: Boolean
 })
 const emit = defineEmits(['close'])
 const dialog = ref(null)
+const closing = ref(false)
+let closeTimer
 let previousOverflow
 let opener
 onMounted(() => {
@@ -15,12 +18,24 @@ onMounted(() => {
   dialog.value.showModal()
 })
 onBeforeUnmount(() => {
+  clearTimeout(closeTimer)
   dialog.value?.close()
   document.body.style.overflow = previousOverflow
-  if (opener?.isConnected) opener.focus()
+  if (opener?.isConnected) opener.focus({ preventScroll: true })
 })
 function close() {
-  if (!props.busy) emit('close')
+  if (props.busy || closing.value) return
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return emit('close')
+  closing.value = true
+  const duration = getComputedStyle(dialog.value).getPropertyValue('--motion-exit').trim()
+  const milliseconds = parseFloat(duration) * (duration.endsWith('ms') ? 1 : 1000)
+  closeTimer = setTimeout(finishClose, (Number.isFinite(milliseconds) ? milliseconds : 180) + 80)
+}
+function finishClose() {
+  if (!closing.value) return
+  clearTimeout(closeTimer)
+  closing.value = false
+  emit('close')
 }
 function backdrop(event) {
   if (!dialog.value || event.target !== dialog.value) return
@@ -40,17 +55,19 @@ function backdrop(event) {
     <dialog
       ref="dialog"
       class="sheet"
+      :class="{ 'is-closing': closing, 'is-side': side }"
       :aria-label="title"
       :aria-busy="busy"
       @cancel.prevent="close"
       @click="backdrop"
+      @animationend="event => { if (event.target === event.currentTarget && closing) finishClose() }"
     >
       <header>
         <h2>{{ title }}</h2>
         <button
           type="button"
           class="close"
-          :disabled="busy"
+          :disabled="busy || closing"
           aria-label="关闭弹层"
           @click="close"
         >
@@ -73,11 +90,16 @@ function backdrop(event) {
   padding: 24px;
   overflow: auto;
   box-shadow: 0 18px 80px #2b2b2b30;
+  animation: surface-enter var(--motion-normal) var(--ease-out) both;
 }
+.sheet.is-closing { animation: surface-exit var(--motion-exit) var(--ease-in) both; pointer-events: none; }
+.sheet.is-side { margin: 0 0 0 auto; height: 100dvh; max-height: 100dvh; width: min(620px, 100%); border-radius: 22px 0 0 22px; }
 .sheet::backdrop {
-  background: #25211dcc;
+  background: #18324acc;
   opacity: 0.65;
+  animation: surface-backdrop-enter var(--motion-normal) var(--ease-out);
 }
+.sheet.is-closing::backdrop { animation: surface-backdrop-exit var(--motion-exit) var(--ease-in) both; }
 header {
   display: flex;
   justify-content: space-between;
@@ -117,4 +139,5 @@ h2 {
     padding: 20px 16px calc(20px + env(safe-area-inset-bottom));
   }
 }
+@media (prefers-reduced-motion: reduce) { .sheet, .sheet::backdrop { animation: none; } }
 </style>

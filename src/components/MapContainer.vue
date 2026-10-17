@@ -104,7 +104,7 @@ onMounted(async () => {
   map = L.map(host.value, { zoomAnimation: false, fadeAnimation: false, markerZoomAnimation: false, zoomSnap: 0.25, scrollWheelZoom: false, zoomControl: false, dragging: true, touchZoom: true, doubleClickZoom: true, keyboard: true, boxZoom: true }).setView([31.227, 121.473], 13)
   map.attributionControl.addAttribution('© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>')
   map.createPane('localStreets').style.zIndex = 150
-  L.geoJSON(streets, { pane: 'localStreets', style: f => ({ color: f.properties.waterway ? '#8cc4d3' : '#c7ac86', weight: f.properties.waterway ? 12 : 3, opacity: 0.85 }), onEachFeature: (f, layer) => { if (f.properties.name) { const el = document.createElement('span'); el.textContent = f.properties.name; layer.bindTooltip(el) } } }).addTo(map)
+  L.geoJSON(streets, { pane: 'localStreets', style: f => ({ color: f.properties.waterway ? '#8cc4d3' : '#aac2d8', weight: f.properties.waterway ? 12 : 3, opacity: 0.85 }), onEachFeature: (f, layer) => { if (f.properties.name) { const el = document.createElement('span'); el.textContent = f.properties.name; layer.bindTooltip(el) } } }).addTo(map)
   pins = L.layerGroup().addTo(map)
   render(); fit(); connect()
   if (props.activePoiId) focus(props.activePoiId)
@@ -144,22 +144,22 @@ onBeforeUnmount(() => { clearTimeout(timer); observer?.disconnect(); tiles?.off(
 </template>
 
 <style>
-.map-box { position: relative; width: 100%; height: 100%; isolation: isolate; overflow: hidden; border-radius: 14px; border: 1px solid #ded5c5; }
-.map-canvas { width: 100%; height: 100%; background: #f4efe2; }
+.map-box { position: relative; width: 100%; height: 100%; isolation: isolate; overflow: hidden; border-radius: 14px; border: 1px solid var(--line); }
+.map-canvas { width: 100%; height: 100%; background: #edf3f8; }
 .map-toolbar { position: absolute; top: 10px; left: 52px; right: 10px; z-index: 800; display: flex; flex-wrap: wrap; gap: 5px; align-items: center; pointer-events: none; }
 .map-toolbar > * { background: #fff; border-radius: 6px; padding: 5px 9px; font-size: 11px; box-shadow: 0 2px 8px #0002; pointer-events: auto; }
-.map-toolbar button { color: #8d4036; cursor: pointer; }
+.map-toolbar button { color: var(--brand-strong); cursor: pointer; }
 .map-zoom { position: absolute; top: 10px; left: 10px; z-index: 810; display: flex; flex-direction: column; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px #0003; }
-.map-zoom button { width: 36px; height: 36px; border: 0; border-bottom: 1px solid #e6e0d4; background: #fff; color: #8d4036; font-size: 17px; line-height: 1; cursor: pointer; }
+.map-zoom button { width: 36px; height: 36px; border: 0; border-bottom: 1px solid var(--line); background: #fff; color: var(--brand-strong); font-size: 17px; line-height: 1; cursor: pointer; }
 .map-zoom button:last-child { border-bottom: 0; }
-.map-zoom button:hover { background: #f7f2e9; }
+.map-zoom button:hover { background: var(--brand-light); }
 .map-zoom button:focus-visible { outline: 2px solid var(--brand); outline-offset: -3px; }
 .map-picker { position: absolute; left: 10px; bottom: 38px; z-index: 800; display: flex; align-items: center; gap: 6px; padding: 6px 9px; background: #fffffff2; border-radius: 6px; font-size: 11px; max-width: calc(100% - 20px); }
 .map-picker select { min-width: 0; max-width: 230px; padding: 4px; border: 1px solid #ddd; border-radius: 4px; background: white; }
 .map-legend { position: absolute; left: 10px; bottom: 12px; z-index: 800; background: #fffffff2; padding: 3px 6px; border-radius: 5px; font-size: 10px; display: flex; align-items: center; gap: 5px; }
-.map-legend i { width: 8px; height: 8px; background: #89909a; border-radius: 50%; }.map-legend .gold { background: #af7a19; }.map-legend .red { background: #b54d40; }
+.map-legend i { width: 8px; height: 8px; background: #89909a; border-radius: 50%; }.map-legend .gold { background: var(--brand); }.map-legend .red { background: var(--accent); }
 .travel-pin { width: 40px; height: 32px; padding: 0; border: 2px solid white; border-radius: 16px; color: white; background: #89909a; font: bold 10px system-ui,sans-serif; box-shadow: 0 2px 7px #0005; cursor: pointer; }
-.travel-pin.ip { background: #af7a19; }.travel-pin.classic { background: #b54d40; }.travel-pin.active,.travel-pin:focus-visible { outline: 3px solid #242e42; outline-offset: 2px; }
+.travel-pin.ip { background: var(--brand); }.travel-pin.classic { background: var(--accent); }.travel-pin.active,.travel-pin:focus-visible { outline: 3px solid #242e42; outline-offset: 2px; }
 .map-empty { position: absolute; top: 45%; left: 35%; z-index: 700; background: white; padding: 10px; border-radius: 8px; }
 .leaflet-container { font-family: inherit; }.leaflet-control-attribution { font-size: 9px !important; }
 </style>

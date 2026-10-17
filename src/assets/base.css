@@ -1,14 +1,26 @@
 /* 设计令牌：视觉规范冻结后由设计同学在此统一调整 */
 :root {
-  --brand: #a88d58;        /* 主色：卡其棕 */
-  --brand-light: #f3eddf;
-  --ink: #2b2b2b;
-  --ink-2: #6b6b6b;
-  --line: #e5e0d8;
-  --bg: #faf8f4;
-  --card-radius: 10px;
-  --shadow: 0 2px 10px rgba(43, 43, 43, 0.08);
+  --brand: #1765e8;
+  --brand-strong: #205e9c;
+  --brand-light: #edf5ff;
+  --brand-border: #bcd5f5;
+  --ink: #233d56;
+  --ink-2: #60758a;
+  --line: #dce6f0;
+  --bg: #f7fafe;
+  --surface: #fff;
+  --accent: #c97a35;
+  --card-radius: 12px;
+  --shadow: 0 3px 14px rgba(34, 76, 115, .06);
+  --motion-fast: 120ms;
+  --motion-normal: 240ms;
+  --motion-exit: 180ms;
+  --motion-route: 360ms;
+  --ease-in: cubic-bezier(.4, 0, 1, 1);
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
 }
+
+html { scrollbar-gutter: stable; }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -31,11 +43,11 @@ input, select { font: inherit; }
   display: inline-block;
   padding: 10px 28px;
   border-radius: 999px;
-  background: #e4d5b7;
-  color: #493d29;
+  background: var(--brand);
+  color: #fff;
   font-size: 15px;
 }
-.btn:disabled { background: #d9cfbc; cursor: not-allowed; }
+.btn:disabled { background: #dbe5f1; color: #687e94; box-shadow: none; cursor: not-allowed; }
 .btn-ghost {
   display: inline-block;
   padding: 10px 28px;
@@ -50,3 +62,27 @@ input, select { font: inherit; }
 
 /* 与账号演示页统一的标题字体。 */
 h1, h2, h3 { font-family: Georgia, "Songti SC", serif; font-weight: 600; }
+
+:where(button:not(.yoyo-touch):not(.travel-pin), .btn, .btn-ghost) { transition: scale var(--motion-fast) var(--ease-out), translate var(--motion-fast) var(--ease-out), box-shadow var(--motion-normal) var(--ease-out), background-color var(--motion-normal) var(--ease-out), border-color var(--motion-normal) var(--ease-out); }
+.btn { box-shadow: 0 4px 12px #1765e819; }
+@media (hover: hover) {
+  .btn:not(:disabled):hover { background: #0e57cc; box-shadow: 0 6px 18px #1765e829; }
+  .btn-ghost:not(:disabled):hover { border-color: var(--brand-border); background: var(--brand-light); }
+}
+:where(button:not(.yoyo-touch):not(.travel-pin), .btn, .btn-ghost):not(:disabled):active { scale: .985; translate: 0 1px; }
+.btn:not(:disabled):active, .btn-ghost:not(:disabled):active { box-shadow: none; }
+.btn:focus-visible, .btn-ghost:focus-visible { outline: 3px solid var(--brand-strong); outline-offset: 3px; }
+.btn-ghost:disabled { opacity: .55; cursor: not-allowed; }
+/* Only the clicked photograph gets a name, including on the duplicated photo wall. */
+::view-transition-group(route-photo) { animation-duration: var(--motion-route); animation-timing-function: var(--ease-out); overflow: clip; border-radius: 12px; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: var(--motion-normal); animation-timing-function: var(--ease-out); }
+::view-transition-old(route-photo), ::view-transition-new(route-photo) { height: 100%; object-fit: cover; }
+@keyframes surface-enter { from { opacity: 0; transform: translateY(8px) scale(.99); } to { opacity: 1; transform: none; } }
+@keyframes surface-exit { to { opacity: 0; transform: translateY(6px) scale(.99); } }
+@keyframes surface-backdrop-enter { from { opacity: 0; } }
+@keyframes surface-backdrop-exit { to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  :where(button:not(.yoyo-touch):not(.travel-pin), .btn, .btn-ghost) { transition: none; }
+  :where(button:not(.yoyo-touch):not(.travel-pin), .btn, .btn-ghost):not(:disabled):active { scale: none; translate: none; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}

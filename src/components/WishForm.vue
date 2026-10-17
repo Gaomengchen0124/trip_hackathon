@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue'
 import DialogSheet from './ui/DialogSheet.vue'
+import YoyoBuddy from './ui/YoyoBuddy.vue'
 const props = defineProps({ initialIp: { type: String, default: '' } })
 const emit = defineEmits(['close'])
 const key = 'pilgrimage-wish-draft-v1'
@@ -40,14 +41,14 @@ function again() { form.value = fresh(); receipt.value = null; error.value = '' 
 <template>
   <DialogSheet title="巡礼许愿" :busy="busy" @close="emit('close')">
     <div v-if="receipt" class="success" role="status">
-      <div class="mail" aria-hidden="true">💌</div>
+      <YoyoBuddy state="success" :size="108" centered message="愿望已收到！期待与你在故事里相遇。" />
       <h3>许愿成功 ✨</h3>
       <p class="destination">《{{ receipt.ip }}》<template v-if="receipt.city"> · {{ receipt.city }}</template></p>
       <p class="hint">愿望编号：{{ receipt.id }}</p>
       <div class="actions"><router-link class="btn" to="/wishes" @click="emit('close')">去看看许愿墙</router-link><button class="btn-ghost" @click="again">再许一个愿</button></div>
     </div>
     <form v-else @submit.prevent="submit">
-      <p class="intro">留下你期待的下一站</p>
+      <div class="wish-guide"><YoyoBuddy :size="56" :disabled="busy" message="作品、城市或难忘的一幕，都可以告诉我。" /><p class="intro"><strong>YOYO 帮你记下这一站</strong><span>留下你期待的故事与目的地</span></p></div>
       <fieldset :disabled="busy">
         <label for="wish-ip">许愿的作品/IP <span class="required">*</span></label>
         <input id="wish-ip" v-model="form.ip" required maxlength="100" placeholder="小说/动漫/影视/游戏" />
@@ -71,5 +72,6 @@ function again() { form.value = fresh(); receipt.value = null; error.value = '' 
   </DialogSheet>
 </template>
 <style scoped>
-.intro{color:var(--ink-2);margin-bottom:20px}fieldset{border:0;min-width:0}label:not(.check):not(.choice),.label{display:block;margin:18px 0 7px;font-weight:600}fieldset>label:first-child{margin-top:0}input:not([type=checkbox]),textarea{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:var(--bg);font:inherit;color:var(--ink)}textarea{resize:vertical}input:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}input:disabled{opacity:.5}.required,.error{color:var(--brand)}.check{display:flex;align-items:center;gap:8px;margin-top:9px;font-size:14px}.point-row{display:flex;gap:8px}.point-row input{min-width:0}.add{flex-shrink:0;background:var(--brand-light);border-radius:10px;padding:0 16px;color:var(--brand)}.hint{font-size:12px;color:var(--ink-2);margin-top:6px}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.chips button,.choice{padding:6px 11px;border:1px solid var(--line);border-radius:20px;font-size:13px;overflow-wrap:anywhere}.choice{display:flex;gap:5px;align-items:center;cursor:pointer}.selected{background:var(--brand-light);color:var(--brand);border-color:var(--brand)}.notification{margin-top:20px}.privacy{margin:16px 0}.submit{width:100%;margin-top:12px}.error{font-size:14px}.success{text-align:center;padding:18px 0 26px}.success h3{font-size:24px;margin:8px 0}.destination{overflow-wrap:anywhere;margin:12px 0}.actions{display:flex;justify-content:center;gap:10px;margin-top:28px;flex-wrap:wrap}.mail{display:grid;place-items:center;height:130px;width:180px;margin:auto;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;font-size:88px;line-height:1;animation:letter-arrive .55s cubic-bezier(.2,.8,.2,1) both}@keyframes letter-arrive{from{opacity:0;transform:translateY(12px) scale(.85)}to{opacity:1;transform:translateY(0) scale(1)}}@media(prefers-reduced-motion:reduce){.mail{animation:none}}
-</style>
+.wish-guide{display:flex;align-items:center;gap:12px;margin:0 0 20px}.wish-guide .intro{margin:0}.wish-guide strong{display:block;color:var(--ink);font-size:14px}.wish-guide .intro span{display:block;margin-top:3px;font-size:12px}
+
+.intro{color:var(--ink-2);margin-bottom:20px}fieldset{border:0;min-width:0}label:not(.check):not(.choice),.label{display:block;margin:18px 0 7px;font-weight:600}fieldset>label:first-child{margin-top:0}input:not([type=checkbox]),textarea{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:var(--bg);font:inherit;color:var(--ink)}textarea{resize:vertical}input:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}input:disabled{opacity:.5}.required,.error{color:var(--brand)}.check{display:flex;align-items:center;gap:8px;margin-top:9px;font-size:14px}.point-row{display:flex;gap:8px}.point-row input{min-width:0}.add{flex-shrink:0;background:var(--brand-light);border-radius:10px;padding:0 16px;color:var(--brand)}.hint{font-size:12px;color:var(--ink-2);margin-top:6px}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.chips button,.choice{padding:6px 11px;border:1px solid var(--line);border-radius:20px;font-size:13px;overflow-wrap:anywhere}.choice{display:flex;gap:5px;align-items:center;cursor:pointer}.selected{background:var(--brand-light);color:var(--brand);border-color:var(--brand)}.notification{margin-top:20px}.privacy{margin:16px 0}.submit{width:100%;margin-top:12px}.error{font-size:14px}.success{text-align:center;padding:18px 0 26px}.success h3{font-size:24px;margin:8px 0}.destination{overflow-wrap:anywhere;margin:12px 0}.actions{display:flex;justify-content:center;gap:10px;margin-top:28px;flex-wrap:wrap}</style>

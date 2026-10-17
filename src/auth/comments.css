@@ -1,11 +1,11 @@
-.travel-comments { margin-top: 24px; border-top: 1px solid #e8e2da; padding-top: 16px; color: #493d29; }
-.travel-comments article { padding: 14px 0; border-bottom: 1px solid #e8e2da; }
-.travel-comments time { display: block; color: #7a7168; font-size: 12px; margin-top: 3px; }
+.travel-comments { margin-top: 24px; border-top: 1px solid var(--line); padding-top: 16px; color: var(--ink); }
+.travel-comments article { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.travel-comments time { display: block; color: var(--ink-2); font-size: 12px; margin-top: 3px; }
 .travel-comments article p { white-space: pre-wrap; overflow-wrap: anywhere; margin: 8px 0; }
 .travel-comments label { display: block; margin: 16px 0 8px; }
-.travel-comments textarea { display: block; box-sizing: border-box; width: 100%; margin-top: 8px; border: 1px solid #cbb78e; border-radius: 10px; padding: 12px; font: inherit; resize: vertical; }
-.travel-comments button { padding: 8px 16px; background: #e4d5b7; color: #493d29; border: 1px solid #cbb78e; border-radius: 10px; cursor: pointer; }
+.travel-comments textarea { display: block; box-sizing: border-box; width: 100%; margin-top: 8px; border: 1px solid var(--brand-border); border-radius: 10px; padding: 12px; font: inherit; resize: vertical; }
+.travel-comments button { padding: 8px 16px; background: var(--brand-light); color: var(--ink); border: 1px solid var(--brand-border); border-radius: 10px; cursor: pointer; }
 .travel-comments button:disabled { opacity: .6; cursor: wait; }
 .travel-comments [hidden] { display: none; }
-.travel-comments :focus-visible { outline: 2px solid #a88d58; outline-offset: 3px; }
+.travel-comments :focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
 .travel-comments [data-status] { font-size: 13px; }

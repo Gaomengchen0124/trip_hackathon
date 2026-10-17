@@ -30,7 +30,7 @@ function locate(id) { active.value = id; document.getElementById(`intro-${id}`)?
   <p v-else-if="error" role="alert">{{ error }}</p>
   <template v-else-if="detail">
    <section class="intro-hero">
-    <PhotoFrame :src="detail.line.cover" :alt="detail.line.title" ratio="16 / 9" eager />
+    <PhotoFrame class="hero-photo" :src="detail.line.cover" :alt="detail.line.title" ratio="16 / 9" eager />
     <div class="hero-copy"><p class="eyebrow">沿着故事，走进现实</p><h1>{{ detail.line.title }}</h1><p class="hero-meta">{{ detail.line.city }} · {{ pois.length }} 个巡礼点 · 建议 {{ detail.line.recommendDays }} 天</p><router-link class="btn" :to="`/customize/${detail.line.lineId}`">定制行程 ↗</router-link></div>
    </section>
    <nav class="section-nav" aria-label="路线介绍章节"><a href="#work">作品介绍</a><a href="#city">城市介绍</a><a href="#ip-overview">IP 点位</a><a href="#contribute">补充点位</a></nav>

@@ -62,13 +62,14 @@ function onRowClick(e) {
             v-for="tile in row"
             :key="`${tile.key}-${copy}`"
             class="wall-tile"
+            :aria-label="`${tile.ipName} · ${tile.city}`"
             :to="`/line/${tile.lineId}`"
             :tabindex="copy === 'b' ? -1 : undefined"
           >
             <PhotoFrame :src="tile.src" :alt="tile.ipName" ratio="4 / 3" eager />
             <span class="tile-caption">
               <strong>{{ tile.ipName }}</strong>
-              <small>{{ tile.title }}</small>
+              <small v-if="tile.city">{{ tile.city }}</small>
             </span>
           </router-link>
         </div>
@@ -143,10 +144,9 @@ function onRowClick(e) {
   left: 0;
   right: 0;
   bottom: 0;
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  padding: 18px 10px 8px;
+  display: grid;
+  gap: 2px;
+  padding: 25px 12px 10px;
   background: linear-gradient(transparent, rgba(20, 12, 12, 0.72));
   color: #fff;
   pointer-events: none;
@@ -154,7 +154,11 @@ function onRowClick(e) {
 .tile-caption strong {
   font-family: serif;
   font-size: 15px;
-  letter-spacing: 2px;
+  letter-spacing: .04em;
+  line-height: 1.45;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .tile-caption small {
   font-size: 11px;

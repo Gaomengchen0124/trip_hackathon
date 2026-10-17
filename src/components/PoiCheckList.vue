@@ -5,9 +5,11 @@ const props = defineProps({
   title: { type: String, required: true },
   pois: { type: Array, required: true },
   checkedIds: { type: Array, required: true },
+  activeId: { type: String, default: '' },
   disabled: Boolean
 })
-const emit = defineEmits(['toggle'])
+const emit = defineEmits(['toggle', 'locate'])
+function toggleCard(id) { emit('toggle', id); emit('locate', id) }
 const count = computed(
   () => props.pois.filter((p) => props.checkedIds.includes(p.poiId)).length
 )
@@ -49,8 +51,9 @@ function bulk(select) {
         :key="poi.poiId"
         :poi="poi"
         :checked="checkedIds.includes(poi.poiId)"
+        :active="activeId === poi.poiId"
         :disabled="disabled"
-        @toggle="emit('toggle', $event)"
+        @toggle="toggleCard"
       />
     </div>
     <p v-if="!pois.length" class="empty">暂无候选景点</p>

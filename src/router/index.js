@@ -3,8 +3,20 @@ import { usePlanStore } from '../stores/plan'
 import { getAuthSession } from '../auth/session.mjs'
 import { openLoginDialog } from '../auth/login-dialog.mjs'
 
+// Browser back uses savedPosition; explicit Home links also restore the last visit.
+let homePosition = { left: 0, top: 0 }
+
 const router = createRouter({
   history: createWebHistory(),
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) return savedPosition
+    if (to.name === 'home') return homePosition
+    if (to.name === 'customize') {
+      const editor = usePlanStore().editorView
+      return { left: 0, top: editor.lineId === to.params.lineId ? editor.scrollTop : 0 }
+    }
+    if (['route-intro', 'column', 'result', 'poi-detail'].includes(to.name)) return { left: 0, top: 0 }
+  },
   routes: [
     { path: '/line/:lineId', name: 'route-intro', component: () => import('../views/RouteIntroView.vue') },
     // 旧投稿审核入口：统一后台接管（/review/points 保持可达，防止旧链接失效）
@@ -49,7 +61,10 @@ getAuthSession().subscribe((state) => {
     router.push(go)
   }
 })
-router.beforeEach(async (to) => {
+router.beforeEach(async (to, from) => {
+  if (from.name === 'home' && to.name !== 'home' && typeof window !== 'undefined') {
+    homePosition = { left: window.scrollX, top: window.scrollY }
+  }
   if (to.name === 'column' && to.params.key !== 'city') {
     return { name: 'column', params: { key: 'city' } }
   }

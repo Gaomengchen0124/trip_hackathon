@@ -37,8 +37,10 @@ const emit = defineEmits(['select'])
   overflow: hidden;
   box-shadow: var(--shadow);
   transition:
-    transform 0.18s,
-    box-shadow 0.18s;
+    transform var(--motion-normal) var(--ease-out),
+    box-shadow var(--motion-normal) var(--ease-out),
+    scale var(--motion-fast) var(--ease-out),
+    translate var(--motion-fast) var(--ease-out);
 }
 .route-card:hover {
   transform: translateY(-3px);

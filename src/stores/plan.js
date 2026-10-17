@@ -16,6 +16,7 @@ export const usePlanStore = defineStore('plan', {
     hoursPerDay: 8, // 6 / 8 / 10
     result: null, // PlanResult，见 api/contract.md
     submitting: false,
+    editorView: { lineId: null, scrollTop: 0, activePoiId: '' },
   }),
   getters: {
     checkedPois: (s) => s.pois.filter((p) => s.checkedIds.includes(p.poiId)),
@@ -35,6 +36,7 @@ export const usePlanStore = defineStore('plan', {
       this.pois = pois
       this.checkedIds = []
       this.result = null
+      this.editorView = { lineId, scrollTop: 0, activePoiId: '' }
     },
     togglePoi(poiId) {
       const i = this.checkedIds.indexOf(poiId)
@@ -77,6 +79,7 @@ export const usePlanStore = defineStore('plan', {
     reset() {
       this.checkedIds = []
       this.result = null
+      this.editorView = { lineId: this.lineId, scrollTop: 0, activePoiId: '' }
     },
   },
 })

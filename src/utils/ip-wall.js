@@ -36,7 +36,7 @@ export function buildIpGroups(lines) {
       line.city && line.title?.includes(`·${line.city}`)
         ? line.title.split('·')[0]
         : (line.title ?? line.ipId)
-    const base = { ipId: line.ipId, ipName, title: line.title, lineId: line.lineId }
+    const base = { ipId: line.ipId, ipName, title: line.title, city: line.city || '', lineId: line.lineId }
     const tiles = photos.length
       ? photos.map((name, i) => ({
           key: `${line.ipId}-${i}`,

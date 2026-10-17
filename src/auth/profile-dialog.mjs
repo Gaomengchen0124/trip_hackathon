@@ -110,6 +110,23 @@ export function openProfileDialog() {
   document.body.append(dialog); active = dialog
   document.body.style.overflow = 'hidden'
   const cleanupLibrary = mountProfileLibrary(dialog, auth)
+  const accountFooter = document.createElement('div')
+  accountFooter.className = 'profile-account-footer'
+  const signOut = document.createElement('button')
+  signOut.type = 'button'; signOut.textContent = '退出当前账号'
+  const signOutResult = document.createElement('p')
+  signOutResult.className = 'login-feedback'; signOutResult.setAttribute('role', 'status')
+  signOut.onclick = async () => {
+    signOut.disabled = true
+    signOutResult.textContent = ''
+    await auth.logout()
+    if (dialog.isConnected) {
+      signOut.disabled = false
+      signOutResult.textContent = auth.getSnapshot().notice
+    }
+  }
+  accountFooter.append(signOut, signOutResult)
+  dialog.append(accountFooter)
   const unsubscribe = auth.subscribe(state => {
     if (!state.user) { if (dialog.open) dialog.close(); return }
     if (!dirty) {

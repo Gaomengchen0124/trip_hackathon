@@ -149,7 +149,8 @@ test('bundled aggregation: multi-line IP merges; manage list mixes db+bundled; i
       assert.equal(put.status, 200)
       const list2 = await (await fetch(`${base}/api/manage/content/ips`, { headers: admin })).json()
       assert.equal(list2.ips.length, 1)
-      assert.equal(list2.ips[0].status, 'draft')
+      assert.equal(list2.ips[0].status, 'online')
+      assert.equal(store.onlineLines()['multi-beijing'].ip.author, '')
       assert.equal(list2.ips[0].doc.ip.author, '作者甲')
       // 下架打包 IP（未编辑过）→ 导入为 offline → hidden 含两条线
       const bundled2 = join(dir, 'bundled2')
