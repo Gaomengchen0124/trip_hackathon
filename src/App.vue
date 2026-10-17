@@ -3,7 +3,7 @@ import { onMounted, onUnmounted } from 'vue'
 import InterestDialog from './components/InterestDialog.vue'
 import { initInterests, profileState, openInterests } from './recommendation/profile.mjs'
 import AuthStatus from './components/AuthStatus.vue'
-import BrandMasthead from './components/BrandMasthead.vue'
+import TravelMasthead from './components/TravelMasthead.vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
 const editInterests = () => openInterests()
@@ -12,7 +12,7 @@ onUnmounted(() => window.removeEventListener('travel-edit-interests', editIntere
 </script>
 
 <template>
-  <BrandMasthead v-if="route.path === '/'" />
+  <TravelMasthead v-if="route.path === '/'" />
   <header v-else class="app-header">
     <router-link to="/" class="brand">📖 我的圣地巡礼</router-link>
   </header>
