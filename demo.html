@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>跟着书本去旅行 · 全流程 Demo</title>
+<style>
+  :root{
+    --brand:#a88d58; --brand-2:#d4bf96; --brand-soft:#f3eddf; --beige:#eee6d8;
+    --paper:#faf7f2; --card:#fff; --line:#e8e2da; --ink:#1f1b16; --ink-2:#7a7168;
+    --ok:#2f7d52; --warn:#a8741a; --bad:#a88d58; --shadow:0 8px 28px rgba(31,27,22,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--ink)}
+  body{font:14px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif}
+  button{font:inherit;color:inherit}
+  h1,h2,h3{font-family:Georgia,"Songti SC",serif;font-weight:600}
+
+  .topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;
+    padding:12px 22px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line)}
+  .logo{font-family:Georgia,"Songti SC",serif;font-size:16px;letter-spacing:1px;color:var(--brand)}
+  .crumb{color:var(--ink-2);font-size:12px}
+  .grow{flex:1}
+  .btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 16px;
+    cursor:pointer;font-size:13px}
+  .btn:hover{border-color:#d8cec4}
+  .btn.primary{background:#e4d5b7;border-color:#cbb78e;color:#493d29}
+  .btn.primary:hover{background:var(--brand-2)}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+  .btn.sm{padding:4px 12px;font-size:12px}
+
+  main{max-width:1120px;margin:0 auto;padding:26px 22px 80px}
+  .hero{text-align:center;padding:26px 0 8px}
+  .hero p{color:var(--ink-2);margin:6px 0 0;font-size:13px}
+  .hero h1{font-size:30px;margin:0}
+  .searchbar{display:flex;gap:8px;max-width:460px;margin:18px auto 0}
+  .searchbar input{flex:1;border:1px solid var(--line);border-radius:999px;padding:9px 16px;
+    font:inherit;background:#fff;outline:none}
+  .searchbar input:focus{border-color:var(--brand)}
+  .hint{color:var(--ink-2);font-size:12px;text-align:center;margin:14px 0 0}
+
+  section.block{margin-top:34px}
+  section.block > h2{font-size:16px;margin:0 0 12px;display:flex;align-items:center;gap:10px}
+  section.block > h2 span{font-family:inherit;font-size:11px;color:var(--ink-2);letter-spacing:1px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;
+    box-shadow:var(--shadow);cursor:pointer;transition:transform .15s ease,border-color .15s ease;
+    display:flex;flex-direction:column;text-align:left;padding:0}
+  .card:hover{transform:translateY(-2px);border-color:#dfd3c7}
+  .card .cover{aspect-ratio:3/2;background:linear-gradient(145deg,#f3eddf,#eee6d8);position:relative}
+  .card .cover img{width:100%;height:100%;object-fit:cover;display:block}
+  .cover .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    color:var(--brand);font-family:Georgia,"Songti SC",serif;font-size:15px;text-align:center;padding:10px}
+  .card .body{padding:12px 14px 14px}
+  .card .body b{font-weight:500;font-size:14px}
+  .card .body p{margin:4px 0 0;color:var(--ink-2);font-size:12px}
+  .chip{display:inline-block;font-size:11px;border-radius:999px;padding:2px 9px;
+    background:#f4f1ec;color:var(--ink-2);margin:8px 6px 0 0}
+  .chip.ok{background:#e8f3ec;color:var(--ok)}
+  .chip.todo{background:#fbf1e0;color:var(--warn)}
+
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    box-shadow:var(--shadow);padding:20px 22px;margin-bottom:18px}
+  .panel h2{font-size:18px;margin:0 0 4px}
+  .panel .sub{color:var(--ink-2);font-size:12px;margin:0 0 14px}
+  .controls{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end}
+  label.field{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--ink-2)}
+  label.field input,label.field select{border:1px solid var(--line);border-radius:8px;
+    padding:7px 10px;font:inherit;background:#fff;color:var(--ink)}
+
+  .poigrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+  .poi{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;
+    padding:8px;background:#fff;cursor:pointer}
+  .poi[aria-checked="true"]{border-color:var(--brand);background:var(--brand-soft)}
+  .poi img,.poi .ph{width:58px;height:44px;border-radius:8px;object-fit:cover;flex:0 0 auto;
+    background:linear-gradient(145deg,#f3eddf,#eee6d8)}
+  .poi .ph{display:flex;align-items:center;justify-content:center;color:var(--brand);font-size:10px}
+  .poi .txt{min-width:0}
+  .poi .txt b{display:block;font-weight:500;font-size:13px}
+  .poi .txt small{color:var(--ink-2);font-size:11px}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:6px 0 4px}
+  .stat{background:#faf7f2;border-radius:12px;padding:12px 14px}
+  .stat b{display:block;font-size:20px;font-family:Georgia,"Songti SC",serif}
+  .stat span{color:var(--ink-2);font-size:11px}
+  .banner{border-radius:12px;padding:12px 16px;font-size:13px;margin-bottom:14px}
+  .banner.ok{background:#e8f3ec;color:#215c3c}
+  .banner.warn{background:#fbf1e0;color:#7c5610}
+  .banner.bad{background:#f9e9e9;color:#8a2b2b}
+
+  .day{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:14px;background:#fff}
+  .day header{display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+    padding:12px 16px;background:#faf7f2;border-bottom:1px solid var(--line)}
+  .day header b{font-family:Georgia,"Songti SC",serif;font-size:15px}
+  .day header span{color:var(--ink-2);font-size:12px}
+  .stop{display:flex;gap:14px;padding:12px 16px;border-top:1px dashed var(--line);cursor:pointer}
+  .stop:first-of-type{border-top:none}
+  .stop:hover{background:#fdfbf8}
+  .stop .time{color:var(--ink-2);font-size:12px;width:96px;flex:0 0 auto}
+  .stop .time b{display:block;color:var(--ink);font-size:13px;font-family:Georgia,serif}
+  .stop img,.stop .ph{width:64px;height:48px;border-radius:8px;object-fit:cover;flex:0 0 auto;
+    background:linear-gradient(145deg,#f3eddf,#eee6d8)}
+  .stop .ph{display:flex;align-items:center;justify-content:center;color:var(--brand);font-size:10px}
+  .stop .txt{min-width:0;flex:1}
+  .stop .txt b{font-weight:500;font-size:14px}
+  .stop .txt small{display:block;color:var(--ink-2);font-size:11px}
+
+  .sugg{display:flex;gap:12px;align-items:center;border-top:1px dashed var(--line);padding:10px 0}
+  .sugg:first-of-type{border-top:none}
+  .sugg .txt{flex:1;font-size:13px}
+  .sugg .txt small{display:block;color:var(--ink-2);font-size:11px}
+
+  .sheet{position:fixed;inset:0;background:rgba(24,20,17,.45);z-index:40;display:flex;
+    align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto}
+  .sheet .inner{background:#fff;border-radius:16px;max-width:760px;width:100%;overflow:hidden;
+    box-shadow:0 24px 60px rgba(0,0,0,.3)}
+  .sheet .close{position:absolute;right:26px;top:26px}
+  .big{position:relative;aspect-ratio:16/9;background:linear-gradient(145deg,#f3eddf,#eee6d8)}
+  .big img{width:100%;height:100%;object-fit:cover;display:block}
+  .big .ph{position:absolute;inset:0;display:flex;flex-direction:column;gap:6px;
+    align-items:center;justify-content:center;color:var(--brand)}
+  .big .ph span{font-family:Georgia,"Songti SC",serif;font-size:20px}
+  .big .ph small{color:var(--ink-2);font-size:11px}
+  .thumbs{display:flex;gap:8px;padding:10px 14px;overflow-x:auto}
+  .thumbs button{flex:0 0 auto;width:92px;aspect-ratio:4/3;padding:0;border:2px solid transparent;
+    border-radius:8px;overflow:hidden;cursor:pointer;background:linear-gradient(145deg,#f3eddf,#eee6d8)}
+  .thumbs button[aria-pressed="true"]{border-color:var(--brand)}
+  .thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+  .sheet .content{padding:6px 26px 28px}
+  .eyebrow{font-size:11px;color:var(--brand);letter-spacing:2px;margin:0}
+  .quote{background:#faf7f2;border-radius:10px;padding:12px 14px;font-size:13px;white-space:pre-line;margin-top:10px}
+  .quote .src{color:var(--ink-2);font-size:11px;margin-top:6px}
+  .credit{border-top:1px dashed var(--line);margin-top:20px;padding-top:12px;
+    color:var(--ink-2);font-size:11px;line-height:1.8}
+  .empty{color:var(--ink-2);font-size:13px;padding:6px 0}
+</style>
+<link rel="stylesheet" href="./src/planning/ui.css">
+<link rel="stylesheet" href="./travel-components/src/auth/login-dialog.css">
+<link rel="stylesheet" href="./travel-components/src/auth/comments.css">
+</head>
+<body>
+<div class="topbar">
+  <div class="logo">跟着书本去旅行</div>
+  <div class="crumb" id="crumb"></div>
+  <div class="grow"></div>
+  <button class="btn" id="back" hidden>← 返回</button>
+</div>
+<section id="account" aria-label="演示账号" style="max-width:1120px;margin:16px auto 0;padding:0 22px"></section>
+<main id="view"></main>
+<script type="module">
+import { buildHomepage, searchLines, toPlanInput, lineReadiness, EMPTY_SEARCH_HINT } from './src/catalog.mjs'
+import { runPlan } from './src/plan-result.mjs'
+import { createPlanningExperience } from './src/planning/ui.mjs'
+import { renderPlanningResult } from './src/planning/result-ui.mjs'
+import { displayTimeRange,createPlanningAPI } from './src/planning/client.mjs'
+import { createRevisionExperience } from './src/planning/revision-ui.mjs'
+import { getAuthSession } from './travel-components/src/auth/session.mjs'
+import { openLoginDialog, requestDemoLogin } from './travel-components/src/auth/login-dialog.mjs'
+import {ticketPolicy} from './src/planning/ticket-policy.mjs'
+import {createTicketButton} from './src/planning/ticket-ui.mjs'
+import { mountComments } from './travel-components/src/auth/comments.mjs'
+import { subscribeFavorites, setFavorite } from './travel-components/src/auth/favorites.mjs'
+import { createLoginGate } from './travel-components/src/auth/login-gate.mjs'
+import { isAvatarImage, avatarInitial } from './travel-components/src/auth/profile.mjs'
+import { openProfileDialog } from './travel-components/src/auth/profile-dialog.mjs'
+
+const auth = getAuthSession()
+auth.subscribe(({ user, notice, mode }) => {
+  const account = document.getElementById('account')
+  account.setAttribute('aria-label', mode === 'demo' ? '演示账号' : '账号')
+  const label = document.createElement('strong')
+  label.textContent = user ? `${user.nickname} · ${mode === 'demo' ? '演示账号已登录' : '已登录'}` : '游客 · 未登录'
+  const button = document.createElement('button')
+  button.className = 'btn'
+  button.style.marginLeft = '12px'
+  button.textContent = user ? '退出登录' : mode === 'demo' ? '体验登录（演示）' : '登录'
+  button.onclick = () => user ? auth.logout() : openLoginDialog()
+  const hint = document.createElement('p')
+  hint.className = 'empty'
+  hint.setAttribute('role', 'status')
+  hint.textContent = notice || (mode === 'demo' ? '仅用于体验账号流程，未接入手机号、邮箱或携程授权。' : '')
+  const profileButton = document.createElement('button')
+  profileButton.className = 'btn'
+  profileButton.style.marginLeft = '12px'
+  profileButton.textContent = '个人中心'
+  profileButton.onclick = openProfileDialog
+  const avatar = document.createElement('span')
+  avatar.className = 'account-avatar'
+  avatar.setAttribute('aria-hidden', 'true')
+  if (isAvatarImage(user?.avatar)) {
+    const image = document.createElement('img'); image.src = user.avatar; image.alt = ''; avatar.append(image)
+  } else avatar.textContent = avatarInitial(user?.nickname)
+  account.replaceChildren(avatar, label, ...(user ? [profileButton] : []), button, hint)
+})
+
+const LINE_FILES = [
+  'fanhua-shanghai', 'harrypotter-london', 'sherlock-london', 'woyuditan-beijing', 'daomu-hangzhou',
+  'santi-beijing', 'qianfu-tianjin', 'longzu-beijing', 'longzu-japan'
+]
+const IMG = (p) => (p ? 'public/' + p : '')
+const fmtMin = (m) => {
+  if (!m && m !== 0) return '—'
+  const h = Math.floor(m / 60), r = Math.round(m % 60)
+  return h ? `${h} 小时${r ? ` ${r} 分` : ''}` : `${r} 分钟`
+}
+const STATUS_TEXT = { ok: '较充实', overload: '较匆忙', under70: '较宽松' }
+
+const state = {
+  view: 'home', index: null, docs: {}, home: null,
+  lineId: null, checked: new Set(), line: null,
+  range: { startDate: '', endDate: '', startSlot: '上午', endSlot: '晚上' },
+  hours: 8, originPoiId: null, result: null, itinerary: null, resultKind: 'basic', detail: null, detailPhoto: 0, query: ''
+}
+
+const h = (tag, attrs = {}, kids = []) => {
+  const n = document.createElement(tag)
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v === null || v === undefined || v === false) continue
+    if (k === 'text') n.textContent = v
+    else if (k === 'html') n.innerHTML = v
+    else if (k.startsWith('on') && typeof v === 'function') n.addEventListener(k.slice(2), v)
+    else n.setAttribute(k, v)
+  }
+  for (const c of [].concat(kids)) if (c) n.appendChild(c)
+  return n
+}
+const view = () => document.getElementById('view')
+const byId = (id) => [...(state.line?.ipStops || []), ...(state.line?.cityStops || [])].find((p) => p.poiId === id)
+const allPois = () => [...(state.line?.ipStops || []), ...(state.line?.cityStops || [])]
+
+const planningContext = () => ({
+  lineId: state.lineId,
+  selectedPoiIds: [...state.checked].sort(),
+  dateRange: { startDate: state.range.startDate, endDate: state.range.endDate },
+  timeZone: state.lineId?.endsWith('-london') ? 'Europe/London' : state.lineId?.endsWith('-japan') ? 'Asia/Tokyo' : 'Asia/Shanghai',
+  origin: state.originPoiId && byId(state.originPoiId) ? {id:state.originPoiId,lat:byId(state.originPoiId).lat,lng:byId(state.originPoiId).lng} : null
+})
+const planningExperience = createPlanningExperience({
+  getContext: planningContext, getPois: allPois,
+  onSelectionChange: ids => {state.checked=new Set(ids);renderCustomize()},
+  onBusy: busy => {
+    document.getElementById('back').disabled = busy
+    for (const node of document.querySelectorAll('#view .controls input, #view .controls select, #view .controls button, #view .poi')) node.disabled = busy
+  },
+  onItinerary: itinerary => showSavedItinerary(itinerary)
+})
+const planningAPI = createPlanningAPI()
+const revisionExperience = createRevisionExperience({getPois:allPois,onUpdate:showSavedItinerary})
+let savedLoadGeneration=0
+function setItineraryURL(id) {const url=new URL(location.href);id?url.searchParams.set('itinerary',id):url.searchParams.delete('itinerary');history.replaceState(null,'',url)}
+function showSavedItinerary(itinerary) {
+  planningExperience.unmount();revisionExperience.unmount()
+  state.lineId=itinerary.context.lineId;state.line=state.docs[state.lineId]
+  state.checked=new Set(itinerary.context.selectedPoiIds)
+  state.range={...state.range,...itinerary.context.dateRange}
+  state.originPoiId=itinerary.context.origin?.id||null
+  state.itinerary=itinerary;state.resultKind='ai';state.view='result'
+  planningExperience.restoreSession({planningSessionId:itinerary.planningSessionId,intakeRevision:itinerary.intakeRevision,context:itinerary.context,requirements:itinerary.requirements,nextQuestions:[],suggestedKeywords:[],engineMode:itinerary.engineMode})
+  try{localStorage.setItem('book-travel.latest-itinerary',itinerary.id)}catch{}
+  setItineraryURL(itinerary.id);renderResult();window.scrollTo({top:0,behavior:'smooth'})
+}
+async function loadSavedItinerary(id) {
+  const token=++savedLoadGeneration
+  try{const itinerary=await planningAPI('/api/itineraries/'+encodeURIComponent(id));if(token!==savedLoadGeneration)return;if(!state.docs[itinerary.context.lineId])throw Error('当前目录中找不到这条线路');showSavedItinerary(itinerary)}
+  catch(e){if(token!==savedLoadGeneration)return;state.view='home';renderHome();renderCrumb('首页');view().prepend(h('p',{class:'banner warn',text:e.message||'暂时无法恢复行程，请重新选择。'}))}
+}
+let lastPlanningIdentity=null
+auth.subscribe(({user,loading})=>{
+  if(loading)return
+  const identity=user?.id||'guest'
+  if(lastPlanningIdentity!==null&&identity!==lastPlanningIdentity){savedLoadGeneration++;planningExperience.unmount();revisionExperience.unmount();state.itinerary=null;try{localStorage.removeItem('book-travel.latest-itinerary')}catch{};setItineraryURL(null);if(state.home){state.view='home';renderHome();renderCrumb('首页')}}
+  lastPlanningIdentity=identity
+})
+
+function photoEl(poi, cls = '') {
+  const src = (poi.photos && poi.photos[0]) || poi.realPhoto
+  if (src && !missing.has(src)) return h('img', { class: cls, src: IMG(src), alt: '', loading: 'lazy' })
+  return h('div', { class: 'ph ' + cls, text: poi.type === 'ip' ? poi.name : '无图' })
+}
+
+/* ---------------- S1 首页 ---------------- */
+function renderHome() {
+  planningExperience.unmount()
+  revisionExperience.unmount()
+  setItineraryURL(null)
+  cleanupComments?.()
+  const wrap = h('div')
+  wrap.appendChild(h('div', { class: 'hero' }, [
+    h('h1', { text: '把书里的地名，变成可以预订的行程' }),
+    h('p', { text: '选地点 · 说想法 · 安排行程 · 随时调整' }),
+    h('div', { class: 'searchbar' }, [
+      h('input', {
+        type: 'search', placeholder: '搜 IP、人物、地名，例如「繁花」「黄河路」「哈利」',
+        value: state.query,
+        oninput: (e) => { state.query = e.target.value; renderHome(); focusSearch() }
+      })
+    ]),
+    h('p', { class: 'hint', text: '主推：繁花 · 上海' })
+  ]))
+  try{const saved=localStorage.getItem('book-travel.latest-itinerary');if(saved)wrap.append(h('button',{class:'btn',text:'继续上次行程',onclick:()=>loadSavedItinerary(saved)}))}catch{}
+
+  if (state.query.trim()) {
+    const hits = searchLines(state.query, state.index, state.docs)
+    const sec = h('section', { class: 'block' }, [h('h2', {}, [
+      h('span', { text: `搜索结果 · ${hits.length}` })
+    ])])
+    if (!hits.length) sec.appendChild(h('p', { class: 'empty', text: EMPTY_SEARCH_HINT }))
+    else sec.appendChild(h('div', { class: 'grid' }, hits.map((r) => {
+      const line = state.index.lines.find((l) => l.lineId === r.lineId) || {}
+      return lineCard(line, r.reasons.join(' / '), r.ready)
+    })))
+    wrap.appendChild(sec)
+  }
+
+  for (const s of state.home.sections) {
+    const sec = h('section', { class: 'block' }, [
+      h('h2', {}, [
+        h('span', { text: `${s.label} · ${s.total} 条` })
+      ])
+    ])
+    sec.appendChild(h('div', { class: 'grid' }, s.cards.map((c) => {
+      const line = state.index.lines.find((l) => l.lineId === c.lineId) || {}
+      return lineCard(line, c.matched.join(' / '), c.ready, c.note)
+    })))
+    if (s.omitted) sec.appendChild(h('p', { class: 'hint', style: 'text-align:left;margin-top:10px',
+      text: `还有 ${s.omitted} 条未展示` }))
+    wrap.appendChild(sec)
+  }
+  view().replaceChildren(wrap)
+}
+
+function lineCard(line, matched, ready, note) {
+  const cover = line.cover && !missing.has(line.cover)
+    ? h('img', { src: IMG(line.cover), alt: '', loading: 'lazy' })
+    : h('div', { class: 'ph', text: `${line.title} 封面待补` })
+  return h('button', { class: 'card', type: 'button', onclick: () => openLine(line.lineId) }, [
+    h('div', { class: 'cover' }, [cover]),
+    h('div', { class: 'body' }, [
+      h('b', { text: line.title }),
+      h('p', { text: `${line.ipName} · ${line.city} · 建议 ${line.recommendDays} 天` }),
+      matched ? h('span', { class: 'chip', text: matched }) : null,
+      h('span', { class: ready ? 'chip ok' : 'chip todo', text: ready ? '内容已就绪' : (note || '数据筹备中') })
+    ])
+  ])
+}
+function focusSearch() {
+  const i = view().querySelector('input[type="search"]')
+  if (i) { i.focus(); i.setSelectionRange(i.value.length, i.value.length) }
+}
+
+let favorites = new Set()
+subscribeFavorites(keys => { favorites = keys; if (state.view === 'customize') updateFavorite() })
+const favoriteGate = createLoginGate({ getUser: () => auth.getSnapshot().user, requestLogin: requestDemoLogin })
+let favoriteMessage = ''
+auth.subscribe(({ user }) => {
+  if (!user) { favorites.clear(); favoriteMessage = '' }
+  if (state.view === 'customize') updateFavorite()
+})
+function updateFavorite() {
+  const button = document.getElementById('favorite-line')
+  if (!button) return
+  const saved = favorites.has(`line:${state.lineId}`)
+  button.textContent = saved ? '取消收藏路线' : '收藏路线'
+  button.setAttribute('aria-pressed', String(saved))
+  document.getElementById('favorite-feedback').textContent = favoriteMessage
+}
+async function toggleFavorite(event) {
+  const button = event.currentTarget
+  const lineId = state.lineId
+  button.disabled = true
+  try {
+    const done = await favoriteGate.run(async () => {
+      if (state.view !== 'customize' || state.lineId !== lineId) return
+      await setFavorite(`line:${lineId}`, !favorites.has(`line:${lineId}`))
+      favoriteMessage = favorites.has(`line:${lineId}`) ? '已收藏' : '已取消收藏'
+    })
+    if (!done) favoriteMessage = '未完成登录，收藏未执行。你选择的点位和日期已保留。'
+  } catch (error) { favoriteMessage = error.message }
+  finally { button.disabled = false; updateFavorite() }
+}
+
+/* ---------------- S3 定制 ---------------- */
+function openLine(lineId) {
+  favoriteGate.cancel()
+  favoriteMessage = ''
+  state.lineId = lineId
+  state.line = state.docs[lineId]
+  state.checked = new Set()
+  state.result = null
+  state.itinerary = null
+  state.resultKind = 'basic'
+  state.originPoiId = null
+  const iso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+  const today = new Date()
+  const end = new Date(today.getTime() + 2 * 864e5)
+  state.range = { startDate: iso(today), endDate: iso(end), startSlot: '上午', endSlot: '晚上' }
+  state.view = 'customize'
+  renderCustomize()
+}
+
+function poiRow(p) {
+  const on = state.checked.has(p.poiId)
+  return h('button', {
+    class: 'poi', type: 'button', role: 'checkbox', 'aria-checked': String(on),
+    onclick: () => {
+      on ? state.checked.delete(p.poiId) : state.checked.add(p.poiId)
+      renderCustomize()
+    }
+  }, [
+    photoEl(p),
+    h('span', { class: 'txt' }, [
+      h('b', { text: p.name }),
+      h('small', { text: `${p.poiId} · ${p.cluster} · ${fmtMin(p.durationNormal)}${p.tier ? ` · ${p.tier} 级` : ''}` }),
+      h('small', { class:'poi-ticket-reference', text:`门票参考：${p.ticket || '待核实'} · ${ticketPolicy(p).label}` })
+    ])
+  ])
+}
+
+let cleanupComments
+function renderCustomize() {
+  planningExperience.unmount()
+  revisionExperience.unmount()
+  setItineraryURL(null)
+  cleanupComments?.()
+  const d = state.line
+  const ip = d.ipStops || []
+  const sp = d.cityStops || []
+  const pickedIp = ip.filter((p) => state.checked.has(p.poiId)).length
+  const pickedSp = sp.filter((p) => state.checked.has(p.poiId)).length
+  const canPlan = state.checked.size > 0
+
+  const head = h('div', { class: 'panel' }, [
+    h('h2', { text: d.line.title }),
+    h('button', { id: 'favorite-line', class: 'btn', type: 'button', 'aria-pressed': String(favorites.has(`line:${state.lineId}`)), text: favorites.has(`line:${state.lineId}`) ? '取消收藏路线' : '收藏路线', onclick: toggleFavorite }),
+    h('p', { id: 'favorite-feedback', role: 'status', class: 'sub', text: favoriteMessage || '收藏路线，方便下次继续查看。' }),
+    h('p', { class: 'sub', text: `${d.ip.name} · ${d.line.city} · 建议 ${d.line.recommendDays} 天 · 共 ${ip.length + sp.length} 个点位` }),
+    h('div', { class: 'controls' }, [
+      dateField('开始日期', 'startDate'),
+      dateField('结束日期', 'endDate'),
+      h('button',{class:'btn',text:`已选${state.checked.size}个 · 填写旅行想法 ↓`,onclick:()=>document.getElementById('planning-panel').scrollIntoView({behavior:'smooth'})}),
+    ])
+  ])
+
+  const group = (title, list, picked) => h('div', { class: 'panel' }, [
+    h('h2', { text: `${title} · 已选 ${picked}/${list.length}` }),
+    h('p', { class: 'sub', text: '点卡片勾选 / 取消' }),
+    h('div', { class: 'poigrid' }, list.map(poiRow))
+  ])
+
+  const planningPanel = h('section', {class:'panel planning-panel', id:'planning-panel', 'aria-label':'智能行程需求'})
+  const basic = h('details', {class:'panel planning-basic'}, [
+    h('summary', {text:'暂不使用智能规划，先做基础估算'}),
+    h('p', {class:'sub',text:'基础估算只计算景点与粗略交通，不含用餐和休息安排。'}),
+    h('div', {class:'controls'}, [
+      slotField('开始时段', 'startSlot'),
+      slotField('结束时段', 'endSlot'),
+      h('label', { class: 'field' }, [
+        h('span', { text: '每天游玩时长' }),
+        h('select', { onchange: (e) => { state.hours = Number(e.target.value) } },
+          [6, 8, 10].map((v) => h('option', { value: v, selected: v === state.hours, text: `${v} 小时` })))
+      ]),
+      h('button', {
+        class: 'btn primary', disabled: !canPlan,
+        onclick: runAndShow,
+        text: canPlan ? '使用基础估算' : '先选至少一个景点'
+      })
+    ])
+  ])
+  view().replaceChildren(head, group('IP 打卡点', ip, pickedIp), group('其他景点', sp, pickedSp), planningPanel, basic)
+  planningExperience.mount(planningPanel)
+  const comments = document.createElement('section')
+  view().append(comments)
+  cleanupComments = mountComments(comments, `line:${state.lineId}`)
+  renderCrumb(`定制 · ${d.line.title}`)
+}
+
+function dateField(label, key) {
+  return h('label', { class: 'field' }, [
+    h('span', { text: label }),
+    h('input', {
+      type: 'date', value: state.range[key],
+      onchange: (e) => { state.range[key] = e.target.value; renderCustomize() }
+    })
+  ])
+}
+function slotField(label, key) {
+  return h('label', { class: 'field' }, [
+    h('span', { text: label }),
+    h('select', { onchange: (e) => { state.range[key] = e.target.value; renderCustomize() } },
+      ['上午', '中午', '晚上'].map((v) => h('option', { value: v, selected: v === state.range[key], text: v })))
+  ])
+}
+
+function rangeError() {
+  const r = state.range
+  if (!r.startDate || !r.endDate) return '请先选开始和结束日期'
+  if (r.endDate < r.startDate) return '结束日期不能早于开始日期'
+  if (r.startDate === r.endDate && ['上午', '中午', '晚上'].indexOf(r.endSlot) < ['上午', '中午', '晚上'].indexOf(r.startSlot)) {
+    return '同一天里结束时段不能早于开始时段'
+  }
+  return ''
+}
+
+function runAndShow() {
+  planningExperience.unmount()
+  const err = rangeError()
+  if (err) { showRangeError(err); return }
+  const { pois, allPois: all } = toPlanInput(state.line, { poiIds: [...state.checked] })
+  state.result = runPlan({ pois, allPois: all, timeRange: state.range, hoursPerDay: state.hours })
+  state.resultKind = 'basic'
+  state.view = 'result'
+  renderResult()
+}
+
+/* ---------------- S5 结果 ---------------- */
+function renderResult() {
+  planningExperience.unmount()
+  revisionExperience.unmount()
+  cleanupComments?.()
+  if (state.resultKind === 'ai' && state.itinerary) {
+    renderPlanningResult({ itinerary:state.itinerary, container:view(), h, pois:allPois(), photoEl,
+      onPoi:openDetail,
+      onModify:()=>document.getElementById('revision-workspace')?.scrollIntoView({behavior:'smooth'}),
+      onEdit:()=>{state.view='customize';renderCustomize();document.getElementById('planning-panel').scrollIntoView({behavior:'smooth'})},
+      onHome:()=>{state.view='home';renderHome();renderCrumb('首页 · 全部线路')}
+    })
+    const workspace=h('section',{class:'panel revision-workspace',id:'revision-workspace','aria-label':'修改与追加行程'})
+    view().querySelector('.planning-result').append(workspace)
+    revisionExperience.mount(workspace,state.itinerary,{timeline:view()})
+    renderCrumb(`智能行程 · ${state.line.line.title}`)
+    return
+  }
+  const r = state.result
+  const cls = r.status === 'overload' ? 'bad' : r.status === 'under70' ? 'warn' : 'ok'
+  const banner = h('div', { class: `banner ${cls}` }, [
+    h('b', { text: `基础估算 · ${STATUS_TEXT[r.status]}${r.impossible ? '（当前条件下未排下）' : ''}` }),
+    r.message ? h('div', { text: r.message }) : null,
+    r.compressed ? h('div', { text: '已按重要度 B → A → S 自动压缩部分点位时长' }) : null
+  ])
+
+  const stats = h('div', { class: 'stats' }, [
+    stat(`可用 ${fmtMin(r.totalAvailableMin)}`, '时间总量'),
+    stat(`用掉 ${fmtMin(r.totalMin)}`, '含景点时长与路上交通'),
+    stat(`${Math.round(r.usage * 100)}%`, '利用率'),
+    stat(`${r.daysNeeded} 天`, '需要天数')
+  ])
+
+  const days = h('div', {}, r.days.map((day) => h('div', { class: 'day' }, [
+    h('header', {}, [
+      h('b', { text: `第 ${day.day} 天 · ${day.date}` }),
+      h('span', { text: `可用 ${fmtMin(day.availableMin)} · 已用 ${fmtMin(day.usedMin)} · 空闲 ${fmtMin(day.idleMin)}` })
+    ]),
+    ...day.items.map((it) => {
+      const p = byId(it.poiId) || {}
+      return h('div', { class: 'stop', onclick: () => openDetail(it.poiId) }, [
+        h('div', { class: 'time' }, [
+          h('b', { text: displayTimeRange(it) }),
+          h('span', { text: `${it.legMinutes ? `路上 ${it.legMinutes} 分` : '起点'}` })
+        ]),
+        photoEl(p),
+        h('div', { class: 'txt' }, [
+          h('b', { text: `${it.order}. ${p.name || it.poiId}` }),
+          h('small', { text: `${p.cluster || ''} · 停留 ${fmtMin(it.duration)}${it.mode === 'rush' ? ' · 已压缩' : ''}` })
+        ])
+      ])
+    })
+  ])))
+
+  const sug = r.suggestions.length
+    ? h('div', { class: 'panel' }, [
+        h('h2', { text: r.suggestions[0].kind === 'drop' ? '建议舍弃' : '顺路追加' }),
+        h('p', { class: 'sub', text: r.suggestions[0].kind === 'drop'
+          ? '按性价比排序，放弃这些能最快把行程拉回正轨' : '这些点顺路，加上它们时间还剩' }),
+        ...r.suggestions.map((s) => h('div', { class: 'sugg' }, [
+          h('div', { class: 'txt' }, [
+            h('b', { text: s.name }),
+            h('small', { text: s.reason })
+          ]),
+          h('span', { class: 'chip', text: s.kind === 'drop'
+            ? `省 ${fmtMin(s.savesMinutes)}` : `多花 ${fmtMin(s.addsMinutes)}` }),
+          h('button', {
+            class: 'btn sm', text: s.kind === 'drop' ? '去掉' : '加上',
+            onclick: () => {
+              s.kind === 'drop' ? state.checked.delete(s.poiId) : state.checked.add(s.poiId)
+              runAndShow()
+            }
+          })
+        ]))
+      ])
+    : null
+
+  view().replaceChildren(banner, h('div', { class: 'panel' }, [stats]), days, sug)
+  renderCrumb(`行程 · ${state.line.line.title}`)
+}
+
+const stat = (big, label) => h('div', { class: 'stat' }, [h('b', { text: big }), h('span', { text: label })])
+
+function showRangeError(msg) {
+  document.querySelectorAll('.range-error').forEach((n) => n.remove())
+  const box = h('div', { class: 'banner bad range-error', text: msg })
+  view().insertBefore(box, view().firstChild)
+  box.scrollIntoView({ block: 'nearest' })
+}
+
+/* ---------------- 详情 ---------------- */
+function openDetail(poiId) {
+  state.detail = poiId
+  state.detailPhoto = 0
+  renderDetail()
+}
+function renderDetail() {
+  const p = byId(state.detail)
+  if (!p) return
+  const photos = (p.photos && p.photos.length ? p.photos : (p.realPhoto ? [p.realPhoto] : []))
+    .filter((s) => !missing.has(s))
+  const cur = photos[state.detailPhoto]
+
+  const big = h('div', { class: 'big' }, [
+    cur ? h('img', { src: IMG(cur), alt: p.name })
+        : h('div', { class: 'ph' }, [h('span', { text: p.name }), h('small', { text: '现实照片待补充' })])
+  ])
+  const thumbs = photos.length > 1 ? h('div', { class: 'thumbs' }, photos.map((ph, i) =>
+    h('button', {
+      type: 'button', 'aria-pressed': String(i === state.detailPhoto), title: ph,
+      onclick: () => { state.detailPhoto = i; renderDetail() }
+    }, [h('img', { src: IMG(ph), alt: '', loading: 'lazy' })]))) : null
+
+  const quotes = (p.quotes || []).length ? h('div', {}, [
+    h('h3', { text: '重读这个瞬间' }),
+    ...(p.quotes || []).map((q) => h('div', { class: 'quote' }, [
+      h('div', { text: q.full || q.brief || '' }),
+      h('div', { class: 'src', text: [q.kind, q.source].filter(Boolean).join(' · ') })
+    ]))
+  ]) : null
+
+  const policy=ticketPolicy(p);
+  const canQuery=state.view==='result'&&state.resultKind==='ai'&&state.itinerary?.context.selectedPoiIds.includes(p.poiId);
+  const admission=h('section',{class:'detail-ticket-info','aria-label':'门票信息'},[
+    h('h3',{text:'门票与预约'}),
+    h('p',{class:'sub',text:policy.reference?`本地参考：${policy.reference}（政策待核实）`:'门票信息待核实，不能据此判断免费。'}),
+    policy.scopeNote?h('p',{class:'sub',text:policy.scopeNote}):null,
+    createTicketButton(p,{busy:!canQuery,onQuery:()=>{closeDetail();revisionExperience.queryTicket(p.poiId);document.getElementById('revision-workspace')?.scrollIntoView({behavior:'smooth',block:'start'})}}),
+    h('p',{class:'sub',text:policy.category==='reservation'?'需预约，预约入口待核实。':policy.category==='free'?'本地资料标为免费，开放政策请以景点公告为准。':!canQuery?'生成行程后，可在行程中查询携程票种。':'具体票种、出行日期与价格以携程页面为准。'})
+  ]);
+  const sheet = h('div', {
+    class: 'sheet', role: 'dialog', 'aria-modal': 'true',
+    onclick: (e) => { if (e.target === sheet) closeDetail() }
+  }, [
+    h('div', { class: 'inner' }, [
+      big, thumbs,
+      h('div', { class: 'content' }, [
+        h('p', { class: 'eyebrow', text: p.type === 'ip' ? '故事中的一站' : '城市经典' }),
+        h('h2', { text: p.name }),
+        h('p', { class: 'sub', style: 'color:var(--ink-2);font-size:12px;margin:4px 0 0',
+          text: `${p.poiId} · ${p.cluster} · 建议停留 ${fmtMin(p.durationNormal)} · 图 ${photos.length} 张` }),
+        h('p', { style: 'font-size:15px;line-height:1.9;margin:18px 0', text: p.intro || '景点介绍即将补充' }),
+        quotes,
+        p.basis ? h('p', { class: 'sub', text: '作品关联：' + p.basis }) : null,
+        admission,
+        p.address ? h('p', { class: 'sub', text: '地址：' + p.address }) : null,
+        p.mapUrl ? h('a', { href: p.mapUrl, target: '_blank', rel: 'noopener noreferrer', text: '在地图中查看地点' }) : null,
+        p.locationVerification ? h('p', { class: 'credit', text: p.locationVerification.note }) : null,
+        p.tips ? h('p', { class: 'sub', text: '到访提示：' + p.tips }) : null,
+        h('p', { class: 'credit', text: '图片署名：' + (p.photoCredit || '未填') }),
+        h('div', { style: 'margin-top:18px' }, [
+          h('button', { class: 'btn', text: '关闭', onclick: closeDetail })
+        ])
+      ])
+    ])
+  ])
+  document.querySelectorAll('.sheet').forEach((n) => n.remove())
+  document.body.appendChild(sheet)
+}
+function closeDetail() {
+  document.querySelectorAll('.sheet').forEach((n) => n.remove())
+  state.detail = null
+}
+
+/* ---------------- 骨架 ---------------- */
+const missing = new Set()
+
+// 哪些图片文件真的存在 —— 不存在就走占位块（和 PhotoFrame 一致）
+async function markMissing() {
+  const urls = new Set()
+  for (const d of Object.values(state.docs)) {
+    for (const p of [...(d.ipStops || []), ...(d.cityStops || [])]) {
+      for (const s of (p.photos && p.photos.length ? p.photos : [p.realPhoto])) if (s) urls.add(s)
+    }
+    if (d.line?.cover) urls.add(d.line.cover)
+    if (d.ip?.cover) urls.add(d.ip.cover)
+  }
+  const list = [...urls]
+  const ok = await Promise.all(list.map((u) =>
+    fetch(IMG(u), { method: 'HEAD' }).then((r) => r.ok).catch(() => false)))
+  list.forEach((u, i) => { if (!ok[i]) missing.add(u) })
+}
+
+function renderCrumb(text) {
+  document.getElementById('crumb').textContent = text
+  document.getElementById('back').hidden = state.view === 'home'
+}
+document.getElementById('back').onclick = () => {
+  favoriteGate.cancel()
+  favoriteMessage = ''
+  if (state.view === 'result') { state.view = 'customize'; renderCustomize() }
+  else { state.view = 'home'; renderHome(); renderCrumb('首页 · 全部线路') }
+}
+
+async function boot() {
+  state.index = await (await fetch('data/lines/index.json')).json()
+  const docs = await Promise.all(LINE_FILES.map((id) =>
+    fetch(`data/lines/${id}.json`).then((r) => r.json()).catch(() => null)))
+  LINE_FILES.forEach((id, i) => { if (docs[i]) state.docs[id] = docs[i] })
+  await markMissing()
+  state.home = buildHomepage(state.index, state.docs, { perSection: 4 })
+  const saved=new URL(location.href).searchParams.get('itinerary')
+  if(saved&&/^[a-zA-Z0-9-]+$/.test(saved)){await loadSavedItinerary(saved);return}
+  renderHome()
+  renderCrumb('首页 · 全部线路')
+}
+boot()
+</script>
+</body>
+</html>

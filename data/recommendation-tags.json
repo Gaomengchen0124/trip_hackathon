@@ -91,6 +91,14 @@
         "reflective",
         "healing"
       ]
+    },
+    "sherlock": {
+      "themes": [
+        "mystery"
+      ],
+      "moods": [
+        "thrilling"
+      ]
     }
   }
 }

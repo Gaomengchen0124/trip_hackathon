@@ -20,3 +20,5 @@ var/
 
 !server/.env.auth.example
 !server/.env.ai.example
+
+!server/.env.planning.example

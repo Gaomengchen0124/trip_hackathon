@@ -42,7 +42,7 @@ function applyInteractive() {
 }
 const token = import.meta.env.VITE_MAPBOX_TOKEN || import.meta.env.VITE_MAPBOX_ACCESS_TOKEN || ''
 const provider = token.startsWith('pk.') ? 'Mapbox' : 'OpenStreetMap'
-const status = computed(() => state.value === 'online' ? `${provider} · 在线地图` : state.value === 'loading' ? '正在连接在线地图…' : '本地道路 · 仅人民广场周边')
+const status = computed(() => state.value === 'online' ? `${provider} · 在线地图` : state.value === 'loading' ? '正在连接在线地图…' : (props.city === '上海' ? '本地道路 · 仅人民广场周边' : '底图暂不可用 · 保留景点坐标'))
 function fit() {
   if (!map) return
   if (valid.value.length) map.fitBounds(valid.value.map(p => [p.lat, p.lng]), { padding: [45, 55], maxZoom: 15, animate: false })
@@ -104,7 +104,7 @@ onMounted(async () => {
   map = L.map(host.value, { zoomAnimation: false, fadeAnimation: false, markerZoomAnimation: false, zoomSnap: 0.25, scrollWheelZoom: false, zoomControl: false, dragging: true, touchZoom: true, doubleClickZoom: true, keyboard: true, boxZoom: true }).setView([31.227, 121.473], 13)
   map.attributionControl.addAttribution('© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>')
   map.createPane('localStreets').style.zIndex = 150
-  L.geoJSON(streets, { pane: 'localStreets', style: f => ({ color: f.properties.waterway ? '#8cc4d3' : '#c7ac86', weight: f.properties.waterway ? 12 : 3, opacity: 0.85 }), onEachFeature: (f, layer) => { if (f.properties.name) { const el = document.createElement('span'); el.textContent = f.properties.name; layer.bindTooltip(el) } } }).addTo(map)
+  if (props.city === '上海') L.geoJSON(streets, { pane: 'localStreets', style: f => ({ color: f.properties.waterway ? '#8cc4d3' : '#c7ac86', weight: f.properties.waterway ? 12 : 3, opacity: 0.85 }), onEachFeature: (f, layer) => { if (f.properties.name) { const el = document.createElement('span'); el.textContent = f.properties.name; layer.bindTooltip(el) } } }).addTo(map)
   pins = L.layerGroup().addTo(map)
   render(); fit(); connect()
   if (props.activePoiId) focus(props.activePoiId)

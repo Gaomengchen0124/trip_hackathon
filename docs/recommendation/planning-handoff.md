@@ -76,3 +76,8 @@ ipId、路线标题、封面和候选景点可由 getLineDetail(lineId) 获取�
 根目录的《接口对齐.md》是早期合并提案，其中多项问题当前已解决，不作为此次最新接口依据。无需规划同学重新写一份完整文档；若他有未合并的变化，只需提供对应分支或更新后的 contract.md。
 
 需要发给同学的问题见[简短提问](planning-questions.md)。
+
+
+## 本地整合更新（b085373 + planning.v1）
+
+推荐交接仍只传 lineId：介绍页 `/line/:lineId?from=recommend`，规划入口 `/customize/:lineId`。日期、选点和旅行要求由规划端处理。当前规划使用 `/api/planning/sessions`、`/api/itineraries` 等 planning.v1 接口，结果页 `/itinerary/:id`，支持刷新恢复、修改预览/应用/撤销与追加。上述旧 api.plan / PlanResult 说明仅对应保留的兼容流程，不是新规划页面实际调用链。AI 的 preferenceAnalysis 不作为用户已确认要求。

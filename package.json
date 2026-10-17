@@ -20,7 +20,11 @@
     "demo:plan": "node scripts/demo-plan.mjs",
     "e2e": "node scripts/e2e-ssr.mjs",
     "dev:api": "node scripts/start-api.mjs",
-    "dev:content": "node scripts/start-content.sh"
+    "dev:content": "sh scripts/start-content.sh",
+    "dev:planning": "node scripts/start-planning.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "dev:all": "node scripts/start-integrated.mjs",
+    "test:planning:browser": "node scripts/test-formal-planning.mjs"
   },
   "dependencies": {
     "jszip": "^3.10.2",
@@ -32,6 +36,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.4",
+    "playwright": "^1.64.1",
     "puppeteer-core": "^25.12.0",
     "vite": "^5.4.10"
   }

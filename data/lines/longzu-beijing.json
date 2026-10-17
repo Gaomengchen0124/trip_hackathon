@@ -78,44 +78,57 @@
     "丰台·城南",
     "怀柔·长城",
     "通州·环球影城",
-    "密云·古北水镇",
-    "东城",
-    "西城",
-    "朝阳",
-    "海淀",
-    "近郊",
-    "通州"
+    "密云·古北水镇"
   ],
   "ipStops": [
     {
       "poiId": "bj-ip-01",
       "lineId": "longzu-beijing",
       "type": "ip",
-      "name": "颐和园",
-      "alias": "书中「长廊」「十七孔桥」「昆明湖」「佛香阁」",
+      "name": "颐和园 · 长廊",
+      "alias": "书中「长廊」「昆明湖」「佛香阁」",
       "lng": 116.2757976,
       "lat": 39.996719,
       "cluster": "海淀·中关村",
       "tier": "S",
-      "durationNormal": 180,
-      "durationRush": 90,
-      "intro": "诺诺一个人坐在长廊里喝啤酒，隔着昆明湖看对面的万寿山；夜里她又从十七孔桥下水，游向湖心——全书最像\"龙\"的一笔。",
-      "tips": "从东宫门进最顺：长廊—佛香阁—昆明湖；傍晚在十七孔桥东南侧看金光穿洞。",
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "诺诺一个人坐在长廊里喝啤酒，隔着昆明湖看对面的万寿山。",
+      "tips": "长廊—佛香阁—昆明湖，从东宫门进最顺。",
       "skipNote": "全线唯一 S 级场景，不建议放弃。",
-      "realPhoto": "img/st-sp-03.jpg",
+      "realPhoto": "img/bj-ip-01.jpg",
       "photos": [
-        "img/st-sp-03.jpg",
-        "img/st-sp-03-2.jpg",
-        "img/st-sp-03-3.jpg"
+        "img/bj-ip-01.jpg",
+        "img/bj-ip-01-2.jpg"
       ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "quotes": [
         {
           "kind": "原著",
           "brief": "诺诺坐在长廊里，靠着一根柱子",
           "full": "诺诺坐在长廊里，靠着一根柱子，眺望着浩瀚的昆明湖，喝着自己带进来的啤酒。湖对面就是万寿山，山顶是宏伟的佛香阁和排云殿。她没有告诉恺撒自己去了哪里，并不是因为她不开心。多数时候，她并不知道自己开心或者不开心，她有时候这样，有时候那样，只是因为忽然想到，就去做了。",
           "source": "龙族Ⅱ·第十六幕"
-        },
+        }
+      ],
+      "photoCredit": "图片署名：①人工整理 · 来源待核实；②人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。"
+    },
+    {
+      "poiId": "bj-ip-02",
+      "lineId": "longzu-beijing",
+      "type": "ip",
+      "name": "颐和园 · 十七孔桥",
+      "alias": "",
+      "lng": 116.2714667,
+      "lat": 39.9894892,
+      "cluster": "海淀·中关村",
+      "tier": "A",
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "诺诺夜里从这里下水游向昆明湖心，也是全书最像\"龙\"的一笔。",
+      "tips": "傍晚在桥东南侧看金光穿洞。",
+      "skipNote": "和长廊同在颐和园，时间紧可合并成一次。",
+      "realPhoto": "img/bj-ip-02.jpg",
+      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
+      "quotes": [
         {
           "kind": "原著",
           "brief": "十七孔桥在前方的夜色里就像是一具龙的脊骨",
@@ -144,7 +157,6 @@
         "img/bj-ip-03.jpg",
         "img/bj-ip-03-2.jpg"
       ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "quotes": [
         {
           "kind": "原著",
@@ -152,7 +164,8 @@
           "full": "赵孟华看了一眼门上的路线显示，下一站就是中关村。他的目的地就是中关村，他昨天晚上跟一个哥们喝多了，睡在人家宿舍，这是赶回北大。",
           "source": "龙族Ⅱ·第十二幕"
         }
-      ]
+      ],
+      "photoCredit": "图片署名：①人工整理 · 来源待核实；②人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。"
     },
     {
       "poiId": "bj-ip-04",
@@ -174,7 +187,6 @@
         "img/bj-ip-04.jpg",
         "img/bj-ip-04-2.jpg"
       ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "quotes": [
         {
           "kind": "原著",
@@ -182,7 +194,8 @@
           "full": "深夜零点四十五分，楚子航无声地潜行在东方广场地下一层商场里。这栋巨大的地标式建筑毗邻长安街，云集着豪奢品牌和一家君悦酒店，地下直通地铁王府井站。",
           "source": "龙族Ⅱ·第十八幕"
         }
-      ]
+      ],
+      "photoCredit": "图片署名：①人工整理 · 来源待核实；②人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。"
     },
     {
       "poiId": "bj-ip-05",
@@ -204,7 +217,6 @@
         "img/bj-ip-05.jpg",
         "img/bj-ip-05-2.jpg"
       ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "quotes": [
         {
           "kind": "原著",
@@ -212,7 +224,8 @@
           "full": "早晨的阳光照在琉璃厂大街的石板路上，一辆人力三轮跑得欢，两侧都是复古的青砖小楼，每一户门前都挂着“宝翠堂”、“崇文府”这类黑底金字招牌。",
           "source": "龙族Ⅱ·第十六幕"
         }
-      ]
+      ],
+      "photoCredit": "图片署名：①人工整理 · 来源待核实；②人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。"
     },
     {
       "poiId": "bj-ip-06",
@@ -234,7 +247,6 @@
         "img/bj-ip-06.jpg",
         "img/bj-ip-06-2.jpg"
       ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "quotes": [
         {
           "kind": "原著",
@@ -242,7 +254,8 @@
           "full": "这是一个国际化的大城市，上千万人在这个城市里进出，北海公园里还有老头老太在健身，文艺青年们睡醒之后开始准备去后海的酒吧晃晃，CBD里出没着职场精英，为他们的百万年薪小跑着工作，车流堵塞了二三四五环……",
           "source": "龙族Ⅱ·第二十幕"
         }
-      ]
+      ],
+      "photoCredit": "图片署名：①人工整理 · 来源待核实；②人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。"
     },
     {
       "poiId": "bj-ip-07",
@@ -259,11 +272,12 @@
       "intro": "书里那群\"旅行团\"把紫禁城当成找龙的第一站。",
       "tips": "务必提前预约，周一闭馆。",
       "skipNote": "本身是必看景点，但书中只是背景板。",
-      "realPhoto": "img/st-sp-01.jpg",
+      "realPhoto": "img/bj-ip-07.jpg",
       "photos": [
-        "img/st-sp-01.jpg"
+        "img/bj-ip-07.jpg",
+        "img/bj-ip-07-2.jpg",
+        "img/bj-ip-07-3.jpg"
       ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "quotes": [
         {
           "kind": "原著",
@@ -271,7 +285,8 @@
           "full": "那个唐森和他的朋友们正这么做，他们昨天已经游览了故宫，今天的目标是去颐和园。”楚子航淡淡地说，“他们之所以变成了彻头彻尾的旅行团，是因为他们发现这座城市里满是龙的痕迹。",
           "source": "龙族Ⅱ·第十五幕"
         }
-      ]
+      ],
+      "photoCredit": "图片署名：①Wikimedia Commons · User:kallgan（CC BY-SA 3.0）；②人工整理 · 来源待核实；③人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。"
     },
     {
       "poiId": "bj-ip-08",
@@ -292,7 +307,6 @@
       "photos": [
         "img/bj-ip-08.jpg"
       ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "quotes": [
         {
           "kind": "原著",
@@ -300,7 +314,8 @@
           "full": "恺撒开着敞篷小车在车流如织的西单北大街上钻来钻去，就像是在野牛肚子下面奔跑的野兔。来来往往的大车都被他出其不意地截断，但没人冲他按喇叭。",
           "source": "龙族Ⅱ·第十九幕"
         }
-      ]
+      ],
+      "photoCredit": "图片署名：①人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。"
     }
   ],
   "cityStops": [
@@ -311,74 +326,90 @@
       "name": "天安门广场",
       "lng": 116.3972,
       "lat": 39.9087,
-      "cluster": "东城",
+      "cluster": "东城·故宫",
       "popularity": 5,
       "durationNormal": 60,
       "durationRush": 30,
       "intro": "北京的城市中心广场，看升旗与城楼的地方。",
-      "realPhoto": "img/st-sp-02.jpg",
+      "realPhoto": "img/bj-sp-01.jpg",
       "photos": [
-        "img/st-sp-02.jpg",
-        "img/st-sp-02-2.jpg",
-        "img/st-sp-02-3.jpg",
-        "img/st-sp-02-4.jpg"
+        "img/bj-sp-01.jpg",
+        "img/bj-sp-01-2.jpg"
       ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
-      "ticket": "免费（需预约）",
-      "openHours": "全天"
+      "ticket": "",
+      "openHours": "",
+      "photoCredit": "图片署名：①人工整理 · 来源待核实；②人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。"
     },
     {
       "poiId": "bj-sp-02",
       "lineId": "longzu-beijing",
       "type": "classic",
-      "name": "天坛公园",
-      "lng": 116.4066,
-      "lat": 39.8823,
-      "cluster": "东城",
+      "name": "中国国家博物馆",
+      "lng": 116.418,
+      "lat": 39.9042,
+      "cluster": "东城·故宫",
       "popularity": 5,
-      "durationNormal": 120,
-      "durationRush": 60,
-      "intro": "明清皇帝祭天的场所，祈年殿是它的标志。",
-      "realPhoto": "img/st-sp-05.jpg",
+      "durationNormal": 180,
+      "durationRush": 90,
+      "intro": "天安门广场东侧的国家级博物馆，藏品逾百万件。",
+      "realPhoto": "img/bj-sp-02.jpg",
       "photos": [
-        "img/st-sp-05.jpg",
-        "img/st-sp-05-2.jpg",
-        "img/st-sp-05-3.jpg"
+        "img/bj-sp-02.jpg"
       ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
-      "ticket": "¥34",
-      "openHours": "06:00-17:30"
+      "ticket": "",
+      "openHours": "",
+      "photoCredit": "图片署名：①人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。"
     },
     {
       "poiId": "bj-sp-03",
       "lineId": "longzu-beijing",
       "type": "classic",
-      "name": "雍和宫",
-      "lng": 116.4174,
-      "lat": 39.9473,
-      "cluster": "东城",
-      "popularity": 4,
-      "durationNormal": 60,
-      "durationRush": 30,
-      "intro": "清代皇家寺院，北京规模最大的藏传佛教寺院。",
-      "realPhoto": "img/st-sp-10.jpg",
+      "name": "天坛公园",
+      "lng": 116.4066,
+      "lat": 39.8823,
+      "cluster": "东城·故宫",
+      "popularity": 5,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "明清皇帝祭天的场所，祈年殿是它的标志。",
+      "realPhoto": "img/bj-sp-03.jpg",
       "photos": [
-        "img/st-sp-10.jpg",
-        "img/st-sp-10-2.jpg",
-        "img/st-sp-10-3.jpg"
+        "img/bj-sp-03.jpg",
+        "img/bj-sp-03-2.jpg"
       ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
-      "ticket": "¥25",
-      "openHours": "09:00-16:30"
+      "ticket": "",
+      "openHours": "",
+      "photoCredit": "图片署名：①Wikimedia Commons · Fong Chen（Public domain）；②Wikimedia Commons · Maros M r a z (Maros)（CC BY-SA 3.0）。"
     },
     {
       "poiId": "bj-sp-04",
       "lineId": "longzu-beijing",
       "type": "classic",
+      "name": "雍和宫",
+      "lng": 116.4174,
+      "lat": 39.9473,
+      "cluster": "东城·故宫",
+      "popularity": 4,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "清代皇家寺院，北京规模最大的藏传佛教寺院。",
+      "realPhoto": "img/bj-sp-04.jpg",
+      "photos": [
+        "img/bj-sp-04.jpg",
+        "img/bj-sp-04-2.jpg"
+      ],
+      "ticket": "",
+      "openHours": "",
+      "photoCredit": "图片署名：①Wikimedia Commons · PENG, Yanan (Neo-Jay（CC BY-SA 3.0）；②人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。"
+    },
+    {
+      "poiId": "bj-sp-05",
+      "lineId": "longzu-beijing",
+      "type": "classic",
       "name": "南锣鼓巷",
       "lng": 116.4034,
       "lat": 39.9371,
-      "cluster": "东城",
+      "cluster": "东城·故宫",
       "popularity": 4,
       "durationNormal": 90,
       "durationRush": 45,
@@ -388,320 +419,213 @@
         "img/bj-sp-05.jpg",
         "img/bj-sp-05-2.jpg"
       ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
-      "openHours": ""
-    },
-    {
-      "poiId": "bj-sp-05",
-      "lineId": "longzu-beijing",
-      "type": "classic",
-      "name": "景山公园",
-      "lng": 116.3963,
-      "lat": 39.925,
-      "cluster": "东城",
-      "popularity": 3,
-      "durationNormal": 60,
-      "durationRush": 30,
-      "intro": "故宫北侧的皇家园林，万春亭俯瞰紫禁城全景。",
-      "realPhoto": "img/st-sp-12.jpg",
-      "photos": [
-        "img/st-sp-12.jpg",
-        "img/st-sp-12-2.jpg",
-        "img/st-sp-12-3.jpg"
-      ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
-      "ticket": "¥2",
-      "openHours": "06:30-20:00"
+      "openHours": "",
+      "photoCredit": "图片署名：①人工整理 · 来源待核实；②人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。"
     },
     {
       "poiId": "bj-sp-06",
       "lineId": "longzu-beijing",
       "type": "classic",
-      "name": "中国国家博物馆",
-      "lng": 116.418,
-      "lat": 39.9042,
-      "cluster": "东城",
-      "popularity": 5,
-      "durationNormal": 180,
-      "durationRush": 90,
-      "intro": "天安门广场东侧的国家级博物馆，藏品逾百万件。",
-      "realPhoto": "img/bj-sp-02.jpg",
+      "name": "什刹海",
+      "lng": 116.3947,
+      "lat": 39.9428,
+      "cluster": "西城·什刹海",
+      "popularity": 4,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "由前海、后海组成的湖区，环湖是胡同与酒吧。",
+      "realPhoto": "img/bj-sp-06.jpg",
       "photos": [
-        "img/bj-sp-02.jpg"
+        "img/bj-sp-06.jpg",
+        "img/bj-sp-06-2.jpg",
+        "img/bj-sp-06-3.jpg"
       ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
-      "openHours": ""
+      "openHours": "",
+      "photoCredit": "图片署名：①Wikimedia Commons · Worldtravelwiki（CC0）；②Wikimedia Commons · Worldtravelwiki（CC0）；③Wikimedia Commons · Hat600（CC BY-SA 3.0）。"
     },
     {
       "poiId": "bj-sp-07",
       "lineId": "longzu-beijing",
       "type": "classic",
-      "name": "鼓楼·钟楼",
-      "lng": 116.3927,
-      "lat": 39.947,
-      "cluster": "东城",
-      "popularity": 5,
+      "name": "北海公园",
+      "lng": 116.3899,
+      "lat": 39.933,
+      "cluster": "西城·什刹海",
+      "popularity": 4,
       "durationNormal": 90,
       "durationRush": 45,
-      "intro": "北京中轴线重要历史建筑群。",
-      "realPhoto": "img/wd-sp-08.jpg",
+      "intro": "皇家园林，白塔与琼华岛是北京的老地标。",
+      "realPhoto": "img/bj-sp-07.jpg",
       "photos": [
-        "img/wd-sp-08.jpg",
-        "img/wd-sp-08-2.jpg",
-        "img/wd-sp-08-3.jpg"
+        "img/bj-sp-07.jpg",
+        "img/bj-sp-07-2.jpg",
+        "img/bj-sp-07-3.jpg"
       ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
-      "ticket": "约¥30",
-      "openHours": ""
+      "ticket": "",
+      "openHours": "",
+      "photoCredit": "图片署名：①Wikimedia Commons · Ermell（CC BY-SA 4.0）；②人工整理 · 来源待核实；③人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。"
     },
     {
       "poiId": "bj-sp-08",
       "lineId": "longzu-beijing",
       "type": "classic",
-      "name": "北海公园",
-      "lng": 116.3899,
-      "lat": 39.933,
-      "cluster": "西城",
-      "popularity": 4,
-      "durationNormal": 90,
-      "durationRush": 45,
-      "intro": "皇家园林，白塔与琼华岛是北京的老地标。",
-      "realPhoto": "img/st-sp-11.jpg",
+      "name": "景山公园",
+      "lng": 116.3963,
+      "lat": 39.925,
+      "cluster": "西城·什刹海",
+      "popularity": 3,
+      "durationNormal": 60,
+      "durationRush": 30,
+      "intro": "故宫北侧的皇家园林，万春亭俯瞰紫禁城全景。",
+      "realPhoto": "img/bj-sp-08.jpg",
       "photos": [
-        "img/st-sp-11.jpg",
-        "img/st-sp-11-2.jpg",
-        "img/st-sp-11-3.jpg"
+        "img/bj-sp-08.jpg",
+        "img/bj-sp-08-2.jpg"
       ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
-      "ticket": "¥10",
-      "openHours": "06:30-20:00"
+      "ticket": "",
+      "openHours": "",
+      "photoCredit": "图片署名：①人工整理 · 来源待核实；②人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。"
     },
     {
       "poiId": "bj-sp-09",
       "lineId": "longzu-beijing",
       "type": "classic",
-      "name": "北京鲁迅博物馆",
-      "lng": 116.3548,
-      "lat": 39.933,
-      "cluster": "西城",
+      "name": "圆明园遗址公园",
+      "lng": 116.3098,
+      "lat": 40.0076,
+      "cluster": "海淀·中关村",
       "popularity": 4,
-      "durationNormal": 90,
-      "durationRush": 45,
-      "intro": "现代文学主题博物馆，适合文学线路补充。",
-      "realPhoto": "img/wd-sp-09.jpg",
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "清代皇家园林遗址，西洋楼残柱是它的标志。",
+      "realPhoto": "img/bj-sp-09.jpg",
       "photos": [
-        "img/wd-sp-09.jpg",
-        "img/wd-sp-09-2.jpg",
-        "img/wd-sp-09-3.jpg"
+        "img/bj-sp-09.jpg",
+        "img/bj-sp-09-2.jpg"
       ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
-      "ticket": "免费/预约",
-      "openHours": ""
+      "ticket": "",
+      "openHours": "",
+      "photoCredit": "图片署名：①人工整理 · 来源待核实；②人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。"
     },
     {
       "poiId": "bj-sp-10",
       "lineId": "longzu-beijing",
       "type": "classic",
-      "name": "中国现代文学馆",
-      "lng": 116.4268,
-      "lat": 39.985,
-      "cluster": "朝阳",
-      "popularity": 4,
-      "durationNormal": 120,
-      "durationRush": 60,
-      "intro": "中国现代文学重要收藏、研究与展示机构。",
-      "realPhoto": "img/wd-sp-10.jpg",
+      "name": "香山公园",
+      "lng": 116.1888,
+      "lat": 39.9963,
+      "cluster": "海淀·中关村",
+      "popularity": 3,
+      "durationNormal": 180,
+      "durationRush": 90,
+      "intro": "西山赏红叶的胜地，登顶可远眺北京城。",
+      "realPhoto": "img/bj-sp-10.jpg",
       "photos": [
-        "img/wd-sp-10.jpg",
-        "img/wd-sp-10-2.jpg",
-        "img/wd-sp-10-3.jpg"
+        "img/bj-sp-10.jpg",
+        "img/bj-sp-10-2.jpg",
+        "img/bj-sp-10-3.jpg"
       ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
-      "ticket": "预约",
-      "openHours": ""
+      "ticket": "",
+      "openHours": "",
+      "photoCredit": "图片署名：①人工整理 · 来源待核实；②人工整理 · 来源待核实；③人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。"
     },
     {
       "poiId": "bj-sp-11",
       "lineId": "longzu-beijing",
       "type": "classic",
-      "name": "798 艺术区",
-      "lng": 116.4953,
-      "lat": 39.9846,
-      "cluster": "朝阳",
-      "popularity": 3,
-      "durationNormal": 120,
-      "durationRush": 60,
-      "intro": "旧厂房改造的当代艺术区，画廊与咖啡馆密集。",
-      "realPhoto": "img/st-sp-13.jpg",
+      "name": "清华大学",
+      "lng": 116.320963,
+      "lat": 40.0022905,
+      "cluster": "海淀·中关村",
+      "popularity": 4,
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "百年学府，二校门与清华园是经典取景点。",
+      "realPhoto": "img/bj-sp-11.jpg",
       "photos": [
-        "img/st-sp-13.jpg"
+        "img/bj-sp-11.jpg",
+        "img/bj-sp-11-2.jpg",
+        "img/bj-sp-11-3.jpg"
       ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
-      "ticket": "免费",
-      "openHours": "全天"
+      "ticket": "",
+      "openHours": "",
+      "photoCredit": "图片署名：①人工整理 · 来源待核实；②人工整理 · 来源待核实；③人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。"
     },
     {
       "poiId": "bj-sp-12",
       "lineId": "longzu-beijing",
       "type": "classic",
-      "name": "鸟巢 · 水立方",
-      "lng": 116.3969,
-      "lat": 39.9928,
-      "cluster": "朝阳",
-      "popularity": 4,
-      "durationNormal": 90,
-      "durationRush": 45,
-      "intro": "2008 年奥运会主场馆，夜景灯光值得一看。",
-      "realPhoto": "img/st-sp-07.jpg",
+      "name": "798 艺术区",
+      "lng": 116.4953,
+      "lat": 39.9846,
+      "cluster": "朝阳·三里屯",
+      "popularity": 3,
+      "durationNormal": 120,
+      "durationRush": 60,
+      "intro": "旧厂房改造的当代艺术区，画廊与咖啡馆密集。",
+      "realPhoto": "img/bj-sp-12.jpg",
       "photos": [
-        "img/st-sp-07.jpg",
-        "img/st-sp-07-2.jpg",
-        "img/st-sp-07-3.jpg"
+        "img/bj-sp-12.jpg",
+        "img/bj-sp-12-2.jpg",
+        "img/bj-sp-12-3.jpg"
       ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
-      "ticket": "外观免费",
-      "openHours": "全天"
+      "ticket": "",
+      "openHours": "",
+      "photoCredit": "图片署名：①人工整理 · 来源待核实；②人工整理 · 来源待核实；③人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。"
     },
     {
       "poiId": "bj-sp-13",
       "lineId": "longzu-beijing",
       "type": "classic",
-      "name": "圆明园遗址公园",
-      "lng": 116.3098,
-      "lat": 40.0076,
-      "cluster": "海淀",
+      "name": "鸟巢 · 水立方",
+      "lng": 116.3969,
+      "lat": 39.9928,
+      "cluster": "朝阳·三里屯",
       "popularity": 4,
-      "durationNormal": 120,
-      "durationRush": 60,
-      "intro": "清代皇家园林遗址，西洋楼残柱是它的标志。",
-      "realPhoto": "img/st-sp-04.jpg",
+      "durationNormal": 90,
+      "durationRush": 45,
+      "intro": "2008 年奥运会主场馆，夜景灯光值得一看。",
+      "realPhoto": "img/bj-sp-13.jpg",
       "photos": [
-        "img/st-sp-04.jpg",
-        "img/st-sp-04-2.jpg"
+        "img/bj-sp-13.jpg",
+        "img/bj-sp-13-2.jpg",
+        "img/bj-sp-13-3.jpg"
       ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
-      "ticket": "¥25",
-      "openHours": "07:00-19:00"
+      "ticket": "",
+      "openHours": "",
+      "photoCredit": "图片署名：①人工整理 · 来源待核实；②人工整理 · 来源待核实；③人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。"
     },
     {
       "poiId": "bj-sp-14",
       "lineId": "longzu-beijing",
       "type": "classic",
-      "name": "清华大学",
-      "lng": 116.320963,
-      "lat": 40.0022905,
-      "cluster": "海淀",
+      "name": "慕田峪长城",
+      "lng": 116.5605754,
+      "lat": 40.4345154,
+      "cluster": "怀柔·长城",
       "popularity": 5,
-      "durationNormal": 90,
-      "durationRush": 45,
-      "intro": "叶文洁任教一生的地方，叶哲泰的批斗会也发生在这里。",
-      "realPhoto": "img/st-ip-04.jpg",
+      "durationNormal": 300,
+      "durationRush": 150,
+      "intro": "怀柔段的明长城，敌楼密集、游人相对少。",
+      "realPhoto": "img/bj-sp-14.jpg",
       "photos": [
-        "img/st-ip-04.jpg",
-        "img/st-ip-04-2.jpg",
-        "img/st-ip-04-3.jpg"
+        "img/bj-sp-14.jpg",
+        "img/bj-sp-14-2.jpg"
       ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
-      "openHours": ""
+      "openHours": "",
+      "photoCredit": "图片署名：①人工整理 · 来源待核实；②人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。"
     },
     {
       "poiId": "bj-sp-15",
       "lineId": "longzu-beijing",
       "type": "classic",
-      "name": "北京大学",
-      "lng": 116.3109,
-      "lat": 39.9929,
-      "cluster": "海淀",
-      "popularity": 5,
-      "durationNormal": 120,
-      "durationRush": 60,
-      "intro": "北京重要文化教育地标。",
-      "realPhoto": "img/wd-sp-11.jpg",
-      "photos": [
-        "img/wd-sp-11.jpg",
-        "img/wd-sp-11-2.jpg"
-      ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
-      "ticket": "预约",
-      "openHours": ""
-    },
-    {
-      "poiId": "bj-sp-16",
-      "lineId": "longzu-beijing",
-      "type": "classic",
-      "name": "香山公园",
-      "lng": 116.1888,
-      "lat": 39.9963,
-      "cluster": "海淀",
-      "popularity": 3,
-      "durationNormal": 180,
-      "durationRush": 90,
-      "intro": "西山赏红叶的胜地，登顶可远眺北京城。",
-      "realPhoto": "img/st-sp-14.jpg",
-      "photos": [
-        "img/st-sp-14.jpg",
-        "img/st-sp-14-2.jpg",
-        "img/st-sp-14-3.jpg",
-        "img/st-sp-14-4.jpg"
-      ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
-      "ticket": "¥10",
-      "openHours": "06:00-18:30"
-    },
-    {
-      "poiId": "bj-sp-17",
-      "lineId": "longzu-beijing",
-      "type": "classic",
-      "name": "中国国家图书馆",
-      "lng": 116.3256,
-      "lat": 39.9437,
-      "cluster": "海淀",
-      "popularity": 4,
-      "durationNormal": 120,
-      "durationRush": 60,
-      "intro": "北京重要阅读与文化地标。",
-      "realPhoto": "img/wd-sp-13.jpg",
-      "photos": [
-        "img/wd-sp-13.jpg",
-        "img/wd-sp-13-2.jpg",
-        "img/wd-sp-13-3.jpg"
-      ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
-      "ticket": "免费/预约",
-      "openHours": ""
-    },
-    {
-      "poiId": "bj-sp-18",
-      "lineId": "longzu-beijing",
-      "type": "classic",
-      "name": "八达岭长城",
-      "lng": 116.0165,
-      "lat": 40.3586,
-      "cluster": "近郊",
-      "popularity": 5,
-      "durationNormal": 300,
-      "durationRush": 150,
-      "intro": "明长城保存最好的一段，北京最经典的登城点。",
-      "realPhoto": "img/st-sp-06.jpg",
-      "photos": [
-        "img/st-sp-06.jpg",
-        "img/st-sp-06-2.jpg"
-      ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
-      "ticket": "¥40",
-      "openHours": "07:30-16:00"
-    },
-    {
-      "poiId": "bj-sp-19",
-      "lineId": "longzu-beijing",
-      "type": "classic",
       "name": "北京环球影城",
       "lng": 116.6777865,
       "lat": 39.8548383,
-      "cluster": "通州",
+      "cluster": "通州·环球影城",
       "popularity": 4,
       "durationNormal": 420,
       "durationRush": 210,
@@ -712,9 +636,9 @@
         "img/bj-sp-15-2.jpg",
         "img/bj-sp-15-3.jpg"
       ],
-      "photoCredit": "项目组实拍优先；网络图片须逐图核实授权。",
       "ticket": "",
-      "openHours": ""
+      "openHours": "",
+      "photoCredit": "图片署名：①人工整理 · 来源待核实；②人工整理 · 来源待核实；③人工整理 · 来源待核实；其中标注“来源待核实”的图片商用前须逐图核实授权。"
     }
   ]
 }

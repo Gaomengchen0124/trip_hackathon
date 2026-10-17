@@ -8,7 +8,7 @@ const emit = defineEmits(['view-detail', 'close'])
 </script>
 <template>
   <DialogSheet :title="poi.name" @close="emit('close')">
-    <PhotoFrame class="photo" :src="poi.realPhoto" :alt="poi.name" />
+    <PhotoFrame class="photo" :src="poi.photos?.[0] || poi.realPhoto" :alt="poi.name" />
     <p class="meta">
       {{ poi.cluster }} · 建议停留 {{ formatMinutes(poi.durationNormal) }}
     </p>

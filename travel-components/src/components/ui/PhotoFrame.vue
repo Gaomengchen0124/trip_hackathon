@@ -37,7 +37,7 @@ watch(url, () => {
 .photo-frame {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(145deg, #f6ecec, #eee6d8);
+  background: linear-gradient(145deg, #f3eddf, #eee6d8);
   width: 100%;
   min-width: 0;
 }

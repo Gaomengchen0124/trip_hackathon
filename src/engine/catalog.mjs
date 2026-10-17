@@ -28,7 +28,7 @@ export const quoteReady = (q) => !!q && !blank(q.source) && !blank(q.full);
 export function lineReadiness(doc = {}) {
   const ipStops = doc.ipStops ?? [];
   const cityStops = doc.cityStops ?? [];
-  const ipDone = ipStops.filter((p) => pointReady(p) && (p.quotes ?? []).some(quoteReady)).length;
+  const ipDone = ipStops.filter((p) => pointReady(p) && ((p.quotes ?? []).some(quoteReady) || (!blank(p.basis) && (p.basisSources ?? []).length > 0))).length;
   const spDone = cityStops.filter(pointReady).length;
   const missing = [];
   if (ipDone < ipStops.length) missing.push(`IP 点位 ${ipDone}/${ipStops.length}`);

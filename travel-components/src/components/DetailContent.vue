@@ -1,12 +1,12 @@
 <script setup>
-import PhotoFrame from './ui/PhotoFrame.vue'
+import PhotoGallery from './ui/PhotoGallery.vue'
 import QuoteCard from './QuoteCard.vue'
 import { formatMinutes, TIER_LABELS } from '../utils/travel-ui'
 defineProps({ poi: { type: Object, required: true } })
 </script>
 <template>
   <article class="detail">
-    <PhotoFrame :src="poi.realPhoto" :alt="poi.name" />
+    <PhotoGallery :photos="poi.photos" :fallback="poi.realPhoto" :alt="poi.name" />
     <div class="content">
       <p class="eyebrow">
         {{ poi.type === 'ip' ? '故事中的一站' : '城市经典'

@@ -2,6 +2,7 @@
 import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import RouteCard from '../components/RouteCard.vue'
+import AuthStatus from '../components/AuthStatus.vue'
 import * as api from '../api/adapter'
 
 const router = useRouter()
@@ -33,6 +34,7 @@ function go(lineId) {
 
 <template>
   <div class="page">
+    <AuthStatus />
     <section class="hero">
       <h1>我的圣地巡礼</h1>
       <p class="slogan">循着文字与光影的足迹，赴一场现实的朝圣。</p>

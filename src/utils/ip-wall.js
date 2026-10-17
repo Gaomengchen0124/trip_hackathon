@@ -15,6 +15,7 @@ export const IP_PREFIX = {
   quyoufengdedifang: 'yf',
   aiqingshenhua: 'aqsh',
   harrypotter: 'hp',
+  sherlock: 'sherlock',
   longzu: 'bj'
 }
 
@@ -37,6 +38,10 @@ export function buildIpGroups(lines) {
         ? line.title.split('·')[0]
         : (line.title ?? line.ipId)
     const base = { ipId: line.ipId, ipName, title: line.title, lineId: line.lineId }
+    if (line.ipId === 'sherlock' && line.cover) {
+      groups.push({ ...base, tiles: [{key: 'sherlock-cover',kind: 'cover',src: line.cover,...base}, ...photos.map((name,i)=>({key: `sherlock-${i}`,kind:'photo',src:`img/${name}`,...base}))] })
+      continue
+    }
     const tiles = photos.length
       ? photos.map((name, i) => ({
           key: `${line.ipId}-${i}`,
@@ -44,7 +49,7 @@ export function buildIpGroups(lines) {
           src: `img/${name}`,
           ...base
         }))
-      : [{ key: `${line.ipId}-ph`, kind: 'placeholder', src: '', ...base }]
+      : [{ key: `${line.ipId}-ph`, kind: line.cover ? 'cover' : 'placeholder', src: line.cover || '', ...base }]
     groups.push({ ...base, tiles })
   }
   return groups

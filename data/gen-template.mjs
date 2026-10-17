@@ -222,6 +222,113 @@ const LINES = [
     },
     recommendDays: 3,
   },
+{
+  "file": "sherlock-london",
+  "title": "神探夏洛克·伦敦",
+  "city": "伦敦",
+  "clusters": [
+    "Bloomsbury·Euston",
+    "City of London",
+    "Bloomsbury",
+    "West End",
+    "Bayswater",
+    "Westminster",
+    "Southwark",
+    "Baker Street",
+    "South Bank",
+    "South Bank·City",
+    "Tower",
+    "Tower Bridge",
+    "Covent Garden",
+    "Regent’s Park",
+    "Battersea"
+  ],
+  "bounds": {
+    "lng": [
+      -0.45,
+      0.1
+    ],
+    "lat": [
+      51.4,
+      51.75
+    ]
+  },
+  "expectedIp": [
+    7,
+    7
+  ],
+  "ipStopCount": 7,
+  "expectedCity": [
+    15,
+    15
+  ],
+  "prefix": "sherlock",
+  "ip": {
+    "ipId": "sherlock",
+    "name": "神探夏洛克",
+    "author": "史蒂文·莫法特／马克·加蒂斯（主创）；柯南·道尔（原著）",
+    "kind": "tv",
+    "cover": "img/sherlock-cover.png",
+    "aliases": [
+      "神探夏洛克",
+      "Sherlock",
+      "夏洛克",
+      "新世纪福尔摩斯",
+      "福尔摩斯",
+      "卷福",
+      "华生"
+    ],
+    "tags": {
+      "城市": [
+        "伦敦",
+        "英国"
+      ],
+      "人物": [
+        "夏洛克·福尔摩斯",
+        "约翰·华生",
+        "莫里亚蒂",
+        "麦考夫",
+        "玛丽"
+      ],
+      "地名": [
+        "北高尔街",
+        "North Gower Street",
+        "Speedy’s",
+        "巴茨医院",
+        "贝克街",
+        "Leinster Gardens",
+        "罗素广场",
+        "博罗市场"
+      ]
+    }
+  },
+  "priority": 2.5,
+  "tags": {
+    "城市": [
+      "伦敦",
+      "英国"
+    ],
+    "人物": [
+      "夏洛克·福尔摩斯",
+      "约翰·华生",
+      "莫里亚蒂",
+      "麦考夫",
+      "玛丽"
+    ],
+    "地名": [
+      "北高尔街",
+      "North Gower Street",
+      "Speedy’s",
+      "巴茨医院",
+      "贝克街",
+      "Leinster Gardens",
+      "罗素广场",
+      "博罗市场"
+    ]
+  },
+  "recommendDays": 2,
+  "cover": "img/sherlock-cover.png"
+},
   {
     file: 'woyuditan-beijing',
     title: '我与地坛·北京',
@@ -463,7 +570,7 @@ for (const cfg of LINES) {
       name: ipInfo.name,
       author: ipInfo.author,
       kind: ipInfo.kind,
-      cover: `img/${ipInfo.ipId}.jpg`,
+      cover: ipInfo.cover ?? `img/${ipInfo.ipId}.jpg`,
       aliases: ipInfo.aliases,
       tags: cfg.tags,
     },
@@ -472,11 +579,11 @@ for (const cfg of LINES) {
       ipId: ipInfo.ipId,
       title: cfg.title,
       city: cfg.city,
-      cover: `img/${cfg.file}.jpg`,
+      cover: cfg.cover ?? `img/${cfg.file}.jpg`,
       recommendDays: cfg.recommendDays,
     },
     clusters: cfg.clusters,
-    ipStops: Array.from({ length: 8 }, (_, i) => ipSlot(cfg.prefix, lineId, i + 1)),
+    ipStops: Array.from({ length: cfg.ipStopCount ?? 8 }, (_, i) => ipSlot(cfg.prefix, lineId, i + 1)),
     cityStops: Array.from({ length: 15 }, (_, i) => citySlot(cfg.prefix, lineId, i + 1)),
   };
 
@@ -500,7 +607,7 @@ const index = {
       ipName: cfg.ip.name,
       title: cfg.title,
       city: cfg.city,
-      cover: `img/${cfg.file}.jpg`,
+      cover: cfg.cover ?? `img/${cfg.file}.jpg`,
       file: `data/lines/${cfg.file}.json`,
       priority: cfg.priority,
       recommendDays: cfg.recommendDays,

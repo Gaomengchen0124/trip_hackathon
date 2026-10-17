@@ -21,7 +21,7 @@ const emit = defineEmits(['view-detail', 'close'])
         :quote="quote"
         brief
       />
-      <p v-if="!poi.quotes?.length" class="empty">这个地点的故事即将补充</p>
+      <p v-if="poi.basis" class="empty">{{ poi.basis }}</p><p v-else-if="!poi.quotes?.length" class="empty">这个地点的故事即将补充</p>
     </div>
     <p v-else class="intro">{{ poi.intro || '景点介绍即将补充' }}</p>
     <div class="actions">
