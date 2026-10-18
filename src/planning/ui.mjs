@@ -59,7 +59,7 @@ export function createPlanningExperience({getContext,getPois,onItinerary,onSelec
  }
  function openNegotiation(kind,candidates){
    closeNegotiation();
-   negotiation=createNegotiation({kind,ids:[...getContext().selectedPoiIds],candidates,protectedIds:s.mustIds,context:context(),hours:readHours(),trial:negotiationTrial,plan:(settings,request,signal,onProgress)=>negotiationTrial([...getContext().selectedPoiIds],settings,signal,request,onProgress),getPois,
+   negotiation=createNegotiation({kind,ids:[...getContext().selectedPoiIds],candidates,protectedIds:s.mustIds,requirements:s.session?.requirements||[],context:context(),hours:readHours(),trial:negotiationTrial,plan:(settings,request,signal,onProgress)=>negotiationTrial([...getContext().selectedPoiIds],settings,signal,request,onProgress),getPois,
     onCancel:()=>{closeNegotiation();s.advice=null;s.error='';render()},
     onApply:({ids,dateRange,hours,protectedIds})=>{
      const removed=getContext().selectedPoiIds.filter(id=>!ids.includes(id));

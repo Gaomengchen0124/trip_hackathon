@@ -62,4 +62,30 @@ function generated(it){store.checkedIds=[...it.context.selectedPoiIds];router.pu
  .planning-sidebar :deep(.conversation-footer){position:relative;flex-shrink:0;padding:12px 0 0;margin-top:16px}
 }
 
+
+/* Use the whole available viewport; reserve space for generation status. */
+@media(min-width:960px){
+ .planning-sidebar{top:100px;height:auto;min-height:calc(100dvh - 112px);max-height:none}
+ .planning-sidebar :deep(#planning-panel.conversation-shell){flex:1 0 auto;height:auto;min-height:calc(100dvh - 112px);max-height:none;overflow:clip;padding:20px;display:flex;flex-direction:column}
+ .planning-sidebar :deep(.conversation-composer){margin-top:auto;padding-top:12px}
+ .planning-sidebar :deep(.conversation-tokens){margin:10px 0 14px}
+ .planning-sidebar :deep(.conversation-options){margin:12px 0;min-height:0}
+ .planning-sidebar :deep(.conversation-question h2){margin-bottom:8px}
+ .planning-sidebar :deep(.conversation-footer){margin-top:10px;padding-top:6px}
+ .planning-sidebar :deep(.tourist-schedule-cards){gap:6px;margin:6px 0}
+ .planning-sidebar :deep(.tourist-schedule-card){padding:9px 12px}
+ .planning-sidebar :deep(.conversation-shell.is-generating .conversation-composer),
+ .planning-sidebar :deep(.conversation-shell.is-generating .conversation-footer),
+ .planning-sidebar :deep(.conversation-shell.is-generating .conversation-options){display:none}
+ .planning-sidebar :deep(.conversation-generation){flex-shrink:0;margin-top:14px;padding:14px}
+ .planning-sidebar :deep(.conversation-shell > *){flex-shrink:0}
+}
+@media(min-width:960px) and (max-height:800px){
+ .planning-sidebar :deep(#planning-panel.conversation-shell){padding:16px}
+ .planning-sidebar :deep(.conversation-choice){padding:8px 13px}
+ .planning-sidebar :deep(.conversation-input-well){padding:4px 12px}
+ .planning-sidebar :deep(.conversation-tokens){gap:5px;margin:6px 0 10px}
+ .planning-sidebar :deep(.conversation-question h2){font-size:21px}
+}
+
 </style>

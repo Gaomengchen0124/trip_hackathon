@@ -1,7 +1,8 @@
+import {preferenceFit} from './preference-ranking.mjs'
 import {removalProposal,additionProposal} from './negotiation.mjs'
 const el=(tag,attrs={},children=[])=>{const n=document.createElement(tag);for(const[k,v]of Object.entries(attrs)){if(v==null||v===false)continue;if(k==='text')n.textContent=v;else if(k.startsWith('on'))n.addEventListener(k.slice(2),v);else n.setAttribute(k,v)}for(const c of children.flat())if(c)n.append(c);return n};
 const button=(text,onclick,attrs={})=>el('button',{type:'button',text,onclick,...attrs});
-export function createNegotiation({kind,ids,candidates,protectedIds=[],context,hours,trial,plan,onApply,onCancel,getPois}){
+export function createNegotiation({kind,ids,candidates,protectedIds=[],requirements=[],context,hours,trial,plan,onApply,onCancel,getPois}){
  const adding=kind==='add',host=el('section',{class:'negotiation-panel conversation-advice',role:'dialog','aria-modal':'true','aria-label':adding?'顺路追加协商':'景点取舍协商'});
  const state={protected:[...protectedIds],rejected:[],dates:{...context.dateRange},hours:{...hours},proposal:null,busy:true,error:'',retryAt:0,row:null,rowPhase:'',manage:false,settings:false,dirty:false};
  const cache=new Map();
@@ -76,7 +77,13 @@ export function createNegotiation({kind,ids,candidates,protectedIds=[],context,h
   const actions=el('div',{class:'negotiation-actions'});
   if(adding&&!state.error)actions.append(button('不追加，直接生成',()=>apply(true),{class:'negotiation-skip','data-negotiation-skip':'',disabled:state.busy||!p?.baseFeasible||state.dirty}));
   if(state.error){const remaining=Math.max(0,Math.ceil((state.retryAt-Date.now())/1000));actions.append(button(remaining?`${remaining} 秒后可重新核算`:'重新核算',()=>calculate(),{class:'btn primary','data-negotiation-retry':'',disabled:remaining>0}));}else actions.append(button(p?.feasible&&!rows.length?'生成行程':'应用方案',()=>apply(),{class:'btn primary','data-negotiation-apply':'','data-planning-action':'generate',disabled:state.busy||!p?.feasible||state.dirty}));content.push(actions);
-  host.classList.toggle('is-calculating',state.busy);host.replaceChildren(...content);if(!matchMedia('(prefers-reduced-motion: reduce)').matches)for(const n of host.querySelectorAll('[data-advice-poi]')){const previous=positions.get(n.dataset.advicePoi);if(previous!=null){const delta=previous-n.getBoundingClientRect().top;if(Math.abs(delta)>1)n.animate([{transform:`translateY(${delta}px)`},{transform:'translateY(0)'}],{duration:320,easing:'ease-out'});}}
+  const retained=ids.filter(id=>adding||!p?.feasible||!p.ids.includes(id));
+  const preview=el('aside',{class:'negotiation-retained','aria-label':'当前行程内景点'},[el('span',{class:'planning-eyebrow',text:'已选地点 · '+retained.length}),el('h2',{text:'当前行程内景点'}),el('p',{class:'negotiation-retained-note',text:state.busy?'正在核算，以下为上次方案中的保留地点。':state.error?'以下为上次方案预览，重新核算后确认。':adding?'这些是你已经选择的地点，右侧可选择顺路追加。':p?.feasible?'按当前取舍方案保留的地点，应用方案后生效。':'当前已选地点；尚未找到可应用的取舍方案。'})]);
+  const retainedList=el('ol',{class:'negotiation-retained-list'});
+  for(const id of retained){const poi=getPois().find(p=>p.poiId===id)||{};const fit=preferenceFit(poi,requirements);const reason=state.protected.includes(id)?'你已明确选择保留，本轮将优先确保安排。':fit.matched.length?`景点资料与你偏好的「${fit.matched.join('、')}」相关，保留此次体验。`:poi.type==='ip'?'你已选择的作品相关地点，保留本次主题体验。':poi.intro?`你已选择此地。${String(poi.intro).slice(0,65)}${String(poi.intro).length>65?'…':''}`:'你已选择的地点，当前方案保留此次游览安排。';retainedList.append(el('li',{'data-retained-poi':id},[el('strong',{text:name(id)}),el('p',{text:reason})]));}
+  if(!retained.length)preview.append(el('p',{class:'negotiation-retained-note',text:'当前方案暂无普通景点保留，固定游客日程仍按原要求安排。'}));
+  preview.append(retainedList);
+  host.classList.toggle('is-calculating',state.busy);host.replaceChildren(preview,el('div',{class:'negotiation-main'},content));if(!matchMedia('(prefers-reduced-motion: reduce)').matches)for(const n of host.querySelectorAll('[data-advice-poi]')){const previous=positions.get(n.dataset.advicePoi);if(previous!=null){const delta=previous-n.getBoundingClientRect().top;if(Math.abs(delta)>1)n.animate([{transform:`translateY(${delta}px)`},{transform:'translateY(0)'}],{duration:320,easing:'ease-out'});}}
  }
  host.tabIndex=-1;
  host.addEventListener('keydown',e=>{e.stopPropagation();if(e.key==='Escape'){e.preventDefault();onCancel();}if(e.key==='Tab'){const nodes=[...host.querySelectorAll('button:not(:disabled),input:not(:disabled)')];const first=nodes[0],last=nodes.at(-1);if(e.shiftKey&&(document.activeElement===first||document.activeElement===host)){e.preventDefault();last?.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus();}}});
