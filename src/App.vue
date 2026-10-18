@@ -21,6 +21,8 @@ function replayOpening() {
   window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
 }
 const editInterests = () => openInterests()
+// 章节横幅不出现在列表型页面（巡礼路线/智能推荐/巡礼许愿），顶部直接进内容。
+const chapterlessRoutes = new Set(['column', 'recommend', 'wishes'])
 let stopStoryMotion
 onMounted(() => { initInterests(); stopStoryMotion = installStoryMotion(); window.addEventListener('travel-edit-interests', editInterests) })
 onUnmounted(() => { stopStoryMotion?.(); window.removeEventListener('travel-edit-interests', editInterests) })
@@ -31,7 +33,7 @@ onUnmounted(() => { stopStoryMotion?.(); window.removeEventListener('travel-edit
   <div class="story-content" :class="{ 'public-story': !route.meta.admin, 'is-unfolding': introOpen }" :inert="introOpen" :style="introOpen ? { '--arrival': Math.min(1, introProgress * 1.5) } : undefined">
     <SiteNavigation />
     <TravelMasthead v-if="route.path === '/'" @replay-opening="replayOpening" />
-    <StoryChapter v-else-if="!route.meta.admin" :key="route.name" :route-name="route.name" />
+    <StoryChapter v-else-if="!route.meta.admin && !chapterlessRoutes.has(route.name)" :key="route.name" :route-name="route.name" />
     <router-view v-slot="{ Component }">
       <KeepAlive include="HomeView">
         <component :is="Component" />

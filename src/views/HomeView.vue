@@ -63,18 +63,9 @@ function go(lineId) {
 
     <WishForm v-if="wishOpen" :initial-ip="wishIp" @close="wishOpen = false" />
 
-    <section class="atlas-darkroom" aria-labelledby="atlas-darkroom-title">
-      <div class="atlas-darkroom-heading" data-story-reveal><div><p class="atlas-eyebrow">Ⅰ / A COLLECTION OF MOMENTS</p><h2 id="atlas-darkroom-title">故事里的风景<span>，在此显影。</span></h2></div><p>有些地方，还未抵达，<br />就已在心里走过千遍。</p></div>
-      <IpWall :lines="wallLines" />
-      <div class="atlas-darkroom-foot"><span>一帧光影，一段旅途</span><span>随照片走进故事 <i aria-hidden="true">↗</i></span></div>
-    </section>
-
-    <section v-for="(meta, colKey) in COL_META" :key="colKey" class="wall atlas-route-collection">
-      <div class="atlas-collection-heading" data-story-reveal><div><p class="atlas-eyebrow">Ⅱ / CHOOSE YOUR NEXT CHAPTER</p><h2>{{ meta.title }}</h2></div><p>下一章，<em>去往哪里？</em><br /><span>让故事的坐标，成为旅行的起点。</span></p></div>
-      <div class="atlas-route-search">
-        <div class="atlas-search-label"><span>搜索巡礼路线</span><span aria-hidden="true">FIND YOUR STORY</span></div>
-        <div class="searchbox">
-          <svg class="atlas-search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="6.5" /><path d="m15 15 5 5" /></svg>
+    <section class="atlas-darkroom">
+      <div class="atlas-darkroom-heading" data-story-reveal><div><p class="atlas-eyebrow">Ⅰ / A COLLECTION OF MOMENTS</p><div class="searchbox atlas-darkroom-search">
+        <svg class="atlas-search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="6.5" /><path d="m15 15 5 5" /></svg>
         <input
           v-model="keyword"
           aria-label="搜索书名、人物、地名或城市"
@@ -99,9 +90,14 @@ function go(lineId) {
             >
           </button>
         </div>
-        </div>
-        <p class="atlas-search-example">例如：繁花 / 阿宝 / 黄河路</p>
-      </div>
+      </div><p class="atlas-search-example">例如：繁花 / 阿宝 / 黄河路</p></div><p>通过输入框找到喜欢的作品，<br />或者直接点击下方图片</p></div>
+      <IpWall :lines="wallLines" />
+      <div class="atlas-darkroom-foot"><span>一帧光影，一段旅途</span><span>随照片走进故事 <i aria-hidden="true">↗</i></span></div>
+    </section>
+
+    <section v-for="(meta, colKey) in COL_META" :key="colKey" class="wall atlas-route-collection">
+      <div class="atlas-collection-heading" data-story-reveal><div><p class="atlas-eyebrow">Ⅱ / CHOOSE YOUR NEXT CHAPTER</p><h2>{{ meta.title }}</h2></div><p>下一章，<em>去往哪里？</em><br /><span>让故事的坐标，成为旅行的起点。</span></p></div>
+      <router-link class="atlas-all-routes more" aria-label="查看全部巡礼路线" :to="`/column/${meta.key}`"><span>继续翻阅巡礼图鉴</span><span class="atlas-all-routes-rule" aria-hidden="true"></span><span>查看全部路线 <i aria-hidden="true">↗</i></span></router-link>
       <div class="cards">
         <div
           v-for="(g, index) in columns[colKey]
@@ -115,7 +111,6 @@ function go(lineId) {
           <RouteCard :line="g.lines[0]" :label="g.label" :sizes="index === 0 ? '(max-width: 760px) 90vw, 540px' : '(max-width: 760px) 44vw, 300px'" @select="go" />
         </div>
       </div>
-      <router-link class="atlas-all-routes more" aria-label="查看全部巡礼路线" :to="`/column/${meta.key}`"><span>继续翻阅巡礼图鉴</span><span class="atlas-all-routes-rule" aria-hidden="true"></span><span>查看全部路线 <i aria-hidden="true">↗</i></span></router-link>
     </section>
   </div>
 </template>
