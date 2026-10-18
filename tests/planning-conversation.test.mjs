@@ -1,9 +1,9 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {buildAnswers,nextStepIndex,parseKnownReply} from '../src/planning/conversation.mjs';
+import {STEPS,buildAnswers,nextStepIndex,parseKnownReply} from '../src/planning/conversation.mjs';
 import {proposalsFromAnswers,bootstrapQuestions} from '../server/planning/questions.mjs';
 import {createPlanningStore} from '../server/planning/store.mjs';import {createPlanningService} from '../server/planning/service.mjs';
 test('conversation structured answers retain party, steps, interests and hard must-visit',()=>{const a=buildAnswers({must:['有'],count:['3人'],company:['带老人'],hours:['10:00–17:00'],steps:['最多12000步'],interests:['体验当地美食']},['a']);const proposals=proposalsFromAnswers(bootstrapQuestions(),a,[]);assert.equal(proposals.find(r=>r.key==='party').value.count,3);assert.equal(proposals.find(r=>r.key==='mobility').value.dailyStepsMax,12000);assert.equal(proposals.find(r=>r.key==='mobility').value.dailyStepsMin,undefined);assert.equal(proposals.find(r=>r.key==='mustVisit').strength,'hard');assert.deepEqual(proposals.find(r=>r.key==='interests').value.tags,['体验当地美食'])});
-test('multiple explicit answers skip repeated questions without model',()=>{const a=parseKnownReply('我们3个人，带老人，公交优先，每天别超过7000步');assert.deepEqual(a.count,['3人']);assert.deepEqual(a.company,['带老人']);assert.deepEqual(a.steps,['最多7000步']);assert.equal(nextStepIndex(0,a),2);assert.equal(nextStepIndex(8,{connection:['没有']}),11)});
+test('multiple explicit answers skip repeated questions without model',()=>{const a=parseKnownReply('我们3个人，带老人，公交优先，每天别超过7000步');assert.deepEqual(a.count,['3人']);assert.deepEqual(a.company,['带老人']);assert.deepEqual(a.steps,['最多7000步']);assert.equal(nextStepIndex(0,a),2);assert.equal(nextStepIndex(6,{}),8)});
 test('server rejects over-limit or unselected mandatory points before generation',async t=>{const store=createPlanningStore({file:':memory:'});const service=createPlanningService({store,llm:{configured:false},catalogue:async()=>({timeZone:'Asia/Shanghai',line:{},pois:['a','b'].map(poiId=>({poiId}))})});t.after(()=>store.close());const input={engineMode:'rules',context:{lineId:'test',selectedPoiIds:['a','b'],dateRange:{startDate:'2026-11-01',endDate:'2026-11-01'},timeZone:'Asia/Shanghai'},answers:[{questionId:'q:conversation_must:0',optionIds:[],values:{poiIds:['a','b']}}]};await assert.rejects(service.intake('owner',input),{code:'INVALID_ANSWERS'});input.answers[0].values.poiIds=['z'];await assert.rejects(service.intake('owner',input),{code:'INVALID_ANSWERS'})});
 test('negotiation permits retaining more than initial quota but only selected points from a valid prior session',async t=>{
  const store=createPlanningStore({file:':memory:'});const service=createPlanningService({store,llm:{configured:false},catalogue:async()=>({timeZone:'Asia/Shanghai',line:{},pois:['a','b','c'].map(poiId=>({poiId}))})});t.after(()=>store.close());
@@ -12,4 +12,11 @@ test('negotiation permits retaining more than initial quota but only selected po
  const input={engineMode:'rules',context,previousPlanningSessionId:prior.planningSessionId,selectionNegotiation:true,answers:[{questionId:'q:conversation_must:0',optionIds:[],values:{poiIds:['a','b','c']}}]};
  const next=await service.intake('owner',input);assert.deepEqual(next.requirements.find(r=>r.key==='mustVisit').value,['a','b','c']);
  input.answers[0].values.poiIds=['z'];await assert.rejects(service.intake('owner',input),{code:'INVALID_ANSWERS'});
+});
+
+test('fixed appointments use tourist schedules without duplicate airport or train questions',()=>{
+ const ids=STEPS.map(step=>step.id);
+ for(const id of ['connection','connectionDetails','cutoff'])assert.equal(ids.includes(id),false);
+ const tourist=STEPS.find(step=>step.id==='tourist');assert.ok(tourist);assert.match(tourist.hint,/飞机/);assert.match(tourist.hint,/火车/);
+ assert.equal(STEPS[nextStepIndex(ids.indexOf('interests'),{})].id,'tourist');
 });

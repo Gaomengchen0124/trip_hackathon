@@ -7,13 +7,10 @@ export const STEPS=[
  {id:'steps',label:'每天最多接受多少步？',options:['最多3000步','最多7000步','最多12000步','最多16000步','不限步数 · 暴走党']},
  {id:'interests',label:'这次最想体验什么？',options:['打卡出片','了解人文历史','欣赏自然风光','深度感受当地生活','体验当地美食'],multi:true},
  {id:'must',label:'已选景点里，有没有一定要去的？',options:['有','无']},
- {id:'connection',label:'这次有没有需要赶飞机或火车的安排？',options:['没有','需要赶飞机','需要赶火车','两种都有']},
- {id:'connectionDetails',label:'哪一天、哪个机场或车站、几点起飞或发车？',hint:'可以一次填写，例如：16日18:30，虹桥机场。暂不确定也可以跳过。',options:[]},
- {id:'cutoff',label:'为赶飞机或火车，哪一天需要提前结束游览？最晚几点？',hint:'例如：10月18日15:00结束游览。请把前往机场或车站所需的时间预留在这之后。',options:[]},
- {id:'tourist',label:'这次有没有需要在指定时间到达指定地点的特殊日程？',hint:'例如看演出、参加活动、赴约。会作为「游客日程」加入行程。',options:['没有特殊日程','有特殊日程']},
+ {id:'tourist',label:'这次有没有需要在指定时间到达指定地点的特殊日程？',hint:'例如赶飞机、赶火车、看演出、参加活动或赴约。统一在「游客日程」中填写日期、时间和地点。',options:['没有特殊日程','有特殊日程']},
  {id:'extra',label:'还有什么希望我特别安排或避开的？',options:['不喜欢排队','中午需要休息','用餐从容一点','多留自由时间','没有了'],multi:true}
 ];
-export function nextStepIndex(index,answers){let n=index+1;while(n<STEPS.length){const id=STEPS[n].id;if(id==='must'){n++;continue}if(answers[id]?.length){n++;continue}if(id==='company'&&answers.count?.[0]==='1人'){answers.company=['独自出行'];n++;continue}if(['connectionDetails','cutoff'].includes(id)&&(!answers.connection?.length||answers.connection[0]==='没有')){n++;continue}break}return n}
+export function nextStepIndex(index,answers){let n=index+1;while(n<STEPS.length){const id=STEPS[n].id;if(id==='must'){n++;continue}if(answers[id]?.length){n++;continue}if(id==='company'&&answers.count?.[0]==='1人'){answers.company=['独自出行'];n++;continue}break}return n}
 export function buildAnswers(a,mustIds){const out=[];const add=(id,optionIds=[],values={})=>out.push({questionId:`q:${id}:0`,optionIds,values});const count=Number(a.count?.[0]?.match(/^\d+/)?.[0]);const companions=(a.company||[]).map(x=>({'独自出行':'solo','朋友':'friends','伴侣':'couple','带孩子':'children','带老人':'elders'}[x])).filter(Boolean);if(count||companions.length)add('conversation_party',[],{...(count?{count}:{}),companions});
  const hourText=({'午后开始':'13:00–18:00','晚起晚归':'11:00–20:00'}[a.hours?.[0]]||a.hours?.[0]);const h=hourText?.match(/(\d{1,2})[:：](\d{2})\s*[–—~至-]\s*(\d{1,2})[:：](\d{2})/);if(h)add('wake_departure',[],{departure:`${h[1].padStart(2,'0')}:${h[2]}`,dayEnd:`${h[3].padStart(2,'0')}:${h[4]}`});
  const tr=(a.transport||[]).map(x=>({'公共交通':'transit','打车':'taxi','步行':'walk','骑行':'bike','灵活搭配':'mixed'}[x])).filter(Boolean);if(tr.length)add('transport',[tr.length>1?'mixed':tr[0]]);
