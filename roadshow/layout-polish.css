@@ -1,0 +1,17 @@
+/* Keep the ten editorial spreads above the audience navigation. */
+@media(min-width:761px){
+ .hybrid .content-grid{margin-top:26px}.hybrid .browser-frame>img{height:310px}
+ .tech-strip{padding-block:15px}.tech-strip .yoyo{width:45px;height:57px;margin:-10px 5px -10px -7px}
+ .co-create .browser-frame>img{height:313px}.loop-close{margin-top:12px}.loop-close .yoyo{width:58px;height:73px}.loop-close p{font-size:21px}
+ .dilemma .content-grid{margin-top:28px}.constraint-sheet{padding-block:22px}.compute{padding-block:18px}.candidate-row{margin-top:17px}.dilemma .section-note{margin-top:23px;padding-top:15px;font-size:22px}
+ .decide .choice-panel{padding-block:22px}.decide .choice-line{padding-block:13px}.decide .content-grid{margin-top:24px}.decision-flow{margin-top:23px;padding-top:16px}
+ .adjust .content-grid{margin-top:27px}.journal-page{padding-block:22px}.journal-page .topline{padding-bottom:14px}.conversation{margin-top:18px;gap:14px}.bubble{font-size:19px;line-height:1.65;padding:13px 18px}.bubble.answer{font-size:17px}.journal-page .micro{margin-top:16px;padding-top:12px}.adjust .section-note{margin-top:20px;font-size:23px}.adjust .section-note .yoyo{width:45px;height:56px;margin:-7px 0}
+ .closing .value-columns{margin-top:30px}.closing .pilot{margin-top:25px;padding-block:19px}.closing-end{margin-top:21px}.closing-end blockquote{font-size:29px}.closing-team{font-size:11px}
+ .tools .tool{display:flex;align-items:center;gap:8px}
+}
+@media(max-width:760px){
+ .chapter-nav{gap:0;min-width:0}.chapter-nav button{display:none!important;white-space:nowrap;flex-shrink:0}.chapter-nav button.current{display:block!important}
+ .cover-art{top:auto;bottom:54px;height:48%;object-position:right bottom;opacity:.72;mask-image:linear-gradient(transparent,#000 60%)}.cover:before{z-index:0;pointer-events:none}.cover-copy{z-index:1}
+ .footer{min-height:70px}.chapter-nav button.current:after{bottom:1px}
+}
+@media(max-width:380px){.progress-wrap{display:block;width:30px;margin:0 7px}.footer{gap:10px}}
