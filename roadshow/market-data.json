@@ -1,0 +1,26 @@
+{
+  "checkedAt": "2026-10-17",
+  "userReference": "https://chatgpt.com/s/t_6ad382372db88191b4b23a3192428d8f",
+  "tourism": { "year": 2025, "valueTrillionCny": 6.3, "growthPercent": 9.5, "source": "https://zwgk.mct.gov.cn/zfxxgkml/tjxx/202601/t20260126_964367.html" },
+  "games": { "year": 2025, "valueBillionUsd": 201.6, "growthPercent": 9.1, "publishedAt": "2026-06-18", "source": "https://newzoo.com/articles/global-games-market-2025" },
+  "marketCaps": {
+    "unit": "USD billions; year-end; nominal; one annual observation per year",
+    "years": [2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025],
+    "disney": [46.94,69.74,62.33,41.99,60.14,71.02,67.36,89.62,129.88,160.12,173.71,165.86,162.04,164.47,257.58,328.02,281.53,158.43,165.25,202.01,204.17],
+    "netflix": [1.48,1.77,1.72,1.75,2.94,9.27,3.63,5.14,21.94,20.63,48.94,53.12,83.06,116.85,141.98,238.89,267.46,131.22,213.09,387.93,400.29],
+    "disneySource": "https://companiesmarketcap.com/walt-disney/marketcap/",
+    "netflixSource": "https://companiesmarketcap.com/netflix/marketcap/"
+  },
+  "netflixRevenue": {
+    "unit": "USD billions, annual reported revenue",
+    "observations": [{"year":2005,"value":0.682213},{"year":2025,"value":45.183036}],
+    "sources": ["https://s22.q4cdn.com/959853165/files/doc_financials/annual_reports/2005ar.pdf", "https://s22.q4cdn.com/959853165/files/doc_financials/2025/ar/99482238-46b2-4d0d-b292-40e6781bdf03.pdf"],
+    "correction": "分享页的 2005 年 6.7 亿美元、约 67 倍已按 Netflix 2005 年年报校正为约 6.82 亿美元，2025 年约为 2005 年的 66.2 倍。"
+  },
+  "fortune": {
+    "metric": "Fortune Global 500 revenue rank, not market-cap rank; list year, not financial year",
+    "rows": [{"company":"迪士尼","y2005":"159","y2015":"214","y2025":"122"},{"company":"Netflix","y2005":"未入榜","y2015":"未入榜","y2025":"398"},{"company":"华纳兄弟探索","y2005":"尚未成立","y2015":"尚未成立","y2025":"395"}],
+    "sources": ["https://fortune.com/ranking/global500/2005/", "https://www.fortunechina.com/fortune500/c/2015-07/22/content_244435.htm", "https://www.fortunechina.com/fortune500/c/2025-07/29/content_467206.htm"],
+    "note": "行业分类、并购拆分与上市身份不同，不能据此推出全球 IP 企业数量持续增长。仅列分享页中可交叉核对的企业，不作完整行业统计。"
+  }
+}
